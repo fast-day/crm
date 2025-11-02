@@ -4,24 +4,29 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start:dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "icons:build": "rimraf ./src/shared/icons && npx @svgr/cli --typescript --out-dir src/shared/icons --index-template config/svgr-index-template.js -- src/shared/assets/icons && npx prettier ./src/shared/icons --write"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.9.2",
     "@tailwindcss/vite": "^4.1.16",
     "@tanstack/react-router": "^1.133.27",
     "@tanstack/react-router-devtools": "^1.133.27",
+    "class-variance-authority": "^0.7.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-hook-form": "^7.65.0",
     "react-redux": "^9.2.0",
+    "sonner": "^2.0.7",
     "svgr": "^2.0.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.16",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite-plugin-svgr": "^4.5.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
