@@ -21,7 +21,7 @@ export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
   if (res.error?.status === 401) {
     const verify = await baseQuery({ url: "/v1/check/auth", method: "GET" }, api, opt) as VerifyResponse;
 
-    if (verify.data.success) {
+    if (verify.data) {
       res = await baseQuery(args, api, opt);
     } else {
       const refresh_token = getCookie("refresh_token");
