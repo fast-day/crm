@@ -36,6 +36,7 @@ export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
           setCookie("access_token", token, 3600);
 
           res = await baseQuery(args, api, opt);
+          console.log('refresh.data && "access_token" in refresh.data');
         } else {
           deleteCookie("access_token");
           deleteCookie("refresh_token");

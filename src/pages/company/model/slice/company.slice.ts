@@ -1,25 +1,21 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { ServicePayload } from "../type/payload-service.type";
 
 interface Company {
   name: string;
-  currency: ICurrency | "";
+  currency: ICurrency;
   country: string;
   region: string;
   city: string;
-  post_code?: string | null;
-  street?: string | null;
-  house?: string | null;
+  post_code?: string;
+  street?: string;
+  house?: string;
   timezone: string;
   timezone_offset: string;
-  lat?: string;
-  lng?: string;
+  lat: string;
+  lng: string;
   specialization?: number;
   industry?: number;
-}
-
-interface Service {
-  specialization: number;
-  industry: number;
 }
 
 type CompanyState = {
@@ -37,7 +33,7 @@ export const companySlice = createSlice({
     addCompany(state, action: PayloadAction<Company>) {
       state.company = action.payload;
     },
-    addService(state, action: PayloadAction<Service>) {
+    addCompanyService(state, action: PayloadAction<ServicePayload>) {
       const company = state.company;
       const { specialization, industry } = action.payload;
       if (company) {
@@ -48,5 +44,5 @@ export const companySlice = createSlice({
   },
 });
 
-export const { addCompany, addService } = companySlice.actions;
+export const { addCompany, addCompanyService } = companySlice.actions;
 export default companySlice.reducer;

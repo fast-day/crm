@@ -8,8 +8,8 @@ export const CompanySchema = z.object({
   region: z.string().min(1, "Укажите регион"), // сделать опциональным
   street: z.string().optional(),
   house: z.string().optional(),
-  lat: z.string().optional(),
-  lng: z.string().optional(),
+  lat: z.string().optional().default("56.838933"),
+  lng: z.string().optional().default("60.595278"),
   post_code: z.string().optional(),
   timezone: z.string().min(1, "Укажите часовой пояс"),
 });
