@@ -15,6 +15,8 @@ import { Route as AuthLayoutRouteImport } from './app/routes/_auth/_layout'
 import { Route as AppLayoutRouteImport } from './app/routes/_app/_layout'
 import { Route as AppLayoutIndexRouteImport } from './app/routes/_app/_layout/index'
 import { Route as AppLayoutCompanyCreateIndexRouteImport } from './app/routes/_app/_layout/company/create/index'
+import { Route as AppLayoutCompanyCreateServiceIndexRouteImport } from './app/routes/_app/_layout/company/create/service/index'
+import { Route as AppLayoutCompanyCreateServiceService_idRouteImport } from './app/routes/_app/_layout/company/create/service/$service_id'
 
 const AuthLayoutRegisterLazyRouteImport = createFileRoute(
   '/_auth/_layout/register',
@@ -54,18 +56,34 @@ const AppLayoutCompanyCreateIndexRoute =
     path: '/company/create/',
     getParentRoute: () => AppLayoutRoute,
   } as any)
+const AppLayoutCompanyCreateServiceIndexRoute =
+  AppLayoutCompanyCreateServiceIndexRouteImport.update({
+    id: '/company/create/service/',
+    path: '/company/create/service/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
+const AppLayoutCompanyCreateServiceService_idRoute =
+  AppLayoutCompanyCreateServiceService_idRouteImport.update({
+    id: '/company/create/service/$service_id',
+    path: '/company/create/service/$service_id',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
   '/': typeof AppLayoutIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
+  '/company/create/service/$service_id': typeof AppLayoutCompanyCreateServiceService_idRoute
+  '/company/create/service': typeof AppLayoutCompanyCreateServiceIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
   '/': typeof AppLayoutIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
+  '/company/create/service/$service_id': typeof AppLayoutCompanyCreateServiceService_idRoute
+  '/company/create/service': typeof AppLayoutCompanyCreateServiceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -75,12 +93,26 @@ export interface FileRoutesById {
   '/_auth/_layout/register': typeof AuthLayoutRegisterLazyRoute
   '/_app/_layout/': typeof AppLayoutIndexRoute
   '/_app/_layout/company/create/': typeof AppLayoutCompanyCreateIndexRoute
+  '/_app/_layout/company/create/service/$service_id': typeof AppLayoutCompanyCreateServiceService_idRoute
+  '/_app/_layout/company/create/service/': typeof AppLayoutCompanyCreateServiceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/login' | '/register' | '/' | '/company/create'
+  fullPaths:
+    | '/login'
+    | '/register'
+    | '/'
+    | '/company/create'
+    | '/company/create/service/$service_id'
+    | '/company/create/service'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/register' | '/' | '/company/create'
+  to:
+    | '/login'
+    | '/register'
+    | '/'
+    | '/company/create'
+    | '/company/create/service/$service_id'
+    | '/company/create/service'
   id:
     | '__root__'
     | '/_app/_layout'
@@ -89,6 +121,8 @@ export interface FileRouteTypes {
     | '/_auth/_layout/register'
     | '/_app/_layout/'
     | '/_app/_layout/company/create/'
+    | '/_app/_layout/company/create/service/$service_id'
+    | '/_app/_layout/company/create/service/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,17 +174,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutCompanyCreateIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
+    '/_app/_layout/company/create/service/': {
+      id: '/_app/_layout/company/create/service/'
+      path: '/company/create/service'
+      fullPath: '/company/create/service'
+      preLoaderRoute: typeof AppLayoutCompanyCreateServiceIndexRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
+    '/_app/_layout/company/create/service/$service_id': {
+      id: '/_app/_layout/company/create/service/$service_id'
+      path: '/company/create/service/$service_id'
+      fullPath: '/company/create/service/$service_id'
+      preLoaderRoute: typeof AppLayoutCompanyCreateServiceService_idRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
   }
 }
 
 interface AppLayoutRouteChildren {
   AppLayoutIndexRoute: typeof AppLayoutIndexRoute
   AppLayoutCompanyCreateIndexRoute: typeof AppLayoutCompanyCreateIndexRoute
+  AppLayoutCompanyCreateServiceService_idRoute: typeof AppLayoutCompanyCreateServiceService_idRoute
+  AppLayoutCompanyCreateServiceIndexRoute: typeof AppLayoutCompanyCreateServiceIndexRoute
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutIndexRoute: AppLayoutIndexRoute,
   AppLayoutCompanyCreateIndexRoute: AppLayoutCompanyCreateIndexRoute,
+  AppLayoutCompanyCreateServiceService_idRoute:
+    AppLayoutCompanyCreateServiceService_idRoute,
+  AppLayoutCompanyCreateServiceIndexRoute:
+    AppLayoutCompanyCreateServiceIndexRoute,
 }
 
 const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(

@@ -4,12 +4,12 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: apiUrl,
-  prepareHeaders: (h) => {
+  prepareHeaders: (head) => {
     const token: string | null = getCookie("access_token");
 
-    if (token) h.set("Authorization", `Bearer ${token}`);
+    if (token) head.set("Authorization", `Bearer ${token}`);
 
-    return h;
+    return head;
   },
   headers: {  },
 });

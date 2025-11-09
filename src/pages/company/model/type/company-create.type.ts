@@ -1,0 +1,22 @@
+export interface CompanyCredentials {
+  name: string;
+  currency: ICurrency;
+  street?: string;
+  house?: string;
+  city: string;
+  post_code?: string;
+  country: string;
+  region: string;
+  timezone: string;
+  timezone_offset: string;
+  lat: string;
+  lng: string;
+  specialization: number;
+  industry: number;
+}
+
+export interface CompanyCreateResponse {
+  id: string;
+  name: string;
+  currency: ICurrency;
+}

@@ -14,7 +14,9 @@ export const PrivateRoute = ({ children }: PropsWithChildren) => {
 
   if (isLoading) return <AppLoading />;
 
-  if (data?.company === null && location.pathname !== "/company/create") {
+  const companyPath = ["/company/create", "/company/create/service"];
+
+  if (data?.company === null && !companyPath.some(path => location.pathname.startsWith(path))) {
     return <Navigate to={"/company/create"} replace />;
   }
 
