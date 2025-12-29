@@ -64,7 +64,7 @@ export const Register = () => {
         )}
       </Form>
       <div className="flex items-center justify-center mt-2.5">
-        <Link to={"/register"} className="text-sm text-blue-500">Есть аккаунт?</Link>
+        <Link to={"/login"} className="text-sm text-blue-500">Есть аккаунт?</Link>
       </div>
     </div>
   )
