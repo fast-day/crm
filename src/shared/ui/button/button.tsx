@@ -1,30 +1,32 @@
-import { cn } from '@/shared/utils';
-import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
-import { Spinner } from '../spinner';
+import { cn } from "@/shared/utils";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { Spinner } from "../spinner";
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-300',
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-md font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-200",
   {
     variants: {
       variant: {
-        default: 'bg-black text-white hover:bg-black/90 active:bg-black/80 disabled:hover:bg-black/80 disabled:active:bg-black/80',
-        lime: 'bg-lime-400 text-teal-900 hover:bg-lime-300 active:bg-lime-400 disabled:hover:bg-lime-400 disabled:active:bg-lime-400',
-        indigo: 'bg-indigo-500 text-white shadow hover:bg-indigo-400 active:bg-indigo-500 disabled:hover:bg-indigo-500 disabled:active:bg-indigo-500',
-        link: 'text-primary underline-offset-4 hover:underline disabled:hover:no-underline',
-        amber: 'bg-amber-100 text-white hover:bg-amber-200 active:bg-amber-300 disabled:hover:bg-amber-100 disabled:active:bg-amber-100',
+        default: "bg-primary text-white hover:bg-primary/90 active:bg-primary/70 disabled:hover:bg-primary/80 disabled:active:bg-primary/80",
+        link: "text-primary underline-offset-4 hover:underline disabled:hover:no-underline",
       },
       size: {
-        default: 'w-full h-12.5 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-8',
-        icon: 'size-9',
-        iconSm: 'size-8',
+        default: "w-full h-12.5 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "size-9",
+        iconSm: "size-8",
       },
+      active: {
+        none: "",
+        scale_sm: "active:scale-99",
+      }
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
+      active: "none",
     },
   },
 );
@@ -62,6 +64,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 export { Button };

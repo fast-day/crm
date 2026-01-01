@@ -5,15 +5,11 @@ import { cn } from "@/shared/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const inputVariants = cva(
-  'h-11.5 w-full flex text-sm rounded-xl shadow-input px-5 py-3.5 disabled:cursor-not-allowed disabled:opacity-50 placeholder:opacity-50 duration-200',
+  'w-full flex text-md rounded-xl shadow-input px-4 py-4 disabled:cursor-not-allowed disabled:opacity-50 placeholder:opacity-50 duration-200',
   {
     variants: {
       variant: {
-        default: 'bg-card border border-border',
-        gray: 'bg-gray-100',
-        white: 'bg-white',
-        error: 'bg-red-50 shadow-[0_0_0_1px_#FF4747]',
-        success: 'bg-green-50 shadow-[0_0_0_1px_#00B87C]',
+        default: 'bg-card border font-medium border-transparent focus:border-border leading-4.5 focus:bg-card/40',
       },
     },
     defaultVariants: {
@@ -37,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           {...register}
           {...props}
-          className={cn(inputVariants({ variant, className }))}
+          className={cn(inputVariants({ variant, className }), error ? "border-error-color-icon focus:border-error-color-icon" : "")}
         />
       </FieldWrapper>
     );

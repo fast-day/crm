@@ -1,9 +1,14 @@
 import { Button, Form, Input } from "@/shared/ui"
 import { CompanySchema } from "../model/schema/company.schema"
 import { useCompanyCreate } from "../model/hook/company-create.hook";
+import { toast } from "sonner";
 
 export const CompanyCreate = () => {
   const { stepOne } = useCompanyCreate();
+
+  toast.error("ERROR");
+  toast.success("SUCCESS");
+  toast.warning("WARN");
 
   return (
     <div className="max-w-5xl mx-auto w-full py-20 px-10">

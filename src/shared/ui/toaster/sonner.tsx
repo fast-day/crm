@@ -4,17 +4,20 @@ type ToasterProps = React.ComponentProps<typeof Toaster>;
 export const Sonner = ({ ...props }: ToasterProps) => {
   return (
     <Toaster 
-      className="toaster group"
-      closeButton
+      className="toaster group sm:w-145!"
       richColors
       duration={5000}
-      visibleToasts={2}
+      visibleToasts={1}
       expand
-      position={'bottom-right'}
+      icons={{ error: null, success: null, warning: null }}
+      position={'bottom-center'}
       toastOptions={{
         classNames: {
-          closeButton: "border-2 w-5 h-5",
-          content: "p-1 py-0 text-sm"
+          toast: "sm:w-145! flex justify-center",
+          content: "text-xs sm:text-md text-white",
+          error: "bg-error-background! bg-none border-none! text-error-color-text! text-sm justify-center rounded-full! py-5.5! sm:py-7! px-4!",
+          success: "bg-success-background! bg-none border-none! text-success-color-text! text-sm justify-center rounded-full! py-5.5! sm:py-7! px-4!",
+          warning: "bg-warn-background! bg-none border-none! text-warn-color-text! text-sm justify-center rounded-full! py-5.5! sm:py-7! px-4!",
         },
       }}
       {...props}
