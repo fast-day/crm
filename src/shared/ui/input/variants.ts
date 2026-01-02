@@ -9,6 +9,7 @@ export const inputVariants = cva(
       },
       inputSize: {
         default: "",
+        size_56: "h-14 text-sm",
         size_60: "h-15 text-base"
       }
     },

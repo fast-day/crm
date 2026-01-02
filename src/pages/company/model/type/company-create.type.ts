@@ -1,5 +1,6 @@
 export interface CompanyCredentials {
   name: string;
+  public_name: string;
   currency: ICurrency;
   street?: string;
   house?: string;

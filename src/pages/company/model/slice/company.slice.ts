@@ -3,10 +3,11 @@ import type { ServicePayload } from "../type/payload-service.type";
 
 interface Company {
   name: string;
+  public_name: string;
   currency: ICurrency;
   country: string;
-  region: string;
-  city: string;
+  region?: string;
+  city?: string;
   post_code?: string;
   street?: string;
   house?: string;
@@ -41,8 +42,11 @@ export const companySlice = createSlice({
         company.industry = industry;
       }
     },
+    clearCompany(state) {
+      state.company = undefined;
+    }
   },
 });
 
-export const { addCompany, addCompanyService } = companySlice.actions;
+export const { addCompany, addCompanyService, clearCompany } = companySlice.actions;
 export default companySlice.reducer;
