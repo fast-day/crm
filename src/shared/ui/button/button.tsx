@@ -17,6 +17,7 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-8",
         icon: "size-9",
         iconSm: "size-8",
+        size_60: "h-15 w-full text-base font-medium",
       },
       active: {
         none: "",
@@ -57,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {isLoading && <Spinner size="sm" className="text-current" />}
+        {isLoading && <Spinner className="text-current" />}
         {!isLoading && icon && <span className="mr-2">{icon}</span>}
         <span className="mx-2">{children}</span>
       </button>
