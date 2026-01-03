@@ -6,7 +6,7 @@ import { useAccount } from "@/entities/account";
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
   const { isInitialized } = useInitialize();
-  const { isCompany } = useSelector(useAccount);
+  const { isCompany, account } = useSelector(useAccount);
 
   return (
     <div className="flex flex-1 min-h-full">
@@ -14,7 +14,10 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         <AppLoading />
       ) : (
         <>
-          {isCompany && <div>sidebar</div>}
+          {isCompany && <div className="px-30">
+            sidebar
+            <p>{account?.name}</p>
+          </div>}
 
           <div className="flex flex-col flex-1">
             <header></header>

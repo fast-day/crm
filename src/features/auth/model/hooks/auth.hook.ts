@@ -17,14 +17,14 @@ export const useAuth = (): AuthReturnProps => {
   const navigate = useNavigate();
 
   const login = useCallback((access: string, refresh: string) => {
-    setCookie("access_token", access);
-    setCookie("refresh_token", refresh, 30 * 24 * 60);
+    setCookie("access_token", access, { days: 7 });
+    setCookie("refresh_token", refresh, { days: 30 });
     dispatch(setAuthenticated(true));
   }, []);
 
   const refresh = useCallback((access: string, refresh: string) => {
-    setCookie("access_token", access);
-    setCookie("refresh_token", refresh);
+    setCookie("access_token", access, { days: 7 });
+    setCookie("refresh_token", refresh,  { days: 30 });
   }, []);
 
   const logout = useCallback(() => {
