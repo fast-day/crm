@@ -8,6 +8,7 @@ import { companySelector } from "../selector/company.selector";
 import type { CompanyCredentials } from "../type/company-create.type";
 import type { ISpecialization } from "../type/specialization.type";
 import { useNavigate } from "@tanstack/react-router";
+import { setIsCompany } from "@/entities/account";
 
 interface CompanyCreateReturnProps {
   step: number;
@@ -77,9 +78,9 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
       } satisfies CompanyCredentials;
 
       await company(payload).unwrap();
-
+      dispatch(setIsCompany(true));
       navigate({ to: "/", replace: true });
-      clearCompany();
+      dispatch(clearCompany());
     }
     catch (err) {
       console.error("Не удалось создать компанию", err);
