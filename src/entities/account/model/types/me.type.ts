@@ -1,4 +1,6 @@
-interface MeCompany {
+import type { IRole } from "./role.type";
+
+export interface MeCompany {
   id: string;
   name: string;
   currency: string;
@@ -6,7 +8,7 @@ interface MeCompany {
   specialization: string;
 }
 
-interface MeLocations {
+export interface MeLocations {
   id: string;
   name: string;
   avatar: string;
@@ -19,8 +21,8 @@ export interface IMe {
   last_name: string;
   name: string;
   avatar: string | null;
-  role: string;
+  role: IRole;
   role_id: { id: number; };
   company: MeCompany | null;
-  locations: MeLocations[] | null;
+  locations: MeLocations[];
 }
