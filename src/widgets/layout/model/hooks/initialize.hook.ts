@@ -37,18 +37,18 @@ export const useInitialize = (): InitializeReturnProps => {
       const me = await account().unwrap();
       dispatch(setAccount(me));
       
+      if (me.company === null) {
+        navigate({ to: "/company/create" });
+        setState(p => ({ ...p, isInitialized: true, isLoading: false, progress: 100 }))
+        return;
+      }
+
       if (!localStorage.getItem("location")) {
         localStorage.setItem("location", JSON.stringify(me.locations[0]));
         dispatch(setLocation(me.locations[0]));
       }
 
       setState(p => ({ ...p, progress: 50 }));
-  
-      if (me.company === null) {
-        navigate({ to: "/company/create" });
-        setState(p => ({ ...p, isInitialized: true, isLoading: false, progress: 100 }))
-        return;
-      }
 
       setState(p => ({ ...p, isInitialized: true, isLoading: false, progress: 100 }))
     }

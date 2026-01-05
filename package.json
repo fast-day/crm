@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "check-types": "tsc --project tsconfig.json --pretty --noEmit",
     "icons:build": "rimraf ./src/shared/icons && npx @svgr/cli --typescript --out-dir src/shared/icons --index-template config/svgr-index-template.js -- src/shared/assets/icons && npx prettier ./src/shared/icons --write"
   },
   "dependencies": {
