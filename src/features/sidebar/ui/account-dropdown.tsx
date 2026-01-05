@@ -1,10 +1,11 @@
 import type { IRole } from '@/entities/account';
-import { UserRole } from '@/entities/user'
+import { Avatar, UserRole } from '@/entities/user'
 import SvgExit from '@/shared/icons/Exit'
 import SvgPerson from '@/shared/icons/Person'
-import { Avatar, Button, HoverDropdown, HoverDropdownContent, HoverDropdownItemLink, HoverDropdownSeparator, HoverDropdownTrigger } from '@/shared/ui'
+import { Button, HoverDropdown, HoverDropdownContent, HoverDropdownItemLink, HoverDropdownSeparator, HoverDropdownTrigger } from '@/shared/ui'
 
 interface AccountDropdownProps {
+  id: string;
   avatar_url: string | null;
   first_name: string;
   last_name: string;
@@ -12,13 +13,13 @@ interface AccountDropdownProps {
   role: IRole;
 }
 
-export const AccountDropdown = ({ avatar_url, first_name, last_name, name, role }: AccountDropdownProps) => {
+export const AccountDropdown = ({ id, avatar_url, first_name, last_name, name, role }: AccountDropdownProps) => {
   return (
     <HoverDropdown className={"px-5 py-3"}>
       <HoverDropdownTrigger>
         <Button variant={"dropdown"} size={"none"} >
           <div className="flex items-center gap-3 flex-1">
-            <Avatar avatar_url={avatar_url} name={`${first_name.slice(0, 1)}${last_name.slice(0, 1)}`} />
+            <Avatar id={id} avatar_url={avatar_url} name={`${first_name.slice(0, 1)}${last_name.slice(0, 1)}`} />
             <div className="flex flex-col">
               <p className="text-start text-sm font-semibold leading-3">{name}</p>
               <UserRole role={role}/>

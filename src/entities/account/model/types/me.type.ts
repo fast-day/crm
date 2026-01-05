@@ -15,6 +15,7 @@ export interface MeLocations {
 }
 
 export interface IMe {
+  id: string;
   email: string;
   phone: string;
   first_name: string;

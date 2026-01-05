@@ -33,6 +33,7 @@ export const Sidebar = () => {
             </div>
     
             <AccountDropdown
+              id={account.id}
               avatar_url={account.avatar}
               first_name={account.first_name}
               last_name={account.last_name}
