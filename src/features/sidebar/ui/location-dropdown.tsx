@@ -21,7 +21,7 @@ export const LocationDropdown = ({ avatar_url, name, locations, selectId }: Loca
   }
 
   return (
-    <HoverDropdown className={"px-5"}>
+    <HoverDropdown className={"px-5 pb-3 mb-4.5"}>
       <HoverDropdownTrigger>
         <Button variant={"dropdown"} size={"none"} classNameChild={"flex flex-1 items-center !whitespace-normal"}>
           <div className="flex items-center gap-3 flex-1">
