@@ -9,7 +9,7 @@ export const Dashboard = () => {
       <DashboardStatisticsNum />
       
       <ChartProfit />
-      
+
       <div className="flex-1">
         <div className="flex items-center gap-5">
           <Card className="h-23 w-full" />

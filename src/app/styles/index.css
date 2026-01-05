@@ -18,7 +18,7 @@
     --primary-foreground: oklch(83.29% 0.12987 68.95);      /* #ffb864 */
     --muted: oklch(90.751% 0.02632 71.105);                 /* #ecdece */
     --muted-foreground: oklch(94.91% 0.01409 74.304);       /* #f4ede4 */
-    
+
     --border: oklch(43.906% 0.02163 64.455 / 0.102);        /* #5b50461a */
     --border-foreground: oklch(91.12% 0.00909 78.141);      /* #e5e1db */
     --card: oklch(43.906% 0.02163 64.455 / 0.078);          /* #5b504614 */

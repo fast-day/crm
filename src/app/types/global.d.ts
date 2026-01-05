@@ -11,4 +11,8 @@ declare global {
   }
 
   type ICurrency = "RUB" | "USD" | "EUR";
+
+  type ApiResponse<T> = {
+    data: T;
+  }
 }

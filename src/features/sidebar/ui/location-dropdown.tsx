@@ -3,7 +3,7 @@ import { setLocation, type MeLocations } from "@/entities/account";
 import { Avatar } from "@/entities/user";
 import SvgAdd from "@/shared/icons/Add";
 import SvgChevron from "@/shared/icons/Chevron";
-import { Badge, Button, HoverDropdown, HoverDropdownContent, HoverDropdownItemTrigger, HoverDropdownLabel, HoverDropdownSeparator, HoverDropdownTrigger } from "@/shared/ui"
+import { Badge, Button, HoverDropdown, HoverDropdownContent, HoverDropdownItemLink, HoverDropdownItemTrigger, HoverDropdownLabel, HoverDropdownSeparator, HoverDropdownTrigger } from "@/shared/ui"
 import { useDispatch } from "react-redux";
 
 interface LocationDropdownProps {
@@ -48,12 +48,12 @@ export const LocationDropdown = ({ avatar_url, name, locations, selectId }: Loca
           </HoverDropdownItemTrigger>
         ))}
         <HoverDropdownSeparator className={"mt-3 mb-1.5"} />
-        <HoverDropdownItemTrigger className={"rounded-none"}>
+        <HoverDropdownItemLink to={"/business/locations"} className={"rounded-none"}>
           <Badge variant={"action"}>
             <SvgAdd width={24} height={24} />
           </Badge>
           <p className="text-start text-md font-semibold leading-3">Создать локацию</p>
-        </HoverDropdownItemTrigger>
+        </HoverDropdownItemLink>
       </HoverDropdownContent>
     </HoverDropdown>
   )

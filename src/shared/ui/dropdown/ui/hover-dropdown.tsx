@@ -2,6 +2,7 @@ import { cn } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { createContext, useCallback, useContext, useState, type PropsWithChildren } from "react"
 import { Button } from "../../button";
+import { createPortal } from "react-dom";
 
 type IHoverDropdownContext = {
   open: boolean;
@@ -44,7 +45,7 @@ const alignVariant: Record<Align, Record<Side, string>> = {
     left: "bottom-0",
     right: "bottom-0",
     center_right: "left-57 top-1/2 -translate-y-1/2",
-    top_right: "left-57 top-0",
+    top_right: "left-57 top-22",
     bottom_right: "bottom-3 left-56.5",
   },
 };
@@ -98,10 +99,11 @@ function HoverDropdownContent ({ align="center", side="bottom", children, classN
   const ctx = useContext(HoverDropdownCtx);
   if (!ctx || !ctx.open) return null;
 
-  return (
+  return createPortal(
     <div data-ui="dropdown-content" className={cn("absolute z-10", alignVariant[align], alignVariant[align][side])}>
       <div className={cn("bg-accent-foreground rounded-12 w-60 overflow-hidden p-2", className)}>{children}</div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -140,11 +142,14 @@ function HoverDropdownItemTrigger ({ children, onClick, ...props }: React.Button
 }
 
 function HoverDropdownItemLink ({ children, className, href, ...props }: HoverDropdownItemLinkProps) {
+  const ctx = useContext(HoverDropdownCtx);
+  if (!ctx) return null;
   return (
     <Link 
       to={href}
       data-ui="dropdown-link"
       data-action="dropdown-link"
+      onClick={() => ctx.close()}
       className={cn("flex items-center gap-2 px-2.5 py-2 hover:bg-primary/90 active:opacity-55 hover:text-white/90 duration-200 text-white/70 font-medium text-sm leading-4 rounded-12", className)}
       {...props}
     >
