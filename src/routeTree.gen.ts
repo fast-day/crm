@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './app/routes/__root'
 import { Route as AuthLayoutRouteImport } from './app/routes/_auth/_layout'
 import { Route as AppLayoutRouteImport } from './app/routes/_app/_layout'
 import { Route as AppLayoutIndexRouteImport } from './app/routes/_app/_layout/index'
+import { Route as AppLayoutNotFoundRouteImport } from './app/routes/_app/_layout/$notFound'
 import { Route as AppLayoutSettingsIndexRouteImport } from './app/routes/_app/_layout/settings/index'
 import { Route as AppLayoutScheduleIndexRouteImport } from './app/routes/_app/_layout/schedule/index'
 import { Route as AppLayoutNotificationsIndexRouteImport } from './app/routes/_app/_layout/notifications/index'
@@ -53,6 +54,11 @@ const AuthLayoutLoginLazyRoute = AuthLayoutLoginLazyRouteImport.update({
 } as any).lazy(() =>
   import('./app/routes/_auth/_layout/login.lazy').then((d) => d.Route),
 )
+const AppLayoutNotFoundRoute = AppLayoutNotFoundRouteImport.update({
+  id: '/$notFound',
+  path: '/$notFound',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
 const AppLayoutSettingsIndexRoute = AppLayoutSettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
@@ -87,6 +93,7 @@ const AppLayoutCompanyCreateIndexRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/$notFound': typeof AppLayoutNotFoundRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
   '/': typeof AppLayoutIndexRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
 }
 export interface FileRoutesByTo {
+  '/$notFound': typeof AppLayoutNotFoundRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
   '/': typeof AppLayoutIndexRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app/_layout': typeof AppLayoutRouteWithChildren
   '/_auth/_layout': typeof AuthLayoutRouteWithChildren
+  '/_app/_layout/$notFound': typeof AppLayoutNotFoundRoute
   '/_auth/_layout/login': typeof AuthLayoutLoginLazyRoute
   '/_auth/_layout/register': typeof AuthLayoutRegisterLazyRoute
   '/_app/_layout/': typeof AppLayoutIndexRoute
@@ -125,6 +134,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/$notFound'
     | '/login'
     | '/register'
     | '/'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/company/create'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/$notFound'
     | '/login'
     | '/register'
     | '/'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_app/_layout'
     | '/_auth/_layout'
+    | '/_app/_layout/$notFound'
     | '/_auth/_layout/login'
     | '/_auth/_layout/register'
     | '/_app/_layout/'
@@ -202,6 +214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLayoutLoginLazyRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
+    '/_app/_layout/$notFound': {
+      id: '/_app/_layout/$notFound'
+      path: '/$notFound'
+      fullPath: '/$notFound'
+      preLoaderRoute: typeof AppLayoutNotFoundRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
     '/_app/_layout/settings/': {
       id: '/_app/_layout/settings/'
       path: '/settings'
@@ -248,6 +267,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppLayoutRouteChildren {
+  AppLayoutNotFoundRoute: typeof AppLayoutNotFoundRoute
   AppLayoutIndexRoute: typeof AppLayoutIndexRoute
   AppLayoutCustomersIndexRoute: typeof AppLayoutCustomersIndexRoute
   AppLayoutEmployeesIndexRoute: typeof AppLayoutEmployeesIndexRoute
@@ -258,6 +278,7 @@ interface AppLayoutRouteChildren {
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
+  AppLayoutNotFoundRoute: AppLayoutNotFoundRoute,
   AppLayoutIndexRoute: AppLayoutIndexRoute,
   AppLayoutCustomersIndexRoute: AppLayoutCustomersIndexRoute,
   AppLayoutEmployeesIndexRoute: AppLayoutEmployeesIndexRoute,

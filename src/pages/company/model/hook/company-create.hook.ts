@@ -8,7 +8,7 @@ import { companySelector } from "../selector/company.selector";
 import type { CompanyCredentials } from "../type/company-create.type";
 import type { ISpecialization } from "../type/specialization.type";
 import { useNavigate } from "@tanstack/react-router";
-import { setAccount, useLazyMeQuery } from "@/entities/account";
+import { setAccount, setLocation, useLazyMeQuery } from "@/entities/account";
 import { useState } from "react";
 
 interface CompanyCreateReturnProps {
@@ -86,6 +86,7 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
       const me = await account().unwrap();
 
       dispatch(setAccount(me));
+      dispatch(setLocation(me.locations[0]));
       navigate({ to: "/", replace: true });
       dispatch(clearCompany());
     }
