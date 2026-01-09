@@ -9,3 +9,4 @@ export * from './badge';
 export * from './empty';
 export * from './chart';
 export * from './card';
+export * from './switch';
