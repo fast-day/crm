@@ -4,7 +4,7 @@ import * as React from "react";
 import { Spinner } from "../spinner";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center  whitespace-nowrap rounded-xl text-md font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-200",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-md font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-200",
   {
     variants: {
       variant: {
@@ -17,6 +17,7 @@ const buttonVariants = cva(
         accent: "font-medium px-5 bg-accent-foreground text-white hover:bg-accent-foreground/95 active:opacity-85",
         secondary: "font-medium bg-card border border-border px-5 hover:bg-border-foreground active:opacity-70",
         white: "bg-white text-foreground",
+        ghost: "font-medium text-sm hover:text-primary"
       },
       size: {
         none: "",
@@ -25,11 +26,18 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-8",
         icon: "size-9",
         iconSm: "size-8",
+        icon_36: "size-9",
+        icon_40: "size-10",
+        icon_42: "size-10.5",
+        icon_44: "size-11",
         icon_48: "size-12",
-        size_42: "h-11 w-full font-medium",
+
+        size_32: "h-8",
         size_36: "h-9",
         size_38: "h-9.5 rounded-12! text-sm",
         size_40: "h-10",
+        size_42: "h-11 w-full font-medium",
+        size_44: "h-11",
         size_48: "h-12",
         size_60: "h-15 w-full text-base font-medium",
       },
@@ -41,7 +49,9 @@ const buttonVariants = cva(
       animation: {
         none: "",
         toggle: "active:scale-97 active:opacity-80",
-        pulse: "disabled:animate-pulse"
+        toggle_sm: "active:scale-98 active:opacity-80",
+        pulse: "disabled:animate-pulse",
+
       }
     },
     defaultVariants: {
@@ -88,7 +98,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && <Spinner className="mr-2 text-current" />}
         {!isLoading && iconLeft && <span className="mr-2">{iconLeft}</span>}
         <span className={classNameChild}>{children}</span>
-        {iconRight && <span className="ml-2">{iconRight}</span>}
+        {iconRight && <span className="ml-1">{iconRight}</span>}
       </button>
     );
   },

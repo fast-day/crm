@@ -35,7 +35,7 @@ function PageHeaderActions ({ className, children, ...props }: ComponentProps<"d
 }
 
 const PageHeaderBackAction = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(
-  ({ children, ...props }, ref) => {
+  ({ ...props }, ref) => {
     const { history } = useRouter();
     return (
       <Button
@@ -44,10 +44,10 @@ const PageHeaderBackAction = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<
         ref={ref}
         variant={"white"}
         animation={"toggle"}
-        className={"px-5 items-end py-3"}
-        size={"size_48"}
+        className={"px-5 text-sm font-bold"}
+        size={"size_44"}
         onClick={() => history.back()}
-        iconLeft={<ArrowBackUpIcon width={25} height={25} />}
+        iconLeft={<ArrowBackUpIcon width={24} height={24} />}
         {...props}
       >
         Назад
