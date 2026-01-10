@@ -66,7 +66,6 @@ export const Locations = () => {
             </TableRow>
           ))}
         </TableBody>
-
       </Table>
 
     </div>
