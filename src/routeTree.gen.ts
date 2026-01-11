@@ -26,6 +26,7 @@ import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_
 import { Route as AppLayoutCompanyCreateIndexRouteImport } from './app/routes/_app/_layout/company/create/index'
 import { Route as AppLayoutBusinessServicesIndexRouteImport } from './app/routes/_app/_layout/business/services/index'
 import { Route as AppLayoutBusinessLocationsIndexRouteImport } from './app/routes/_app/_layout/business/locations/index'
+import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
 
 const AuthLayoutRegisterLazyRouteImport = createFileRoute(
   '/_auth/_layout/register',
@@ -125,6 +126,12 @@ const AppLayoutBusinessLocationsIndexRoute =
     path: '/business/locations/',
     getParentRoute: () => AppLayoutRoute,
   } as any)
+const AppLayoutBusinessLocationsCreateIndexRoute =
+  AppLayoutBusinessLocationsCreateIndexRouteImport.update({
+    id: '/business/locations/create/',
+    path: '/business/locations/create/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/network': typeof NetworkLayoutRouteWithChildren
@@ -142,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/business/locations': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services': typeof AppLayoutBusinessServicesIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
+  '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/network': typeof NetworkLayoutRouteWithChildren
@@ -159,6 +167,7 @@ export interface FileRoutesByTo {
   '/business/locations': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services': typeof AppLayoutBusinessServicesIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
+  '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,6 +188,7 @@ export interface FileRoutesById {
   '/_app/_layout/business/locations/': typeof AppLayoutBusinessLocationsIndexRoute
   '/_app/_layout/business/services/': typeof AppLayoutBusinessServicesIndexRoute
   '/_app/_layout/company/create/': typeof AppLayoutCompanyCreateIndexRoute
+  '/_app/_layout/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/business/locations'
     | '/business/services'
     | '/company/create'
+    | '/business/locations/create'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/network'
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/business/locations'
     | '/business/services'
     | '/company/create'
+    | '/business/locations/create'
   id:
     | '__root__'
     | '/_app/_layout'
@@ -234,6 +246,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/business/locations/'
     | '/_app/_layout/business/services/'
     | '/_app/_layout/company/create/'
+    | '/_app/_layout/business/locations/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -363,6 +376,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutBusinessLocationsIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
+    '/_app/_layout/business/locations/create/': {
+      id: '/_app/_layout/business/locations/create/'
+      path: '/business/locations/create'
+      fullPath: '/business/locations/create'
+      preLoaderRoute: typeof AppLayoutBusinessLocationsCreateIndexRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
   }
 }
 
@@ -377,6 +397,7 @@ interface AppLayoutRouteChildren {
   AppLayoutBusinessLocationsIndexRoute: typeof AppLayoutBusinessLocationsIndexRoute
   AppLayoutBusinessServicesIndexRoute: typeof AppLayoutBusinessServicesIndexRoute
   AppLayoutCompanyCreateIndexRoute: typeof AppLayoutCompanyCreateIndexRoute
+  AppLayoutBusinessLocationsCreateIndexRoute: typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
@@ -390,6 +411,8 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutBusinessLocationsIndexRoute: AppLayoutBusinessLocationsIndexRoute,
   AppLayoutBusinessServicesIndexRoute: AppLayoutBusinessServicesIndexRoute,
   AppLayoutCompanyCreateIndexRoute: AppLayoutCompanyCreateIndexRoute,
+  AppLayoutBusinessLocationsCreateIndexRoute:
+    AppLayoutBusinessLocationsCreateIndexRoute,
 }
 
 const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(

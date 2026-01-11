@@ -1,4 +1,5 @@
 import type { IRole, IUserProfile } from "@/entities/account";
+import type { AddressCredentials } from "@/shared/types";
 
 export interface ILocationAddress {
   full_address: string;
@@ -49,21 +50,16 @@ export interface ILocationDetail extends ILocation {
   };
 }
 
-export interface CreateLocationRequest {
+export interface LocationCredentials extends AddressCredentials {
   name: string;
   description?: string;
   phone: string;
-  city?: string;
-  street?: string;
-  country: string;
-  region?: string;
-  timezone: string;
-  timezone_offset: string;
-  lat: string;
-  lng: string;
+
+  comfort?: string[];
+  category?: string[];
 }
 
 export interface UpdateLocationRequest {
   location_id: string;
-  body: CreateLocationRequest;
+  body: LocationCredentials;
 }

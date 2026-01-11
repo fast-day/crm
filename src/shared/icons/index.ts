@@ -1,8 +1,10 @@
 export { default as _404Icon } from "./404";
+export { default as AddFillIcon } from "./AddFill";
 export { default as AddIcon } from "./Add";
 export { default as AiIcon } from "./Ai";
 export { default as ArrowBackUpIcon } from "./ArrowBackUp";
 export { default as ArrowBackIcon } from "./ArrowBack";
+export { default as ArrowCircleIcon } from "./ArrowCircle";
 export { default as ArrowForwardUpDoubleIcon } from "./ArrowForwardUpDouble";
 export { default as ArrowsDownUpIcon } from "./ArrowsDownUp";
 export { default as BellIcon } from "./Bell";
@@ -55,6 +57,7 @@ export { default as PlusIcon } from "./Plus";
 export { default as ResearchIcon } from "./Research";
 export { default as SearchIcon } from "./Search";
 export { default as SettingIcon } from "./Setting";
+export { default as ShopIcon } from "./Shop";
 export { default as ShoppingCartIcon } from "./ShoppingCart";
 export { default as StatisticsIcon } from "./Statistics";
 export { default as StickerIcon } from "./Sticker";

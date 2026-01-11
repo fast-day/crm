@@ -10,6 +10,7 @@ import type { ISpecialization } from "../type/specialization.type";
 import { useNavigate } from "@tanstack/react-router";
 import { setAccount, setLocation, useLazyMeQuery } from "@/entities/account";
 import { useState } from "react";
+import { timezoneCredSchema } from "@/shared/schemas/timezone.schema";
 
 interface CompanyCreateReturnProps {
   step: number;
@@ -60,6 +61,8 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
     setIsLoading(true);
     try {
       if (!companyData) return;
+
+      const { timezone, timezone_offset } = timezoneCredSchema.parse(companyData.timezone);
       const payload = { 
         // ...companyData, 
 
@@ -72,10 +75,10 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
         city: "Москва",
         region: "Московская область",
 
-        timezone: companyData.timezone,
-        timezone_offset: companyData.timezone_offset,
-        lat: 55.7558,
-        lng: 37.6173,
+        timezone: timezone,
+        timezone_offset: timezone_offset,
+        lat: parseFloat(companyData.lat),
+        lng: parseFloat(companyData.lng),
         //
 
         specialization: companyData.specialization ?? 0, 

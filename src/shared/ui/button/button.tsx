@@ -17,7 +17,8 @@ const buttonVariants = cva(
         accent: "font-medium px-5 bg-accent-foreground text-white hover:bg-accent-foreground/95 active:opacity-85",
         secondary: "font-medium bg-card border border-border px-5 hover:bg-border-foreground active:opacity-70",
         white: "bg-white text-foreground",
-        ghost: "font-medium text-sm hover:text-primary"
+        ghost: "font-medium text-sm hover:text-primary",
+        dashed: "bg-transparent border border-dashed font-medium hover:bg-primary/10 py-4 px-8",
       },
       size: {
         none: "",
@@ -39,6 +40,7 @@ const buttonVariants = cva(
         size_42: "h-11 w-full font-medium",
         size_44: "h-11",
         size_48: "h-12",
+        size_54: "h-13.5",
         size_60: "h-15 w-full text-base font-medium",
       },
       active: {

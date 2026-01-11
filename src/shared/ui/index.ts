@@ -12,3 +12,5 @@ export * from './card';
 export * from './switch';
 export * from './page-header';
 export * from './table';
+export * from './tooltip';
+export * from './textarea';

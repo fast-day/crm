@@ -35,7 +35,7 @@ function TableBody({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-ui="table-body"
-      className={cn("bg-card/60 rounded-3xl overflow-hidden peer-hover:rounded-t-none", className)}
+      className={cn("bg-card/60 rounded-3xl overflow-hidden peer-hover:rounded-t-none relative", className)}
       {...props}
     />
   )
@@ -81,6 +81,36 @@ function TableCellActions({ className, ...props }: ComponentProps<"div">) {
   )
 }
 
+function TableSeparator({ className, ...props }: ComponentProps<"div">) {
+  return (
+    <div
+      data-ui="table-cell-separator"
+      className={cn("border-b border-card", className)}
+      {...props}
+    />
+  )
+}
+
+function TableFetching({ className, ...props }: ComponentProps<"div">) {
+  return (
+    <div
+      data-ui="table-fetching"
+      className={cn("absolute top-0 left-0 w-full h-full bg-card backdrop-blur-2 z-10", className)}
+      {...props}
+    />
+  )
+}
+
+function TableNotFound({ className, ...props }: ComponentProps<"div">) {
+  return (
+    <div
+      data-ui="table-not-found"
+      className={cn("py-3.5 px-5 h-64 flex items-center justify-center text-sm gap-2.5 font-medium leading-5", className)}
+      {...props}
+    />
+  )
+}
+
 export {
   Table,
   TableHeader,
@@ -90,4 +120,7 @@ export {
   TableRow,
   TableCell,
   TableCellActions,
+  TableSeparator,
+  TableFetching,
+  TableNotFound,
 }

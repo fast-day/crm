@@ -79,7 +79,7 @@ export const CompanyCreateForm = ({ setCompany }: { setCompany: (data: CompanyTy
                   error={formState.errors["currency"]}
                   label={"Валюта"}
                   required
-                    />
+                />
 
               </div>
             </div>
