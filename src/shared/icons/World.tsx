@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-const SvgWord = (props: SVGProps<SVGSVGElement>) => (
+const SvgWorld = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -16,4 +16,4 @@ const SvgWord = (props: SVGProps<SVGSVGElement>) => (
     <path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18" />
   </svg>
 );
-export default SvgWord;
+export default SvgWorld;

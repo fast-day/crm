@@ -11,10 +11,13 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './app/routes/__root'
+import { Route as NetworkLayoutRouteImport } from './app/routes/network/_layout'
 import { Route as AuthLayoutRouteImport } from './app/routes/_auth/_layout'
 import { Route as AppLayoutRouteImport } from './app/routes/_app/_layout'
 import { Route as AppLayoutIndexRouteImport } from './app/routes/_app/_layout/index'
 import { Route as AppLayoutNotFoundRouteImport } from './app/routes/_app/_layout/$notFound'
+import { Route as NetworkLayoutServerIndexRouteImport } from './app/routes/network/_layout/server/index'
+import { Route as NetworkLayoutClientIndexRouteImport } from './app/routes/network/_layout/client/index'
 import { Route as AppLayoutSettingsIndexRouteImport } from './app/routes/_app/_layout/settings/index'
 import { Route as AppLayoutScheduleIndexRouteImport } from './app/routes/_app/_layout/schedule/index'
 import { Route as AppLayoutNotificationsIndexRouteImport } from './app/routes/_app/_layout/notifications/index'
@@ -23,12 +26,18 @@ import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_
 import { Route as AppLayoutCompanyCreateIndexRouteImport } from './app/routes/_app/_layout/company/create/index'
 import { Route as AppLayoutBusinessServicesIndexRouteImport } from './app/routes/_app/_layout/business/services/index'
 import { Route as AppLayoutBusinessLocationsIndexRouteImport } from './app/routes/_app/_layout/business/locations/index'
+import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
 
 const AuthLayoutRegisterLazyRouteImport = createFileRoute(
   '/_auth/_layout/register',
 )()
 const AuthLayoutLoginLazyRouteImport = createFileRoute('/_auth/_layout/login')()
 
+const NetworkLayoutRoute = NetworkLayoutRouteImport.update({
+  id: '/network/_layout',
+  path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthLayoutRoute = AuthLayoutRouteImport.update({
   id: '/_auth/_layout',
   getParentRoute: () => rootRouteImport,
@@ -61,6 +70,18 @@ const AppLayoutNotFoundRoute = AppLayoutNotFoundRouteImport.update({
   path: '/$notFound',
   getParentRoute: () => AppLayoutRoute,
 } as any)
+const NetworkLayoutServerIndexRoute =
+  NetworkLayoutServerIndexRouteImport.update({
+    id: '/server/',
+    path: '/server/',
+    getParentRoute: () => NetworkLayoutRoute,
+  } as any)
+const NetworkLayoutClientIndexRoute =
+  NetworkLayoutClientIndexRouteImport.update({
+    id: '/client/',
+    path: '/client/',
+    getParentRoute: () => NetworkLayoutRoute,
+  } as any)
 const AppLayoutSettingsIndexRoute = AppLayoutSettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
@@ -105,8 +126,15 @@ const AppLayoutBusinessLocationsIndexRoute =
     path: '/business/locations/',
     getParentRoute: () => AppLayoutRoute,
   } as any)
+const AppLayoutBusinessLocationsCreateIndexRoute =
+  AppLayoutBusinessLocationsCreateIndexRouteImport.update({
+    id: '/business/locations/create/',
+    path: '/business/locations/create/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
+  '/network': typeof NetworkLayoutRouteWithChildren
   '/$notFound': typeof AppLayoutNotFoundRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
@@ -116,11 +144,15 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof AppLayoutNotificationsIndexRoute
   '/schedule': typeof AppLayoutScheduleIndexRoute
   '/settings': typeof AppLayoutSettingsIndexRoute
+  '/network/client': typeof NetworkLayoutClientIndexRoute
+  '/network/server': typeof NetworkLayoutServerIndexRoute
   '/business/locations': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services': typeof AppLayoutBusinessServicesIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
+  '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 export interface FileRoutesByTo {
+  '/network': typeof NetworkLayoutRouteWithChildren
   '/$notFound': typeof AppLayoutNotFoundRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
@@ -130,14 +162,18 @@ export interface FileRoutesByTo {
   '/notifications': typeof AppLayoutNotificationsIndexRoute
   '/schedule': typeof AppLayoutScheduleIndexRoute
   '/settings': typeof AppLayoutSettingsIndexRoute
+  '/network/client': typeof NetworkLayoutClientIndexRoute
+  '/network/server': typeof NetworkLayoutServerIndexRoute
   '/business/locations': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services': typeof AppLayoutBusinessServicesIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
+  '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app/_layout': typeof AppLayoutRouteWithChildren
   '/_auth/_layout': typeof AuthLayoutRouteWithChildren
+  '/network/_layout': typeof NetworkLayoutRouteWithChildren
   '/_app/_layout/$notFound': typeof AppLayoutNotFoundRoute
   '/_auth/_layout/login': typeof AuthLayoutLoginLazyRoute
   '/_auth/_layout/register': typeof AuthLayoutRegisterLazyRoute
@@ -147,13 +183,17 @@ export interface FileRoutesById {
   '/_app/_layout/notifications/': typeof AppLayoutNotificationsIndexRoute
   '/_app/_layout/schedule/': typeof AppLayoutScheduleIndexRoute
   '/_app/_layout/settings/': typeof AppLayoutSettingsIndexRoute
+  '/network/_layout/client/': typeof NetworkLayoutClientIndexRoute
+  '/network/_layout/server/': typeof NetworkLayoutServerIndexRoute
   '/_app/_layout/business/locations/': typeof AppLayoutBusinessLocationsIndexRoute
   '/_app/_layout/business/services/': typeof AppLayoutBusinessServicesIndexRoute
   '/_app/_layout/company/create/': typeof AppLayoutCompanyCreateIndexRoute
+  '/_app/_layout/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/network'
     | '/$notFound'
     | '/login'
     | '/register'
@@ -163,11 +203,15 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/schedule'
     | '/settings'
+    | '/network/client'
+    | '/network/server'
     | '/business/locations'
     | '/business/services'
     | '/company/create'
+    | '/business/locations/create'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/network'
     | '/$notFound'
     | '/login'
     | '/register'
@@ -177,13 +221,17 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/schedule'
     | '/settings'
+    | '/network/client'
+    | '/network/server'
     | '/business/locations'
     | '/business/services'
     | '/company/create'
+    | '/business/locations/create'
   id:
     | '__root__'
     | '/_app/_layout'
     | '/_auth/_layout'
+    | '/network/_layout'
     | '/_app/_layout/$notFound'
     | '/_auth/_layout/login'
     | '/_auth/_layout/register'
@@ -193,18 +241,29 @@ export interface FileRouteTypes {
     | '/_app/_layout/notifications/'
     | '/_app/_layout/schedule/'
     | '/_app/_layout/settings/'
+    | '/network/_layout/client/'
+    | '/network/_layout/server/'
     | '/_app/_layout/business/locations/'
     | '/_app/_layout/business/services/'
     | '/_app/_layout/company/create/'
+    | '/_app/_layout/business/locations/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AppLayoutRoute: typeof AppLayoutRouteWithChildren
   AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
+  NetworkLayoutRoute: typeof NetworkLayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/network/_layout': {
+      id: '/network/_layout'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_auth/_layout': {
       id: '/_auth/_layout'
       path: ''
@@ -246,6 +305,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/$notFound'
       preLoaderRoute: typeof AppLayoutNotFoundRouteImport
       parentRoute: typeof AppLayoutRoute
+    }
+    '/network/_layout/server/': {
+      id: '/network/_layout/server/'
+      path: '/server'
+      fullPath: '/network/server'
+      preLoaderRoute: typeof NetworkLayoutServerIndexRouteImport
+      parentRoute: typeof NetworkLayoutRoute
+    }
+    '/network/_layout/client/': {
+      id: '/network/_layout/client/'
+      path: '/client'
+      fullPath: '/network/client'
+      preLoaderRoute: typeof NetworkLayoutClientIndexRouteImport
+      parentRoute: typeof NetworkLayoutRoute
     }
     '/_app/_layout/settings/': {
       id: '/_app/_layout/settings/'
@@ -303,6 +376,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutBusinessLocationsIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
+    '/_app/_layout/business/locations/create/': {
+      id: '/_app/_layout/business/locations/create/'
+      path: '/business/locations/create'
+      fullPath: '/business/locations/create'
+      preLoaderRoute: typeof AppLayoutBusinessLocationsCreateIndexRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
   }
 }
 
@@ -317,6 +397,7 @@ interface AppLayoutRouteChildren {
   AppLayoutBusinessLocationsIndexRoute: typeof AppLayoutBusinessLocationsIndexRoute
   AppLayoutBusinessServicesIndexRoute: typeof AppLayoutBusinessServicesIndexRoute
   AppLayoutCompanyCreateIndexRoute: typeof AppLayoutCompanyCreateIndexRoute
+  AppLayoutBusinessLocationsCreateIndexRoute: typeof AppLayoutBusinessLocationsCreateIndexRoute
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
@@ -330,6 +411,8 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutBusinessLocationsIndexRoute: AppLayoutBusinessLocationsIndexRoute,
   AppLayoutBusinessServicesIndexRoute: AppLayoutBusinessServicesIndexRoute,
   AppLayoutCompanyCreateIndexRoute: AppLayoutCompanyCreateIndexRoute,
+  AppLayoutBusinessLocationsCreateIndexRoute:
+    AppLayoutBusinessLocationsCreateIndexRoute,
 }
 
 const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
@@ -350,9 +433,24 @@ const AuthLayoutRouteWithChildren = AuthLayoutRoute._addFileChildren(
   AuthLayoutRouteChildren,
 )
 
+interface NetworkLayoutRouteChildren {
+  NetworkLayoutClientIndexRoute: typeof NetworkLayoutClientIndexRoute
+  NetworkLayoutServerIndexRoute: typeof NetworkLayoutServerIndexRoute
+}
+
+const NetworkLayoutRouteChildren: NetworkLayoutRouteChildren = {
+  NetworkLayoutClientIndexRoute: NetworkLayoutClientIndexRoute,
+  NetworkLayoutServerIndexRoute: NetworkLayoutServerIndexRoute,
+}
+
+const NetworkLayoutRouteWithChildren = NetworkLayoutRoute._addFileChildren(
+  NetworkLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   AppLayoutRoute: AppLayoutRouteWithChildren,
   AuthLayoutRoute: AuthLayoutRouteWithChildren,
+  NetworkLayoutRoute: NetworkLayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

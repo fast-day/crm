@@ -90,11 +90,11 @@ const FormLabel = React.forwardRef<
     <label
       ref={ref}
       htmlFor={formItemId}
-      className={cn("text-sm select-none font-medium", error && "text-[#F22417]", className)}
+      className={cn("text-xs select-none font-medium", error && "text-red", className)}
       {...props}
     >
       {children}
-      {required && <span className="text-[#F22417] ml-0.5">*</span>}
+      {required && <span className="text-red ml-0.5">*</span>}
     </label>
   );
 });
@@ -197,6 +197,16 @@ const Form = <
   );
 };
 
+function FormWrapperAction({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-ui="form-wrapper-action"
+      className={cn("left-0 right-0 sticky mx-auto bottom-0 flex justify-center md:bg-transparent backdrop-blur-xs py-6 rounded-t-3xl px-5", className)}
+      {...props}
+    />
+  )
+}
+
 export {
   Form,
   FormProvider,
@@ -206,4 +216,5 @@ export {
   FormDescription,
   FormMessage,
   FormField,
+  FormWrapperAction,
 };

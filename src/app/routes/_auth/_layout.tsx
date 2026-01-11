@@ -1,3 +1,5 @@
+import { OnlineHandler } from '@/app/providers/online'
+import { NavigationHandler } from '@/features/navigation'
 import { AuthLayout } from '@/widgets/layout'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
@@ -10,6 +12,8 @@ function RouteComponent() {
     <>
       <AuthLayout>
         <Outlet />
+        <OnlineHandler />
+        <NavigationHandler />
       </AuthLayout>
     </>
   )

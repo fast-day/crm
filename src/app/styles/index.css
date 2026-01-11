@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @import "./fonts.css";
 
 @layer base {
@@ -132,6 +133,11 @@
   /* shadow */
   --shadow-dropdown: 0 4px 4px 0 var(--accent);
 
+  /* blur */
+  --blur-1: 1px;
+  --blur-2: 2px;
+  --blur-xss: 3px;
+
   /* ... */
 }
 
@@ -140,12 +146,3 @@
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
-
-*:focus:not(:focus-visible) {
-  outline: none;
-}
-
-*:focus-visible {
-  outline: 2px solid transparent;
-}
-

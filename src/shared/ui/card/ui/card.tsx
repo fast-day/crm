@@ -1,7 +1,6 @@
 import { cn } from "@/shared/utils"
 import { forwardRef, type HTMLAttributes } from "react"
 
-
 const Card = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement>

@@ -1,6 +1,6 @@
 import { API } from "@/shared/api";
 import { apiVersion } from "@/shared/constants";
-import type { CreateLocationRequest, ILocationResponse, ILocationUser, ILocationUserQuery, UpdateLocationRequest } from "../model/types/location.type";
+import type { LocationCredentials, ILocationResponse, ILocationUser, ILocationUserQuery, UpdateLocationRequest } from "../model/types/location.type";
 
 export const serviceAPI = API.injectEndpoints(({
   endpoints: (build) => ({
@@ -9,10 +9,10 @@ export const serviceAPI = API.injectEndpoints(({
         url: `/${apiVersion}/locations`,
         method: "GET",
       }),
+      providesTags: ["LOCATIONS"]
     }),
     getLocationUsers: build.query<ILocationUser[], string>({
       query: (locationId) => ({
-        // TODO: ИЗМЕНИТЬ URL НА СЕРВЕРЕ
         url: `/${apiVersion}/locations/${locationId}/users`,
         method: "GET",
       }),
@@ -23,12 +23,13 @@ export const serviceAPI = API.injectEndpoints(({
         method: "GET",
       }),
     }),
-    createLocation: build.mutation<ILocationResponse, CreateLocationRequest>({
+    createLocation: build.mutation<ILocationResponse, LocationCredentials>({
       query: (body) => ({
         url: `/${apiVersion}/location`,
         method: "POST",
         body,
       }),
+      invalidatesTags: ["LOCATIONS"],
     }),
     updateLocation: build.mutation<UpdateLocationRequest, ILocationResponse>({
       query: (body) => ({
@@ -36,12 +37,14 @@ export const serviceAPI = API.injectEndpoints(({
         method: "PATCH",
         body,
       }),
+      invalidatesTags: ["LOCATIONS"],
     }),
     deleteLocation: build.mutation<void, string>({
       query: (locationId) => ({
         url: `/${apiVersion}/location/${locationId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["LOCATIONS"],
     }),
   }),
 }));

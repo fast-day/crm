@@ -1,4 +1,6 @@
+import { OnlineHandler } from '@/app/providers/online'
 import { PrivateRoute } from '@/features/auth'
+import { NavigationHandler } from '@/features/navigation'
 import { AppLayout, NotFound } from '@/widgets/layout'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
@@ -13,6 +15,8 @@ function RouteComponent() {
       <AppLayout>
         <Outlet />
       </AppLayout>
+      <OnlineHandler />
+      <NavigationHandler />
     </PrivateRoute>
   )
 }

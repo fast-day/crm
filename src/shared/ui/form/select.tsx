@@ -7,9 +7,10 @@ interface SelectFormProps<F extends FieldValues> extends FieldWrapperPassThrough
   options: SelectOptions[];
   control: Control<F>;
   isError?: boolean;
+  placeholder?: string;
 }
 
-export const SelectForm = <F extends FieldValues>({ name, options, control, label, error, required }: SelectFormProps<F>) => {
+export const SelectForm = <F extends FieldValues>({ name, placeholder, options, control, label, error, required }: SelectFormProps<F>) => {
   return (
     <Controller
       name={name}
@@ -21,6 +22,7 @@ export const SelectForm = <F extends FieldValues>({ name, options, control, labe
             value={field.value}
             onChange={(v) => field.onChange(v)}
             isError={!!error}
+            placeholder={placeholder}
           />
         </FieldWrapper>
       )}

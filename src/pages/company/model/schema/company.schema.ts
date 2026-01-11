@@ -1,3 +1,4 @@
+import { timezoneSchema } from "@/shared/schemas/timezone.schema";
 import z from "zod";
 
 export const CompanySchema = z.object({
@@ -19,7 +20,8 @@ export const CompanySchema = z.object({
   lat: z.string().optional().default("56.838933"),
   lng: z.string().optional().default("60.595278"),
   post_code: z.string().optional(),
-  timezone: z.string("Укажите часовой пояс").min(1, "Укажите часовой пояс"),
+
+  timezone: timezoneSchema,
 });
 
 export type CompanyType = z.infer<typeof CompanySchema>;

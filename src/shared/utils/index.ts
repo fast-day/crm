@@ -5,3 +5,4 @@ export { buildQuery } from './build-query/build-query.util';
 export * from './date-format/date-format.util';
 export * from './storage/storage.util';
 export * from './currency';
+export { extractTimezoneOffset } from './timezone-offset/timezone-offset.util';
