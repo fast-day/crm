@@ -68,3 +68,8 @@ export interface UpdateLocationRequest {
   location_id: string;
   body: LocationCredentials;
 }
+
+export interface ChangeLocationStatusRequest {
+  locationId: string;
+  active: boolean;
+}

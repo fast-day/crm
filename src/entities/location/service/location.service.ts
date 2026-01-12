@@ -1,6 +1,6 @@
 import { API } from "@/shared/api";
 import { apiVersion } from "@/shared/constants";
-import type { LocationCredentials, ILocationResponse, ILocationDetail, ILocationUser, ILocationUserQuery, UpdateLocationRequest } from "../model/types/location.type";
+import type { LocationCredentials, ILocationResponse, ILocationDetail, ILocationUser, ILocationUserQuery, UpdateLocationRequest, ChangeLocationStatusRequest } from "../model/types/location.type";
 
 export const serviceAPI = API.injectEndpoints(({
   endpoints: (build) => ({
@@ -45,12 +45,12 @@ export const serviceAPI = API.injectEndpoints(({
       }),
       invalidatesTags: ["LOCATIONS"],
     }),
-    deleteLocation: build.mutation<void, string>({
-      query: (locationId) => ({
-        url: `/${apiVersion}/location/${locationId}`,
-        method: "DELETE",
+    onlineLocation: build.mutation<void, ChangeLocationStatusRequest>({
+      query: ({ locationId, active }) => ({
+        url: `/${apiVersion}/location/${locationId}/status`,
+        method: "POST",
+        body: { active },
       }),
-      invalidatesTags: ["LOCATIONS"],
     }),
   }),
 }));
@@ -66,5 +66,5 @@ export const {
   useLazyGetLocationUserQuery,
   useCreateLocationMutation,
   useUpdateLocationMutation,
-  useDeleteLocationMutation,
+  useOnlineLocationMutation,
 } = serviceAPI;

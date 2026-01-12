@@ -1,5 +1,6 @@
 import { WorldPauseIcon } from "@/shared/icons"
 import { Button, Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui"
+import { useLocationOnline } from "../model/hooks/online.hook";
 
 interface LocationOnlineToggleProps {
   isOnline: boolean;
@@ -9,18 +10,19 @@ interface LocationOnlineToggleProps {
 }
 
 export const LocationOnlineToggle = ({ isOnline, locationId, side="bottom", className="" }: LocationOnlineToggleProps) => {
-
-  // create hook
-  const handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-
-    console.log(!isOnline, locationId);
-  }
+  const { handleToggle, isLoading } = useLocationOnline();
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"} className={className} onClick={handleToggle}>
+        <Button 
+          variant={"white"} 
+          size={"icon_40"} 
+          animation={"toggle_sm"} 
+          className={className} 
+          disabled={isLoading}
+          onClick={(e) => handleToggle(e, locationId, isOnline)}
+        >
           <WorldPauseIcon width={16} height={16} />
         </Button>
       </TooltipTrigger>
