@@ -16,6 +16,7 @@ export const serviceAPI = API.injectEndpoints(({
         url: `/${apiVersion}/location/${locationId}`,
         method: "GET",
       }),
+      providesTags: ["LOCATIONS"]
     }),
     getLocationUsers: build.query<ILocationUser[], string>({
       query: (locationId) => ({
@@ -51,6 +52,7 @@ export const serviceAPI = API.injectEndpoints(({
         method: "POST",
         body: { active },
       }),
+      invalidatesTags: ["LOCATIONS"],
     }),
   }),
 }));

@@ -1,7 +1,7 @@
 export interface CompanyCredentials {
   name: string;
   public_name: string;
-  currency: ICurrency;
+  currency: CurrencyType;
   street?: string;
   house?: string;
   city: string;
@@ -19,5 +19,5 @@ export interface CompanyCredentials {
 export interface CompanyCreateResponse {
   id: string;
   name: string;
-  currency: ICurrency;
+  currency: CurrencyType;
 }

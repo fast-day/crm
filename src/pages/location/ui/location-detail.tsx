@@ -1,7 +1,7 @@
 import { useGetLocationQuery } from "@/entities/location"
 import { PencilEditIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { LocationDetails } from "@/widgets/location"
+import { LocationDetailLazy, LocationDetails } from "@/widgets/location"
 import { Link, useParams } from "@tanstack/react-router"
 
 export const LocationDetail = () => {
@@ -25,11 +25,9 @@ export const LocationDetail = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      <div className="mt-8">
-        {isLoading && <div>load..</div>}
+      {isLoading && <LocationDetailLazy />}
 
-        {data && <LocationDetails location={data} />}
-      </div>
+      {data && <LocationDetails location={data} />}
     </>
   )
 }

@@ -30,7 +30,7 @@ export interface ILocationResponse extends ILocation {
   address: ILocationAddress,
 }
 
-export interface LocationUsersList {
+export interface ILocationUsersList {
   id: string;
   name: string;
   avatar: string | null;
@@ -48,11 +48,18 @@ export interface ILocationUser {
   profile: IUserProfile;
 }
 
+export interface ILocationServices {
+  id: string;
+  name: string;
+  mark: MarkType;
+}
+
 export interface ILocationDetail extends ILocation {
   address: ILocationAddress;
   timezone: string;
   user_count: number;
-  users: LocationUsersList[];
+  users: ILocationUsersList[];
+  services: ILocationServices[];
 }
 
 export interface LocationCredentials extends AddressCredentials {

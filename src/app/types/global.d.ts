@@ -10,9 +10,11 @@ declare global {
     status: number
   }
 
-  type ICurrency = "RUB" | "USD" | "EUR";
+  type CurrencyType = "RUB" | "USD" | "EUR";
 
   type ApiResponse<T> = {
     data: T;
   }
+
+  type MarkType = "green" | "yellow" | "red"; // ...
 }

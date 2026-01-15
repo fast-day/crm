@@ -26,7 +26,7 @@ export const LocationOnlineToggle = ({ isOnline, locationId, side="bottom", clas
           <WorldPauseIcon width={16} height={16} />
         </Button>
       </TooltipTrigger>
-      <TooltipContent side={side}>Приостановить</TooltipContent>
+      <TooltipContent side={side}>{isOnline ? "Приостановить" : "Запустить"}</TooltipContent>
     </Tooltip>
   )
 }
