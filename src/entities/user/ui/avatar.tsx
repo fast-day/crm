@@ -23,13 +23,16 @@ type AvatarProps = VariantProps<typeof avatarVariants> & React.ComponentProps<"d
   id: string;
   avatar_url?: string | null;
   name: string;
+  opacity?: number;
 }
 
-export const Avatar = ({ id, avatar_url, size, name, className, ...props }: AvatarProps) => {
+export const Avatar = ({ id, avatar_url, size, name, className, opacity, ...props }: AvatarProps) => {
+  console.log(getAvatarColor(id, opacity))
   return (
     <div
       data-ui="avatar"
-      className={cn(avatarVariants({ size }), getAvatarColor(id), className)}
+      className={cn(avatarVariants({ size }), className)}
+      style={{ background: getAvatarColor(id, (opacity ?? 100) / 100) }}
       {...props}
     >
       {avatar_url ? (

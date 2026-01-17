@@ -1,6 +1,7 @@
 import { useGetLocationsQuery } from "@/entities/location"
 import { AddIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { TableLoading } from "@/widgets/loading";
 import { LocationEmpty, LocationTable } from "@/widgets/location";
 import { Link } from "@tanstack/react-router";
 
@@ -24,7 +25,7 @@ export const Locations = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <>loading...</>}
+      {isLoading && <TableLoading rows={4} />}
       {!isLoading && isSuccess && locations.length ? (
         <LocationTable locations={locations} isLoading={isLoading} />
       ) : (

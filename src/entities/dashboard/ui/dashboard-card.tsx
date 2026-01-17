@@ -10,7 +10,7 @@ interface DashboardCardProps {
   isIncreased: boolean;
   percentage: string;
   description: string;
-  currency?: ICurrency;
+  currency?: CurrencyType;
   recommendation: string;
 }
 
