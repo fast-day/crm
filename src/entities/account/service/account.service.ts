@@ -1,12 +1,12 @@
 import { API } from "@/shared/api";
-import { apiVersion } from "@/shared/constants";
+import { API_VERSION } from "@/shared/constants";
 import type { IMe } from "../model/types/me.type";
 
 export const AccountApi = API.injectEndpoints({
   endpoints: build => ({
     me: build.query<IMe, void>({
       query: () => ({
-        url: `/${apiVersion}/me`,
+        url: `/${API_VERSION}/me`,
         method: "GET",
       }),
     }),
