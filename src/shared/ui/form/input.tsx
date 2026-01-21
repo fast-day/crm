@@ -13,9 +13,9 @@ FieldWrapperPassThroughProps & VariantProps<typeof inputVariants> & {
 }
 
 const InputForm = React.forwardRef<HTMLInputElement, InputFormProps>(
-  ({ className="", type, required, variant, inputSize, label, error, isError=false, register, ...props }, ref) => {
+  ({ className="", type, required, variant, inputSize, label, error, isError=false, register, message, ...props }, ref) => {
     return (
-      <FieldWrapper label={label} error={error} required={required}>
+      <FieldWrapper label={label} error={error} required={required} message={message}>
         <input
           ref={ref}
           type={type}

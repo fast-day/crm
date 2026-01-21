@@ -56,14 +56,14 @@ declare global {
   type OrderStatusType = "pending" | "open" | "closed" | "paid";
 
   /** СТАТУСЫ ДЛЯ ОПЛАТЫ **/
-  type OrderStatusType = "online" | "cash" | "credit_card";
-
-  /** СТАТУСЫ ДЛЯ ОПЛАТЫ **/
-  type OrderStatusType = "online" | "cash" | "credit_card";
+  type PaymentStatusType = "online" | "cash" | "credit_card";
 
   /** СТАТУСЫ ПОЛЬЗОВАТЕЛЕЙ **/
-  type OrderStatusType = "invited" | "active" | "disable";
+  type UserStatusType = "invited" | "active" | "disable";
 
   /** СТАТУСЫ ИНВАЙТОВ **/
-  type OrderStatusType = "accept" | "register" | "notify";
+  type InviteStatusType = "accept" | "register" | "notify";
+
+  /** ЕДЕНИЦА ЦЕНЫ **/
+  type UnitPriceType = "booking" | "hour" | "day" | "week" | "month";
 }

@@ -13,7 +13,7 @@ export const LocationEdit = () => {
 
   return (
     <>
-      <PageHeader>
+      <PageHeader className="sticky top-8">
         <PageHeaderTitle>Редактировать локацию</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />

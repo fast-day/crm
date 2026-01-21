@@ -19,6 +19,7 @@ export interface IServiceCredentials {
 
   // ЦЕНЫ
   price: number;
+  unit_price: string;       // ДОБАВИТЬ В API
   cost_price?: number;
 
   // НАСТРОЙКИ СКИДОК - ВСЕ ПОЛЯ ОПЦИОНАЛЬНЫ
@@ -26,7 +27,7 @@ export interface IServiceCredentials {
   date_type?: DateType;
   discount_days?: DaysType[];
   discount_time_start?: string;
-  discount_time_end: string;
+  discount_time_end?: string;
 }
 
 export interface IServiceEditCredentials {
