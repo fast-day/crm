@@ -1,6 +1,7 @@
 export {};
 
 declare global {
+  /** API TYPES **/
   type HttpError<T = unknown> = {
     data: T & {
       title: string;
@@ -10,11 +11,59 @@ declare global {
     status: number
   }
 
-  type CurrencyType = "RUB" | "USD" | "EUR";
-
   type ApiResponse<T> = {
     data: T;
   }
 
-  type MarkType = "green" | "yellow" | "red"; // ...
+  type ApiSuccess = {
+    success: boolean;
+  }
+
+  /** **/
+  interface IUserList {
+    id: string;
+    name: string;
+  }
+
+  interface ILocationList {
+    id: string;
+    name: string;
+  }
+
+  interface IDataList {
+    id: string;
+    name: string;
+  }
+  
+  /**
+    TODO:
+    РАСПРЕДЕЛИТЬ ТИПЫ ПО СТРУКТУРЕ
+  **/
+  type CurrencyType = "RUB" | "USD" | "EUR";
+
+  type MarkType = "red" | "orange" | "green" | "blue" | "purple" | "teal" | "pink";
+  
+  type DaysType = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
+  type DateType = "days" | "dates";
+
+  /** **/
+  type SexType = "man" | "woman" | "none";
+
+  /** СТАТУСЫ ДЛЯ БРОНИРОВАНИЯ **/
+  type BookingStatusType = "pending" | "confirmed" | "cancelled" | "completed";
+
+  /** СТАТУСЫ ДЛЯ ЗАКАЗОВ **/
+  type OrderStatusType = "pending" | "open" | "closed" | "paid";
+
+  /** СТАТУСЫ ДЛЯ ОПЛАТЫ **/
+  type PaymentStatusType = "online" | "cash" | "credit_card";
+
+  /** СТАТУСЫ ПОЛЬЗОВАТЕЛЕЙ **/
+  type UserStatusType = "invited" | "active" | "disable";
+
+  /** СТАТУСЫ ИНВАЙТОВ **/
+  type InviteStatusType = "accept" | "register" | "notify";
+
+  /** ЕДЕНИЦА ЦЕНЫ **/
+  type UnitPriceType = "booking" | "hour" | "day" | "week" | "month";
 }

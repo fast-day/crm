@@ -1,6 +1,7 @@
 import { AddFillIcon, ShopIcon } from "@/shared/icons"
 import { Button, Empty } from "@/shared/ui"
 import { EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/shared/ui/empty/ui/empty"
+import { Link } from "@tanstack/react-router"
 
 export const LocationEmpty = () => {
   return (
@@ -13,13 +14,15 @@ export const LocationEmpty = () => {
         <EmptyDescription>Давайте создадим первую локацию</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button 
-          variant={"dashed"}
-          size={"size_54"} 
-          animation={"toggle_sm"}
-          iconLeft={<AddFillIcon width={22} height={22} className="text-primary"/>}
-        >Добавить локацию
-        </Button>
+        <Link to={"create"}>
+          <Button 
+            variant={"dashed"}
+            size={"size_54"} 
+            animation={"toggle_sm"}
+            iconLeft={<AddFillIcon width={22} height={22} className="text-primary"/>}
+          >Добавить локацию
+          </Button>
+        </Link>
       </EmptyContent>
     </Empty>
   )

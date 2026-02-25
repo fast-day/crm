@@ -7,13 +7,12 @@ import { LocationNotFound } from "@/widgets/location";
 export const LocationEdit = () => {
   const { location_id } = useParams({ from: `/_app/_layout/business/locations/_location/$location_id/edit/` });
   const { data, isLoading, isError } = useGetLocationQuery(location_id);
-  console.log(data);
 
   if (isLoading || !data) return null;
 
   return (
     <>
-      <PageHeader>
+      <PageHeader className="sticky top-8">
         <PageHeaderTitle>Редактировать локацию</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />

@@ -4,7 +4,7 @@ import { LocationCreateForm } from "./components/location-create-form"
 export const LocationCreate = () => {
   return (
     <>
-      <PageHeader>
+      <PageHeader className="sticky top-8">
         <PageHeaderTitle>Создание локации</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
