@@ -31,6 +31,8 @@
     --green: oklch(67.311% 0.16242 144.231);                /* #4caf50 */
     --green-accent: oklch(45.358% 0.14503 143.081);         /* #0C6910 */
 
+    --orange: #EF9831;                                      /* #EF9831 */
+    
     /* notify colors */
     --warn-background: oklch(81.081% 0.12154 70.422);       /* #f3b364 */
     --warn-color-text: oklch(25.785% 0.05555 70.851 / 0.6); /* #341e0099 */
@@ -103,6 +105,8 @@
   
   --color-green: var(--green);
   --color-green-accent: var(--green-accent);
+
+  --color-orange: var(--orange);
 
   /* notify colors */
   --color-warn-background: var(--warn-background);

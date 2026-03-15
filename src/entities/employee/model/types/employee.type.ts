@@ -8,7 +8,7 @@ export interface IEmployee {
   position: string | null;
 }
 
-export type EmployeeStatus = "active" | "inactive";
+export type EmployeeStatus = "active" | "inactive" | "invited";
 
 export interface IEmployees {
   data: IEmployee[];
@@ -35,10 +35,15 @@ export interface IEmployeeInviteCredentials {
   first_name: string;
   last_name?: string;
   role: number;
-  position?: string;
+  position: string;
   location_id: string;
   birth_date?: string;
   note?: string;
+}
+
+export interface IEmployeeInviteResponse {
+  detail: { action: string };
+  message: string;
 }
 
 export interface IEmployeeUpdateCredentials {

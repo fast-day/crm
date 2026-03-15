@@ -2,18 +2,26 @@ export {};
 
 declare global {
   /** API TYPES **/
+  // type HttpError<T = unknown> = {
+  //   data: T & {
+  //     title: string;
+  //     detail: string;
+  //     status: number;
+  //   }
+  //   status: number
+  // }
   type HttpError<T = unknown> = {
-    data: T & {
-      title: string;
-      detail: string;
-      status: number;
-    }
-    status: number
+    title: string;
+    detail: string;
+    status: number;
+    meta: T;
   }
 
-  type ApiResponse<T> = {
-    data: T;
-  }
+  type ApiResponse<T> = T | HttpError;
+
+  // type ApiResponse<T> = {
+  //   data: T;
+  // }
 
   type ApiSuccess = {
     success: boolean;

@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import type { IEmployee, IEmployeeBlockedCredentials, IEmployeeByEmail, IEmployeeByEmailCredentials, IEmployeeDeleteCredentials, IEmployeeInviteCredentials, IEmployeeUpdateCredentials } from "../model/types/employee.type";
+import type { IEmployee, IEmployeeBlockedCredentials, IEmployeeByEmail, IEmployeeByEmailCredentials, IEmployeeDeleteCredentials, IEmployeeInviteCredentials, IEmployeeInviteResponse, IEmployeeUpdateCredentials } from "../model/types/employee.type";
 
 export const employeeAPI = API.injectEndpoints(({
   endpoints: (build) => ({
@@ -16,7 +16,7 @@ export const employeeAPI = API.injectEndpoints(({
     /** 
       ===== ПОЛУЧИТЬ СОТРУДНИКА ПО EMAIL =====
     **/
-    getEmployeeByEmail: build.query<IEmployeeByEmail, IEmployeeByEmailCredentials>({
+    getEmployeeByEmail: build.query<ApiResponse<IEmployeeByEmail>, IEmployeeByEmailCredentials>({
       query: ({ email }) => ({
         url: `/v1/user/${email}`,
         method: "GET",
@@ -26,7 +26,7 @@ export const employeeAPI = API.injectEndpoints(({
     /** 
       ===== ДОБАВЛЕНИЕ СОТРУДНИКА В ЛОКАЦИЮ =====
     **/
-    employeeInvite: build.mutation<void, IEmployeeInviteCredentials>({
+    employeeInvite: build.mutation<IEmployeeInviteResponse, IEmployeeInviteCredentials>({
       query: (body) => ({
         url: `/v1/employee/invite`,
         method: "POST",

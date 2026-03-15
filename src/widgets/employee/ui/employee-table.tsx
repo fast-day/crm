@@ -38,7 +38,7 @@ export const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                   </TableCell>
                   <TableCell>{employee.phone}</TableCell>
                   <TableCell>
-                    <Badge variant={employee.status}>{employee.status === "active" ? "Активный" : "Не активный"}</Badge>
+                    <Badge variant={employee.status}>{employee.status === "active" ? "Активный" : employee.status === "inactive" ? "Не активный" : employee.status === "invited" ? "Приглашение отправлено" : ""}</Badge>
                   </TableCell>
                   <TableCellActions>
                     <Link to={`${employee.id}`}>
