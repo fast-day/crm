@@ -1,5 +1,6 @@
 import type { IEmployee } from "@/entities/employee";
 import { Avatar } from "@/entities/user"
+import { EMPLOYEE_STATUS } from "@/shared/constants";
 import { ChevronRightIcon } from "@/shared/icons"
 import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
 import { Link, useNavigate } from "@tanstack/react-router";
@@ -38,7 +39,7 @@ export const EmployeeTable = ({ employees }: EmployeeTableProps) => {
                   </TableCell>
                   <TableCell>{employee.phone}</TableCell>
                   <TableCell>
-                    <Badge variant={employee.status}>{employee.status === "active" ? "Активный" : employee.status === "inactive" ? "Не активный" : employee.status === "invited" ? "Приглашение отправлено" : ""}</Badge>
+                    <Badge variant={employee.status}>{EMPLOYEE_STATUS[employee.status]}</Badge>
                   </TableCell>
                   <TableCellActions>
                     <Link to={`${employee.id}`}>

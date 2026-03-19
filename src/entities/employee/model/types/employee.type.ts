@@ -1,3 +1,5 @@
+import type { IRole } from "@/entities/account";
+
 export interface IEmployee {
   id: string;
   email: string;
@@ -19,7 +21,7 @@ export interface IEmployeeByEmail {
   id: string;
   email: string;
   phone: string;
-  role: string;
+  role: IRole;
   first_name: string;
   last_name: string;
   avatar: string | null;

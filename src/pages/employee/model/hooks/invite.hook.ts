@@ -13,10 +13,17 @@ type InviteLoading = {
   create?: boolean;
 }
 
+type InviteError = {
+  check?: string;
+  invite?: string;
+  create?: string;
+}
+
 interface UseInviteReturnProps {
   step: InviteStep;
   employee: IEmployeeByEmail | null;
   isLoading: InviteLoading;
+  error: InviteError;
   onCheck: (data: InviteCheckSchemaType) => Promise<void>;
   onInvite: (data: InviteSchemaType, location_id: string) => Promise<void>;
 }
@@ -25,6 +32,7 @@ export const useInvite = (): UseInviteReturnProps => {
   const [step, setStep] = useState<InviteStep>("check");
   const [employee, setEmployee] = useState<IEmployeeByEmail | null>(null);
   const [isLoading, setIsLoading] = useState<InviteLoading>({ check: false, invite: false, create: false });
+  const [error, setError] = useState<InviteError>({ check: "", invite: "", create: "" });
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -35,6 +43,7 @@ export const useInvite = (): UseInviteReturnProps => {
   const onCheck = async (data: InviteCheckSchemaType): Promise<void> => {
     setIsLoading({ check: true });
     setEmail(data.email);
+    setError({ check: "" });
     try {
       const res = await checkEmployee({ email: data.email }).unwrap() as IEmployeeByEmail;
       setStep("invite");
@@ -43,6 +52,9 @@ export const useInvite = (): UseInviteReturnProps => {
     catch (error) {
       if (isApiError(error) && error.status === 404) {
         setStep("create");
+      }
+      if (isApiError(error) && error.status === 409) {
+        setError({ check: error.data.detail });
       }
     }
     finally {
@@ -79,6 +91,7 @@ export const useInvite = (): UseInviteReturnProps => {
     step,
     employee,
     isLoading,
+    error,
     onCheck,
     onInvite,
   }

@@ -10,11 +10,16 @@ declare global {
   //   }
   //   status: number
   // }
-  type HttpError<T = unknown> = {
+  type HttpError<M = unknown> = {
     title: string;
     detail: string;
     status: number;
-    meta: T;
+    meta: M;
+  }
+
+  type ApiErrorResponse<M> = {
+    status: number;
+    data: HttpError<M>;
   }
 
   type ApiResponse<T> = T | HttpError;

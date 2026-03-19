@@ -40,6 +40,9 @@ const AuthLayoutRegisterLazyRouteImport = createFileRoute(
   '/_auth/_layout/register',
 )()
 const AuthLayoutLoginLazyRouteImport = createFileRoute('/_auth/_layout/login')()
+const AuthLayoutInviteLazyRouteImport = createFileRoute(
+  '/_auth/_layout/invite',
+)()
 
 const NetworkLayoutRoute = NetworkLayoutRouteImport.update({
   id: '/network/_layout',
@@ -72,6 +75,13 @@ const AuthLayoutLoginLazyRoute = AuthLayoutLoginLazyRouteImport.update({
   getParentRoute: () => AuthLayoutRoute,
 } as any).lazy(() =>
   import('./app/routes/_auth/_layout/login.lazy').then((d) => d.Route),
+)
+const AuthLayoutInviteLazyRoute = AuthLayoutInviteLazyRouteImport.update({
+  id: '/invite',
+  path: '/invite',
+  getParentRoute: () => AuthLayoutRoute,
+} as any).lazy(() =>
+  import('./app/routes/_auth/_layout/invite.lazy').then((d) => d.Route),
 )
 const AppLayoutNotFoundRoute = AppLayoutNotFoundRouteImport.update({
   id: '/$notFound',
@@ -192,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AppLayoutIndexRoute
   '/network': typeof NetworkLayoutRouteWithChildren
   '/$notFound': typeof AppLayoutNotFoundRoute
+  '/invite': typeof AuthLayoutInviteLazyRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
   '/bookings/': typeof AppLayoutBookingsIndexRoute
@@ -218,6 +229,7 @@ export interface FileRoutesByTo {
   '/': typeof AppLayoutIndexRoute
   '/network': typeof NetworkLayoutRouteWithChildren
   '/$notFound': typeof AppLayoutNotFoundRoute
+  '/invite': typeof AuthLayoutInviteLazyRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
   '/bookings': typeof AppLayoutBookingsIndexRoute
@@ -246,6 +258,7 @@ export interface FileRoutesById {
   '/_auth/_layout': typeof AuthLayoutRouteWithChildren
   '/network/_layout': typeof NetworkLayoutRouteWithChildren
   '/_app/_layout/$notFound': typeof AppLayoutNotFoundRoute
+  '/_auth/_layout/invite': typeof AuthLayoutInviteLazyRoute
   '/_auth/_layout/login': typeof AuthLayoutLoginLazyRoute
   '/_auth/_layout/register': typeof AuthLayoutRegisterLazyRoute
   '/_app/_layout/': typeof AppLayoutIndexRoute
@@ -275,6 +288,7 @@ export interface FileRouteTypes {
     | '/'
     | '/network'
     | '/$notFound'
+    | '/invite'
     | '/login'
     | '/register'
     | '/bookings/'
@@ -301,6 +315,7 @@ export interface FileRouteTypes {
     | '/'
     | '/network'
     | '/$notFound'
+    | '/invite'
     | '/login'
     | '/register'
     | '/bookings'
@@ -328,6 +343,7 @@ export interface FileRouteTypes {
     | '/_auth/_layout'
     | '/network/_layout'
     | '/_app/_layout/$notFound'
+    | '/_auth/_layout/invite'
     | '/_auth/_layout/login'
     | '/_auth/_layout/register'
     | '/_app/_layout/'
@@ -400,6 +416,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof AuthLayoutLoginLazyRouteImport
+      parentRoute: typeof AuthLayoutRoute
+    }
+    '/_auth/_layout/invite': {
+      id: '/_auth/_layout/invite'
+      path: '/invite'
+      fullPath: '/invite'
+      preLoaderRoute: typeof AuthLayoutInviteLazyRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
     '/_app/_layout/$notFound': {
@@ -601,11 +624,13 @@ const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
 )
 
 interface AuthLayoutRouteChildren {
+  AuthLayoutInviteLazyRoute: typeof AuthLayoutInviteLazyRoute
   AuthLayoutLoginLazyRoute: typeof AuthLayoutLoginLazyRoute
   AuthLayoutRegisterLazyRoute: typeof AuthLayoutRegisterLazyRoute
 }
 
 const AuthLayoutRouteChildren: AuthLayoutRouteChildren = {
+  AuthLayoutInviteLazyRoute: AuthLayoutInviteLazyRoute,
   AuthLayoutLoginLazyRoute: AuthLayoutLoginLazyRoute,
   AuthLayoutRegisterLazyRoute: AuthLayoutRegisterLazyRoute,
 }

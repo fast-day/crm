@@ -1,4 +1,4 @@
-import { Button, Card, Form, FormWrapperAction, Input, InputForm, SelectForm } from "@/shared/ui"
+import { Button, Card, Form, FormWrapperAction, InputForm, SelectForm } from "@/shared/ui"
 import { CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardHeader, CardTitle } from "@/shared/ui/card/ui/card"
 import { inviteCheckSchema, inviteSchema } from "../../model/schemas/invite.schema"
 import { useSelector } from "react-redux"
@@ -7,11 +7,12 @@ import { useInvite } from "../../model/hooks/invite.hook"
 import { Avatar } from "@/entities/user"
 import { Controller } from "react-hook-form"
 import { PatternFormat } from "react-number-format"
+import { ROLE } from "@/shared/constants"
 
 export const EmployeeInviteForm = () => {
   const { location } = useSelector(useAccount);
 
-  const { onCheck, onInvite, step, employee, isLoading } = useInvite();
+  const { onCheck, onInvite, step, employee, isLoading, error } = useInvite();
 
   return (
     <div className="mt-8 relative">
@@ -24,6 +25,7 @@ export const EmployeeInviteForm = () => {
                   <CardTitle>Email</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  {error.check && <div className="p-3 rounded-xl bg-red border-2 text-white border-red text-xs">{error.check}</div>}
                   <InputForm
                     name={"email"}
                     id={"email"}
@@ -36,6 +38,7 @@ export const EmployeeInviteForm = () => {
                     disabled={step !== "check"}
                     className={"disabled:opacity-90"}
                   />
+
 
                   <div className="bg-card/60 px-4 py-4 w-full text-md h-14 rounded-xl flex flex-col justify-center">
                     <span className="text-11 leading-2 font-normal select-none">Локация</span>
@@ -71,7 +74,7 @@ export const EmployeeInviteForm = () => {
 
               <CardContentLabel>
                 <CardContentLabelTitle>Роль</CardContentLabelTitle>
-                <CardContentLabelDescription className="capitalize">{employee.role}</CardContentLabelDescription>
+                <CardContentLabelDescription className="capitalize">{ROLE[employee.role]}</CardContentLabelDescription>
               </CardContentLabel>
 
             </CardContent>
@@ -166,6 +169,8 @@ export const EmployeeInviteForm = () => {
 
         <FormWrapperAction>
           {step === "check" && <Button form="check" className="max-w-60" isLoading={isLoading.check} disabled={isLoading.check}>Далее</Button>}
+          {/* onClick={() => onInvite(data: employee, location?.id ?? "")} */}
+          {step === "invite" && <Button className="max-w-60" isLoading={isLoading.create} disabled={isLoading.create}>Добавить</Button>}
           {step === "create" && <Button form="create" className="max-w-60" isLoading={isLoading.create} disabled={isLoading.create}>Создать</Button>}
         </FormWrapperAction>
       </div>
