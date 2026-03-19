@@ -1,6 +1,7 @@
 import { Button, Form, InputForm } from "@/shared/ui"
 import { LoginSchema } from "../model/schemas/login.schema"
 import { useLogin } from "../model/hooks/login.hook";
+import { Link } from "@tanstack/react-router";
 
 export const Login = () => {
   const { onSubmit, isLoading } = useLogin();
@@ -38,9 +39,12 @@ export const Login = () => {
                   size={"size_60"}
                   isLoading={isLoading}
                   disabled={isLoading}
-                >
+                  >
                   Войти
                 </Button>
+              </div>
+              <div className="flex items-center justify-center">
+                <p>У вас нет аккаунта? <Link to={"/register"} className="text-orange hover:text-warn-color-icon underline duration-200 cursor-pointer">Зарегистрироваться</Link></p>
               </div>
             </>
           )}

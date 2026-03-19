@@ -27,8 +27,8 @@ export const useLogin = (): LoginReturnProps => {
       navigate({ to: to, replace: true });
     }
     catch (err) {
-      const { data } = err as HttpError;
-      toast.error(data.title, { description: data.detail });
+      const { title, detail } = err as HttpError;
+      toast.error(title, { description: detail });
     }
   }
 

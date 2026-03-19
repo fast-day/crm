@@ -9,3 +9,4 @@ export { extractTimezoneOffset } from './timezone-offset/timezone-offset.util';
 export { sleep } from './sleeper/sleep';
 export { replaceAddress } from './replace/replace-address';
 export { minuteFormat } from './minute-format/minute-format';
+export { isApiError } from './api-error/api-error';

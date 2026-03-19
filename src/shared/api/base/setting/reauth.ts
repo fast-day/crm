@@ -58,8 +58,8 @@ export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
     }
 
     if (res.error) {
-      const { data } = res.error as HttpError;
-      toast.error(data.title, { description: data.detail });
+      const { title, detail } = res.error as unknown as HttpError;
+      toast.error(title, { description: detail });
     }
   }
 

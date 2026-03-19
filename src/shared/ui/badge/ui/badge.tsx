@@ -13,6 +13,10 @@ const badgeVariants = cva(
         profit_down: "px-2.5 py-0.5 text-11 text-red border-red/15 bg-red/8 [&>svg]:size-4",
         online: "px-2 py-0.5 text-xss! font-bold rounded-lg bg-primary border-primary text-white",
         offline: "px-2 py-0.5 text-xss! font-bold rounded-lg bg-error-background border-error-background text-white",
+        
+        active: "px-2 py-0.5 text-xss! font-bold rounded-lg bg-green border-green text-white",
+        invited: "px-2 py-0.5 text-xss! font-bold rounded-lg bg-orange border-orange text-white",
+        inactive: "px-2 py-0.5 text-xss! font-bold rounded-lg bg-error-background border-error-background text-white",
       },
     },
     defaultVariants: {
