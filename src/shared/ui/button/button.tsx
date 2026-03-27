@@ -19,6 +19,7 @@ const buttonVariants = cva(
         white: "bg-white text-foreground",
         ghost: "font-medium text-sm hover:text-primary",
         dashed: "bg-transparent border border-dashed font-medium hover:bg-primary/10 py-4 px-8",
+        orange: "bg-orange px-6 text-white hover:bg-orange/90 active:bg-orange/70 disabled:hover-orange/80 disabled:active:bg-orange/80"
       },
       size: {
         none: "",

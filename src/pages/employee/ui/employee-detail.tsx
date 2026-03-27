@@ -1,19 +1,22 @@
-import { useGetDetailServiceQuery } from "@/entities/services"
+import { useAccount } from "@/entities/account";
+import { useGetEmployeeQuery } from "@/entities/employee";
 import { ArrowBackUpIcon, PencilEditIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderTitle } from "@/shared/ui"
-import { ServiceDetailLazy, ServiceDetails, ServiceNotFound } from "@/widgets/services"
+import { EmployeeDetailLazy, EmployeeDetails, EmployeeNotFound } from "@/widgets/employee";
 import { Link, useParams } from "@tanstack/react-router"
+import { useSelector } from "react-redux";
 
-export const ServicesDetail = () => {
-  const { service_id } = useParams({ from: "/_app/_layout/business/services/$service_id/" });
-  const { data, isLoading, isError } = useGetDetailServiceQuery({ service_id });
+export const EmployeeDetail = () => {
+  const { employee_id } = useParams({ from: "/_app/_layout/employees/users/$employee_id/" });
+  const { location } = useSelector(useAccount);
+  const { data, isLoading, isError } = useGetEmployeeQuery({ location_id: location?.id, employee_id });
 
   return (
     <>
       <PageHeader>
-        <PageHeaderTitle>Услуга {data?.name && `- ${data.name}`}</PageHeaderTitle>
+        <PageHeaderTitle>Сотрудник</PageHeaderTitle>
         <PageHeaderActions>
-          <Link to={"/business/services"}>
+          <Link to={"/employees/users"}>
             <Button
               variant={"white"}
               animation={"toggle"}
@@ -22,9 +25,9 @@ export const ServicesDetail = () => {
               iconLeft={<ArrowBackUpIcon width={24} height={24} />}
             >Назад</Button>
           </Link>
-          <Link to={`/business/services/${data?.id}/edit`}>
-            <Button 
-              size={"size_44"} 
+          <Link to={`edit`}>
+            <Button
+              size={"size_44"}
               animation={"toggle"}
               className={"text-sm font-bold"}
               iconLeft={<PencilEditIcon width={21} height={21}/>}
@@ -34,9 +37,9 @@ export const ServicesDetail = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <ServiceDetailLazy />}
-      {isError && <ServiceNotFound />}
-      {data && <ServiceDetails service={data} />}
+      {isLoading && <EmployeeDetailLazy />}
+      {isError && <EmployeeNotFound />}
+      {data && <EmployeeDetails employee={data} locationId={location!.id} />}
     </>
   )
 }
