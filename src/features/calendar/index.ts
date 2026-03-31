@@ -13,3 +13,4 @@ export * from './model/types/calendar.type';
 // UI
 export { CurrentDate } from './ui/current-date';
 export { ChangeYear } from './ui/change-year';
+export { CalendarDayItem } from './ui/calendar-day-item';

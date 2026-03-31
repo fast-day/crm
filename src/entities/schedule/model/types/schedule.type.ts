@@ -67,3 +67,11 @@ export interface IScheduleUpdateResponse {
   id: number;
   date: string;
 }
+
+export type ScheduleDialogData = {
+  date_key: string;
+  year: number;
+  month_index: number;
+  day: number;
+  in_month: boolean;
+}

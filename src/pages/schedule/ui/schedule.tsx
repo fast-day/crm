@@ -1,13 +1,16 @@
 import { useAccount } from "@/entities/account"
+import { dialogSelector } from "@/entities/dialog"
 import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule"
-import { isTimeValue, isWeekendValue, parseBackendDate, toDateKey, type DayInfo } from "@/features/calendar"
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { isTimeValue, isWeekendValue, parseBackendDate, toDateKey, type DayInfo } from "@/features/calendar";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { Calendar } from "@/widgets/calendar"
+import { ScheduleDialog } from "@/widgets/schedule"
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
 
 export const Schedule = () => {
   const { account, location } = useSelector(useAccount);
+  const { dialog } = useSelector(dialogSelector);
   
   const user_id = account?.id ?? "";
   const location_id = location?.id ?? "";
@@ -56,7 +59,8 @@ export const Schedule = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      <Calendar dayInfoByKey={dayInfoByKey} isLoading={isLoading} />
+      <Calendar schedules={schedules} dayInfoByKey={dayInfoByKey} isLoading={isLoading} />
+      {dialog.name === "schedule" && <ScheduleDialog location_id={location_id} data={dialog.data} />}
     </>
   )
 }

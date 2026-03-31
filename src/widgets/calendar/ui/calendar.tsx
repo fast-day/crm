@@ -1,13 +1,14 @@
-import { ChangeYear, CurrentDate, formatInterval, useCalendar, WEEKDAYS_MONDAY_START, type DayInfo } from "@/features/calendar"
-import { cn } from "@/shared/utils";
+import type { ISchedule } from "@/entities/schedule";
+import { CalendarDayItem, ChangeYear, CurrentDate, useCalendar, WEEKDAYS_MONDAY_START, type DayInfo } from "@/features/calendar"
 
 interface CalendarProps {
+  schedules?: ISchedule[];
   dayInfoByKey: Map<string, DayInfo>;
   isLoading?: boolean;
 }
 
-export const Calendar = ({ dayInfoByKey, isLoading=false }: CalendarProps) => {
-  const calendar = useCalendar();
+export const Calendar = ({ schedules, dayInfoByKey, isLoading=false }: CalendarProps) => {
+  const calendar = useCalendar(schedules);
 
   return (
     <div className="mt-8">
@@ -39,61 +40,20 @@ export const Calendar = ({ dayInfoByKey, isLoading=false }: CalendarProps) => {
         <div className="grid grid-cols-7 gap-2.5 mt-2.5 relative">
           {isLoading && <div className="absolute top-0 left-0 h-full w-full rounded-xl z-10 backdrop-blur-xs" />}
           {calendar.calendarCells.map((cell) => {
-            const dayInfo = dayInfoByKey.get(cell.dateKey)
-            const isMarked = Boolean(dayInfo)
-            const isToday = cell.dateKey === calendar.todayDateKey
-            const isSelected = calendar.selectedDateKey === cell.dateKey
-
+            const dayInfo = dayInfoByKey.get(cell.dateKey);
+            const isMarked = Boolean(dayInfo);
+            const isToday = cell.dateKey === calendar.todayDateKey;
+            const isSelected = calendar.selectedDateKey === cell.dateKey;
             return (
-              <div
+              <CalendarDayItem
                 key={cell.dateKey}
-                onClick={() => {
-                  if (!cell.inMonth) return;
-                  calendar.handleSelectDate(cell.dateKey);
-                  console.log(cell);
-                }}
-                aria-disabled={!cell.inMonth}
-                className={cn(
-                  "h-40 rounded-xl border-2 flex flex-col items-center relative overflow-hidden p-5", 
-                  isSelected ? "border-primary/30 bg-muted" : "border-transparent bg-muted-foreground",
-                  !cell.inMonth ? "bg-transparent! border-accent/10 text-accent/40! justify-center" : "",
-                  isMarked ? "bg-muted" : "bg-red-100/17 text-red-100",
-                )}
-                aria-label={`День ${cell.day}`}
-              >
-                <div className={cn(
-                  `text-md font-extrabold leading-4 px-3.5 py-0.5 border-b border-accent 
-                  ${isToday ? "bg-white rounded-xl text-accent! border-accent!" : ""}`, 
-                  !isMarked ? "border-red-100" : "",
-                  !cell.inMonth ? "border-none" : "",
-                )}>{cell.day}</div>
-
-                {cell.inMonth && (
-                  <div className="flex-1 w-full flex flex-col justify-center items-center gap-0.5">
-                    {dayInfo?.kind !== "work" && (
-                      <div className="text-sm text-red-100">Выходной</div>
-                    )}
-
-                    {dayInfo?.kind === "work" && (
-                      <>
-                        <div className="text-xs">
-                          {formatInterval(dayInfo.intervals[0].start, dayInfo.intervals[0].end)}
-                        </div>
-                        {dayInfo.intervals[1] && (
-                          <div className="text-xs">
-                            {formatInterval(dayInfo.intervals[1].start, dayInfo.intervals[1].end)}
-                          </div>
-                        )}
-                        {dayInfo.extraCount > 0 && (
-                          <div className="text-xs">
-                            ...
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
+                dayInfo={dayInfo}
+                isMarked={isMarked}
+                isToday={isToday}
+                isSelected={isSelected}
+                handleChangeSchedule={calendar.handleChangeSchedule}
+                cell={cell}
+              />
             )
           })}
         </div>
