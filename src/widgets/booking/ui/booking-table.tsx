@@ -1,0 +1,91 @@
+import type { IBooking } from "@/entities/booking";
+import { Avatar } from "@/entities/user";
+import { ChevronRightIcon } from "@/shared/icons"
+import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
+import { formatDate } from "@/shared/utils";
+import { LazyBlur } from "@/widgets/loading";
+import { Link, useNavigate } from "@tanstack/react-router";
+import React from "react";
+
+interface BookingTableProps {
+  bookings?: IBooking[];
+  isLoading: boolean;
+  isFetching: boolean;
+}
+
+export const BookingTable = ({ bookings, isFetching }: BookingTableProps) => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="mt-8">
+      
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Дата</TableHead>
+            <TableHead>Услуга</TableHead>
+            <TableHead>Клиент</TableHead>
+            <TableHead>Сотрудник</TableHead>
+            <TableHead>Цена</TableHead>
+            <TableHead>Статус</TableHead>
+            <TableHead />
+          </TableRow>
+        </TableHeader>
+
+        <TableBody className="relative">
+          {isFetching && <LazyBlur />}
+          {bookings?.length ? 
+            bookings.map((booking, index) => (
+              <React.Fragment key={index}>
+                <TableRow onClick={() => navigate({ to: `#` })}>
+                  <TableCell>
+                    <div>
+                      <p className="font-semibold">{formatDate(booking.date)}</p>
+                      <div className="flex items-center text-sm mt-0.5 opacity-80">
+                        <p>{booking.start_time}</p>
+                        <span> - </span>
+                        <p>{booking.end_time}</p>
+                      </div>
+                      <span className="text-xss leading-3 opacity-80">{booking.service.duration}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Avatar size={"tiny"} avatar_url={""} name={"t"} id={"48934"} />
+                    <p>Название услуги</p>
+                  </TableCell>
+                  <TableCell className="flex-col items-start justify-center">
+                    <div className="flex items-center gap-2.5">
+                      <Avatar size={"tiny"} avatar_url={""} name={booking.customer.first_name} id={booking.customer.id} />
+                      <p>{booking.customer.full_name}</p>
+                    </div>
+                    <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={"tel:8991392993994"}>{booking.customer.phone}</Link>
+                  </TableCell>
+                  <TableCell>
+                    <Avatar size={"tiny"} avatar_url={""} name={booking.employee.first_name} id={booking.employee.id} />
+                    <p>{booking.employee.full_name}</p>
+                  </TableCell>
+                  <TableCell>{booking.service.price.price}</TableCell>
+                  <TableCell>
+                    <Badge variant={"online"}>{booking.status}</Badge>
+                  </TableCell>
+                  <TableCellActions>
+                    <Link to={`${booking.id}`}>
+                      <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
+                        <ChevronRightIcon width={17} height={17} />
+                      </Button>
+                    </Link>
+                  </TableCellActions>
+                </TableRow>
+                {index !== bookings.length - 1 && <TableSeparator />}
+              </React.Fragment>
+            )) : (
+              <TableRow>
+                <TableNotFound>Нет данных</TableNotFound>
+              </TableRow>
+            )
+          }
+        </TableBody>
+      </Table>
+    </div>
+  )
+}

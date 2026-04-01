@@ -69,8 +69,8 @@ declare global {
   /** СТАТУСЫ ДЛЯ ЗАКАЗОВ **/
   type OrderStatusType = "pending" | "open" | "closed" | "paid";
 
-  /** СТАТУСЫ ДЛЯ ОПЛАТЫ **/
-  type PaymentStatusType = "online" | "cash" | "credit_card";
+  /** МЕТОДЫ ДЛЯ ОПЛАТЫ **/
+  type PaymentMethodType = "online" | "cash" | "credit_card";
 
   /** СТАТУСЫ ПОЛЬЗОВАТЕЛЕЙ **/
   type UserStatusType = "invited" | "active" | "disable";
