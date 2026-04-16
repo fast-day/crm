@@ -9,7 +9,7 @@ export const intervalsSchema = z.object({
     }).refine(
       ({ start, end }) => start < end,
       {
-        message: "start must be before end",
+        message: "Начало должно быть раньше окончания",
         path: ["end"],
       }
     )

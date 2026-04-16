@@ -4,6 +4,8 @@ import { isTimeValue, isWeekendValue, parseBackendDate, toBackendDateString, toD
 import type { CalendarCell, ScheduleEditInfo } from "../types/calendar.type";
 import { useDialog } from "@/entities/dialog";
 import type { ISchedule, ScheduleDialogData } from "@/entities/schedule";
+import { useSelector } from "react-redux";
+import { accountSelector } from "@/entities/account";
 
 interface UseCalendarReturnProps {
   goPrevMonth: () => void;
@@ -31,6 +33,7 @@ export const useCalendar = (schedules?: ISchedule[]): UseCalendarReturnProps => 
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
 
   const { openDialog } = useDialog();
+  const { account } = useSelector(accountSelector);
 
   const calendarTitle = useMemo(() => `${MONTHS[viewMonthIndex]} ${viewYear}`, [viewMonthIndex, viewYear]);
 
@@ -122,7 +125,9 @@ export const useCalendar = (schedules?: ISchedule[]): UseCalendarReturnProps => 
         day: data.day,
         backend_date: backDate,
       },
+      user_id: account!.id,
       intervals: initIntervals,
+      day_info: data.day_info,
     });
   }
 

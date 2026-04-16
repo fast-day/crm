@@ -1,4 +1,5 @@
 import type { IScheduleIntervals } from "@/entities/schedule";
+import type { DayInfo } from "@/features/calendar";
 
 /**
   ===== DIALOG NAMES ======
@@ -34,7 +35,9 @@ export type DialogDataMap = {
       day: number;
       backend_date: string,
     };
+    user_id: string;
     intervals: IScheduleIntervals[];
+    day_info?: DayInfo;
   };
 }
 

@@ -37,7 +37,7 @@ export const Schedule = () => {
       })
 
       if (workIntervals.length === 0) {
-        map.set(key, { kind: "weekend" });
+        map.set(key, { kind: "weekend", intervals: null });
         continue;
       }
 

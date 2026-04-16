@@ -5,6 +5,7 @@ interface CalendarProps {
   schedules?: ISchedule[];
   dayInfoByKey: Map<string, DayInfo>;
   isLoading?: boolean;
+  
 }
 
 export const Calendar = ({ schedules, dayInfoByKey, isLoading=false }: CalendarProps) => {
@@ -44,6 +45,7 @@ export const Calendar = ({ schedules, dayInfoByKey, isLoading=false }: CalendarP
             const isMarked = Boolean(dayInfo);
             const isToday = cell.dateKey === calendar.todayDateKey;
             const isSelected = calendar.selectedDateKey === cell.dateKey;
+
             return (
               <CalendarDayItem
                 key={cell.dateKey}

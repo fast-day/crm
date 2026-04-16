@@ -23,6 +23,7 @@ export const CalendarDayItem = ({ dayInfo, isMarked, isToday, isSelected, handle
           month_index: cell.monthIndex,
           day: cell.day,
           in_month: cell.inMonth,
+          day_info: dayInfo,
         });
       }}
       aria-disabled={!cell.inMonth}

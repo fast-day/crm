@@ -1,5 +1,6 @@
 import { useDialog } from "@/entities/dialog";
-import { useCreateMutation, useUpdateMutation, type IScheduleIntervals } from "@/entities/schedule";
+import { useCreateMutation, useUpdateMutation, type IScheduleCreateBodyCredentials, type IScheduleIntervals } from "@/entities/schedule";
+import type { DayInfo } from "@/features/calendar";
 import { intervalsSchema, type IntervalsSchemaType } from "@/features/schedule/model/schemas/schedule.schema";
 import { IntervalsField } from "@/features/schedule/ui/intervals-field";
 import { Button, Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, Form } from "@/shared/ui"
@@ -16,11 +17,13 @@ interface ScheduleDialogProps {
       day: number;
       backend_date: string,
     };
+    user_id: string;
     intervals: IScheduleIntervals[];
+    day_info?: DayInfo;
   };
 }
 
-export const ScheduleDialog = ({ location_id, data }: ScheduleDialogProps) => {
+export const ScheduleDialog = ({ location_id, data: props }: ScheduleDialogProps) => {
   const { closeDialog } = useDialog();
 
   const [createSchedule, { isLoading: isCreating }] = useCreateMutation()
@@ -28,18 +31,23 @@ export const ScheduleDialog = ({ location_id, data }: ScheduleDialogProps) => {
 
   const onSubmit = async (data: IntervalsSchemaType): Promise<void> => {
     try {
-      console.log(data);
-      // if (data.schedule_id != null) {
-      //   await updateSchedule({
-      //     params: { location_id, schedule_id: editingScheduleId },
-      //     body: payloadBody,
-      //   }).unwrap()
-      // } else {
-      //   await createSchedule({
-      //     params: { location_id },
-      //     body: payloadBody,
-      //   }).unwrap()
-      // }
+      const payloadBody = {
+        date: props.schedule.backend_date,
+        intervals: data.intervals,
+        user_id: props.user_id,
+      } satisfies IScheduleCreateBodyCredentials;
+      console.log(data, props);
+      if (props.schedule_id != null) {
+        // await updateSchedule({
+        //   params: { location_id, schedule_id: editingScheduleId },
+        //   body: payloadBody,
+        // }).unwrap()
+      } else {
+        // await createSchedule({
+        //   params: { location_id },
+        //   body: payloadBody,
+        // }).unwrap()
+      }
     }
     catch (error) {
       console.error("Не удалось сохранить расписание");
@@ -60,11 +68,10 @@ export const ScheduleDialog = ({ location_id, data }: ScheduleDialogProps) => {
             id={"schedule-save"}
             onSubmit={(data) => onSubmit(data)}
             schema={intervalsSchema}
-            options={{ defaultValues: { intervals: [ { start: "", end: "" } ] } }}
+            options={{ defaultValues: { intervals: props.day_info?.intervals ?? [ { start: "", end: "" } ] } }}
           >
-            {({ control, formState }) => <IntervalsField control={control} formState={formState} />}
+            {({ control, formState }) => <IntervalsField control={control} formState={formState} isLoading={isCreating || isUpdating} />}
           </Form>
-
         </div>
         
         <DialogFooter>

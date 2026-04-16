@@ -5,6 +5,7 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
+        transparent: "",
         default: "px-6 bg-primary text-white hover:bg-primary/90 active:bg-primary/70 disabled:hover:bg-primary/80 disabled:active:bg-primary/80",
         link: "text-primary underline-offset-4 hover:underline disabled:hover:no-underline",
         industry: "p-4.5! 480:p-6! rounded-18 bg-card flex items-center justify-center cursor-pointer border-2 border-transparent hover:border-primary active:opacity-60 active:scale-96 duration-200!",
@@ -19,7 +20,8 @@ export const buttonVariants = cva(
         orange: "bg-orange px-6 text-white hover:bg-orange/90 active:bg-orange/70 disabled:hover-orange/80 disabled:active:bg-orange/80",
         dialog_close: "px-10! py-3! w-auto! font-bold text-md bg-card text-primary active:scale-98 active:opacity-80",
         dialog_apply: "px-10! py-3! w-auto! font-bold text-md bg-primary text-white active:scale-98 active:opacity-80",
-        action: "rounded-3xl bg-card/60 p-6 text-2xl font-bold leading-none justify-start"
+        action: "rounded-3xl bg-card/60 p-6 text-2xl font-bold leading-none justify-start",
+        remove: "bg-error-background rounded-full flex items-center justify-center text-white active:scale-98 active:opacity-75 hover:opacity-90"
       },
       size: {
         none: "",
@@ -28,12 +30,18 @@ export const buttonVariants = cva(
         lg: "h-10 rounded-md px-8",
         icon: "size-9",
         iconSm: "size-8",
+        icon_20: "size-5",
+        icon_24: "size-6",
+        icon_28: "size-7",
         icon_36: "size-9",
         icon_40: "size-10",
         icon_42: "size-10.5",
         icon_44: "size-11",
         icon_48: "size-12",
 
+
+        size_24: "h-6",
+        size_28: "h-7",
         size_32: "h-8",
         size_36: "h-9",
         size_38: "h-9.5 rounded-12! text-sm",
