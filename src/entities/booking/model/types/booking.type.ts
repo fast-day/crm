@@ -26,7 +26,7 @@ export interface IBookingService {
   public_name: string;
   mark: MarkType;
   duration: number;
-  price: {
+  prices: {
     price: number;
     cost_price: number;
   };

@@ -1,8 +1,9 @@
 import type { IBooking } from "@/entities/booking";
 import { Avatar } from "@/entities/user";
+import { BOOKING_STATUS } from "@/shared/constants";
 import { ChevronRightIcon } from "@/shared/icons"
 import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
-import { formatDate } from "@/shared/utils";
+import { formatDate, formatPrice, minuteFormat } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
@@ -46,7 +47,7 @@ export const BookingTable = ({ bookings, isFetching }: BookingTableProps) => {
                         <span> - </span>
                         <p>{booking.end_time}</p>
                       </div>
-                      <span className="text-xss leading-3 opacity-80">{booking.service.duration}</span>
+                      <span className="text-xss leading-3 opacity-80">{minuteFormat(booking.service.duration)}</span>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -64,9 +65,9 @@ export const BookingTable = ({ bookings, isFetching }: BookingTableProps) => {
                     <Avatar size={"tiny"} avatar_url={""} name={booking.employee.first_name} id={booking.employee.id} />
                     <p>{booking.employee.full_name}</p>
                   </TableCell>
-                  <TableCell>{booking.service.price.price}</TableCell>
+                  <TableCell>{formatPrice(booking.service.prices.price)} ₽</TableCell>
                   <TableCell>
-                    <Badge variant={"online"}>{booking.status}</Badge>
+                    <Badge variant={"online"}>{BOOKING_STATUS[booking.status]}</Badge>
                   </TableCell>
                   <TableCellActions>
                     <Link to={`${booking.id}`}>
