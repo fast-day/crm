@@ -95,7 +95,7 @@ export const EmployeeDetails = ({ employee, locationId }: EmployeeDetailsProps) 
           </div>
 
           <div className="flex flex-col col-span-2 space-y-6">
-            <Link to={"#"}>
+            <Link to={`/employees/schedule/${employee.profile.id}`}>
               <Card>
                 <CardHeader>
                   <CardTitle>Расписание</CardTitle>
