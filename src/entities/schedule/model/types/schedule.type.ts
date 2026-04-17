@@ -1,3 +1,5 @@
+import type { DayInfo } from "@/features/calendar";
+
 export interface ISchedule {
   id: number;
   date: string;
@@ -66,4 +68,13 @@ export interface IScheduleUpdateCredentials {
 export interface IScheduleUpdateResponse {
   id: number;
   date: string;
+}
+
+export type ScheduleDialogData = {
+  date_key: string;
+  year: number;
+  month_index: number;
+  day: number;
+  in_month: boolean;
+  day_info?: DayInfo;
 }

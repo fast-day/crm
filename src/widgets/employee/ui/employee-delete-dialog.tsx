@@ -10,6 +10,7 @@ interface EmployeeDeleteDialogProps {
 
 export const EmployeeDeleteDialog = ({ employee }: EmployeeDeleteDialogProps) => {
   const { closeDialog } = useDialog();
+
   return (
     <Dialog open onOpenChange={closeDialog}>
       <DialogContent>

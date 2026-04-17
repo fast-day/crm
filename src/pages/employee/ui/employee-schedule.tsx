@@ -1,22 +1,25 @@
-import { useAccount } from "@/entities/account"
-import { dialogSelector } from "@/entities/dialog"
-import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule"
+import { useAccount } from "@/entities/account";
+import { dialogSelector } from "@/entities/dialog";
+import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule";
 import { isTimeValue, isWeekendValue, parseBackendDate, toDateKey, type DayInfo } from "@/features/calendar";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { Calendar } from "@/widgets/calendar"
-import { ScheduleDialog } from "@/widgets/schedule"
-import { useMemo } from "react"
-import { useSelector } from "react-redux"
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { Calendar } from "@/widgets/calendar";
+import { EmployeeNotFound } from "@/widgets/employee";
+import { ScheduleDialog } from "@/widgets/schedule";
+import { useParams } from "@tanstack/react-router";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
-export const Schedule = () => {
-  const { account, location } = useSelector(useAccount);
+export const EmployeeSchedule = () => {
+  const { location } = useSelector(useAccount);
   const { dialog } = useSelector(dialogSelector);
   
-  const user_id = account?.id ?? "";
   const location_id = location?.id ?? "";
 
-  const { data: schedules, isLoading } = useGetEmployeeServicesQuery({ user_id, location_id });
+  const { employee_id } = useParams({ from: "/_app/_layout/employees/schedule/$employee_id" });
 
+  const { data: schedules, isLoading, isError, isFetching } = useGetEmployeeServicesQuery({ user_id: employee_id, location_id });
+  
   const dayInfoByKey = useMemo(() => {
     const map = new Map<string, DayInfo>();
     const scheduleList = (schedules ?? []) as ISchedule[];
@@ -53,13 +56,14 @@ export const Schedule = () => {
   return (
     <>
       <PageHeader>
-        <PageHeaderTitle>Расписание</PageHeaderTitle>
+        <PageHeaderTitle>Настройка расписания</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
         </PageHeaderActions>
       </PageHeader>
 
-      <Calendar schedules={schedules} dayInfoByKey={dayInfoByKey} isLoading={isLoading} />
+      {isError && <EmployeeNotFound />}
+      {!isError && <Calendar schedules={schedules} dayInfoByKey={dayInfoByKey} isLoading={isLoading || isFetching} />}
       {dialog.name === "schedule" && <ScheduleDialog location_id={location_id} data={dialog.data} />}
     </>
   )

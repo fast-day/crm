@@ -1,8 +1,8 @@
-import { getOnlineStatus } from "@/shared/lib";
+import { GET_ONLINE_STATUS } from "@/shared/lib";
 import { useEffect, useState } from "react"
 
 export const useNavigatorOnline = (): boolean => {
-  const [status, setStatus] = useState(getOnlineStatus());
+  const [status, setStatus] = useState(GET_ONLINE_STATUS());
 
   const setOnlineStatus = () => setStatus(true);
   const setOfflineStatus = () => setStatus(false);

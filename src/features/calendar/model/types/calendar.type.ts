@@ -1,3 +1,5 @@
+import type { IScheduleIntervals } from "@/entities/schedule";
+
 export type ParsedBackendDate = {
   day: number;
   monthIndex: number;
@@ -5,8 +7,13 @@ export type ParsedBackendDate = {
 }
 
 export type DayInfo =
-  | { kind: "weekend" }
-  | { kind: "work"; intervals: Array<{ start: string; end: string }>; extraCount: number; totalCount: number };
+  | { kind: "weekend", intervals: null, }
+  | {
+  extraCount: number;
+  intervals: IScheduleIntervals[];
+  kind: "work" | "weekend";
+  totalCount: number;
+}
 
 
 export type ScheduleEditInfo = {

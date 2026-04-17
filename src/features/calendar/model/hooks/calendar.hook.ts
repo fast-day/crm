@@ -1,7 +1,11 @@
 import { useMemo, useState } from "react";
 import { MONTHS } from "../constants/calendar.constant";
-import { toDateKey } from "../utils/calendar.util";
-import type { CalendarCell } from "../types/calendar.type";
+import { isTimeValue, isWeekendValue, parseBackendDate, toBackendDateString, toDateKey } from "../utils/calendar.util";
+import type { CalendarCell, ScheduleEditInfo } from "../types/calendar.type";
+import { useDialog } from "@/entities/dialog";
+import type { ISchedule, ScheduleDialogData } from "@/entities/schedule";
+import { useSelector } from "react-redux";
+import { accountSelector } from "@/entities/account";
 
 interface UseCalendarReturnProps {
   goPrevMonth: () => void;
@@ -9,6 +13,7 @@ interface UseCalendarReturnProps {
   goPrevYear: () => void;
   goNextYear: () => void;
   handleSelectDate: (dateKey: string | null) => void;
+  handleChangeSchedule: (data: ScheduleDialogData) => void;
   handleViewMonthIndex: (idx: number) => void;
 
   viewYear: number;
@@ -21,11 +26,14 @@ interface UseCalendarReturnProps {
   todayDateKey: string;
 }
 
-export const useCalendar = (): UseCalendarReturnProps => {
+export const useCalendar = (schedules?: ISchedule[]): UseCalendarReturnProps => {
   const today = useMemo(() => new Date(), []);
   const [viewYear, setViewYear] = useState(() => today.getFullYear());
   const [viewMonthIndex, setViewMonthIndex] = useState(() => today.getMonth());
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
+
+  const { openDialog } = useDialog();
+  const { account } = useSelector(accountSelector);
 
   const calendarTitle = useMemo(() => `${MONTHS[viewMonthIndex]} ${viewYear}`, [viewMonthIndex, viewYear]);
 
@@ -71,7 +79,58 @@ export const useCalendar = (): UseCalendarReturnProps => {
   const yearMin = yearRange[0] ?? today.getFullYear();
   const yearMax = yearRange[yearRange.length - 1] ?? today.getFullYear();
 
+  const scheduleEditByKey = useMemo(() => {
+    const map = new Map<string, ScheduleEditInfo>();
+    const scheduleList = (schedules ?? []) as ISchedule[];
+
+    for (const item of scheduleList) {
+      const parsed = parseBackendDate(item.date);
+      if (!parsed) continue;
+
+      const key = toDateKey(parsed.year, parsed.monthIndex, parsed.day);
+      const intervals = item.intervals ?? [];
+
+      const workIntervals = intervals.filter((it) => {
+        const start = it.start ?? "";
+        const end = it.end ?? "";
+        if (isWeekendValue(start) || isWeekendValue(end)) return false;
+        if (!isTimeValue(start) || !isTimeValue(end)) return false;
+        return true;
+      })
+
+      map.set(key, {
+        scheduleId: item.id,
+        workIntervals: workIntervals.map((it) => ({ start: it.start, end: it.end })),
+      });
+    }
+
+    return map
+  }, [schedules]);
+
   const handleSelectDate = (dateKey: string | null) => setSelectedDateKey(dateKey);
+
+  const handleChangeSchedule = (data: ScheduleDialogData) => {
+    if (!data.in_month) return;
+
+    const backDate = toBackendDateString(data.year, data.month_index, data.day);
+    const editInfo = scheduleEditByKey.get(data.date_key);
+    const initIntervals = editInfo && editInfo.workIntervals.length > 0 ? editInfo.workIntervals : [{ start: "00:00", end: "00:05" }];
+    
+    openDialog("schedule", {
+      schedule_id: editInfo?.scheduleId ?? null,
+      schedule: {
+        date_key: data.date_key,
+        year: data.year,
+        month_index: data.month_index,
+        day: data.day,
+        backend_date: backDate,
+      },
+      user_id: account!.id,
+      intervals: initIntervals,
+      day_info: data.day_info,
+    });
+  }
+
   const handleViewMonthIndex = (idx: number) => setViewMonthIndex(idx);
 
   const goPrevMonth = () => {
@@ -114,6 +173,7 @@ export const useCalendar = (): UseCalendarReturnProps => {
     goPrevYear,
     goNextYear,
     handleSelectDate,
+    handleChangeSchedule,
     handleViewMonthIndex,
 
     viewYear,

@@ -16,4 +16,19 @@ function formatDateTime (dateTime: string): string {
   }
 };
 
-export { formatDateTime };
+/**
+  ===== ПРЕОБРАЗОВАНИЕ ДАТЫ 31-03-2026 В ЧИСЛО МЕСЯЦ, ГОД =====
+**/
+function formatDate(date: string) {
+  const [day, month, year] = date.split('-');
+  const months = [
+    "Января", "Февраля", "Марта", 
+    "Апреля", "Мая", "Июня", 
+    "Июля", "Августа", "Сентября", 
+    "Октября", "Ноября", "Декабря",
+  ];
+
+  return `${parseInt(day, 10)} ${months[parseInt(month, 10) -1]}, ${year}`;
+}
+
+export { formatDateTime, formatDate };
