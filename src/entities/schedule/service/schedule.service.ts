@@ -1,17 +1,28 @@
 import { API } from "@/shared/api";
 import { type IScheduleDetail, type IScheduleCreateCredentials, type IScheduleCredentials, type ISchedule, type IScheduleEmployeeParams, type IScheduleUpdateCredentials, type IScheduleUpdateResponse, } from "../model/types/schedule.type";
 
-export const ScheduleAPI = API.injectEndpoints({
+export const scheduleAPI = API.injectEndpoints({
   endpoints: builder => ({
     /** 
       ===== СОЗДАНИЕ РАСПИСАНИЯ ДЛЯ СОТРУДНИКА =====
     **/
-    create: builder.mutation<void, IScheduleCreateCredentials>({
+    create: builder.mutation<ISchedule, IScheduleCreateCredentials>({
       query: ({ body, params }) => ({
         url: `/v1/schedule/${params.location_id}`,
         method: "POST",
         body,
       }),
+      async onQueryStarted({ params, body }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          dispatch(scheduleAPI.util.updateQueryData(
+            "getEmployeeServices",
+            { user_id: body.user_id!, location_id: params.location_id },
+            (d) => { d.push(data) }
+          ));
+        }
+        catch { /*  */ }
+      }
     }),
 
     /** 
@@ -43,7 +54,23 @@ export const ScheduleAPI = API.injectEndpoints({
         url: `/v1/schedule/${params.location_id}/schedule/${params.schedule_id}`,
         method: "PATCH",
         body,
-      })
+      }),
+      async onQueryStarted({ params, body }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(scheduleAPI.util.updateQueryData(
+            "getEmployeeServices",
+            { user_id: body.user_id!, location_id: params.location_id },
+            (d) => {
+              const index = d.findIndex(item => item.id === params.schedule_id);
+              if (index !== -1) {
+                d[index] = { ...d[index], ...data };
+              }
+            }
+          ));
+        }
+        catch { /* */ }
+      }
     }),
 
     /** 
@@ -66,4 +93,4 @@ export const {
   useGetEmployeeServicesQuery,
   useLazyGetEmployeeServicesQuery,
   useUpdateMutation,
-} = ScheduleAPI;
+} = scheduleAPI;

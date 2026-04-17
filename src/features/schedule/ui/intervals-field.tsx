@@ -1,12 +1,12 @@
 import { Button, SelectForm } from "@/shared/ui"
 import type { IntervalsSchemaType } from "../model/schemas/schedule.schema"
-import { useFieldArray } from "react-hook-form"
+import { useFieldArray, type Control, type FormState } from "react-hook-form"
 import { TIME_OPTIONS } from "@/shared/lib";
 import { AddIcon, CloseIcon } from "@/shared/icons";
 
 interface IntervalsFieldProps {
-  control: any;
-  formState: any;
+  control: Control<IntervalsSchemaType>;
+  formState: FormState<IntervalsSchemaType>;
   isLoading: boolean;
 }
 
@@ -19,7 +19,7 @@ export const IntervalsField = ({ control, formState, isLoading }: IntervalsField
         <div key={f.id} className="grid grid-cols-2 gap-2.5 relative">
           <SelectForm<IntervalsSchemaType>
             name={`intervals.${idx}.start`}
-            control={control}
+            control={control as Control<IntervalsSchemaType>}
             options={TIME_OPTIONS}
             error={formState.errors.intervals?.[idx]?.start}
             label={"Начало"}
@@ -27,7 +27,7 @@ export const IntervalsField = ({ control, formState, isLoading }: IntervalsField
           />
           <SelectForm<IntervalsSchemaType>
             name={`intervals.${idx}.end`}
-            control={control}
+            control={control as Control<IntervalsSchemaType>}
             options={TIME_OPTIONS}
             error={formState.errors.intervals?.[idx]?.end}
             label={"Конец"}

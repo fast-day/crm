@@ -38,15 +38,17 @@ export const ScheduleDialog = ({ location_id, data: props }: ScheduleDialogProps
       } satisfies IScheduleCreateBodyCredentials;
       console.log(data, props);
       if (props.schedule_id != null) {
-        // await updateSchedule({
-        //   params: { location_id, schedule_id: editingScheduleId },
-        //   body: payloadBody,
-        // }).unwrap()
+        await updateSchedule({
+          params: { location_id, schedule_id: props.schedule_id },
+          body: payloadBody,
+        }).unwrap()
+        closeDialog();
       } else {
-        // await createSchedule({
-        //   params: { location_id },
-        //   body: payloadBody,
-        // }).unwrap()
+        await createSchedule({
+          params: { location_id },
+          body: payloadBody,
+        }).unwrap()
+        closeDialog();
       }
     }
     catch (error) {
