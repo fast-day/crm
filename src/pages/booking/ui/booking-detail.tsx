@@ -1,6 +1,7 @@
 import { useGetBookingQuery } from "@/entities/booking";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { BookingDetails, BookingNotFound } from "@/widgets/booking";
+import { AppLoading } from "@/widgets/loading";
 import { useParams } from "@tanstack/react-router"
 
 export const BookingDetail = () => {
@@ -20,7 +21,7 @@ export const BookingDetail = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <div>load</div>}
+      {isLoading && <AppLoading/>}
       {isError && <BookingNotFound />}
       {data && <BookingDetails booking={data} />}
     </>
