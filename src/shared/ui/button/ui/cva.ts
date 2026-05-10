@@ -16,6 +16,7 @@ export const buttonVariants = cva(
         secondary: "font-medium bg-card border border-border px-5 hover:bg-border-foreground active:opacity-70",
         white: "bg-white text-foreground",
         ghost: "font-medium text-sm hover:text-primary",
+        gray: "bg-card text-accent font-medium border border-transparent",
         dashed: "bg-transparent border border-dashed font-medium hover:bg-primary/10 py-4 px-8",
         orange: "bg-orange px-6 text-white hover:bg-orange/90 active:bg-orange/70 disabled:hover-orange/80 disabled:active:bg-orange/80",
         dialog_close: "px-10! py-3! w-auto! font-bold text-md bg-card text-primary active:scale-98 active:opacity-80",

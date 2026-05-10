@@ -234,7 +234,7 @@ function SelectContent({ className, children, ...props }: ComponentProps<"div">)
 
 type SelectItemProps = {
   value: SelectItemValue;
-  onChange?: (v?: string) => void;
+  onChange?: () => void;
 } & ComponentProps<"div">;
 
 const SelectItem = ({ value, onChange, className, children, ...props }: SelectItemProps) => {
@@ -243,7 +243,7 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
 
   const handleClick = useCallback(() => {
     setValue(value);
-    onChange?.(value.value);
+    onChange?.();
   }, [value, onChange, setValue]);
 
   return (

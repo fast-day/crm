@@ -18,6 +18,7 @@ export const BookingSelectEmployee = ({ location_id, employee, users, setSetting
       <Select value={{
         value: employee?.full_name ?? "",
         label: employee?.full_name ?? "",
+        avatar: employee ? { id: employee.id, name: employee.full_name, avatar_url: employee.avatar } : undefined
       }}>
         <SelectTrigger className="h-16">
           <SelectValue placeholder="Исполнитель" />
@@ -43,7 +44,7 @@ export const BookingSelectEmployee = ({ location_id, employee, users, setSetting
                   <div className="flex items-center gap-1">
                     <span className="text-11 leading-3">{emp.position}</span>
                   </div>
-                  {users && !users.some(u => u.id === emp.id) && <div className="text-11 text-red leading-3">Не предлагает выбранную услугу</div>}
+                  {users && !users.some(u => u.id === emp.profile_id) && <div className="text-11 text-red leading-3">Не предлагает выбранную услугу</div>}
                 </div>
               </SelectItem>
             ))

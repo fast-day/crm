@@ -15,7 +15,7 @@ export const Schedule = () => {
   const user_id = account?.id ?? "";
   const location_id = location?.id ?? "";
 
-  const { data: schedules, isLoading } = useGetEmployeeServicesQuery({ user_id, location_id });
+  const { data: schedules, isLoading, isFetching } = useGetEmployeeServicesQuery({ user_id, location_id });
 
   const dayInfoByKey = useMemo(() => {
     const map = new Map<string, DayInfo>();
@@ -59,7 +59,12 @@ export const Schedule = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      <Calendar schedules={schedules} dayInfoByKey={dayInfoByKey} isLoading={isLoading} />
+      <Calendar
+        schedules={schedules}
+        dayInfoByKey={dayInfoByKey}
+        isLoading={isLoading}
+        isFetching={isFetching}
+      />
       {dialog.name === "schedule" && <ScheduleDialog location_id={location_id} data={dialog.data} />}
     </>
   )

@@ -3,7 +3,7 @@ import { useDialog } from "@/entities/dialog";
 import type { IDirectoryLocationEmployee, IDirectoryLocationService } from "@/entities/directories";
 import { BookingChangeServicePrice, BookingSelectEmployee, BookingSelectServices, type ServiceSettingType } from "@/features/booking"
 import { useAppDispatch } from "@/shared/hooks";
-import { Button, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/shared/ui"
+import { Button, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/shared/ui"
 import { useState } from "react";
 
 interface BookingServiceSettingProps {
@@ -30,6 +30,7 @@ export const BookingServiceSetting = ({ location_id, service, employee }: Bookin
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Добавление услуги</DialogTitle>
+        <DialogDescription></DialogDescription>
       </DialogHeader>
 
       <div className="space-y-5">

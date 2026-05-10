@@ -13,3 +13,5 @@ export { bookingSelector } from './model/selector/booking.selector';
 
 // UI
 export { BookingSelectServiceCard } from './ui/booking-select-service-card';
+export { BookingSelectCustomerInfo } from './ui/booking-select-customer-info';
+export { BookingTotalPrice } from './ui/booking-total-price';

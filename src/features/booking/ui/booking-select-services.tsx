@@ -21,6 +21,7 @@ export const BookingSelectServices = ({ location_id, service, services, setSetti
       <Select value={{
         value: service?.name ?? "",
         label: service?.name ?? "",
+        avatar: service?.id ? { id: service?.id, name: service?.name, avatar_url: service?.avatar } : undefined, 
       }}>
         <SelectTrigger className="h-16">
           <SelectValue placeholder="Услуга" />
@@ -37,7 +38,6 @@ export const BookingSelectServices = ({ location_id, service, services, setSetti
                   label: service.name,
                   avatar: { id: service.id, name: service.name, avatar_url: service.avatar }
                 }}
-                // onChange={() => dispatch(setBookingCreate({ service }))}
                 onChange={() => setSetting(p => ({ ...p, service }))}
                 className="flex items-center gap-2 rounded-none"
               >

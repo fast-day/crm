@@ -3,6 +3,7 @@ import type { IDirectoryEmployee, IDirectoryLocationEmployee } from "../model/ty
 import type { IDirectoryLocation } from "../model/types/directory-location.type";
 import type { IDirectoryLocationService, IDirectoryService } from "../model/types/directory-service.type";
 import type { IDirectoryCustomer } from "../model/types/directory-customer.type";
+import type { DirectoryScheduleIntervalsType, IDirectoryScheduleIntervalsCredentials } from "../model/types/directory-schedule-intervals.type";
 
 export const DirectoryAPI = API.injectEndpoints({
   endpoints: builder => ({
@@ -65,6 +66,16 @@ export const DirectoryAPI = API.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    /**
+      ===== СПИСОК СВОБОДНЫХ СЛОТОВ СОТРУДНИКА =====
+    **/
+    employeeScheduleSlots: builder.query<DirectoryScheduleIntervalsType, IDirectoryScheduleIntervalsCredentials>({
+      query: ({ params, query }) => ({
+        url: `/v1/directory/employee/schedule/${params.user_id}/${params.location_id}?date=${query.date}&duration=${query.duration}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -75,4 +86,5 @@ export const {
   useLocationsQuery,
   useServicesQuery,
   useLocationServicesQuery,
+  useEmployeeScheduleSlotsQuery,
 } = DirectoryAPI;

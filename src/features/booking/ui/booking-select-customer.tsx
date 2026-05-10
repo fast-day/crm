@@ -16,7 +16,8 @@ export const BookingSelectCustomer = ({ customer }: BookingSelectCustomerProps) 
   return (
     <Select value={{
       value: customer?.full_name ?? "",
-      label: customer?.full_name ?? ""
+      label: customer?.full_name ?? "",
+      avatar: customer ? { id: customer.id, name: customer.first_name, avatar_url: customer.avatar } : undefined,
     }}>
       <SelectTrigger className="h-16">
         <SelectValue placeholder="Клиент не выбран" />

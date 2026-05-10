@@ -1,14 +1,15 @@
 import type { ISchedule } from "@/entities/schedule";
 import { CalendarDayItem, ChangeYear, CurrentDate, useCalendar, WEEKDAYS_MONDAY_START, type DayInfo } from "@/features/calendar"
+import { LazyBlur } from "@/widgets/loading";
 
 interface CalendarProps {
   schedules?: ISchedule[];
   dayInfoByKey: Map<string, DayInfo>;
   isLoading?: boolean;
-  
+  isFetching: boolean;
 }
 
-export const Calendar = ({ schedules, dayInfoByKey, isLoading=false }: CalendarProps) => {
+export const Calendar = ({ schedules, dayInfoByKey, isLoading=false, isFetching }: CalendarProps) => {
   const calendar = useCalendar(schedules);
 
   return (
@@ -39,6 +40,7 @@ export const Calendar = ({ schedules, dayInfoByKey, isLoading=false }: CalendarP
         </div>
 
         <div className="grid grid-cols-7 gap-2.5 mt-2.5 relative">
+          {isFetching && <LazyBlur />}
           {isLoading && <div className="absolute top-0 left-0 h-full w-full rounded-xl z-10 backdrop-blur-xs" />}
           {calendar.calendarCells.map((cell) => {
             const dayInfo = dayInfoByKey.get(cell.dateKey);

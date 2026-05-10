@@ -19,16 +19,43 @@ function formatDateTime (dateTime: string): string {
 /**
   ===== ПРЕОБРАЗОВАНИЕ ДАТЫ 31-03-2026 В ЧИСЛО МЕСЯЦ, ГОД =====
 **/
-function formatDate(date: string) {
+function formatDate(date: string): string {
   const [day, month, year] = date.split('-');
   const months = [
     "Января", "Февраля", "Марта", 
     "Апреля", "Мая", "Июня", 
     "Июля", "Августа", "Сентября", 
     "Октября", "Ноября", "Декабря",
-  ];
+  ] as const;
 
   return `${parseInt(day, 10)} ${months[parseInt(month, 10) -1]}, ${year}`;
 }
 
-export { formatDateTime, formatDate };
+function formatDateWeek(date?: string): string {
+  const months = [
+    "Января", "Февраля", "Марта", 
+    "Апреля", "Мая", "Июня", 
+    "Июля", "Августа", "Сентября", 
+    "Октября", "Ноября", "Декабря",
+  ] as const;
+
+  const weeks = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"] as const;
+
+  let current_date: Date;
+
+  if (date) {
+    const [day, month, year] = date.split("-").map(Number);
+    current_date = new Date(year, month - 1, day);
+  } else {
+    current_date = new Date();
+  }
+
+  const dayOfWeek = weeks[current_date.getDay()];
+  const dayNum = current_date.getDate();
+  const monthName = months[current_date.getMonth()];
+  const year = current_date.getFullYear();
+
+  return `${dayOfWeek}, ${dayNum} ${monthName}, ${year}г.`;
+}
+
+export { formatDateTime, formatDate, formatDateWeek };

@@ -8,6 +8,8 @@ type BookingCreate = {
   employee?: IDirectoryLocationEmployee;
   // ... more fields
   // ....
+  date?: string;
+  time?: string;
 }
 
 interface BookingState {

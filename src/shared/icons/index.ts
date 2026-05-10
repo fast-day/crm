@@ -41,6 +41,7 @@ export { default as GiftIcon } from "./Gift";
 export { default as HelpIcon } from "./Help";
 export { default as HourglassIcon } from "./Hourglass";
 export { default as LinkIcon } from "./Link";
+export { default as LocationIcon } from "./Location";
 export { default as LockSquareIcon } from "./LockSquare";
 export { default as LockIcon } from "./Lock";
 export { default as MegaphoneIcon } from "./Megaphone";

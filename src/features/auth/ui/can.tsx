@@ -1,3 +1,4 @@
+import type { PermissionName } from "@/entities/account";
 import { useAllPermissions, useAnyPermission, usePermission } from "../model/hooks/permission.hook";
 
 interface CanProps {

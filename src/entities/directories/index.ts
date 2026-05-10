@@ -6,3 +6,4 @@ export type { IDirectoryEmployee, IDirectoryLocationEmployee } from './model/typ
 export type { IDirectoryLocation } from './model/types/directory-location.type';
 export type { IDirectoryService, IDirectoryLocationService} from './model/types/directory-service.type';
 export type { IDirectoryCustomer } from './model/types/directory-customer.type';
+export * from './model/types/directory-schedule-intervals.type';

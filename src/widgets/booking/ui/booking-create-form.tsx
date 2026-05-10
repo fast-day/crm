@@ -1,21 +1,38 @@
 import { accountSelector } from "@/entities/account"
-import { bookingSelector, BookingSelectServiceCard } from "@/entities/booking";
+import { BookingSelectCustomerInfo, bookingSelector, BookingSelectServiceCard, BookingTotalPrice } from "@/entities/booking";
 import { Avatar } from "@/entities/user";
 import { BookingSelectCustomer } from "@/features/booking";
-import { Copyable } from "@/features/copyable";
-import { AddIcon } from "@/shared/icons";
-import { Button, Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardHeader, CardTitle, Dialog, DialogTrigger } from "@/shared/ui"
-import { formatPrice } from "@/shared/utils";
+import { AddIcon, CalendarIcon } from "@/shared/icons";
+import { Button, Card, CardContent, CardHeader, CardTitle, Dialog } from "@/shared/ui"
+import { formatDateWeek } from "@/shared/utils";
 import { useSelector } from "react-redux"
 import { BookingServiceSetting } from "./components/booking-service-setting";
 import { dialogSelector, useDialog } from "@/entities/dialog";
+import { BookingScheduleIntervals } from "./components/booking-schedule-intervals";
 
-export const BookingCreateForm = () => {
+export const BookingCreateForm = ({ date }: { date: string }) => {
   const { location } = useSelector(accountSelector);
   const { booking_create } = useSelector(bookingSelector);
   const { dialog } = useSelector(dialogSelector);
 
   const { closeDialog, openDialog } = useDialog();
+
+  const handleSave = () => {
+    console.log(booking_create);
+
+    const req = {
+      name: "",
+      start_time: booking_create?.time,
+      end_time: "",
+      date: booking_create?.date,
+      service_id: booking_create?.service?.id,
+      employee_id: booking_create?.employee?.profile_id,
+      payment_method: "",
+      customer_id: booking_create?.customer?.profile_id,
+      location_id: booking_create?.location?.id,
+    }
+    console.log(req);
+  }
 
   return (
     <div className="mt-8 relative flex gap-8 h-full">
@@ -53,8 +70,6 @@ export const BookingCreateForm = () => {
                 )}
 
                 <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
-                  <DialogTrigger asChild onClick={() => openDialog("booking_service_create", undefined)}>
-                  </DialogTrigger>
                   <BookingServiceSetting location_id={location.id} service={booking_create?.service} employee={booking_create?.employee} />
                 </Dialog>
 
@@ -69,29 +84,7 @@ export const BookingCreateForm = () => {
               <CardContent className="space-y-5">
                 <BookingSelectCustomer customer={booking_create?.customer} />
 
-                {booking_create?.customer && (
-                  <div className="space-y-5">
-                    
-                    <CardContentLabel>
-                      <CardContentLabelTitle>Посещений</CardContentLabelTitle>
-                      <CardContentLabelDescription>{booking_create.customer.bookings_count}</CardContentLabelDescription>
-                    </CardContentLabel>
-
-                    <CardContentLabel>
-                      <CardContentLabelTitle>Номер телефона</CardContentLabelTitle>
-                      <CardContentLabelDescription>
-                        <Copyable text={booking_create.customer.phone}/>
-                      </CardContentLabelDescription>
-                    </CardContentLabel>
-
-                    <CardContentLabel>
-                      <CardContentLabelTitle>Электронная почта</CardContentLabelTitle>
-                      <CardContentLabelDescription>
-                        <Copyable text={booking_create.customer.email}/>
-                      </CardContentLabelDescription>
-                    </CardContentLabel>
-                  </div>
-                )}
+                {booking_create?.customer && <BookingSelectCustomerInfo customer={booking_create.customer} />}
               </CardContent>
             </Card>
           </>
@@ -102,14 +95,59 @@ export const BookingCreateForm = () => {
         <CardHeader className="pb-0">
           <CardTitle>Детали бронирования</CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 flex flex-col">
+        <CardContent className="flex-1 flex flex-col space-y-8">
           <div className="flex items-center justify-between">
             <div className="font-medium opacity-60">Итого</div>
-            <div className="font-semibold">{formatPrice(booking_create?.service?.prices.price ?? 0)} ₽</div>
+            <BookingTotalPrice price={booking_create?.service?.prices.price ?? 0} />
           </div>
-          <div className="flex-1"></div>
+
+          <div className="flex-1 space-y-6">
+
+            <Card className="relative">
+              <CardContent>
+                <div className="text-center font-semibold text-lg">
+                  {/* {!booking_create?.date ? (
+                    "- - - - -"
+                  ) : (
+                    formatDateWeek()
+                  )} */}
+                  {formatDateWeek(date)}
+                  
+                  {/* Вт, 25 Апреля 2026г. 10:13 */}
+                </div>
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-card-accent border-4 border-card-ring w-11 h-11 flex items-center justify-center rounded-full">
+                  <CalendarIcon width={22} height={22}/>
+                </div>
+              </CardContent>
+            </Card>
+
+
+            {/* SELECT DATE */}
+            {/* 
+              ЭТО ВООБЩЕ НЕ ТО. ТУТ МНЕ НАДО СНАЧАЛА ДЕЛАТЬ ЗАПРОС НА ПОЛУЧЕНИЕ ГРАФИКА РАБОТЫ
+              В ВЫБРАННЫЙ ДЕНЬ И УЖЕ ВЫБИРАТЬ ВРЕМЯ - ВО СКОЛЬКО ЗАПИСАТЬСЯ
+            */}
+            {/* {!booking_create?.employee?.schedule && (
+              <div>
+                <div className="grid grid-cols-3 gap-2.5">
+                  <BookingChangeTime schedule={booking_create.employee.schedule} current_time={booking_create?.time} />
+                </div>
+              </div>
+            )} */}
+            {(booking_create?.employee && location && booking_create.service) && (
+              <BookingScheduleIntervals
+                user_id={booking_create.employee.profile_id}
+                location_id={location?.id}
+                date={booking_create.date ?? date}
+                current_time={booking_create.time}
+                duration={booking_create.service.duration}
+              />
+            )}
+
+          </div>
+          
           <div>
-            <Button type={"button"}>Сохранить</Button>
+            <Button type={"button"} onClick={handleSave}>Сохранить</Button>
           </div>
         </CardContent>
       </Card>

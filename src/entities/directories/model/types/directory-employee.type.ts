@@ -7,10 +7,12 @@ export interface IDirectoryEmployee {
   last_name: string;
   full_name: string;
   role: RoleType;
+  profile_id: string;
   position: string;
   avatar: string;
 }
 
 export interface IDirectoryLocationEmployee extends IDirectoryEmployee {
   services: Array<{ id: string }>;
+  schedule: Array<{ date: string }>;
 }
