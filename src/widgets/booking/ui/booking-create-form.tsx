@@ -3,7 +3,7 @@ import { BookingSelectCustomerInfo, bookingSelector, BookingSelectServiceCard, B
 import { Avatar } from "@/entities/user";
 import { BookingSelectCustomer, BookingSelectDate, useBookingCreate } from "@/features/booking";
 import { AddIcon } from "@/shared/icons";
-import { Button, Card, CardContent, CardHeader, CardTitle, Dialog } from "@/shared/ui"
+import { Button, Card, CardContent, CardHeader, CardTitle, Dialog, Select } from "@/shared/ui"
 import { useSelector } from "react-redux"
 import { BookingServiceSetting } from "./components/booking-service-setting";
 import { dialogSelector, useDialog } from "@/entities/dialog";
@@ -121,6 +121,17 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                 duration={booking_create.service.duration}
               />
             )}
+
+            <Select
+              value={booking_create?.payment_method}
+              placeholder={"Способ оплаты"}
+              options={[
+                { id: 1, value: "online", label: "Онлайн" },
+                { id: 2, value: "cash", label: "Наличные" },
+                { id: 3, value: "credit_card", label: "Банковская карта" },
+              ]}
+              onChange={(v) => dispatch(setBookingCreate({ payment_method: v as PaymentMethodType }))}
+            />
 
           </div>
           

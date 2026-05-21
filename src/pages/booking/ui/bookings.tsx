@@ -19,7 +19,7 @@ export const Bookings = () => {
         <PageHeaderActions>
           <PageHeaderBackAction />
           <Can permission={"booking:create"}>
-            <Link to={"/bookings/create?date=07-05-2026"}>
+            <Link to={"/bookings/create"}>
               <Button 
                 size={"size_44"}
                 animation={"toggle"}

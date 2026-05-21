@@ -3,6 +3,7 @@ import { useAppDispatch } from '@/shared/hooks';
 import { CalendarIcon } from '@/shared/icons';
 import { Calendar, Card, CardContent } from '@/shared/ui';
 import { formatDateWeek } from '@/shared/utils';
+import { ru } from 'date-fns/locale';
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 interface BookingSelectDateProps {
@@ -70,7 +71,7 @@ export const BookingSelectDate = ({ date }: BookingSelectDateProps) => {
 
       {open && (
         <div
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 shadow-lg rounded-xl bg-popover border border-border"
+          className="absolute top-full w-full left-1/2 -translate-x-1/2 mt-2 z-50 shadow-lg rounded-xl bg-popover border border-border"
           onClick={(e) => e.stopPropagation()}
         >
           <Calendar
@@ -79,6 +80,7 @@ export const BookingSelectDate = ({ date }: BookingSelectDateProps) => {
             onSelect={handleSelect}
             onMonthChange={setMonth}
             month={month}
+            locale={ru}
             captionLayout={"dropdown-years"}
           />
         </div>
