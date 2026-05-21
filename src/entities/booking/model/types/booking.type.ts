@@ -67,3 +67,17 @@ export interface IBookingDetail extends IBooking {
   location: IBookingLocation;
   order: IBookingOrder;
 }
+
+export interface IBookingActionCredentials {
+  name: string;
+  start_time: string;
+  end_time: string;
+  date: string;
+  comment?: string;
+  service_id: string;
+  employee_id: string;
+  customer_id: string;
+  location_id: string;
+  payment_method: PaymentMethodType;
+  status: BookingStatusType;
+}

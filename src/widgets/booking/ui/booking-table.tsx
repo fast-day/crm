@@ -52,7 +52,7 @@ export const BookingTable = ({ bookings, isFetching }: BookingTableProps) => {
                   </TableCell>
                   <TableCell>
                     <Avatar size={"tiny"} avatar_url={""} name={"t"} id={"48934"} />
-                    <p>Название услуги</p>
+                    <p>{booking.service.name}</p>
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
                     <div className="flex items-center gap-2.5">

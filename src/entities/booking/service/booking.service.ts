@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import type { IBooking, IBookingDetail } from "../model/types/booking.type";
+import type { IBooking, IBookingActionCredentials, IBookingDetail } from "../model/types/booking.type";
 
 export const bookingApi = API.injectEndpoints({
   endpoints: builder => ({
@@ -24,11 +24,37 @@ export const bookingApi = API.injectEndpoints({
       }),
     }),
 
+    /**
+      ===== СОЗДАНИЕ БРОНИРОВАНИЯ =====
+    **/
+    createBooking: builder.mutation<IBooking, IBookingActionCredentials>({
+      query: (body) => ({
+        url: `/v1/booking`,
+        method: "POST",
+        body,
+      }),
+
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data: newBooking } = await queryFulfilled;
+
+          dispatch(
+            bookingApi.util.updateQueryData(
+              "getBookings",
+              { location_id: arg.location_id },
+              (draft) => {
+                draft.unshift(newBooking);
+              }
+            )
+          );
+        } catch { /* */ }
+      },
+    }),
   }),
 });
 
 export const {
   useGetBookingsQuery,
   useGetBookingQuery,
-  
+  useCreateBookingMutation,
 } = bookingApi;

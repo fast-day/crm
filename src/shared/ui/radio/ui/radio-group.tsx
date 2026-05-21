@@ -1,5 +1,3 @@
-"use client"
-
 import { cn } from "@/shared/utils"
 import * as React from "react"
 import { RadioGroup as RadioGroupPrimitive } from "radix-ui"

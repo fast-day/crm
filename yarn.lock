@@ -260,6 +260,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@date-fns/tz@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@date-fns/tz@npm:1.4.1"
+  checksum: 10/062097590005cce3da4c7d9880f9c77d386cff5b4dd58fa3dde3c346a8b2e4f4a8025a613306351a7cad8eb71178a0f67b4840d5884f73aa4c759085fac92063
+  languageName: node
+  linkType: hard
+
 "@emnapi/core@npm:^1.7.1, @emnapi/core@npm:^1.8.1":
   version: 1.8.1
   resolution: "@emnapi/core@npm:1.8.1"
@@ -3657,6 +3664,7 @@ __metadata:
     "@vitest/browser-playwright": "npm:^4.0.16"
     "@vitest/coverage-v8": "npm:^4.0.16"
     class-variance-authority: "npm:^0.7.1"
+    date-fns: "npm:^4.1.0"
     eslint: "npm:^9.36.0"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-react-refresh: "npm:^0.4.22"
@@ -3666,6 +3674,7 @@ __metadata:
     playwright: "npm:^1.57.0"
     radix-ui: "npm:^1.4.3"
     react: "npm:^19.1.1"
+    react-day-picker: "npm:^10.0.0"
     react-dom: "npm:^19.1.1"
     react-hook-form: "npm:^7.65.0"
     react-is: "npm:^19.2.3"
@@ -4253,6 +4262,13 @@ __metadata:
   dependencies:
     assert-plus: "npm:^1.0.0"
   checksum: 10/137b287fa021201ce100cef772c8eeeaaafdd2aa7282864022acf3b873021e54cb809e9c060fa164840bf54ff72d00d6e2d8da1ee5a86d7200eeefa1123a8f7f
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10/d5f6e9de5bbc52310f786099e18609289ed5e30af60a71e0646784c8185ddd1d0eebcf7c96b7faaaefc4a8366f3a3a4244d099b6d0866ee2bec80d1361e64342
   languageName: node
   linkType: hard
 
@@ -6450,6 +6466,18 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: 10/de5a0e2df7bfbaac889c15499c75c5216729bd2db2c4ca63b2718454a95bebbe38f6305df00efca72aa949d39bf1f4fd14057c3a261b75fb1cfae5103490da7b
+  languageName: node
+  linkType: hard
+
+"react-day-picker@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "react-day-picker@npm:10.0.0"
+  dependencies:
+    "@date-fns/tz": "npm:^1.4.1"
+    date-fns: "npm:^4.1.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/f158cf48cf58b812991ea893394910246d4a756ac78197b7dc9dd3355904d86e1ecc23b8ce353ecdee0b69812884770efd0c78332a6dffbb8dfca4043076595e
   languageName: node
   linkType: hard
 

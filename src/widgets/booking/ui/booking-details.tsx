@@ -2,9 +2,10 @@ import type { IBookingDetail } from "@/entities/booking"
 import { Avatar } from "@/entities/user";
 import { Copyable } from "@/features/copyable";
 import { markClasses } from "@/shared/constants";
-import { Badge, Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui";
-import { cn, formatPrice, minuteFormat } from "@/shared/utils";
+import { Badge, Button, Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui";
+import { cn, formatDateWeek, formatPrice, minuteFormat } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
+import { CalendarIcon } from "lucide-react";
 
 interface BookingDetailsProps {
   booking: IBookingDetail;
@@ -86,13 +87,33 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
         </Card>
       </div>
 
-        <Card>
+        <Card className="flex flex-col">
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
               <p>Итого</p>
-              <span>0 руб.</span>
+              <span>{formatPrice(booking.service.prices.price)} руб.</span>
             </CardTitle>
           </CardHeader>
+
+          <CardContent className="flex-1 flex flex-col">
+            <div className="flex flex-col h-full">
+              <Card className="relative">
+                <CardContent>
+                  <div className="text-center font-semibold text-lg">
+                    <span>{formatDateWeek(booking.date)} </span>
+                    <span>{booking.start_time}</span>
+                  </div>
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-card-accent border-4 border-card-ring w-11 h-11 flex items-center justify-center rounded-full">
+                    <CalendarIcon width={22} height={22}/>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="flex">
+              <Button type={"button"}>Продолжить</Button>
+            </div>
+          </CardContent>
         </Card>
 
       </div>
