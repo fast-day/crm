@@ -16,7 +16,7 @@ export const BookingScheduleIntervals = ({ user_id, location_id, date, duration,
   const { data, isLoading, isError } = useEmployeeScheduleSlotsQuery({
     params: { user_id, location_id },
     query: { date, duration },
-  });
+  }, { refetchOnMountOrArgChange: true });
 
   return (
     <div>

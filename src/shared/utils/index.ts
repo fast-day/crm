@@ -8,7 +8,7 @@ export * from './currency';
 export { extractTimezoneOffset } from './timezone-offset/timezone-offset.util';
 export { sleep } from './sleeper/sleep';
 export { replaceAddress } from './replace/replace-address';
-export { minuteFormat } from './minute-format/minute-format';
+export { minuteFormat, calcEndTime } from './minute-format/minute-format';
 export { isApiError } from './api-error/api-error';
 export { formatPrice } from './price/formatter';
 export { removeEmpty } from './object/object';

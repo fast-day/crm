@@ -1,7 +1,7 @@
 import type { IDirectoryCustomer, IDirectoryLocation, IDirectoryLocationEmployee, IDirectoryLocationService } from "@/entities/directories";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type BookingCreate = {
+export type BookingCreate = {
   customer?: IDirectoryCustomer;
   service?: IDirectoryLocationService;
   location?: IDirectoryLocation;
@@ -16,8 +16,19 @@ interface BookingState {
   booking_create: BookingCreate | null;
 }
 
+function getTodayFormatted(): string {
+  const now = new Date();
+  return [
+    String(now.getDate()).padStart(2, "0"),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    now.getFullYear(),
+  ].join("-");
+}
+
 const initialState: BookingState = {
-  booking_create: null,
+  booking_create: {
+    date: getTodayFormatted(),
+  },
 };
 
 export const bookingSlice = createSlice({

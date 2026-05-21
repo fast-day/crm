@@ -1,38 +1,32 @@
 import { accountSelector } from "@/entities/account"
-import { BookingSelectCustomerInfo, bookingSelector, BookingSelectServiceCard, BookingTotalPrice } from "@/entities/booking";
+import { BookingSelectCustomerInfo, bookingSelector, BookingSelectServiceCard, BookingTotalPrice, setBookingCreate, type BookingCreate } from "@/entities/booking";
 import { Avatar } from "@/entities/user";
-import { BookingSelectCustomer } from "@/features/booking";
-import { AddIcon, CalendarIcon } from "@/shared/icons";
+import { BookingSelectCustomer, BookingSelectDate, useBookingCreate } from "@/features/booking";
+import { AddIcon } from "@/shared/icons";
 import { Button, Card, CardContent, CardHeader, CardTitle, Dialog } from "@/shared/ui"
-import { formatDateWeek } from "@/shared/utils";
 import { useSelector } from "react-redux"
 import { BookingServiceSetting } from "./components/booking-service-setting";
 import { dialogSelector, useDialog } from "@/entities/dialog";
 import { BookingScheduleIntervals } from "./components/booking-schedule-intervals";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/shared/hooks";
 
 export const BookingCreateForm = ({ date }: { date: string }) => {
+  const dispatch = useAppDispatch();
   const { location } = useSelector(accountSelector);
   const { booking_create } = useSelector(bookingSelector);
   const { dialog } = useSelector(dialogSelector);
 
   const { closeDialog, openDialog } = useDialog();
 
-  const handleSave = () => {
-    console.log(booking_create);
+  const { handleSave, isLoading } = useBookingCreate();
 
-    const req = {
-      name: "",
-      start_time: booking_create?.time,
-      end_time: "",
-      date: booking_create?.date,
-      service_id: booking_create?.service?.id,
-      employee_id: booking_create?.employee?.profile_id,
-      payment_method: "",
-      customer_id: booking_create?.customer?.profile_id,
-      location_id: booking_create?.location?.id,
-    }
-    console.log(req);
-  }
+  useEffect(() => {
+    const payload: Partial<BookingCreate> = {};
+    if (date && !booking_create?.date) payload.date = date;
+    if (location && !booking_create?.location) payload.location = location;
+    if (Object.keys(payload).length > 0) dispatch(setBookingCreate(payload));
+  }, [date, location]);
 
   return (
     <div className="mt-8 relative flex gap-8 h-full">
@@ -103,23 +97,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
 
           <div className="flex-1 space-y-6">
 
-            <Card className="relative">
-              <CardContent>
-                <div className="text-center font-semibold text-lg">
-                  {/* {!booking_create?.date ? (
-                    "- - - - -"
-                  ) : (
-                    formatDateWeek()
-                  )} */}
-                  {formatDateWeek(date)}
-                  
-                  {/* Вт, 25 Апреля 2026г. 10:13 */}
-                </div>
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-card-accent border-4 border-card-ring w-11 h-11 flex items-center justify-center rounded-full">
-                  <CalendarIcon width={22} height={22}/>
-                </div>
-              </CardContent>
-            </Card>
+            <BookingSelectDate date={booking_create?.date} />
 
 
             {/* SELECT DATE */}
@@ -147,7 +125,12 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
           </div>
           
           <div>
-            <Button type={"button"} onClick={handleSave}>Сохранить</Button>
+            <Button
+              type={"button"}
+              onClick={() => handleSave(booking_create)}
+              isLoading={isLoading}
+              disabled={isLoading}
+            >Сохранить</Button>
           </div>
         </CardContent>
       </Card>
