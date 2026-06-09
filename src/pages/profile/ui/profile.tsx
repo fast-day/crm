@@ -36,7 +36,7 @@ export const Profile = () => {
       {isError && <div className="text-center py-40">Ошибка</div>}
       {data && <ProfileInfo employee={data} />}
 
-      {dialog.name === "me_delete" && <DeleteMeAccount />}
+      {dialog.name === "me_delete" && <DeleteMeAccount profile_id={dialog.data.profile_id} />}
     </>
   )
 }
