@@ -43,6 +43,7 @@ import { Route as AppLayoutBusinessServicesCreateIndexRouteImport } from './app/
 import { Route as AppLayoutBusinessServicesService_idIndexRouteImport } from './app/routes/_app/_layout/business/services/$service_id/index'
 import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/services/index'
+import { Route as AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/password/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idEditIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/edit/index'
 import { Route as AppLayoutBusinessServicesService_idLocationsIndexRouteImport } from './app/routes/_app/_layout/business/services/$service_id/locations/index'
 import { Route as AppLayoutBusinessServicesService_idEmployeesIndexRouteImport } from './app/routes/_app/_layout/business/services/$service_id/employees/index'
@@ -257,6 +258,12 @@ const AppLayoutEmployeesUsersEmployee_idServicesIndexRoute =
     path: '/employees/users/$employee_id/services/',
     getParentRoute: () => AppLayoutRoute,
   } as any)
+const AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute =
+  AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport.update({
+    id: '/employees/users/$employee_id/password/',
+    path: '/employees/users/$employee_id/password/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
 const AppLayoutEmployeesUsersEmployee_idEditIndexRoute =
   AppLayoutEmployeesUsersEmployee_idEditIndexRouteImport.update({
     id: '/employees/users/$employee_id/edit/',
@@ -332,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/business/services/$service_id/employees/': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
   '/business/services/$service_id/locations/': typeof AppLayoutBusinessServicesService_idLocationsIndexRoute
   '/employees/users/$employee_id/edit/': typeof AppLayoutEmployeesUsersEmployee_idEditIndexRoute
+  '/employees/users/$employee_id/password/': typeof AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute
   '/employees/users/$employee_id/services/': typeof AppLayoutEmployeesUsersEmployee_idServicesIndexRoute
   '/business/locations/$location_id/edit/': typeof AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute
 }
@@ -373,6 +381,7 @@ export interface FileRoutesByTo {
   '/business/services/$service_id/employees': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
   '/business/services/$service_id/locations': typeof AppLayoutBusinessServicesService_idLocationsIndexRoute
   '/employees/users/$employee_id/edit': typeof AppLayoutEmployeesUsersEmployee_idEditIndexRoute
+  '/employees/users/$employee_id/password': typeof AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute
   '/employees/users/$employee_id/services': typeof AppLayoutEmployeesUsersEmployee_idServicesIndexRoute
   '/business/locations/$location_id/edit': typeof AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute
 }
@@ -417,6 +426,7 @@ export interface FileRoutesById {
   '/_app/_layout/business/services/$service_id/employees/': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
   '/_app/_layout/business/services/$service_id/locations/': typeof AppLayoutBusinessServicesService_idLocationsIndexRoute
   '/_app/_layout/employees/users/$employee_id/edit/': typeof AppLayoutEmployeesUsersEmployee_idEditIndexRoute
+  '/_app/_layout/employees/users/$employee_id/password/': typeof AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute
   '/_app/_layout/employees/users/$employee_id/services/': typeof AppLayoutEmployeesUsersEmployee_idServicesIndexRoute
   '/_app/_layout/business/locations/_location/$location_id/edit/': typeof AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute
 }
@@ -460,6 +470,7 @@ export interface FileRouteTypes {
     | '/business/services/$service_id/employees/'
     | '/business/services/$service_id/locations/'
     | '/employees/users/$employee_id/edit/'
+    | '/employees/users/$employee_id/password/'
     | '/employees/users/$employee_id/services/'
     | '/business/locations/$location_id/edit/'
   fileRoutesByTo: FileRoutesByTo
@@ -501,6 +512,7 @@ export interface FileRouteTypes {
     | '/business/services/$service_id/employees'
     | '/business/services/$service_id/locations'
     | '/employees/users/$employee_id/edit'
+    | '/employees/users/$employee_id/password'
     | '/employees/users/$employee_id/services'
     | '/business/locations/$location_id/edit'
   id:
@@ -544,6 +556,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/business/services/$service_id/employees/'
     | '/_app/_layout/business/services/$service_id/locations/'
     | '/_app/_layout/employees/users/$employee_id/edit/'
+    | '/_app/_layout/employees/users/$employee_id/password/'
     | '/_app/_layout/employees/users/$employee_id/services/'
     | '/_app/_layout/business/locations/_location/$location_id/edit/'
   fileRoutesById: FileRoutesById
@@ -801,6 +814,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
+    '/_app/_layout/employees/users/$employee_id/password/': {
+      id: '/_app/_layout/employees/users/$employee_id/password/'
+      path: '/employees/users/$employee_id/password'
+      fullPath: '/employees/users/$employee_id/password/'
+      preLoaderRoute: typeof AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
     '/_app/_layout/employees/users/$employee_id/edit/': {
       id: '/_app/_layout/employees/users/$employee_id/edit/'
       path: '/employees/users/$employee_id/edit'
@@ -878,6 +898,7 @@ interface AppLayoutRouteChildren {
   AppLayoutBusinessServicesService_idEmployeesIndexRoute: typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
   AppLayoutBusinessServicesService_idLocationsIndexRoute: typeof AppLayoutBusinessServicesService_idLocationsIndexRoute
   AppLayoutEmployeesUsersEmployee_idEditIndexRoute: typeof AppLayoutEmployeesUsersEmployee_idEditIndexRoute
+  AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute: typeof AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute
   AppLayoutEmployeesUsersEmployee_idServicesIndexRoute: typeof AppLayoutEmployeesUsersEmployee_idServicesIndexRoute
   AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute: typeof AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute
 }
@@ -926,6 +947,8 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
     AppLayoutBusinessServicesService_idLocationsIndexRoute,
   AppLayoutEmployeesUsersEmployee_idEditIndexRoute:
     AppLayoutEmployeesUsersEmployee_idEditIndexRoute,
+  AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute:
+    AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute,
   AppLayoutEmployeesUsersEmployee_idServicesIndexRoute:
     AppLayoutEmployeesUsersEmployee_idServicesIndexRoute,
   AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute:
