@@ -11,6 +11,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { setAccount, setLocation, useLazyMeQuery } from "@/entities/account";
 import { useState } from "react";
 import { timezoneCredSchema } from "@/shared/schemas/timezone.schema";
+import { getErrorMessage } from "@/shared/utils";
 
 interface CompanyCreateReturnProps {
   step: number;
@@ -94,7 +95,7 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
     }
     catch (err) {
       console.error("Не удалось создать компанию", err);
-      toast.error("Не удалось создать компанию", { description: JSON.stringify(err) });
+      toast.error(getErrorMessage(err));
     }
     finally {
       setIsLoading(false);

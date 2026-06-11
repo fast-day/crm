@@ -22,6 +22,7 @@ import { Route as AppLayoutSettingsIndexRouteImport } from './app/routes/_app/_l
 import { Route as AppLayoutScheduleIndexRouteImport } from './app/routes/_app/_layout/schedule/index'
 import { Route as AppLayoutNotificationsIndexRouteImport } from './app/routes/_app/_layout/notifications/index'
 import { Route as AppLayoutMeIndexRouteImport } from './app/routes/_app/_layout/me/index'
+import { Route as AppLayoutLogoutIndexRouteImport } from './app/routes/_app/_layout/logout/index'
 import { Route as AppLayoutEmployeesIndexRouteImport } from './app/routes/_app/_layout/employees/index'
 import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_layout/customers/index'
 import { Route as AppLayoutBookingsIndexRouteImport } from './app/routes/_app/_layout/bookings/index'
@@ -132,6 +133,11 @@ const AppLayoutNotificationsIndexRoute =
 const AppLayoutMeIndexRoute = AppLayoutMeIndexRouteImport.update({
   id: '/me/',
   path: '/me/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+const AppLayoutLogoutIndexRoute = AppLayoutLogoutIndexRouteImport.update({
+  id: '/logout/',
+  path: '/logout/',
   getParentRoute: () => AppLayoutRoute,
 } as any)
 const AppLayoutEmployeesIndexRoute = AppLayoutEmployeesIndexRouteImport.update({
@@ -298,6 +304,7 @@ export interface FileRoutesByFullPath {
   '/bookings/': typeof AppLayoutBookingsIndexRoute
   '/customers/': typeof AppLayoutCustomersIndexRoute
   '/employees/': typeof AppLayoutEmployeesIndexRoute
+  '/logout/': typeof AppLayoutLogoutIndexRoute
   '/me/': typeof AppLayoutMeIndexRoute
   '/notifications/': typeof AppLayoutNotificationsIndexRoute
   '/schedule/': typeof AppLayoutScheduleIndexRoute
@@ -338,6 +345,7 @@ export interface FileRoutesByTo {
   '/bookings': typeof AppLayoutBookingsIndexRoute
   '/customers': typeof AppLayoutCustomersIndexRoute
   '/employees': typeof AppLayoutEmployeesIndexRoute
+  '/logout': typeof AppLayoutLogoutIndexRoute
   '/me': typeof AppLayoutMeIndexRoute
   '/notifications': typeof AppLayoutNotificationsIndexRoute
   '/schedule': typeof AppLayoutScheduleIndexRoute
@@ -381,6 +389,7 @@ export interface FileRoutesById {
   '/_app/_layout/bookings/': typeof AppLayoutBookingsIndexRoute
   '/_app/_layout/customers/': typeof AppLayoutCustomersIndexRoute
   '/_app/_layout/employees/': typeof AppLayoutEmployeesIndexRoute
+  '/_app/_layout/logout/': typeof AppLayoutLogoutIndexRoute
   '/_app/_layout/me/': typeof AppLayoutMeIndexRoute
   '/_app/_layout/notifications/': typeof AppLayoutNotificationsIndexRoute
   '/_app/_layout/schedule/': typeof AppLayoutScheduleIndexRoute
@@ -423,6 +432,7 @@ export interface FileRouteTypes {
     | '/bookings/'
     | '/customers/'
     | '/employees/'
+    | '/logout/'
     | '/me/'
     | '/notifications/'
     | '/schedule/'
@@ -463,6 +473,7 @@ export interface FileRouteTypes {
     | '/bookings'
     | '/customers'
     | '/employees'
+    | '/logout'
     | '/me'
     | '/notifications'
     | '/schedule'
@@ -505,6 +516,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/bookings/'
     | '/_app/_layout/customers/'
     | '/_app/_layout/employees/'
+    | '/_app/_layout/logout/'
     | '/_app/_layout/me/'
     | '/_app/_layout/notifications/'
     | '/_app/_layout/schedule/'
@@ -640,6 +652,13 @@ declare module '@tanstack/react-router' {
       path: '/me'
       fullPath: '/me/'
       preLoaderRoute: typeof AppLayoutMeIndexRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
+    '/_app/_layout/logout/': {
+      id: '/_app/_layout/logout/'
+      path: '/logout'
+      fullPath: '/logout/'
+      preLoaderRoute: typeof AppLayoutLogoutIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
     '/_app/_layout/employees/': {
@@ -833,6 +852,7 @@ interface AppLayoutRouteChildren {
   AppLayoutBookingsIndexRoute: typeof AppLayoutBookingsIndexRoute
   AppLayoutCustomersIndexRoute: typeof AppLayoutCustomersIndexRoute
   AppLayoutEmployeesIndexRoute: typeof AppLayoutEmployeesIndexRoute
+  AppLayoutLogoutIndexRoute: typeof AppLayoutLogoutIndexRoute
   AppLayoutMeIndexRoute: typeof AppLayoutMeIndexRoute
   AppLayoutNotificationsIndexRoute: typeof AppLayoutNotificationsIndexRoute
   AppLayoutScheduleIndexRoute: typeof AppLayoutScheduleIndexRoute
@@ -868,6 +888,7 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutBookingsIndexRoute: AppLayoutBookingsIndexRoute,
   AppLayoutCustomersIndexRoute: AppLayoutCustomersIndexRoute,
   AppLayoutEmployeesIndexRoute: AppLayoutEmployeesIndexRoute,
+  AppLayoutLogoutIndexRoute: AppLayoutLogoutIndexRoute,
   AppLayoutMeIndexRoute: AppLayoutMeIndexRoute,
   AppLayoutNotificationsIndexRoute: AppLayoutNotificationsIndexRoute,
   AppLayoutScheduleIndexRoute: AppLayoutScheduleIndexRoute,
