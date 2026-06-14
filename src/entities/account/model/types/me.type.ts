@@ -1,6 +1,7 @@
+import type { PageType } from "@/entities/settings";
 import type { IRole } from "./role.type";
 
-export interface MeCompany {
+export interface IMeCompany {
   id: string;
   name: string;
   currency: CurrencyType;
@@ -16,8 +17,6 @@ export interface MeLocations {
   avatar: string;
   full_address: string;
 }
-
-export type PageType = "DASHBOARD" | "CALENDAR" | "BOOKINGS" | "CUSTOMERS" | "SERVICES" | "EMPLOYEES" | "ANALYTICS" | "SETTINGS" | "NOTIFICATIONS"
 
 export interface MeSettingPages {
   page: PageType;
@@ -38,7 +37,7 @@ export interface IMe {
   avatar: string | null;
   role: IRole;
   role_id: { id: number; };
-  company: MeCompany | null;
+  company: IMeCompany | null;
   locations: MeLocations[];
   settings: MeSettings;
 }

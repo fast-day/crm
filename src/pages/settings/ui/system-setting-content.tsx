@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, ImagePicker, InputForm, SelectForm, Switch } from "@/shared/ui"
-import { settingSchema, type SettingType } from "../model/hooks/setting.schema"
+import { settingSchema, type SettingType } from "../model/schemas/setting.schema"
 import { mockCurrency } from "@/pages/company/model/mock"
 import { useSelector } from "react-redux"
-import { accountSelector, updateSettings, type PageType } from "@/entities/account"
+import { accountSelector } from "@/entities/account"
 import { Controller } from "react-hook-form"
 import { PaletteIcon, PaperClipIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils"
@@ -12,7 +12,7 @@ import SvgCalendar from "@/shared/icons/Calendar"
 import SvgBook from "@/shared/icons/Book"
 import SvgDashboard from "@/shared/icons/Dashboard"
 import { usePermissions } from "@/features/auth/model/hooks/permission.hook"
-import { useAppDispatch } from "@/shared/hooks"
+import { type PageType } from "@/entities/settings"
 
 const MENU = [
   {
@@ -62,10 +62,13 @@ const MENU = [
   // },
 ];
 
-export const SystemSettingContent = () => {
+interface SystemSettingContentProps {
+  onSubmit: (data: SettingType, role?: RoleType) => Promise<void>;
+}
+
+export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) => {
   const { account } = useSelector(accountSelector);
   const { hasWildcard } = usePermissions();
-  const dispatch = useAppDispatch();
 
   const defaultValues: SettingType = {
     name: account?.company?.name ?? "",
@@ -86,21 +89,9 @@ export const SystemSettingContent = () => {
       }),
   };
 
-  const handleSubmit = async (data: SettingType) => {
-    const { pages, ...general } = data;
-    const req: Promise<unknown>[] = [/* update pages */];
-
-    if (account?.role === "owner") {
-      req.push(/* update company */);
-    }
-
-    await Promise.all(req);
-    dispatch(updateSettings({ pages }));
-  }
-
   return (
     <div className="mt-8 space-y-6">
-      <Form id="setting-save" onSubmit={handleSubmit} schema={settingSchema} options={{ defaultValues }}>
+      <Form id="setting-save" onSubmit={(data) => onSubmit(data, account?.role)} schema={settingSchema} options={{ defaultValues }}>
         {({ formState, register, control, watch }) => {
           const pages = watch("pages");
 

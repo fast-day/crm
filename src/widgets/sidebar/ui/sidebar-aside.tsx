@@ -1,4 +1,4 @@
-import { accountSelector, type PageType, type PermissionName } from "@/entities/account"
+import { accountSelector, type PermissionName } from "@/entities/account"
 import { usePermissions } from "@/features/auth/model/hooks/permission.hook"
 import { AsideItem } from "@/features/sidebar"
 import { PaletteIcon } from "@/shared/icons"
@@ -11,6 +11,7 @@ import SvgUsersGroup from "@/shared/icons/UsersGroup"
 import { useLocation } from "@tanstack/react-router"
 import { isRouteActive } from "../model/utils/navigation.util"
 import { useSelector } from "react-redux"
+import type { PageType } from "@/entities/settings"
 
 interface MenuItem {
   to: string;

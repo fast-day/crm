@@ -50,11 +50,11 @@ export const Avatar = ({ id, avatar_url, size, name, className, opacity, childre
       {...props}
     >
       {avatar_url ? (
-        <img className="object-cover w-full h-full" src={avatar_url} alt={name} />
+        <img className={cn(avatarVariants({ size }), "object-cover w-full h-full")} src={avatar_url} alt={name} />
       ) : (
         isIcon ? <>{icon}</> :
         <span className="uppercase font-medium leading-5 select-none tracking-wider">
-          {name.trim().includes(' ') ? (name.trim()[0] + name.trim().split(/\s+/)[1][0]).toUpperCase() : name.trim()[0].toUpperCase()}
+          {name.trim().includes(' ') ? (name.trim()[0] + name.trim().split(/\s*[—–-]\s*/)[1][0]).toUpperCase() : name.trim()[0].toUpperCase()}
         </span>
       )}
       {}
