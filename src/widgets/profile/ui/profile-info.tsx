@@ -3,8 +3,8 @@ import { Avatar } from "@/entities/user";
 import { Can } from "@/features/auth";
 import { Copyable } from "@/features/copyable";
 import { DeleteAccountAction } from "@/features/profile";
-import { EMPLOYEE_STATUS, ROLE } from "@/shared/constants";
-import { Badge, Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui"
+import { ROLE } from "@/shared/constants";
+import { Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui"
 import { AvatarGroup } from "@/shared/ui/avatar";
 import { Link } from "@tanstack/react-router";
 
@@ -22,16 +22,10 @@ export const ProfileInfo = ({ employee }: ProfileInfoProps) => {
               <div className="relative">
                 <Avatar size={"xl"} id={employee.profile.id} name={employee.profile.first_name} avatar_url={employee.profile.avatar} />
               </div>
-              <div className="flex justify-between gap-4 flex-1">
+              <div className="flex justify-start gap-4 flex-1">
                 <div className="space-y-0.5 flex-1">
                   <CardTitle className="capitalize">{employee.profile.full_name}</CardTitle>
                   <CardDescription className="opacity-50">{ROLE[employee.profile.role.name]}{employee.profile.position && `, ${employee.profile.position}`}</CardDescription>
-                </div>
-                <div>
-                  {employee.is_banned ? 
-                    <Badge variant={"inactive"}>Заблокирован</Badge> :
-                    <Badge variant={employee.profile.status}>{EMPLOYEE_STATUS[employee.profile.status]}</Badge>
-                  }
                 </div>
               </div>
             </CardHeader>
