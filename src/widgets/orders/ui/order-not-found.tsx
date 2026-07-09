@@ -14,7 +14,7 @@ export const OrderNotFound = ({ order_id }: OrderNotFoundProps) => {
         </EmptyMedia>
         <EmptyTitle>Заказа #{order_id} не найден</EmptyTitle>
         <EmptyDescription>
-          Заказа, который вы ищете, не существует или был удален.
+          Заказ, который вы ищете, не существует или был удален.
         </EmptyDescription>
       </EmptyHeader>
     </Empty>

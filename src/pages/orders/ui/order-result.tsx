@@ -54,7 +54,18 @@ export const OrderResult = ({ order_id }: OrderResultProps) => {
               
               <div className="flex flex-col items-center space-y-2.5">
                 <h3 className="text-2xl font-bold">{ORDER_STATUS_TITLE[data.status]}</h3>
-                <Badge variant={data.status} className="py-1 px-2 text-xss text-white rounded-lg">{ORDER_STATUS[data.status].label}</Badge>
+                <Badge variant={`${data.status}`} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
+                    {(() => {
+                      const status = ORDER_STATUS[data.status];
+                      const Icon = status.icon;
+                      return (
+                        <>
+                          <Icon />
+                          {status.label}
+                        </>
+                      );
+                    })()}
+                </Badge>
               </div>
             </div>
 

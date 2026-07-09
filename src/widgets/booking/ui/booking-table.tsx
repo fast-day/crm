@@ -68,7 +68,7 @@ export const BookingTable = ({ bookings, isFetching, profileId, meta, query}: Bo
                           <p className="text-xs font-normal leading-2.5">еще +{booking.services.length - 2}</p>
                         )}
                       </>
-                    ) : ( <div className="flex items-center justify-center flex-1">-</div> )}
+                    ) : ( <div className="flex items-center w-full flex-1">-</div> )}
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
                     <div className="flex items-center gap-2.5">
@@ -88,11 +88,9 @@ export const BookingTable = ({ bookings, isFetching, profileId, meta, query}: Bo
                     <Badge variant={`${booking.status}_b`}>{BOOKING_STATUS[booking.status]}</Badge>
                   </TableCell>
                   <TableCellActions>
-                    <Link to={`${booking.id}`}>
-                      <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
-                        <ChevronRightIcon width={17} height={17} />
-                      </Button>
-                    </Link>
+                    <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
+                      <ChevronRightIcon width={17} height={17} />
+                    </Button>
                   </TableCellActions>
                 </TableRow>
                 {index !== bookings.length - 1 && <TableSeparator />}

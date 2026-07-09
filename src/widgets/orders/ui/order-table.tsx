@@ -50,11 +50,17 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                     {ord.tag ?? "-"}
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
-                    <div className="flex items-center gap-2.5">
-                      <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id} />
-                      <p>{ord.customer.full_name}</p>
-                    </div>
-                    <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${ord.customer.phone}`}>{ord.customer.phone}</Link>
+                    {ord.customer.id ? (
+                      <>
+                        <div className="flex items-center gap-2.5">
+                          <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id ?? "none"} />
+                          <p>{ord.customer.full_name}</p>
+                        </div>
+                        <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${ord.customer.phone}`}>{ord.customer.phone}</Link>
+                      </>
+                    ) : (
+                      <div className="flex items-center justify-center flex-1 w-full">-</div>
+                    )}
                   </TableCell>
                   <TableCell>
                     {formatPrice(ord.subtotal ?? ord.total)} ₽

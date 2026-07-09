@@ -1,11 +1,11 @@
-import { useCompleteBookingMutation, useConfirmBookingMutation, type IBookingConfirmCredentials, type IBookingDetail } from "@/entities/booking";
+import { BookingServiceCard, useCompleteBookingMutation, useConfirmBookingMutation, type IBookingConfirmCredentials, type IBookingDetail } from "@/entities/booking";
 import { Avatar } from "@/entities/user";
-import { markClasses } from "@/shared/constants";
 import { PAYMENT_METHODS_ENUM } from "@/shared/constants/payment-methods.constant";
 import { TrashIcon } from "@/shared/icons";
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Textarea } from "@/shared/ui";
-import { cn, formatPrice, getErrorMessage, minuteFormat } from "@/shared/utils";
+import { cn, formatPrice, getErrorMessage } from "@/shared/utils";
 import { Link, useNavigate } from "@tanstack/react-router";
+import React from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -111,7 +111,7 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
                 <div className="w-2 h-2 rounded-full bg-primary" />
                 <div className="font-medium">{PAYMENT_METHODS_ENUM[payment].label}</div>
               </div>
-              <div className="font-medium">{formatPrice(booking.service.prices.price)} ₽</div>
+              <div className="font-medium">{formatPrice(booking.order.subtotal)} ₽</div>
 
               <Button
                 variant={"transparent"}
@@ -131,9 +131,9 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
 
           <Card className="bg-transparent">
             <CardHeader className="p-0">
-              <Link to={`/customers/${booking.customer.id}`} className="flex flex-row items-center gap-2.5 p-5 hover:bg-card rounded-t-3xl duration-200">
+              <Link to={`/customers/${booking.customer.profile_id}`} className="flex flex-row items-center gap-2.5 p-5 hover:bg-card rounded-t-3xl duration-200">
                 <div className="relative">
-                  <Avatar size={"large"} id={booking.customer.id} name={booking.customer.full_name} avatar_url={booking.customer.avatar} />
+                  <Avatar size={"large"} id={booking.customer.profile_id ?? "none"} name={booking.customer.full_name} avatar_url={booking.customer.avatar} />
                 </div>
                 <div>
                   <CardTitle className="capitalize text-base">{booking.customer.full_name}</CardTitle>
@@ -147,24 +147,21 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
             <div className="flex flex-col h-full space-y-6">
 
               <div className="space-y-4">
-                <div className="flex items-center gap-2 font-bold">Услуги <Badge variant={"count"}>1</Badge></div>
-                <div>
-                  <div className="flex gap-2.5 items-center justify-between">
-                    <div className="flex gap-2.5 items-center">
-                      <div className="relative">
-                        <Avatar size={"md"} id={booking.service.id} name={booking.service.name} avatar_url={booking.service.avatar} />
-                        <div className={cn("absolute -bottom-px -right-px w-2 h-2 rounded-full",  markClasses[booking.service.mark ?? "red"])} />
-                      </div>
-                      <div>
-                        <div className="font-medium text-md leading-5">{booking.service.name}</div>
-                        <div className="flex items-center gap-2">
-                          <div className="text-xs font-medium">{minuteFormat(booking.service.duration)}</div>
-                          <p className="text-xs font-medium leading-4">{booking.employee.full_name}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-base font-bold">{formatPrice(booking.service.prices.price)} ₽</div>
-                  </div>
+                <div className="flex items-center gap-2 font-bold">Услуги <Badge variant={"count"}>{booking.services.length}</Badge></div>
+
+                <div className="grid gap-2.5">
+                  {booking.services.length > 0 ? booking.services.map((service, idx) => (
+                    <React.Fragment key={idx}>
+                      <BookingServiceCard
+                        service={service}
+                        employee={booking.employee}
+                        start_time={booking.start_time}
+                        end_time={booking.end_time}
+                      />
+                    
+                      {idx !== booking.services.length - 1 && <div className="w-full h-px bg-border" />}
+                    </React.Fragment>
+                  )) : <div className="text-sm opacity-50">Нет выбранных услуг.</div>}
                 </div>
               </div>
 
@@ -173,7 +170,7 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
             <div className="space-y-8">
               <div className="flex items-center justify-between gap-2.5 py-8 border-b border-border">
                 <p className="font-medium opacity-50">Итого</p>
-                <span className="font-semibold">{formatPrice(booking.service.prices.price)} руб.</span>
+                <span className="font-semibold">{formatPrice(booking.order.subtotal)} руб.</span>
               </div>
               <div className="flex gap-3">
                 <Button type={"button"} isLoading={isLoading} disabled={isLoading} onClick={() => handleSave(booking.id)} size={"size_60"} variant={"white"} className="p-5">

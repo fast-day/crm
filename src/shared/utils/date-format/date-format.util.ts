@@ -53,12 +53,8 @@ function formatDateWeek(date?: Date | string): string {
 
   if (!date) {
     current_date = new Date();
-  } else if (date instanceof Date) {
-    current_date = date;
   } else {
-    const [day, month, year] = date.split("-").map(Number);
-    if (!day || !month || !year) return "- - - - -";
-    current_date = new Date(year, month - 1, day);
+    current_date = new Date(date);
   }
 
   if (isNaN(current_date.getTime())) return "- - - - -";

@@ -1,13 +1,13 @@
-import type { IBookingDetail } from "@/entities/booking"
+import { BookingServiceCard, type IBookingDetail } from "@/entities/booking"
 import { Avatar } from "@/entities/user";
 import { Copyable } from "@/features/copyable";
-import { markClasses } from "@/shared/constants";
 import { ORDER_STATUS } from "@/shared/constants/order-status.constant";
 import { ChevronIcon } from "@/shared/icons";
 import { Badge, Button, Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui";
-import { cn, formatDateWeek, formatPrice, minuteFormat } from "@/shared/utils";
+import { formatDateWeek, formatPrice } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { CalendarIcon } from "lucide-react";
+import React from "react";
 
 interface BookingDetailsProps {
   booking: IBookingDetail;
@@ -22,41 +22,31 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
       <div className="col-span-2 space-y-8">
         <Card>
           <CardHeader className="pb-0">
-            <CardTitle className="flex items-center gap-2">Услуги <Badge variant={"count"}>1</Badge></CardTitle>
+            <CardTitle className="flex items-center gap-2">Услуги <Badge variant={"count"}>{booking.services.length}</Badge></CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-2.5 items-center justify-between">
-              <div className="flex gap-2.5 items-center">
-                <Link to={`/business/services/${booking.service.id}`} className="relative">
-                  <Avatar size={"md"} id={booking.service.id} name={booking.service.name} avatar_url={booking.service.avatar} />
-                  <div className={cn("absolute -bottom-px -right-px w-2 h-2 rounded-full",  markClasses[booking.service.mark ?? "red"])} />
-                </Link>
-                <div>
-                  <Link to={`/business/services/${booking.service.id}`} className="block font-medium text-md leading-5">{booking.service.name}</Link>
-                  <div className="flex items-center gap-3.5">
-                    <div className="leading-4.5">
-                      <span className="text-xs font-medium">{booking.start_time}</span>
-                      <span className="text-xs font-medium"> - </span>
-                      <span className="text-xs font-medium">{booking.end_time}</span>
-                    </div>
-                    <div className="text-xs font-medium">{minuteFormat(booking.service.duration)}</div>
-                    <Link to={`/employees/users/${booking.employee.id}`} className="flex items-center gap-2">
-                      <Avatar size={"xs"} avatar_url={booking.employee.avatar} name={booking.employee.first_name} id={booking.employee.id} />
-                      <p className="text-xs font-medium leading-4">{booking.employee.full_name}</p>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="text-lg font-bold">{formatPrice(booking.service.prices.price)} ₽</div>
+            <div className="grid gap-2.5">
+              {booking.services.length > 0 ? booking.services.map((service, idx) => (
+                <React.Fragment key={idx}>
+                  <BookingServiceCard
+                    service={service}
+                    employee={booking.employee}
+                    start_time={booking.start_time}
+                    end_time={booking.end_time}
+                  />
+
+                  {idx !== booking.services.length - 1 && <div className="w-full h-px bg-border" />}
+                </React.Fragment>
+              )) : <div className="text-sm opacity-50">Нет выбранных услуг.</div>}
             </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="p-0">
-            <Link to={`/customers/${booking.customer.id}`} className="flex flex-row items-center gap-4 p-6 hover:bg-card rounded-t-3xl duration-200">
+            <Link to={`/customers/${booking.customer.profile_id}`} className="flex flex-row items-center gap-4 p-6 hover:bg-card rounded-t-3xl duration-200">
               <div className="relative">
-                <Avatar size={"xl"} id={booking.customer.id} name={booking.customer.full_name} avatar_url={booking.customer.avatar} />
+                <Avatar size={"xl"} id={booking.customer.profile_id ?? "none"} name={booking.customer.full_name} avatar_url={booking.customer.avatar} />
               </div>
               <div className="flex justify-between gap-4 flex-1">
                 <div className="space-y-0.5 flex-1">
@@ -93,7 +83,7 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
               <p>Итого</p>
-              <span>{formatPrice(booking.service.prices.price)} руб.</span>
+              <span>{formatPrice(booking.order.subtotal)} руб.</span>
             </CardTitle>
           </CardHeader>
 
@@ -104,8 +94,20 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
                 <Card className="bg-white mb-10">
                   <CardContent className="p-5 space-y-5">
                     <div className="flex items-center justify-between gap-2.5">
-                      <Badge variant={booking.order.status}>{ORDER_STATUS[booking.order.status].label}</Badge>
-                      <div className="font-bold">{formatPrice(booking.service.prices.price)}₽</div>
+                      {/* <Badge variant={booking.order.status}>{ORDER_STATUS[booking.order.status].label}</Badge> */}
+                      <Badge variant={`${booking.order.status}`} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
+                          {(() => {
+                            const status = ORDER_STATUS[booking.order.status];
+                            const Icon = status.icon;
+                            return (
+                              <>
+                                <Icon />
+                                {status.label}
+                              </>
+                            );
+                          })()}
+                      </Badge>
+                      <div className="font-bold">{formatPrice(booking.order.subtotal)} ₽</div>
                     </div>
                     <Link to="result">
                       <Button variant={"accent"} size={"size_48"} className="w-full bg-primary">Заказ № {booking.order.tag}</Button>
