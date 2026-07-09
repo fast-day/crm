@@ -20,7 +20,7 @@ function formatDateTime (dateTime: string): string {
   ===== ПРЕОБРАЗОВАНИЕ ДАТЫ 31-03-2026 В ЧИСЛО МЕСЯЦ, ГОД =====
 **/
 function formatDate(date: string): string {
-  const [day, month, year] = date.split('-');
+  const [year, month, day] = date.split('-');
   const months = [
     "Января", "Февраля", "Марта", 
     "Апреля", "Мая", "Июня", 
@@ -53,12 +53,8 @@ function formatDateWeek(date?: Date | string): string {
 
   if (!date) {
     current_date = new Date();
-  } else if (date instanceof Date) {
-    current_date = date;
   } else {
-    const [day, month, year] = date.split("-").map(Number);
-    if (!day || !month || !year) return "- - - - -";
-    current_date = new Date(year, month - 1, day);
+    current_date = new Date(date);
   }
 
   if (isNaN(current_date.getTime())) return "- - - - -";

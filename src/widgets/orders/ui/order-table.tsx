@@ -42,16 +42,25 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
           {orders?.length ? 
             orders.map((ord, index) => (
               <React.Fragment key={index}>
-                <TableRow onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/bookings/${ord.booking_ids[0]}/checkout` : `/bookings/${ord.booking_ids[0]}/result`) })}>
+                <TableRow
+                  // onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/bookings/${ord.booking_ids[0]}/checkout` : `/bookings/${ord.booking_ids[0]}/result`) })}
+                  onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/${ord.id}` : `/orders/${ord.id}/result`) })}
+                >
                   <TableCell>
                     {ord.tag ?? "-"}
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
-                    <div className="flex items-center gap-2.5">
-                      <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id} />
-                      <p>{ord.customer.full_name}</p>
-                    </div>
-                    <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={"tel:8991392993994"}>{ord.customer.phone}</Link>
+                    {ord.customer.id ? (
+                      <>
+                        <div className="flex items-center gap-2.5">
+                          <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id ?? "none"} />
+                          <p>{ord.customer.full_name}</p>
+                        </div>
+                        <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${ord.customer.phone}`}>{ord.customer.phone}</Link>
+                      </>
+                    ) : (
+                      <div className="flex items-center justify-center flex-1 w-full">-</div>
+                    )}
                   </TableCell>
                   <TableCell>
                     {formatPrice(ord.subtotal ?? ord.total)} ₽
