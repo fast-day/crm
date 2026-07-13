@@ -1,13 +1,13 @@
 import { deleteCookie, getCookie } from "@/shared/utils";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IMe, MeLocations, MeSettings } from "../types/me.type";
+import type { IMe, MeLocation, MeSettingPages } from "../types/me.type";
 import type { IPermission } from "../types/permission.type";
 
 interface AccountState {
   isAuthenticated: boolean;
   account: IMe | null;
   isCompany: boolean;
-  location: MeLocations | null;
+  location: MeLocation | null;
   permissions: IPermission[] | null;
 }
 
@@ -32,7 +32,7 @@ export const accountSlice = createSlice({
       state.account = action.payload;
       state.isCompany = !!action.payload.company;
     },
-    setLocation: (state, action: PayloadAction<MeLocations>) => {
+    setLocation: (state, action: PayloadAction<MeLocation>) => {
       state.location = action.payload;
       localStorage.setItem("location", JSON.stringify(action.payload));
     },
@@ -42,9 +42,9 @@ export const accountSlice = createSlice({
     setPermission: (state, action: PayloadAction<IPermission[]>) => {
       state.permissions = action.payload;
     },
-    updateSettings: (state, action: PayloadAction<MeSettings>) => {
+    updateSettings: (state, action: PayloadAction<MeSettingPages[]>) => {
       if (state.account) {
-        state.account.settings = action.payload;
+        state.account.settings.pages = action.payload;
       }
     },
     logout: (state) => {

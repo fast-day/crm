@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AppDispatch } from "@/app/providers/redux/config";
-import { setLocation, type MeLocations } from "@/entities/account";
+import { setLocation, type MeLocation } from "@/entities/account";
 import { Avatar } from "@/entities/user";
 import { Can } from "@/features/auth";
 import { ShopIcon } from "@/shared/icons";
@@ -12,14 +12,14 @@ import { useDispatch } from "react-redux";
 interface LocationDropdownProps {
   avatar_url?: string | null;
   name: string;
-  locations: MeLocations[];
+  locations: MeLocation[];
   selectId?: string;
 }
 
 export const LocationDropdown = ({ avatar_url, name, locations, selectId }: LocationDropdownProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleSelectLocation = (loc: MeLocations) => {
+  const handleSelectLocation = (loc: MeLocation) => {
     dispatch(setLocation(loc));
   }
 
