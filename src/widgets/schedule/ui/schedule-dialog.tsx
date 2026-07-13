@@ -37,7 +37,6 @@ export const ScheduleDialog = ({ location_id, data: props }: ScheduleDialogProps
         intervals: data.intervals,
         user_id: props.user_id,
       } satisfies IScheduleCreateBodyCredentials;
-      console.log(data, props);
       if (props.schedule_id != null) {
         await updateSchedule({
           params: { location_id, schedule_id: props.schedule_id },

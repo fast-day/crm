@@ -38,7 +38,7 @@ export const useSettings = (): UseSettingsReturnProps => {
       }
   
       await Promise.all(req);
-      dispatch(updateSettings({ pages }));
+      dispatch(updateSettings(pages));
     }
     catch (err) {
       toast.error(getErrorMessage(err));
