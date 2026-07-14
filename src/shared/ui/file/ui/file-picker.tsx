@@ -36,7 +36,7 @@ export const FilePicker = ({ accept, capture, multiple=false, disabled=false, on
         onClick={handleClick}
         disabled={disabled}
         className={cn("w-55 h-55 bg-card flex items-center justify-center overflow-hidden rounded-3xl", className)}
-        classNameChild={"w-full"}
+        classNameChild={"w-full flex justify-center"}
       >
         {children ? children : (
           <div className={cn("size-18.5", iconCls)}>
