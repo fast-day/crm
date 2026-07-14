@@ -22,7 +22,7 @@ export const Sidebar = () => {
               <div className="px-5 flex items-center gap-3">
                 <Avatar id={account.company?.id ?? "none"} avatar_url={account.company?.logo} className="rounded-xl text-md" size={"md"} name={account.company?.name ?? "none"} opacity={25} />
                 <div>
-                  <h1 className="text-lg leading-5 font-extrabold text-start capitalize line-clamp-2 break-all">{account?.company?.name}</h1>
+                  <h1 className="text-base leading-5 font-extrabold text-start capitalize line-clamp-2 break-all">{account?.company?.name}</h1>
                   <div className="flex items-center gap-1">
                     <SubscribeIcon width={10} height={10} className="text-white/60" />
                     <p className="text-10 font-medium text-white/60">Тарифный план (демо)</p>
