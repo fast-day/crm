@@ -4,3 +4,7 @@ export { CustomerTable } from './ui/customer-table';
 export { CustomerDetailLazy } from './ui/customer-detail-lazy';
 export { CustomerNotFound } from './ui/customer-not-found';
 export { CustomerDetails } from './ui/customer-details';
+
+// UI DOCUMENT
+export { Editor } from './ui/document/editor/editor';
+export { CustomerDocumentsTable } from './ui/document/customer-documents-table';

@@ -19,7 +19,7 @@ export const DeleteMeAccount = ({ profile_id }: DeleteMeAccountProps) => {
         <DialogHeader>
           <DialogTitle className="leading-7">Вы уверены, что хотите удалить свой аккаунт?</DialogTitle>
           <DialogDescription className="text-xs opacity-50">
-            После удаления Вашей учётной записи Вы будете разлогинены и потеряете доступ ко всем данным, включая бронирования и другую информацию.
+            После удаления Вашей учётной записи Вы будете разлогинены и потеряете доступ ко всем данным, включая записи и другую информацию.
           </DialogDescription>
         </DialogHeader>
 
