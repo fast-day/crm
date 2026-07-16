@@ -1,13 +1,19 @@
+import type { ICustomerDocument } from "@/entities/customers"
 import { AddFillIcon } from "@/shared/icons"
 import { Badge, Card, CardDescription, CardHeader, CardTitle } from "@/shared/ui"
 import { Link } from "@tanstack/react-router"
 
-export const CustomerDocumentsTable = () => {
+interface ICustomerDocumentsTableProps {
+  documents: ICustomerDocument[];
+  meta: PaginationMeta;
+}
+
+export const CustomerDocumentsTable = ({ documents }: ICustomerDocumentsTableProps) => {
   return (
     <div className="space-y-8 mt-8">
       <div className="grid grid-cols-4 gap-2.5">
 
-        <Link to={"4"}>
+        <Link to={"create"}>
           <Card className="h-31 flex bg-primary/20 border-2 border-dashed border-primary cursor-pointer">
             <CardHeader className="flex items-center justify-center flex-1">
               <CardTitle className="flex items-center justify-center gap-2 text-lg">
@@ -18,16 +24,19 @@ export const CustomerDocumentsTable = () => {
           </Card>
         </Link>
 
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <p className="text-xss opacity-50">06.06.2025 19:58</p>
-              <Badge variant={"online_p"}>новая</Badge>
-            </div>
-            <CardTitle>Карточка клиента</CardTitle>
-            <CardDescription className="opacity-50">Описание карточки клиента</CardDescription>
-          </CardHeader>
-        </Card>
+        {documents.map((doc, idx) => (
+          <Card key={idx}>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <p className="text-xss opacity-50">06.06.2025 19:58</p>
+                {/* <Badge variant={"online_p"}>{}</Badge> */}
+              </div>
+              <CardTitle>{doc.name ?? "Без названия"}</CardTitle>
+              <CardDescription className="opacity-50">{doc.description ?? "-"}</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
+
 
 
       </div>

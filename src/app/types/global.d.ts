@@ -101,4 +101,7 @@ declare global {
 
   /** ЕДЕНИЦА ЦЕНЫ **/
   type UnitPriceType = "booking" | "hour" | "day" | "week" | "month";
+
+  /** ТЕГИ ДОКУМЕНТОВ КЛИЕНТА **/
+  type TCustomerDocument = "session" | "progress" | "plan" | "important" | "administrative" | "general";
 }

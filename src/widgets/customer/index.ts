@@ -8,3 +8,4 @@ export { CustomerDetails } from './ui/customer-details';
 // UI DOCUMENT
 export { Editor } from './ui/document/editor/editor';
 export { CustomerDocumentsTable } from './ui/document/customer-documents-table';
+export { CustomerDocumentsLoading } from './ui/document/customer-documents-loading';

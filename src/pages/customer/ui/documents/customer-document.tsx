@@ -7,7 +7,6 @@ interface ICustomerDocumentProps {
 export const CustomerDocument = ({ document_id }: ICustomerDocumentProps) => {
   return (
     <>
-      {document_id}
       <Editor data={undefined} />
     </>
   )

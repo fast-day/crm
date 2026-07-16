@@ -1,15 +1,24 @@
-import type { ICustomerDocumentQuery } from "@/entities/customers";
+import { useGetCustomerDocumentsQuery, type ICustomerDocumentQuery } from "@/entities/customers";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { CustomerDocumentsTable } from "@/widgets/customer";
+import { CustomerDocumentsLoading, CustomerDocumentsTable } from "@/widgets/customer";
 
 interface ICustomerDocumentsProps {
   query: PaginationQuery & ICustomerDocumentQuery;
+  customer_id: string;
 }
 
-export const CustomerDocuments = ({ query }: ICustomerDocumentsProps) => {
+export const CustomerDocuments = ({ query, customer_id }: ICustomerDocumentsProps) => {
+
+  const { data, isLoading, isError } = useGetCustomerDocumentsQuery({
+    customer_id,
+    query: {
+      page: query.page,
+      limit: query.limit,
+    },
+  });
+
   return (
     <>
-    
       <PageHeader>
         <PageHeaderTitle>Заметки клиента {query.full_name && `- ${query.full_name}`}</PageHeaderTitle>
         <PageHeaderActions>
@@ -18,7 +27,9 @@ export const CustomerDocuments = ({ query }: ICustomerDocumentsProps) => {
         </PageHeaderActions>
       </PageHeader>
     
-      <CustomerDocumentsTable />
+      {isLoading && <CustomerDocumentsLoading />}
+      {isError && "error"}
+      {data && <CustomerDocumentsTable documents={data.data} meta={data.meta} />}
     </>
   )
 }

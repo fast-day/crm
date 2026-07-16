@@ -17,5 +17,6 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const query = Route.useSearch();
-  return <CustomerDocuments query={query} />
+  const { customer_id } = Route.useParams();
+  return <CustomerDocuments query={query} customer_id={customer_id} />
 }
