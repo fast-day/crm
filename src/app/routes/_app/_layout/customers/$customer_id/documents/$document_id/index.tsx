@@ -8,6 +8,6 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  const { document_id } = Route.useParams();
-  return <CustomerDocument document_id={document_id} />
+  const { customer_id, document_id } = Route.useParams();
+  return <CustomerDocument customer_id={customer_id} document_id={document_id} />
 }

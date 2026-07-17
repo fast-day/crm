@@ -8,7 +8,7 @@ export const CustomerDocumentApi = API.injectEndpoints({
     /*
       ===== ПОЛУЧЕНИЕ ДОКУМЕНТОВ КЛИЕНТА =====
     */
-   getCustomerDocuments: build.query<ApiResponse<ICustomerDocument[]>, ICustomerDocumentsCredentials>({
+   getCustomerDocuments: build.query<ApiResponse<ICustomerDocument>, ICustomerDocumentsCredentials>({
     query: ({ customer_id, query }) => ({
       url: buildQuery(`/v1/customer/${customer_id}/documents`, { ...query }),
       method: "GET",

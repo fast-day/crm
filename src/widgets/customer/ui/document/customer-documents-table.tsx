@@ -1,6 +1,6 @@
 import type { ICustomerDocument } from "@/entities/customers"
 import { AddFillIcon } from "@/shared/icons"
-import { Badge, Card, CardDescription, CardHeader, CardTitle } from "@/shared/ui"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/shared/ui"
 import { Link } from "@tanstack/react-router"
 
 interface ICustomerDocumentsTableProps {
@@ -25,16 +25,18 @@ export const CustomerDocumentsTable = ({ documents }: ICustomerDocumentsTablePro
         </Link>
 
         {documents.map((doc, idx) => (
-          <Card key={idx}>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <p className="text-xss opacity-50">06.06.2025 19:58</p>
-                {/* <Badge variant={"online_p"}>{}</Badge> */}
-              </div>
-              <CardTitle>{doc.name ?? "Без названия"}</CardTitle>
-              <CardDescription className="opacity-50">{doc.description ?? "-"}</CardDescription>
-            </CardHeader>
-          </Card>
+          <Link to={doc.id} key={idx}>
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <p className="text-xss opacity-50">06.06.2025 19:58</p>
+                  {/* <Badge variant={"online_p"}>{}</Badge> */}
+                </div>
+                <CardTitle>{doc.name ?? "Без названия"}</CardTitle>
+                <CardDescription className="opacity-50">{doc.description ?? "-"}</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
         ))}
 
 

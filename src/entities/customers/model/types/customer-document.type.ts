@@ -1,3 +1,4 @@
+import type { OutputData } from "@editorjs/editorjs";
 import type { CustomerProfile } from "./customer.type";
 
 export interface ICustomerDocumentQuery {
@@ -63,7 +64,7 @@ export interface ICustomerUpdateDocumentCredentials {
   document_id: string;
   body: {
     name?: string;
-    content?: IDocumentContent;
+    content?: OutputData | null;
     is_pinned?: boolean;
     is_archived?: boolean;
     is_locked?: boolean;
