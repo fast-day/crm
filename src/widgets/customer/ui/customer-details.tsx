@@ -92,13 +92,13 @@ export const CustomerDetails = ({ customer }: CustomerDetailsProps) => {
             <Link to={"#"}>
               <Card>
                 <CardHeader>
-                  <CardTitle>Бронирования</CardTitle>
+                  <CardTitle>Записи</CardTitle>
                   <CardDescription>История записей и предстоящие сессии клиента</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            <Link to={"#"}>
+            <Link to={customer.documents_count > 0 ? `documents?full_name=${customer.profile.full_name}` : `documents/create`}>
               <Card>
                 <CardHeader>
                   <CardTitle>Заметки</CardTitle>

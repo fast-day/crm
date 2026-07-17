@@ -5,7 +5,10 @@ import { useParams } from "@tanstack/react-router"
 
 export const Customer = () => {
   const { customer_id } = useParams({ from: "/_app/_layout/customers/$customer_id/" });
-  const { data, isLoading, isError } = useGetCustomerQuery({ customer_id });
+  const { data, isLoading, isError } = useGetCustomerQuery(
+    { customer_id },
+    { refetchOnMountOrArgChange: true },
+  );
   
   return (
     <>

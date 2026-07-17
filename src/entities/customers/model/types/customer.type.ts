@@ -24,6 +24,7 @@ export interface ICustomer {
   note: string;
   is_banned: boolean;
   booking_count: number;
+  documents_count: number;
   profile: CustomerProfile & {
     id: string;
     email: string;

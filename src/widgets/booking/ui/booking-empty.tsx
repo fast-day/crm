@@ -11,7 +11,7 @@ export const BookingEmpty = () => {
           <BookIcon />
         </EmptyMedia>
         <EmptyTitle>Записей пока нет.</EmptyTitle>
-        <EmptyDescription>Создайте первую запись или дождитесь бронирования от клиента.</EmptyDescription>
+        <EmptyDescription>Создайте первую запись или дождитесь новой записи от клиента.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Link to={"/bookings/create"}>

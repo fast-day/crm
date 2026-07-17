@@ -1,0 +1,52 @@
+.ce-paragraph[data-placeholder]:empty::before {
+  color: var(--primary);
+}
+
+.ce-toolbar__plus {
+  color: var(--foreground);
+}
+
+.ce-header {
+  font-weight: 600;
+}
+h1.ce-header {
+  font-size: 38px;
+}
+h2.ce-header {
+  font-size: 36px;
+}
+h3.ce-header {
+  font-size: 32px;
+}
+h4.ce-header {
+  font-size: 28px;
+}
+h5.ce-header {
+  font-size: 24px;
+}
+h6.ce-header {
+  font-size: 20px;
+}
+
+.cdx-quote__text {
+  border-left: 4px solid var(--primary);
+  box-shadow: none;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+.cdx-quote__caption {
+  box-shadow: none;
+  border-radius: 16px;
+}
+.cdx-list__checkbox.cdx-list__checkbox--checked .cdx-list__checkbox-check {
+  background: var(--primary) !important;
+  border: var(--primary);
+}
+.ce-popover-item {
+  color: var(--foreground);
+}
+.ce-popover-item--active {
+  background: var(--card);
+  color: var(--foreground);
+  
+}

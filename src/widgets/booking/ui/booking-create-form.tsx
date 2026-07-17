@@ -87,7 +87,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
 
       <Card className="max-w-93.75 w-full flex flex-col">
         <CardHeader className="pb-0">
-          <CardTitle>Детали бронирования</CardTitle>
+          <CardTitle>Детали записи</CardTitle>
         </CardHeader>
         <CardContent className="flex-1 flex flex-col space-y-8">
           <div className="flex items-center justify-between">

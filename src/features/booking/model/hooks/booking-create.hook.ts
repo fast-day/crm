@@ -17,7 +17,7 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
 
   const handleSave = async (booking: BookingCreate | null): Promise<void> => {
     if (!booking) {
-      toast.error("Нет данных для бронирования");
+      toast.error("Нет данных для записи");
       return;
     }
 

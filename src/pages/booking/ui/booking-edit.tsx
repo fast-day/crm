@@ -15,7 +15,7 @@ export const BookingEdit = ({ booking_id }: BookingEditProps) => {
     <>
       <PageHeader>
         <div>
-          <PageHeaderTitle>Редактирование бронирования № {data?.tag}</PageHeaderTitle>
+          <PageHeaderTitle>Редактирование записи № {data?.tag}</PageHeaderTitle>
         </div>
         <PageHeaderActions>
           <PageHeaderBackAction />
