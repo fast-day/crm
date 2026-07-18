@@ -16,7 +16,7 @@ export const Orders = ({ query }: OrderProps) => {
     <TableLoading rows={6} />
   ) : isError ? (
     <>error message</>
-  ) : isSuccess && (data.data.length > 0 && hasActiveFilters) ? (
+  ) : isSuccess && (data.data.length > 0 && hasActiveFilters && data.meta.total > 0) ? (
     <OrderTable orders={data.data} isFetching={isFetching} meta={data.meta} query={query} />
   ) : (
     <OrderEmpty />

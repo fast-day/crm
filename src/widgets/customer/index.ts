@@ -9,3 +9,5 @@ export { CustomerDetails } from './ui/customer-details';
 export { Editor } from './ui/document/editor/editor';
 export { CustomerDocumentsTable } from './ui/document/customer-documents-table';
 export { CustomerDocumentsLoading } from './ui/document/customer-documents-loading';
+export { CustomerDocumentLoading } from './ui/document/customer-document-loading';
+export { EditorHead } from './ui/document/editor/editor-head';
