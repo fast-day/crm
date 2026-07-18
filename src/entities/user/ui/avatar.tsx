@@ -14,7 +14,9 @@ const avatarVariants = cva(
         md: "min-w-10 w-10 h-10 rounded-lg text-sm",
         lg: "min-w-12 w-12 h-12 rounded-12 text-sm",
         large: "min-w-11 w-11 h-11 rounded-12 text-sm",
-        xl: "min-w-24 w-24 h-24 rounded-3xl text-3xl"
+        xl: "min-w-24 w-24 h-24 rounded-3xl text-3xl",
+        size_80: "min-w-18 w-18 h-18 rounded-3xl text-3xl",
+        size_74: "min-w-18.5 w-18.5 h-18.5 rounded-3xl text-3xl",
       }
     },
     defaultVariants: {
@@ -53,7 +55,7 @@ export const Avatar = ({ id, avatar_url, size, name, className, opacity, childre
         <img className={cn(avatarVariants({ size }), "object-cover w-full h-full")} src={avatar_url} alt={name} />
       ) : (
         isIcon ? <>{icon}</> :
-        <span className="uppercase font-medium leading-5 select-none tracking-wider">
+        <span className="uppercase font-medium leading-5 select-none -tracking">
           {name.trim().includes(" ") ? (name.trim().replace(/\s*[—–-]\s*/g, ' ').split(/\s+/).map(w => w[0]).join("")).toUpperCase().slice(0, 2) : name.trim()[0].toUpperCase()}
         </span>
       )}

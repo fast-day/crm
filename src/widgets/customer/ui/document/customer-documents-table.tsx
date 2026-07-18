@@ -29,7 +29,7 @@ export const CustomerDocumentsTable = ({ documents }: ICustomerDocumentsTablePro
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <p className="text-xss opacity-50">06.06.2025 19:58</p>
+                  <p className="text-xss opacity-50">{doc.created.date} {doc.created.time}</p>
                   {/* <Badge variant={"online_p"}>{}</Badge> */}
                 </div>
                 <CardTitle>{doc.name ?? "Без названия"}</CardTitle>
