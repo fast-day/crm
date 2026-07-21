@@ -2,7 +2,6 @@ import type { IDirectoryCustomer, IDirectoryLocation, IDirectoryLocationEmployee
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export type BookingCreate = {
-  customer?: IDirectoryCustomer;
   service?: IDirectoryLocationService;
   location?: IDirectoryLocation;
   employee?: IDirectoryLocationEmployee;
@@ -14,22 +13,24 @@ export type BookingCreate = {
 }
 
 interface BookingState {
-  booking_create: BookingCreate | null;
+  booked: BookingCreate[];
+  customer: IDirectoryCustomer | null;
+  date: string;
 }
 
 function getTodayFormatted(): string {
   const now = new Date();
   return [
-    String(now.getDate()).padStart(2, "0"),
-    String(now.getMonth() + 1).padStart(2, "0"),
     now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
   ].join("-");
 }
 
 const initialState: BookingState = {
-  booking_create: {
-    date: getTodayFormatted(),
-  },
+  booked: [],
+  customer: null,
+  date: getTodayFormatted(),
 };
 
 export const bookingSlice = createSlice({
@@ -37,28 +38,37 @@ export const bookingSlice = createSlice({
   initialState,
   reducers: {
     setBookingCreate: (state, action: PayloadAction<BookingCreate>) => {
-      if (state.booking_create) {
-        state.booking_create = { ...state.booking_create, ...action.payload };
-      } else {
-        state.booking_create = action.payload;
-      }
+      state.booked.push(action.payload);
     },
-    changeBookingServicePrice: (state, action: PayloadAction<number>) => {
-      if (state.booking_create) {
-        state.booking_create.service = {
-          ...state.booking_create.service,
-          prices: {
-            price: action.payload,
-            cost_price: state.booking_create.service?.prices.cost_price,
-          },
-        } as IDirectoryLocationService;
-      }
+    changeBookingServicePrice: () => {
+      // if (state.booked) {
+      //   state.booked.service = {
+      //     ...state.booked.service,
+      //     prices: {
+      //       price: action.payload,
+      //       cost_price: state.booked.service?.prices.cost_price,
+      //     },
+      //   } as IDirectoryLocationService;
+      // }
     },
     resetBookingCreate: (state) => {
-      state.booking_create = null;
+      state.booked = [];
+      state.customer = null;
     },
+    setBookingCustomer: (state, action: PayloadAction<IDirectoryCustomer>) => {
+      state.customer = action.payload;
+    },
+    setBookingDate: (state, action: PayloadAction<string>) => {
+      state.date = action.payload;
+    }
   },
 });
 
-export const { setBookingCreate, changeBookingServicePrice, resetBookingCreate } = bookingSlice.actions;
+export const {
+  setBookingCreate,
+  changeBookingServicePrice,
+  resetBookingCreate,
+  setBookingCustomer,
+  setBookingDate,
+} = bookingSlice.actions;
 export default bookingSlice.reducer;
