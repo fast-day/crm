@@ -15,7 +15,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
 
   const { closeDialog, openDialog } = useDialog();
 
-  const { isLoading } = useBookingCreate();
+  const { handleSave, isLoading } = useBookingCreate();
 
   // useEffect(() => {
     // const payload: Partial<BookingCreate> = {};
@@ -59,7 +59,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                     size={"icon_42"}
                     className="w-full rounded-lg text-sm"
                     iconLeft={<AddIcon width={18} height={18}/>}
-                  >Выбрать услугу</Button>
+                  >{booked.length > 0 ? "Добавить услугу" : "Выбрать услугу"}</Button>
                 </div>
 
                 <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
@@ -139,7 +139,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
           <div>
             <Button
               type={"button"}
-              // onClick={() => handleSave(booking_create)}
+              onClick={() => handleSave(booked, customer, location!.id)}
               isLoading={isLoading}
               disabled={isLoading}
             >Сохранить</Button>

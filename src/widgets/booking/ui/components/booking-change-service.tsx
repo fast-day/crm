@@ -6,6 +6,8 @@ import { formatDateWeek } from "@/shared/utils";
 import { useAppDispatch } from "@/shared/hooks";
 import { setBookingCreate } from "@/entities/booking";
 import { useDialog } from "@/entities/dialog";
+import { validateAddedBooking } from "@/features/booking/model/utils/validation.util";
+import { toast } from "sonner";
 
 interface BookingChangeServiceProps {
   location_id: string;
@@ -26,6 +28,14 @@ export const BookingChangeService = ({ location_id, date }: BookingChangeService
   const { closeDialog } = useDialog();
 
   const handleSave = () => {
+
+    const errors = validateAddedBooking(setting);
+    console.log("==== setting =====",setting)
+    if (errors.length > 0) {
+      toast.error("Заполните все поля", { description: errors.map(e => e.message).join(" • ") });
+      return;
+    }
+
     dispatch(setBookingCreate({
       service: setting.service,
       employee: setting.employee,
@@ -37,7 +47,7 @@ export const BookingChangeService = ({ location_id, date }: BookingChangeService
     setSetting({
       service: undefined,
       employee: undefined,
-      date: undefined,
+      date,
       time: undefined,
     });
   }
@@ -67,7 +77,7 @@ export const BookingChangeService = ({ location_id, date }: BookingChangeService
               user_id={setting.employee.profile_id}
               location_id={location_id}
               date={date}
-              current_time={""}
+              current_time={setting.time}
               duration={setting.service?.duration ?? 0}
               onSelectInterval={onSelectInterval}
             />

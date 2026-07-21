@@ -1,12 +1,12 @@
 import { resetBookingCreate, useCreateBookingMutation, type BookingCreate, type IBookingActionCredentials } from "@/entities/booking";
-import { calcEndTime } from "@/shared/utils";
 import { toast } from "sonner";
 import { validateBooking } from "../utils/validation.util";
 import { useAppDispatch } from "@/shared/hooks";
 import { useNavigate } from "@tanstack/react-router";
+import type { IDirectoryCustomer } from "@/entities/directories";
 
 interface UseBookingCreateReturnProps {
-  handleSave: (booking: BookingCreate | null) => Promise<void>;
+  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, location_id: string) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -15,13 +15,17 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
   const navigate = useNavigate();
   const [create, { isLoading }] = useCreateBookingMutation();
 
-  const handleSave = async (booking: BookingCreate | null): Promise<void> => {
-    if (!booking) {
-      toast.error("Нет данных для записи");
+  const handleSave = async (
+    booked: BookingCreate[] | null,
+    customer: IDirectoryCustomer | null,
+    location_id: string,
+  ): Promise<void> => {
+    if (!booked?.length) {
+      toast.error("Нет данных для создания записи");
       return;
     }
 
-    const errors = validateBooking(booking);
+    const errors = validateBooking(booked, !!customer);
 
     if (errors.length > 0) {
       toast.error("Заполните все поля", {
@@ -30,23 +34,34 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
       return;
     }
 
-    const end_time =
-      booking.time && booking.service?.duration
-        ? calcEndTime(booking.time, booking.service.duration)
-        : "";
-
     const req = {
-      start_time: booking.time!,
-      end_time,
-      date: booking.date!,
-      service_id: booking.service!.id,
-      employee_id: booking.employee!.profile_id,
-      payment_method: "cash", // ВРЕМЕННАЯ ЗАГЛУШКА !!!!!
-      // customer_id: booking.customer!.profile_id,
-      customer_id: "",
-      location_id: booking.location!.id,
-      status: "pending",
+      services: booked.map(book => ({
+        service_id: book.service!.id,
+        price: book.service!.prices.price,
+        count: 1,
+        date: book.date!,
+        start_time: book.time!,
+        duration: book.service!.duration,
+        users: book.employee?.id ? [{
+          id: book.employee.id,
+          first_name: book.employee.first_name,
+          last_name: book.employee.last_name,
+          position: book.employee.position
+        }] : [],
+      })),
+      customers: customer ? [{
+        id: customer.id,
+        first_name: customer.first_name,
+        last_name: customer.last_name,
+        profile_id: customer.profile_id,
+        phone: customer.phone,
+        email: customer.email,
+      }] : [],
+      location_id,
+      comment: null,
     } satisfies IBookingActionCredentials;
+
+    console.log("action", req);
 
     toast.promise(create(req).unwrap(), {
       success: () => {

@@ -53,6 +53,7 @@ export const bookingSlice = createSlice({
     },
     resetBookingCreate: (state) => {
       state.booked = [];
+      state.customer = null;
     },
     setBookingCustomer: (state, action: PayloadAction<IDirectoryCustomer>) => {
       state.customer = action.payload;

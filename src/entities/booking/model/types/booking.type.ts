@@ -111,18 +111,32 @@ export interface IBookingDetail extends IBooking {
   order: IBookingOrder;
 }
 
+export interface IBookingServiceActionCredentials {
+  service_id: string;
+  price: number;
+  count: number;
+  date: string;
+  start_time: string;
+  duration: number;
+
+  users: Partial<Omit<IBookingEmployee, "full_name" | "avatar" | "phone">>[];
+}
+
 export interface IBookingActionCredentials {
   // name: string;
-  start_time: string;
-  end_time: string;
-  date: string;
-  comment?: string;
-  service_id: string;
-  employee_id: string;
-  customer_id: string;
+  // start_time: string;
+  // end_time: string;
+  // date: string;
+  // service_id: string;
+  // payment_method: PaymentMethodType;
+  // customer_id: string;
+
+  services: IBookingServiceActionCredentials[];
+  customers: Partial<Omit<IBookingCustomer, "full_name" | "avatar" | "birthday">>[];
+
+  comment?: string | null;
   location_id: string;
-  payment_method: PaymentMethodType;
-  status: BookingStatusType;
+  status?: BookingStatusType;
 }
 
 export interface IBookingConfirmCredentials {
