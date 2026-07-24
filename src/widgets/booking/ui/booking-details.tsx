@@ -4,7 +4,7 @@ import { Copyable } from "@/features/copyable";
 import { ORDER_STATUS } from "@/shared/constants/order-status.constant";
 import { ChevronIcon } from "@/shared/icons";
 import { Badge, Button, Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui";
-import { formatDateWeek, formatPrice } from "@/shared/utils";
+import { formatPrice } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { CalendarIcon } from "lucide-react";
 import React from "react";
@@ -22,20 +22,20 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
       <div className="col-span-2 space-y-8">
         <Card>
           <CardHeader className="pb-0">
-            <CardTitle className="flex items-center gap-2">Услуги <Badge variant={"count"}>{booking.services.length}</Badge></CardTitle>
+            <CardTitle className="flex items-center gap-2">Услуги <Badge variant={"count"}>{booking.booking_services.length}</Badge></CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-2.5">
-              {booking.services.length > 0 ? booking.services.map((service, idx) => (
+              {booking.booking_services.length > 0 ? booking.booking_services.map((service, idx) => (
                 <React.Fragment key={idx}>
                   <BookingServiceCard
                     service={service}
-                    employee={booking.employee}
-                    start_time={booking.start_time}
-                    end_time={booking.end_time}
+                    employee={service.user}
+                    start_time={service.booking_service_start_time}
+                    end_time={service.booking_service_end_time}
                   />
 
-                  {idx !== booking.services.length - 1 && <div className="w-full h-px bg-border" />}
+                  {idx !== booking.booking_services.length - 1 && <div className="w-full h-px bg-border" />}
                 </React.Fragment>
               )) : <div className="text-sm opacity-50">Нет выбранных услуг.</div>}
             </div>
@@ -83,14 +83,14 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
               <p>Итого</p>
-              <span>{formatPrice(booking.order.subtotal)} руб.</span>
+              <span>{formatPrice(booking.order ? booking.order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} руб.</span>
             </CardTitle>
           </CardHeader>
 
           <CardContent className="flex-1 flex flex-col">
             <div className="flex flex-col h-full space-y-6">
               
-              {booking.order.id && (
+              {booking.order && (
                 <Card className="bg-white mb-10">
                   <CardContent className="p-5 space-y-5">
                     <div className="flex items-center justify-between gap-2.5">
@@ -119,8 +119,8 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
               <Card className="relative bg-white/40">
                 <CardContent>
                   <div className="text-center font-semibold text-lg">
-                    <span>{formatDateWeek(booking.date)} </span>
-                    <span>{booking.start_time}</span>
+                    {/* <span>{formatDateWeek(booking.date)} </span> */}
+                    {/* <span>{booking.start_time}</span> */}
                   </div>
                   <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white/40 border-4 border-card-ring w-11 h-11 flex items-center justify-center rounded-full">
                     <CalendarIcon width={22} height={22}/>
@@ -134,7 +134,7 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
               </CardContentLabel>
             </div>
 
-            {booking.order.status !== "paid" && (
+            {booking.order && (booking.order.status !== "paid") && (
               <div className="flex gap-3">
                 {/* <Link to={"edit"}>
                   <Button type={"button"} size={"icon_60"} variant={"white"} className="p-5">

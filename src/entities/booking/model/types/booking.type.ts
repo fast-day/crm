@@ -1,4 +1,6 @@
+import type { CustomerProfile } from "@/entities/customers";
 import type { ILocationAddress } from "@/entities/location";
+import type { ServicePrices } from "@/entities/services";
 
 export interface IBookingCustomer {
   id: string;
@@ -38,26 +40,6 @@ export type BookingServiceType = {
   category: string | null;
 }
 
-export interface IBookingService {
-  booking_service_id: string;
-  booking_service_price: number;
-  booking_service_count: number;
-  booking_service_duration: number | null;
-  service: {
-    id: string;
-    name: string;
-    public_name: string;
-    mark: MarkType;
-    avatar: string | null;
-    duration: number;
-    prices: {
-      price: number;
-      cost_price: number;
-    };
-    category: string | null;
-  }
-}
-
 export interface IBookingOrder {
   id: string;
   status: OrderStatusType;
@@ -90,36 +72,64 @@ export interface IBookingCredentials extends IBookingQuery {
   location_id: string;
 }
 
-export interface IBooking {
-  id: string;
+export interface IBookingServiceType {
+  service_id: string;
   name: string;
-  status: BookingStatusType;
-  start_time: string;
-  end_time: string;
-  date: string;
-  comment: string | null;
-  customer: IBookingCustomer;
-  employee: IBookingEmployee;
-  services: IBookingService[];
-  subtotal: number;
-  payment_method: PaymentMethodType;
-  tag: string;
+  mark: MarkType;
+  duration: number;
+  avatar: string | null;
+  category: string;
+  prices: ServicePrices;
 }
 
-export interface IBookingDetail extends IBooking {
-  location: IBookingLocation;
-  order: IBookingOrder;
+export interface IBookingUserType {
+  user_id: string;
+  first_name: string;
+  last_name: string;
+  full_name: string;
+  phone: string;
+  avatar: string | null;
+}
+
+export interface IBookingService {
+  booking_service_id: string;
+  booking_service_start_time: Date;
+  booking_service_end_time: Date;
+  booking_service_duration: number;
+  booking_service_price: number;
+  booking_service_count: number;
+  service: IBookingServiceType;
+  user: IBookingUserType;
+}
+
+export interface IBooking {
+  id: string;
+  status: BookingStatusType;
+  tag: string;
+  comment: string | null;
+  subtotal: number | null;
+  payment_method: PaymentMethodType | null;
+  order_id: string | null;
+  customer: Omit<CustomerProfile, "birthday">;
+  booking_services: IBookingService[];
+}
+
+export interface IBookingDetail extends Omit<IBooking, "payment_method" | "subtotal" | "order_id" | "customer"> {
+  order: IBookingOrder | null;
+  customer: CustomerProfile & {
+    profile_id: string | null;
+    email: string | null;
+  }
 }
 
 export interface IBookingServiceActionCredentials {
   service_id: string;
   price: number;
   count: number;
-  date: string;
   start_time: string;
   duration: number;
 
-  users: Partial<Omit<IBookingEmployee, "full_name" | "avatar" | "phone">>[];
+  users: Partial<Omit<IBookingEmployee, "full_name" | "avatar" | "phone" | "position">>[];
 }
 
 export interface IBookingActionCredentials {
@@ -132,7 +142,7 @@ export interface IBookingActionCredentials {
   // customer_id: string;
 
   services: IBookingServiceActionCredentials[];
-  customers: Partial<Omit<IBookingCustomer, "full_name" | "avatar" | "birthday">>[];
+  customers: Partial<Omit<IBookingCustomer, "full_name" | "avatar" | "birthday" | "email" | "profile_id">>[];
 
   comment?: string | null;
   location_id: string;

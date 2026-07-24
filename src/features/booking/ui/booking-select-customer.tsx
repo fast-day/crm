@@ -15,9 +15,9 @@ export const BookingSelectCustomer = ({ customer }: BookingSelectCustomerProps) 
 
   return (
     <Select value={{
-      value: customer?.full_name ?? "",
-      label: customer?.full_name ?? "",
-      avatar: customer ? { id: customer.id, name: customer.first_name, avatar_url: customer.avatar } : undefined,
+      value: customer?.customer_attributes.full_name ?? "",
+      label: customer?.customer_attributes.full_name ?? "",
+      avatar: customer ? { id: customer.id, name: customer.customer_attributes.first_name, avatar_url: customer.customer_attributes.avatar } : undefined,
     }}>
       <SelectTrigger className="h-16">
         <SelectValue placeholder="Клиент не выбран" />
@@ -30,17 +30,17 @@ export const BookingSelectCustomer = ({ customer }: BookingSelectCustomerProps) 
             <SelectItem
               key={idx}
               value={{
-                value: customer.first_name,
-                label: customer.first_name,
-                avatar: { id: customer.id, name: customer.first_name, avatar_url: customer.avatar }
+                value: customer.customer_attributes.first_name,
+                label: customer.customer_attributes.first_name,
+                avatar: { id: customer.id, name: customer.customer_attributes.first_name, avatar_url: customer.customer_attributes.avatar }
               }}
               onChange={() => dispatch(setBookingCustomer(customer))}
               className="flex items-center gap-2 rounded-none"
             >
-              <Avatar size={"small"} id={customer.id} avatar_url={customer.avatar} name={customer.full_name} />
+              <Avatar size={"small"} id={customer.id} avatar_url={customer.customer_attributes.avatar} name={customer.customer_attributes.full_name} />
               <div>
-                <div className="text-xs leading-5 font-medium">{customer.full_name}</div>
-                <div className="text-11 leading-3">{customer.phone}</div>
+                <div className="text-xs leading-5 font-medium">{customer.customer_attributes.full_name}</div>
+                <div className="text-11 leading-3">{customer.customer_attributes.phone}</div>
               </div>
             </SelectItem>
           ))

@@ -14,7 +14,6 @@ export const BookingDetail = () => {
       <PageHeader>
         <div>
           <PageHeaderTitle>Бронирование № {data?.tag}</PageHeaderTitle>
-          {data && <p className="text-sm leading-4">{data.location.name}</p>}
         </div>
         <PageHeaderActions>
           <PageHeaderBackAction />

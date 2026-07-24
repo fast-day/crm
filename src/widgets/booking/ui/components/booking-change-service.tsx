@@ -30,7 +30,7 @@ export const BookingChangeService = ({ location_id, date }: BookingChangeService
   const handleSave = () => {
 
     const errors = validateAddedBooking(setting);
-    console.log("==== setting =====",setting)
+    // console.log("🚀==== setting =====🚀",setting);
     if (errors.length > 0) {
       toast.error("Заполните все поля", { description: errors.map(e => e.message).join(" • ") });
       return;
@@ -42,7 +42,6 @@ export const BookingChangeService = ({ location_id, date }: BookingChangeService
       date: date,
       time: setting.time,
     }))
-    console.log(setting);
     closeDialog();
     setSetting({
       service: undefined,
