@@ -1,4 +1,5 @@
 export type CustomerProfile = {
+  id: string;
   full_name: string;
   first_name: string;
   last_name: string | null;
@@ -8,7 +9,6 @@ export type CustomerProfile = {
 }
 
 export interface ICustomers extends CustomerProfile {
-  id: string;
   is_banned: boolean;
 }
 

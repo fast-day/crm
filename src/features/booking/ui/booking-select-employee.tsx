@@ -16,6 +16,8 @@ export const BookingSelectEmployee = ({ location_id, employee, users, setSetting
     { refetchOnMountOrArgChange: true },
   );
 
+  // console.log("[ ===== EMPLOYEES ===== ]", data);
+
   return (
     <div>
       <Select value={{
