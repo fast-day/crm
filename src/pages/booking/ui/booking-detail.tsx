@@ -6,7 +6,7 @@ import { useParams } from "@tanstack/react-router"
 
 export const BookingDetail = () => {
   const { booking_id } = useParams({ from: "/_app/_layout/bookings/$booking_id/" });
-
+  
   const { data, isLoading, isError } = useGetBookingQuery({ booking_id });
 
   return (

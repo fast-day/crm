@@ -1,4 +1,5 @@
 import type { CustomerProfile } from "@/entities/customers";
+import type { IDirectoryCustomer } from "@/entities/directories";
 import type { ILocationAddress } from "@/entities/location";
 import type { ServicePrices } from "@/entities/services";
 
@@ -93,8 +94,8 @@ export interface IBookingUserType {
 
 export interface IBookingService {
   booking_service_id: string;
-  booking_service_start_time: Date;
-  booking_service_end_time: Date;
+  booking_service_start_time: string;
+  booking_service_end_time: string;
   booking_service_duration: number;
   booking_service_price: number;
   booking_service_count: number;
@@ -107,6 +108,9 @@ export interface IBooking {
   status: BookingStatusType;
   tag: string;
   comment: string | null;
+  date: string;
+  start_time: string;
+  end_time: string;
   subtotal: number | null;
   payment_method: PaymentMethodType | null;
   order_id: string | null;
@@ -114,12 +118,14 @@ export interface IBooking {
   booking_services: IBookingService[];
 }
 
+export interface IBookingDetailCustomerProfile extends CustomerProfile {
+  profile_id: string | null;
+  email: string | null;
+}
+
 export interface IBookingDetail extends Omit<IBooking, "payment_method" | "subtotal" | "order_id" | "customer"> {
   order: IBookingOrder | null;
-  customer: CustomerProfile & {
-    profile_id: string | null;
-    email: string | null;
-  }
+  customer: IDirectoryCustomer;
 }
 
 export interface IBookingServiceActionCredentials {

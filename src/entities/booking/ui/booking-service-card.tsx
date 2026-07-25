@@ -7,8 +7,8 @@ import type { IBookingUserType, IBookingService } from "../model/types/booking.t
 interface IBookingServiceCardProps {
   service: IBookingService;
   employee: IBookingUserType;
-  start_time: Date;
-  end_time: Date;
+  start_time: string;
+  end_time: string;
 }
 
 export const BookingServiceCard = ({ service, employee, start_time, end_time }: IBookingServiceCardProps) => {
@@ -22,15 +22,15 @@ export const BookingServiceCard = ({ service, employee, start_time, end_time }: 
         <div>
           <Link to={`/business/services/${service.service.service_id}`} className="block font-medium text-md leading-5">{service.service.name}</Link>
           <div className="flex items-center gap-3.5">
-            <div className="leading-4.5">
-              <span className="text-xs font-medium">{`${start_time}`}</span>
-              <span className="text-xs font-medium"> - </span>
-              <span className="text-xs font-medium">{`${end_time}`}</span>
+            <div className="leading-3.5">
+              <span className="text-xss font-medium">{start_time}</span>
+              <span className="text-xss font-medium"> - </span>
+              <span className="text-xss font-medium">{`${end_time}`}</span>
             </div>
-            <div className="text-xs font-medium">{minuteFormat(service.service.duration)}</div>
+            <div className="text-xss font-medium opacity-50">{minuteFormat(service.service.duration)}</div>
             <Link to={`/employees/users/${employee.user_id}`} className="flex items-center gap-2">
               <Avatar size={"xs"} avatar_url={employee.avatar} name={employee.first_name} id={employee.user_id} />
-              <p className="text-xs font-medium leading-4">{employee.full_name}</p>
+              <p className="text-xss font-medium leading-3.5">{employee.full_name}</p>
             </Link>
           </div>
         </div>

@@ -31,15 +31,13 @@ function formatDate(date: string): string {
   return `${parseInt(day, 10)} ${months[parseInt(month, 10) -1]}, ${year}`;
 }
 
-function formatToTime(time: Date): string {
-  return time.toLocaleTimeString(
-    "ru-RU",
-    {
-      timeZone: "Europe/Moscow",
-      hour: "2-digit",
-      minute: "2-digit",
-    },
-  );
+function formatTimeRange(start: string, end: string, timezone: string) {
+  const formatter = new Intl.DateTimeFormat("ru-RU", {
+    timeZone: timezone,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return `${formatter.format(new Date(start))}-${formatter.format(new Date(end))}`;
 }
 
 function formatDateToString(date: Date) {
@@ -78,4 +76,4 @@ function formatDateWeek(date?: Date | string): string {
   return `${dayOfWeek}, ${dayNum} ${monthName}, ${year}г.`;
 }
 
-export { formatDateTime, formatDate, formatToTime, formatDateWeek, formatDateToString };
+export { formatDateTime, formatDate, formatTimeRange, formatDateWeek, formatDateToString };

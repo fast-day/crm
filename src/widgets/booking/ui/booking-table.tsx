@@ -3,7 +3,7 @@ import { Avatar } from "@/entities/user";
 import { BOOKING_STATUS } from "@/shared/constants";
 import { ChevronRightIcon } from "@/shared/icons"
 import { Badge, Button, Pagination, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
-import { formatPrice } from "@/shared/utils";
+import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
@@ -46,14 +46,12 @@ export const BookingTable = ({ bookings, isFetching, meta, query}: BookingTableP
                 <TableRow onClick={() => navigate({ to: `${booking.id}` })}>
                   <TableCell>
                     <div>
-                      -
-                      {/* <p className="font-semibold">{formatDate(booking.date)}</p> */}
-                      {/* <div className="flex items-center text-sm mt-0.5 opacity-80"> */}
-                        {/* <p>{booking.start_time}</p> */}
-                        {/* <span> - </span> */}
-                        {/* <p>{booking.end_time}</p> */}
-                      {/* </div> */}
-                      {/* <span className="text-xss leading-3 opacity-80">{minuteFormat(booking.service.duration)}</span> */}
+                      <p className="font-semibold">{formatDate(booking.date)}</p>
+                      <div className="flex items-center text-sm mt-0.5 opacity-80">
+                        <p>{booking.start_time}</p>
+                        <span> - </span>
+                        <p>{booking.end_time}</p>
+                      </div>
                     </div>
                   </TableCell>
                   <TableCell>

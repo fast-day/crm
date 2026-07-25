@@ -28,7 +28,13 @@ export const Bookings = ({ query }: BookingProps) => {
   ) : isError ? (
     <>error message</>
   ) : isSuccess && (data.data.length > 0 && hasActiveFilters) ? (
-    <BookingTable bookings={data.data} isFetching={isFetching} profileId={account?.id} meta={data.meta} query={query} />
+    <BookingTable
+      bookings={data.data}
+      isFetching={isFetching}
+      profileId={account?.id}
+      meta={data.meta}
+      query={query}
+    />
   ) : (
     <BookingEmpty />
   );
