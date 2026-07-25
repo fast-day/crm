@@ -9,10 +9,10 @@ const variant = ["all", "pending", "open", "closed", "paid", "unpaid"] as OrderS
 const ORDER_STATUS: Record<OrderStatusType | "all", string> = {
   "all": "Все",
   "pending": "В ожидании",
-  "open": "Новый",
-  "closed": "Отменен",
-  "paid": "Оплачен",
-  "unpaid": "Не оплачен"
+  "open": "Новые",
+  "closed": "Отмененные",
+  "paid": "Оплачены",
+  "unpaid": "Не оплачены"
 };
 
 export const OrderSort = ({ status }: IOrderQuery) => {

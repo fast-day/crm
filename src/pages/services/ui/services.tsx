@@ -1,3 +1,4 @@
+import { accountSelector } from "@/entities/account"
 import { useGetServicesQuery, type IServiceQuery } from "@/entities/services"
 import { Can } from "@/features/auth"
 import { AddIcon } from "@/shared/icons"
@@ -5,19 +6,21 @@ import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeader
 import { TableLoading } from "@/widgets/loading"
 import { ServicesEmpty, ServicesTable } from "@/widgets/services"
 import { Link } from "@tanstack/react-router"
+import { useSelector } from "react-redux"
 
 interface ServiceProps {
   query: IServiceQuery & PaginationQuery;
 }
 
 export const Services = ({ query }: ServiceProps) => {
+  const { account } = useSelector(accountSelector);
   const { data, isLoading, isSuccess } = useGetServicesQuery({ ...query });
 
-  const hasActiveFilters = !query.search || !query.mark || !query.price_sort || !query.type;
+  // const hasActiveFilters = !query.search || !query.mark || !query.price_sort || !query.type;
 
   const content = isLoading ? (
     <TableLoading rows={4} />
-  ) : isSuccess && (data.data.length > 0 && hasActiveFilters) ? (
+  ) : isSuccess && account?.has_services ? (
     <ServicesTable services={data.data} meta={data.meta} query={query} />
   ) : (
     <ServicesEmpty />
