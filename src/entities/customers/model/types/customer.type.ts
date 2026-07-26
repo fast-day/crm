@@ -1,3 +1,5 @@
+import type { IBookingQuery } from "@/entities/booking";
+
 export type CustomerProfile = {
   id: string;
   full_name: string;
@@ -31,7 +33,7 @@ export interface ICustomer {
   }
 }
 
-export interface ICustomerDetailCredentials {
+export interface ICustomerDetailCredentials extends IBookingQuery {
   customer_id: string;
 }
 

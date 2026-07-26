@@ -1,4 +1,3 @@
-export interface ICustomerBooking {
-  id: string;
-  name: string;
-}
+import type { IBooking } from "@/entities/booking";
+
+export type ICustomerBooking = Omit<IBooking, "customer">;
