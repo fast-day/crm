@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from "@/shared/icons"
 import { Badge, Button, Pagination, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
-import { formatPrice } from "@/shared/utils";
+import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
@@ -28,7 +28,7 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Номер заказа</TableHead>
+            <TableHead>Дата</TableHead>
             <TableHead>Клиент</TableHead>
             <TableHead>Цена</TableHead>
             <TableHead>Способ оплаты</TableHead>
@@ -47,7 +47,7 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                   onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/${ord.id}` : `/orders/${ord.id}/result`) })}
                 >
                   <TableCell>
-                    {ord.tag ?? "-"}
+                    От {formatDate(ord.date)}
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
                     {ord.customer.id ? (

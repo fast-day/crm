@@ -1,3 +1,4 @@
+import type { IBooking } from "@/entities/booking";
 import type { ServiceStatusType } from "@/entities/services";
 
 export type OrderSortType = "newest" | "oldest" | "price_asc" | "price_desc";
@@ -22,6 +23,7 @@ export interface IOrder {
   status: OrderStatusType;
   subtotal: number;
   total: number;
+  date: string;
   payment_method: PaymentMethodType;
   is_payment: boolean;
   booking_ids: string[];
@@ -77,13 +79,14 @@ export interface IOrderBooking {
 }
 
 export interface IOrderDetail {
-  bookings: IOrderBooking[];
   id: string;
-  tag: string;
   status: OrderStatusType;
-  payment_method: PaymentMethodType | null;
-  total: number | null;
+  tag: string;
   subtotal: number;
-  discount: number | null;
+  total: number | null;
+  date: string;
+  payment_method: PaymentMethodType | null;
   is_payment: boolean;
+  discount: number | null;
+  bookings: Omit<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
 }
