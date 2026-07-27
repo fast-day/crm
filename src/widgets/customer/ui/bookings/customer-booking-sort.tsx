@@ -1,9 +1,9 @@
-import { Route } from "@/app/routes/_app/_layout/bookings";
+import { Route } from "@/app/routes/_app/_layout/customers/$customer_id/bookings";
 import type { IBookingQuery } from "@/entities/booking"
 import { BookingStatusSort } from "@/features/booking";
 import { useNavigate } from "@tanstack/react-router";
 
-export const BookingSort = ({ status }: IBookingQuery) => {
+export const CustomerBookingSort = ({ status }: IBookingQuery) => {
   const navigate = useNavigate({ from: Route.fullPath });
   
   const handleChange = (name: "status", value: BookingStatusType | "all" ) => {
@@ -20,12 +20,6 @@ export const BookingSort = ({ status }: IBookingQuery) => {
     <div>
       <div className="flex items-center justify-between">
         <BookingStatusSort status={status ?? "new"} handleChange={handleChange} />
-
-        {/* <Search
-          placeholder={"Поиск по имени и номеру телефона"}
-          value={searchValue}
-          onValueChange={setSearchValue}
-        /> */}
       </div>
     </div>
   )

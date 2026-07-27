@@ -4,12 +4,10 @@ import { Button, Card, CardContent } from "@/shared/ui"
 import { cn } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 
-const variant = ["all", "pending", "open", "closed", "paid", "unpaid"] as OrderStatusType[] | "all"[];
+const variant = ["all", "closed", "paid", "unpaid"] as Exclude<OrderStatusType, "pending" | "open">[] | "all"[];
 
-const ORDER_STATUS: Record<OrderStatusType | "all", string> = {
+const ORDER_STATUS: Record<Exclude<OrderStatusType, "pending" | "open"> | "all", string> = {
   "all": "Все",
-  "pending": "В ожидании",
-  "open": "Новые",
   "closed": "Отмененные",
   "paid": "Оплачены",
   "unpaid": "Не оплачены"

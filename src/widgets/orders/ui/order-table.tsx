@@ -30,9 +30,9 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
           <TableRow>
             <TableHead>Дата</TableHead>
             <TableHead>Клиент</TableHead>
-            <TableHead>Цена</TableHead>
             <TableHead>Способ оплаты</TableHead>
             <TableHead>Статус</TableHead>
+            <TableHead>Цена</TableHead>
             <TableHead />
           </TableRow>
         </TableHeader>
@@ -46,8 +46,9 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                   // onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/bookings/${ord.booking_ids[0]}/checkout` : `/bookings/${ord.booking_ids[0]}/result`) })}
                   onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/${ord.id}` : `/orders/${ord.id}/result`) })}
                 >
-                  <TableCell>
-                    От {formatDate(ord.date)}
+                  <TableCell className="flex-col justify-center items-start gap-0">
+                    <p>{formatDate(ord.date)}</p>
+                    <p className="opacity-50">{ord.time}</p>
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
                     {ord.customer.id ? (
@@ -61,9 +62,6 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                     ) : (
                       <div className="flex items-center justify-center flex-1 w-full">-</div>
                     )}
-                  </TableCell>
-                  <TableCell>
-                    {formatPrice(ord.subtotal ?? ord.total)} ₽
                   </TableCell>
                   <TableCell>
                     {ord.payment_method ? (
@@ -94,6 +92,9 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                           );
                         })()}
                     </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {formatPrice(ord.subtotal ?? ord.total)} ₽
                   </TableCell>
                   <TableCellActions>
                     <Link to={`${ord.id}`}>

@@ -39,8 +39,7 @@ import { Route as AppLayoutBusinessLocationsIndexRouteImport } from './app/route
 import { Route as AppLayoutBookingsCreateIndexRouteImport } from './app/routes/_app/_layout/bookings/create/index'
 import { Route as AppLayoutBookingsBooking_idIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/index'
 import { Route as AppLayoutEmployeesScheduleEmployee_idRouteImport } from './app/routes/_app/_layout/employees/schedule/$employee_id'
-import { Route as AppLayoutOrdersOrder_idResultIndexRouteImport } from './app/routes/_app/_layout/orders/$order_id/result/index'
-import { Route as AppLayoutOrdersOrder_idCheckoutIndexRouteImport } from './app/routes/_app/_layout/orders/$order_id/checkout/index'
+import { Route as AppLayoutOrdersCheckoutSellIndexRouteImport } from './app/routes/_app/_layout/orders/checkout/sell/index'
 import { Route as AppLayoutEmployeesUsersCreateIndexRouteImport } from './app/routes/_app/_layout/employees/users/create/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/index'
 import { Route as AppLayoutCustomersCustomer_idDocumentsIndexRouteImport } from './app/routes/_app/_layout/customers/$customer_id/documents/index'
@@ -244,16 +243,10 @@ const AppLayoutEmployeesScheduleEmployee_idRoute =
     path: '/employees/schedule/$employee_id',
     getParentRoute: () => AppLayoutRoute,
   } as any)
-const AppLayoutOrdersOrder_idResultIndexRoute =
-  AppLayoutOrdersOrder_idResultIndexRouteImport.update({
-    id: '/orders/$order_id/result/',
-    path: '/orders/$order_id/result/',
-    getParentRoute: () => AppLayoutRoute,
-  } as any)
-const AppLayoutOrdersOrder_idCheckoutIndexRoute =
-  AppLayoutOrdersOrder_idCheckoutIndexRouteImport.update({
-    id: '/orders/$order_id/checkout/',
-    path: '/orders/$order_id/checkout/',
+const AppLayoutOrdersCheckoutSellIndexRoute =
+  AppLayoutOrdersCheckoutSellIndexRouteImport.update({
+    id: '/orders/checkout/sell/',
+    path: '/orders/checkout/sell/',
     getParentRoute: () => AppLayoutRoute,
   } as any)
 const AppLayoutEmployeesUsersCreateIndexRoute =
@@ -417,8 +410,7 @@ export interface FileRoutesByFullPath {
   '/customers/$customer_id/documents/': typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   '/employees/users/$employee_id/': typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   '/employees/users/create/': typeof AppLayoutEmployeesUsersCreateIndexRoute
-  '/orders/$order_id/checkout/': typeof AppLayoutOrdersOrder_idCheckoutIndexRoute
-  '/orders/$order_id/result/': typeof AppLayoutOrdersOrder_idResultIndexRoute
+  '/orders/checkout/sell/': typeof AppLayoutOrdersCheckoutSellIndexRoute
   '/business/locations/$location_id/': typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   '/business/services/$service_id/edit/': typeof AppLayoutBusinessServicesService_idEditIndexRoute
   '/business/services/$service_id/employees/': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -470,8 +462,7 @@ export interface FileRoutesByTo {
   '/customers/$customer_id/documents': typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   '/employees/users/$employee_id': typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   '/employees/users/create': typeof AppLayoutEmployeesUsersCreateIndexRoute
-  '/orders/$order_id/checkout': typeof AppLayoutOrdersOrder_idCheckoutIndexRoute
-  '/orders/$order_id/result': typeof AppLayoutOrdersOrder_idResultIndexRoute
+  '/orders/checkout/sell': typeof AppLayoutOrdersCheckoutSellIndexRoute
   '/business/locations/$location_id': typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   '/business/services/$service_id/edit': typeof AppLayoutBusinessServicesService_idEditIndexRoute
   '/business/services/$service_id/employees': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -526,8 +517,7 @@ export interface FileRoutesById {
   '/_app/_layout/customers/$customer_id/documents/': typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   '/_app/_layout/employees/users/$employee_id/': typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   '/_app/_layout/employees/users/create/': typeof AppLayoutEmployeesUsersCreateIndexRoute
-  '/_app/_layout/orders/$order_id/checkout/': typeof AppLayoutOrdersOrder_idCheckoutIndexRoute
-  '/_app/_layout/orders/$order_id/result/': typeof AppLayoutOrdersOrder_idResultIndexRoute
+  '/_app/_layout/orders/checkout/sell/': typeof AppLayoutOrdersCheckoutSellIndexRoute
   '/_app/_layout/business/locations/_location/$location_id/': typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   '/_app/_layout/business/services/$service_id/edit/': typeof AppLayoutBusinessServicesService_idEditIndexRoute
   '/_app/_layout/business/services/$service_id/employees/': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -581,8 +571,7 @@ export interface FileRouteTypes {
     | '/customers/$customer_id/documents/'
     | '/employees/users/$employee_id/'
     | '/employees/users/create/'
-    | '/orders/$order_id/checkout/'
-    | '/orders/$order_id/result/'
+    | '/orders/checkout/sell/'
     | '/business/locations/$location_id/'
     | '/business/services/$service_id/edit/'
     | '/business/services/$service_id/employees/'
@@ -634,8 +623,7 @@ export interface FileRouteTypes {
     | '/customers/$customer_id/documents'
     | '/employees/users/$employee_id'
     | '/employees/users/create'
-    | '/orders/$order_id/checkout'
-    | '/orders/$order_id/result'
+    | '/orders/checkout/sell'
     | '/business/locations/$location_id'
     | '/business/services/$service_id/edit'
     | '/business/services/$service_id/employees'
@@ -689,8 +677,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/customers/$customer_id/documents/'
     | '/_app/_layout/employees/users/$employee_id/'
     | '/_app/_layout/employees/users/create/'
-    | '/_app/_layout/orders/$order_id/checkout/'
-    | '/_app/_layout/orders/$order_id/result/'
+    | '/_app/_layout/orders/checkout/sell/'
     | '/_app/_layout/business/locations/_location/$location_id/'
     | '/_app/_layout/business/services/$service_id/edit/'
     | '/_app/_layout/business/services/$service_id/employees/'
@@ -928,18 +915,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutEmployeesScheduleEmployee_idRouteImport
       parentRoute: typeof AppLayoutRoute
     }
-    '/_app/_layout/orders/$order_id/result/': {
-      id: '/_app/_layout/orders/$order_id/result/'
-      path: '/orders/$order_id/result'
-      fullPath: '/orders/$order_id/result/'
-      preLoaderRoute: typeof AppLayoutOrdersOrder_idResultIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
-    }
-    '/_app/_layout/orders/$order_id/checkout/': {
-      id: '/_app/_layout/orders/$order_id/checkout/'
-      path: '/orders/$order_id/checkout'
-      fullPath: '/orders/$order_id/checkout/'
-      preLoaderRoute: typeof AppLayoutOrdersOrder_idCheckoutIndexRouteImport
+    '/_app/_layout/orders/checkout/sell/': {
+      id: '/_app/_layout/orders/checkout/sell/'
+      path: '/orders/checkout/sell'
+      fullPath: '/orders/checkout/sell/'
+      preLoaderRoute: typeof AppLayoutOrdersCheckoutSellIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
     '/_app/_layout/employees/users/create/': {
@@ -1119,8 +1099,7 @@ interface AppLayoutRouteChildren {
   AppLayoutCustomersCustomer_idDocumentsIndexRoute: typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   AppLayoutEmployeesUsersEmployee_idIndexRoute: typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   AppLayoutEmployeesUsersCreateIndexRoute: typeof AppLayoutEmployeesUsersCreateIndexRoute
-  AppLayoutOrdersOrder_idCheckoutIndexRoute: typeof AppLayoutOrdersOrder_idCheckoutIndexRoute
-  AppLayoutOrdersOrder_idResultIndexRoute: typeof AppLayoutOrdersOrder_idResultIndexRoute
+  AppLayoutOrdersCheckoutSellIndexRoute: typeof AppLayoutOrdersCheckoutSellIndexRoute
   AppLayoutBusinessLocationsLocationLocation_idIndexRoute: typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   AppLayoutBusinessServicesService_idEditIndexRoute: typeof AppLayoutBusinessServicesService_idEditIndexRoute
   AppLayoutBusinessServicesService_idEmployeesIndexRoute: typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -1179,10 +1158,7 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
     AppLayoutEmployeesUsersEmployee_idIndexRoute,
   AppLayoutEmployeesUsersCreateIndexRoute:
     AppLayoutEmployeesUsersCreateIndexRoute,
-  AppLayoutOrdersOrder_idCheckoutIndexRoute:
-    AppLayoutOrdersOrder_idCheckoutIndexRoute,
-  AppLayoutOrdersOrder_idResultIndexRoute:
-    AppLayoutOrdersOrder_idResultIndexRoute,
+  AppLayoutOrdersCheckoutSellIndexRoute: AppLayoutOrdersCheckoutSellIndexRoute,
   AppLayoutBusinessLocationsLocationLocation_idIndexRoute:
     AppLayoutBusinessLocationsLocationLocation_idIndexRoute,
   AppLayoutBusinessServicesService_idEditIndexRoute:

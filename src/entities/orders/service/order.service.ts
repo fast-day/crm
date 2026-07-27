@@ -31,4 +31,5 @@ export const orderApi = API.injectEndpoints({
 export const {
   useGetOrdersQuery,
   useGetOrderQuery,
+  useLazyGetOrderQuery,
 } = orderApi;

@@ -13,7 +13,7 @@ export const BookingDetail = () => {
     <>
       <PageHeader>
         <div>
-          <PageHeaderTitle>Бронирование № {data?.tag}</PageHeaderTitle>
+          <PageHeaderTitle>Запись № {data?.tag}</PageHeaderTitle>
         </div>
         <PageHeaderActions>
           <PageHeaderBackAction />

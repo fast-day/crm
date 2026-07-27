@@ -16,3 +16,4 @@ export { BookingSelectServiceCard } from './ui/booking-select-service-card';
 export { BookingSelectCustomerInfo } from './ui/booking-select-customer-info';
 export { BookingTotalPrice } from './ui/booking-total-price';
 export { BookingServiceCard } from './ui/booking-service-card';
+export { BookingCurrentDate } from './ui/booking-current-date';

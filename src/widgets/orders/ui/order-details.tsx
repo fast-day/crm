@@ -4,7 +4,6 @@ import { Avatar } from "@/entities/user";
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/ui";
 import { formatPrice } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
-import React from "react";
 
 interface IOrderDetailsProps {
   order: IOrderDetail;
@@ -40,16 +39,13 @@ export const OrderDetails = ({ order }: IOrderDetailsProps) => {
 
                 <div className="grid gap-2.5">
                   {order.bookings[0].booking_services.length > 0 ? order.bookings[0].booking_services.map((service, idx) => (
-                    <React.Fragment key={idx}>
-                      <BookingServiceCard
-                        service={service}
-                        employee={service.user}
-                        start_time={service.booking_service_start_time}
-                        end_time={service.booking_service_end_time}
-                      />
-                    
-                      {idx !== order.bookings[0].booking_services.length - 1 && <div className="w-full h-px bg-border" />}
-                    </React.Fragment>
+                    <BookingServiceCard
+                      key={idx}
+                      service={service}
+                      employee={service.user}
+                      start_time={service.booking_service_start_time}
+                      end_time={service.booking_service_end_time}
+                    />
                   )) : <div className="text-sm opacity-50">Нет выбранных услуг.</div>}
                 </div>
               </div>

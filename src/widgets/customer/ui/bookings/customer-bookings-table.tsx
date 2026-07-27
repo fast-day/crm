@@ -8,6 +8,7 @@ import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
+import { CustomerBookingSort } from "./customer-booking-sort";
 
 interface ICustomerBookingsTableProps {
   bookings: ICustomerBooking[];
@@ -16,11 +17,13 @@ interface ICustomerBookingsTableProps {
   query: Omit<IBookingQuery, "customer">;
 }
 
-export const CustomerBookingsTable = ({ bookings, meta, isFetching }: ICustomerBookingsTableProps) => {
+export const CustomerBookingsTable = ({ bookings, meta, isFetching, query }: ICustomerBookingsTableProps) => {
   const navigate = useNavigate();
 
   return (
     <div className="mt-8 space-y-6">
+
+      <CustomerBookingSort {...query} />
 
       <Table>
         <TableHeader>
@@ -39,7 +42,7 @@ export const CustomerBookingsTable = ({ bookings, meta, isFetching }: ICustomerB
           {bookings?.length ? 
             bookings.map((booking, index) => (
               <React.Fragment key={index}>
-                <TableRow onClick={() => navigate({ to: `${booking.id}` })}>
+                <TableRow onClick={() => navigate({ to: `/bookings/${booking.id}` })}>
                   <TableCell>
                     <div>
                       <p className="font-semibold">{formatDate(booking.date)}</p>

@@ -24,6 +24,7 @@ export interface IOrder {
   subtotal: number;
   total: number;
   date: string;
+  time: string;
   payment_method: PaymentMethodType;
   is_payment: boolean;
   booking_ids: string[];

@@ -81,6 +81,7 @@ export const bookingApi = API.injectEndpoints({
 export const {
   useGetBookingsQuery,
   useGetBookingQuery,
+  useLazyGetBookingQuery,
   useCreateBookingMutation,
   useConfirmBookingMutation,
   useCompleteBookingMutation,

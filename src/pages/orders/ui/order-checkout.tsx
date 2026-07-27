@@ -1,30 +1,42 @@
+import { useGetBookingQuery } from "@/entities/booking";
 import { useGetOrderQuery } from "@/entities/orders";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { OrderNotFound } from "@/widgets/orders";
+import { BookingNotFound } from "@/widgets/booking";
+import { AppLoading } from "@/widgets/loading";
+import { OrderCheckoutSell, OrderNotFound } from "@/widgets/orders";
 
 interface OrderCheckoutProps {
-  order_id: string;
+  booking_id: string;
+  order_id?: string;
 }
 
-export const OrderCheckout = ({ order_id }: OrderCheckoutProps) => {
-  const { data, isLoading, isError } = useGetOrderQuery({ order_id });
-  
-  if (isLoading || !data) return null;
+export const OrderCheckout = ({ booking_id, order_id }: OrderCheckoutProps) => {
+  const { data: bookingData, isError: bookingError, isLoading: bookingLoading } = useGetBookingQuery({ booking_id });
+  const { data: orderData, isError: orderError, isLoading: orderLoading } = useGetOrderQuery(
+    { order_id: order_id! },
+    { skip: !order_id },
+  );
+
+  const isLoading = bookingLoading || (Boolean(order_id) && orderLoading);
+  const hasError = bookingError || orderError;
 
   return (
     <>
       <PageHeader>
         <div>
-          <PageHeaderTitle>Заказ № {data?.tag}</PageHeaderTitle>
+          <PageHeaderTitle>{orderData ? `Заказ № ${orderData.tag}` : "Оформление заказа"}</PageHeaderTitle>
         </div>
         <PageHeaderActions>
           <PageHeaderBackAction />
         </PageHeaderActions>
       </PageHeader>
 
-      {isError && <OrderNotFound order_id={order_id} />}
-
-      {/* <OrderCheckoutContent booking={data} /> */}
+      {isLoading && <AppLoading />}
+      {!isLoading && bookingError && <BookingNotFound />}
+      {!isLoading && !bookingError && orderError && <OrderNotFound />}
+      {!isLoading && !hasError && bookingData && (
+        <OrderCheckoutSell booking={bookingData} order={orderData} />
+      )}
     </>
   )
 }

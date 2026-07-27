@@ -5,7 +5,6 @@ import { TrashIcon } from "@/shared/icons";
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Textarea } from "@/shared/ui";
 import { cn, formatPrice, getErrorMessage } from "@/shared/utils";
 import { Link, useNavigate } from "@tanstack/react-router";
-import React from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -151,16 +150,13 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
 
                 <div className="grid gap-2.5">
                   {booking.booking_services.length > 0 ? booking.booking_services.map((service, idx) => (
-                    <React.Fragment key={idx}>
-                      <BookingServiceCard
-                        service={service}
-                        employee={service.user}
-                        start_time={service.booking_service_start_time}
-                        end_time={service.booking_service_end_time}
-                      />
-                    
-                      {idx !== booking.booking_services.length - 1 && <div className="w-full h-px bg-border" />}
-                    </React.Fragment>
+                    <BookingServiceCard
+                      key={idx}
+                      service={service}
+                      employee={service.user}
+                      start_time={service.booking_service_start_time}
+                      end_time={service.booking_service_end_time}
+                    />
                   )) : <div className="text-sm opacity-50">Нет выбранных услуг.</div>}
                 </div>
               </div>
