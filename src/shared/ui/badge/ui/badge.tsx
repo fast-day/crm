@@ -21,11 +21,11 @@ const badgeVariants = cva(
 
         count: "w-6 h-6 rounded-lg bg-border flex items-center justify-center border-transparent text-primary",
 
-        open: "bg-primary text-white border-none px-4 py-1.5",
-        pending: "bg-orange border-none px-4 py-1.5",
-        closed: "bg-red border-none px-4 py-1.5",
-        paid: "bg-green text-white border-none px-4 py-1.5",
-        unpaid: "bg-blue text-white border-none px-4 py-1.5",
+        open_icon: "bg-primary text-white border-none px-4 py-1.5",
+        pending_icon: "bg-orange border-none px-4 py-1.5",
+        closed_icon: "bg-red border-none px-4 py-1.5 flex items-center justify-center",
+        paid_icon: "bg-green text-white border-none px-4 py-1.5 flex items-center justify-center",
+        unpaid_icon: "bg-blue/30 text-white border-none px-4 py-1.5 flex items-center justify-center relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-14 before:h-14 before:bg-blue before:rounded-full before:pointer-events-none",
 
         new_b: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-primary text-white",
         pending_b: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-orange text-white",
@@ -38,9 +38,36 @@ const badgeVariants = cva(
         cash_p: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-green/30 text-green",
         credit_card_p: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-blue/30 text-blue",
       },
+      status: {
+        none: "",
+        open: "",
+        pending: "",
+        closed: "",
+        paid: "",
+        unpaid: ""
+      },
+      fill: {
+        none: "",
+        soft: "px-2 py-0.5 text-xss! border-none rounded-lg",
+        solid: "px-4 py-1.5 border-none"
+      }
     },
+    compoundVariants: [
+      { status: "open", fill: "soft", class: "bg-primary/30 text-primary" },
+      { status: "pending", fill: "soft", class: "bg-orange/30 text-orange" },
+      { status: "closed", fill: "soft", class: "bg-red/30 text-red" },
+      { status: "paid", fill: "soft", class: "bg-green/30 text-green" },
+      { status: "unpaid", fill: "soft", class: "bg-blue/30 text-blue" },
+
+      { status: "open", fill: "solid", class: "bg-primary text-white" },
+      { status: "pending", fill: "solid", class: "bg-orange text-white" },
+      { status: "closed", fill: "solid", class: "bg-red text-white" },
+      { status: "paid", fill: "solid", class: "bg-green text-white" },
+      { status: "unpaid", fill: "solid", class: "bg-blue text-white" },
+    ],
     defaultVariants: {
-      variant: "default",
+      status: "none",
+      fill: "none"
     },
   }
 )
@@ -49,12 +76,12 @@ type BadgeProps = React.ComponentProps<"span"> & VariantProps<typeof badgeVarian
   asChild?: boolean
 }
 
-function Badge ({ className, variant, asChild, ...props }: BadgeProps) {
+function Badge ({ className, variant, status, fill, asChild, ...props }: BadgeProps) {
   const Span = asChild ? Slot : "span"
   return (
     <Span
       data-ui="badge"
-      className={cn(badgeVariants({ variant, className }), className)}
+      className={cn(badgeVariants({ variant, status, fill, className }), className)}
       {...props}
     />
   )

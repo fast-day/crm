@@ -43,7 +43,8 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
             orders.map((ord, index) => (
               <React.Fragment key={index}>
                 <TableRow
-                  onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/checkout/sell?booking_id=${ord.booking_ids}&order_id=${ord.id}` : `/orders/${ord.id}/result`) })}
+                  // onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/checkout/sell?booking_id=${ord.booking_ids}&order_id=${ord.id}` : `/orders/${ord.id}`) })}
+                  onClick={() => navigate({ to: `/orders/${ord.id}` })}
                 >
                   <TableCell className="flex-col justify-center items-start gap-0">
                     <p>{formatDate(ord.date)}</p>
@@ -79,7 +80,7 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                     ) : "-"}
                   </TableCell>
                   <TableCell>
-                    <Badge variant={`${ord.status}`} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
+                    <Badge status={ord.status} fill={"solid"} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
                         {(() => {
                           const status = ORDER_STATUS[ord.status];
                           const Icon = status.icon;

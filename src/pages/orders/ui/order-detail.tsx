@@ -1,5 +1,5 @@
 import { useGetOrderQuery } from "@/entities/orders";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction } from "@/shared/ui";
 import { AppLoading } from "@/widgets/loading";
 import { OrderDetails, OrderNotFound } from "@/widgets/orders";
 
@@ -15,9 +15,6 @@ export const OrderDetail = ({ order_id }: OrderDetailProps) => {
     <>
     
       <PageHeader>
-        <div>
-          <PageHeaderTitle>Платеж № {data?.tag}</PageHeaderTitle>
-        </div>
         <PageHeaderActions>
           <PageHeaderBackAction />
         </PageHeaderActions>

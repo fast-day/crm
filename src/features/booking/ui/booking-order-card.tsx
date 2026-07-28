@@ -13,7 +13,7 @@ export const BookingOrderCard = ({ order }: IBookingOrderCardProps) => {
     <Card className="bg-white mb-10">
       <CardContent className="p-5 space-y-5">
         <div className="flex items-center justify-between gap-2.5">
-          <Badge variant={`${order.status}`} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
+          <Badge status={order.status} fill={"solid"} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
               {(() => {
                 const status = ORDER_STATUS[order.status];
                 const Icon = status.icon;

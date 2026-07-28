@@ -56,7 +56,12 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
                   </Button>
                 </Link> */}
                 <Link to={`/orders/checkout/sell?booking_id=${booking.id}${booking.order ? `&order_id=${booking.order.id}` : ``}`} className="w-full">
-                  <Button type={"button"} size={"size_60"} iconRight={<ChevronIcon width={20} height={20} />} className="w-full">Продолжить</Button>
+                  <Button
+                    type={"button"}
+                    size={"size_60"}
+                    className={"w-full"}
+                    iconRight={<ChevronIcon width={20} height={20} />}
+                  >Продолжить</Button>
                 </Link>
               </div>
             )}
