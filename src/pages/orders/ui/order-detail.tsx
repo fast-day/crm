@@ -24,7 +24,7 @@ export const OrderDetail = ({ order_id }: OrderDetailProps) => {
       </PageHeader>
 
       {isLoading && <AppLoading/>}
-      {isError && <OrderNotFound order_id={order_id} />}
+      {isError && <OrderNotFound />}
       {data && <OrderDetails order={data} />}
     </>
   )

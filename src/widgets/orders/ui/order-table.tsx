@@ -43,8 +43,7 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
             orders.map((ord, index) => (
               <React.Fragment key={index}>
                 <TableRow
-                  // onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/bookings/${ord.booking_ids[0]}/checkout` : `/bookings/${ord.booking_ids[0]}/result`) })}
-                  onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/${ord.id}` : `/orders/${ord.id}/result`) })}
+                  onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/checkout/sell?booking_id=${ord.booking_ids}&order_id=${ord.id}` : `/orders/${ord.id}/result`) })}
                 >
                   <TableCell className="flex-col justify-center items-start gap-0">
                     <p>{formatDate(ord.date)}</p>

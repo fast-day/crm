@@ -1,12 +1,13 @@
 import { BookingServiceCard, type IBookingDetail } from "@/entities/booking"
 import type { IOrderDetail } from "@/entities/orders";
 import { OrderSelectPaymentMethod } from "./order-select-payment-method";
-import { useState } from "react";
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/ui";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Avatar } from "@/entities/user";
 import { formatPrice } from "@/shared/utils";
 import { OrderPaymentResult } from "./order-payment-result";
+import { useOrderSell } from "@/features/order";
+import { useEffect } from "react";
 
 interface IOrderCheckoutSellProps {
   booking: IBookingDetail;
@@ -14,11 +15,15 @@ interface IOrderCheckoutSellProps {
 }
 
 export const OrderCheckoutSell = ({ booking, order }: IOrderCheckoutSellProps) => {
-  const [payment, setPayment] = useState<PaymentMethodType | null>(null);
+  const navigate = useNavigate();
+  const { handleSave, handlePay, payment, selectPayment, isConfirming, IsCompleting } = useOrderSell();
 
-  const selectPayment = (method: PaymentMethodType) => {
-    setPayment(method);
-  }
+  useEffect(() => {
+    if (booking.order?.status === "paid") {
+      navigate({ to: `/orders/${booking.order.id}`, replace: true });
+      return;
+    }
+  }, [booking.order?.status]);
 
   return (
     <div className="mt-8 h-full">
@@ -31,10 +36,9 @@ export const OrderCheckoutSell = ({ booking, order }: IOrderCheckoutSellProps) =
             <OrderPaymentResult
               payment={"online"}
               subtotal={booking.order ? booking.order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0)}
-              cancel={() => setPayment(null)}
+              cancel={() => selectPayment(null)}
             />
-          )
-          }
+          )}
         </div>
 
         <Card className="flex flex-col">
@@ -81,10 +85,23 @@ export const OrderCheckoutSell = ({ booking, order }: IOrderCheckoutSellProps) =
                 <span className="font-bold text-lg">{formatPrice(order?.subtotal ? order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} руб.</span>
               </div>
               <div className="flex gap-3">
-                <Button type={"button"} isLoading={false} disabled={false} onClick={() => {}} size={"size_60"} variant={"white"} className="p-5">
-                  Сохранить
-                </Button>
-                <Button type={"button"} isLoading={false} disabled={false} onClick={() => {}} size={"size_60"} className="w-full">Оплатить</Button>
+                <Button
+                  type={"button"}
+                  size={"size_60"}
+                  variant={"white"}
+                  className={"p-5"}
+                  isLoading={isConfirming}
+                  disabled={isConfirming}
+                  onClick={() => handleSave(booking.id)}
+                >Сохранить</Button>
+                <Button
+                  type={"button"}
+                  size={"size_60"}
+                  className={"w-full"}
+                  isLoading={IsCompleting}
+                  disabled={IsCompleting}
+                  onClick={() => handlePay(booking.id)}
+                >Оплатить</Button>
               </div>
             </div>
           </CardContent>

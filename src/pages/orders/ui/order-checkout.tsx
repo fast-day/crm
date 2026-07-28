@@ -1,9 +1,11 @@
 import { useGetBookingQuery } from "@/entities/booking";
+import { dialogSelector } from "@/entities/dialog";
 import { useGetOrderQuery } from "@/entities/orders";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { BookingNotFound } from "@/widgets/booking";
 import { AppLoading } from "@/widgets/loading";
-import { OrderCheckoutSell, OrderNotFound } from "@/widgets/orders";
+import { CancelPaymentMethodDialog, OrderCheckoutSell, OrderNotFound, SelectPaymentMethodDialog } from "@/widgets/orders";
+import { useSelector } from "react-redux";
 
 interface OrderCheckoutProps {
   booking_id: string;
@@ -11,11 +13,15 @@ interface OrderCheckoutProps {
 }
 
 export const OrderCheckout = ({ booking_id, order_id }: OrderCheckoutProps) => {
+  const { dialog } = useSelector(dialogSelector);
+
   const { data: bookingData, isError: bookingError, isLoading: bookingLoading } = useGetBookingQuery({ booking_id });
   const { data: orderData, isError: orderError, isLoading: orderLoading } = useGetOrderQuery(
     { order_id: order_id! },
     { skip: !order_id },
   );
+
+  console.log('update')
 
   const isLoading = bookingLoading || (Boolean(order_id) && orderLoading);
   const hasError = bookingError || orderError;
@@ -37,6 +43,8 @@ export const OrderCheckout = ({ booking_id, order_id }: OrderCheckoutProps) => {
       {!isLoading && !hasError && bookingData && (
         <OrderCheckoutSell booking={bookingData} order={orderData} />
       )}
+      {dialog.name === "cancel_payment_method" && <CancelPaymentMethodDialog />}
+      {dialog.name === "select_payment_method" && <SelectPaymentMethodDialog />}
     </>
   )
 }

@@ -164,3 +164,17 @@ export interface IBookingConfirmCredentials {
     payment_method?: PaymentMethodType;
   }
 }
+
+export interface IBookingConfirmResult {
+  id: string;
+  status: BookingStatusType;
+  tag: string;
+  order: IBookingOrder;
+}
+
+export interface IBookingCompleteResult {
+  booking_status: BookingStatusType;
+  booking_id: string;
+  order_id: string;
+  order: IBookingOrder;
+}
