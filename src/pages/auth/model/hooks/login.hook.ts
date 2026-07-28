@@ -24,7 +24,7 @@ export const useLogin = (): LoginReturnProps => {
 
       loginState(access_token, refresh_token);
 
-      const to = location.search.from || "/";
+      const to = location.search.from || "/bookings?limit=20&sort=newest&status=new";
       navigate({ to: to, replace: true });
     }
     catch (err) {

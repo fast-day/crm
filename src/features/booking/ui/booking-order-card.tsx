@@ -27,7 +27,7 @@ export const BookingOrderCard = ({ order }: IBookingOrderCardProps) => {
           </Badge>
           <div className="font-bold">{formatPrice(order.subtotal)} ₽</div>
         </div>
-        <Link to="result">
+        <Link to={`/orders/${order.id}`}>
           <Button variant={"accent"} size={"size_48"} className="w-full bg-primary">Заказ № {order.tag}</Button>
         </Link>
       </CardContent>

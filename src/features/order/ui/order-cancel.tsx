@@ -21,6 +21,6 @@ export const OrderCancel = ({ order_id }: IOrderCancelProps) => {
       disabled={false}
       onClick={handleCancel}
       iconLeft={<CancelOrderIcon width={20} height={20} />}
-    >Отменить платеж</Button>
+    >Отменить заказ</Button>
   )
 }

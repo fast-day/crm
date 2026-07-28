@@ -6,21 +6,19 @@ import { accountSelector } from "@/entities/account"
 import { Controller } from "react-hook-form"
 import { PaletteIcon, PaperClipIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils"
-// import SvgUsersGroup from "@/shared/icons/UsersGroup"
 import SvgCustomer from "@/shared/icons/Customer"
 import SvgCalendar from "@/shared/icons/Calendar"
 import SvgBook from "@/shared/icons/Book"
-import SvgDashboard from "@/shared/icons/Dashboard"
 import { usePermissions } from "@/features/auth/model/hooks/permission.hook"
 import { type PageType } from "@/entities/settings"
 import Cast from "@/shared/icons/Cast"
 
 const MENU = [
-  {
-    type: "DASHBOARD",
-    label: "Дашбоард",
-    icon: <SvgDashboard />,
-  },
+  // {
+  //   type: "DASHBOARD",
+  //   label: "Дашбоард",
+  //   icon: <SvgDashboard />,
+  // },
   {
     type: "BOOKINGS",
     label: "Записи",

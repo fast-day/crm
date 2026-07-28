@@ -38,7 +38,7 @@ export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }:
           {(status === "paid" || status === "closed") && <OrderNew />}
           {(status === "unpaid" || status === "open" || status === "pending") && <OrderCheckout booking_id={bookings[0].id} order_id={order_id} />}
           {(status === "paid" || status === "unpaid" || status === "open" || status === "pending") && <OrderBookingView booking_id={bookings[0].id} />}
-          {(status === "paid" || status === "unpaid" || status === "open" || status === "pending") && <OrderCancel order_id={order_id} />}
+          {(status === "unpaid" || status === "open" || status === "pending") && <OrderCancel order_id={order_id} />}
 
         </div>
       </CardContent>
