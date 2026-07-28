@@ -8,6 +8,9 @@ export { BookingChangeServicePrice } from './ui/booking-change-service-price';
 export { BookingSelectEmployee } from './ui/booking-select-employee';
 export { BookingChangeTime } from './ui/booking-change-time';
 export { BookingSelectDate } from './ui/booking-select-date';
+export { BookingOrderCard } from './ui/booking-order-card';
+export { BookingStatusSort } from './ui/booking-status-sort';
+export { BookingAddServiceActions } from './ui/booking-add-service-actions';
 
 // HOOKS
 export { useBookingCreate } from './model/hooks/booking-create.hook';

@@ -7,3 +7,6 @@ export { Customer } from './ui/customer';
 export { CustomerDocuments } from './ui/documents/customer-documents';
 export { CustomerDocument } from './ui/documents/customer-document';
 export { CustomerDocumentCreate } from './ui/documents/customer-document-create';
+
+// UI BOOKINGS
+export { CustomerBookings } from './ui/bookings/customer-bookings';

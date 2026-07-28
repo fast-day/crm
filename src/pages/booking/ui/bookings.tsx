@@ -20,15 +20,19 @@ export const Bookings = ({ query }: BookingProps) => {
       location_id: location!.id,
     }
   );
-
-  const hasActiveFilters = !query.customer || !query.employee || !query.service || !query.sort || !query.status || !query.tag;
   
   const content = isLoading ? (
     <TableLoading rows={6} />
   ) : isError ? (
     <>error message</>
-  ) : isSuccess && (data.data.length > 0 && hasActiveFilters) ? (
-    <BookingTable bookings={data.data} isFetching={isFetching} profileId={account?.id} meta={data.meta} query={query} />
+  ) : isSuccess && account?.has_bookings ? (
+    <BookingTable
+      bookings={data.data}
+      isFetching={isFetching}
+      profileId={account?.id}
+      meta={data.meta}
+      query={query}
+    />
   ) : (
     <BookingEmpty />
   );

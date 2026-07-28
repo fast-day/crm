@@ -14,3 +14,6 @@ export { EditorHead } from './ui/document/editor/editor-head';
 export { EditorActions } from './ui/document/editor/editor-actions';
 export { CustomerDocumentNotFound } from './ui/document/customer-document-not-found';
 export { CustomerDocumentsNotFound } from './ui/document/customer-documents-not-found';
+
+// UI BOOKINGS
+export { CustomerBookingsTable } from './ui/bookings/customer-bookings-table';

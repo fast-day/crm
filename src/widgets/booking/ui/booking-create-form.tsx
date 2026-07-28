@@ -24,7 +24,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
     // if (Object.keys(payload).length > 0) dispatch(setBookingCreate(payload));
   // }, [date, location]);
 
-  console.log("render", booked);
+  // console.log("render", booked);
 
   return (
     <div className="mt-8 relative flex gap-8 h-full">
@@ -41,7 +41,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
 
                 <div className="space-y-6">
                   {booked && booked?.length > 0 && (
-                    <div className="grid gap-4">
+                    <div className="grid gap-3">
                       {booked.map((book, idx) => (
                         <BookingSelectServiceCard
                           key={idx}
@@ -97,42 +97,6 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
           <div className="flex-1 space-y-6">
 
             <BookingSelectDate date={current_date} />
-
-
-            {/* SELECT DATE */}
-            {/* 
-              ЭТО ВООБЩЕ НЕ ТО. ТУТ МНЕ НАДО СНАЧАЛА ДЕЛАТЬ ЗАПРОС НА ПОЛУЧЕНИЕ ГРАФИКА РАБОТЫ
-              В ВЫБРАННЫЙ ДЕНЬ И УЖЕ ВЫБИРАТЬ ВРЕМЯ - ВО СКОЛЬКО ЗАПИСАТЬСЯ
-            */}
-            {/* {!booking_create?.employee?.schedule && (
-              <div>
-                <div className="grid grid-cols-3 gap-2.5">
-                  <BookingChangeTime schedule={booking_create.employee.schedule} current_time={booking_create?.time} />
-                </div>
-              </div>
-            )} */}
-
-            {/* !=====! УБРАТЬ ИНТЕРВАЛЫ !=====! */}
-            {/* {(booking_create?.employee && location && booking_create.service) && (
-              <BookingScheduleIntervals
-                user_id={booking_create.employee.profile_id}
-                location_id={location?.id}
-                date={booking_create.date ?? date}
-                current_time={booking_create.time}
-                duration={booking_create.service.duration}
-              />
-            )} */}
-
-            {/* <Select
-              value={booking_create?.payment_method}
-              placeholder={"Способ оплаты"}
-              options={[
-                { id: 1, value: "online", label: "Онлайн" },
-                { id: 2, value: "cash", label: "Наличные" },
-                { id: 3, value: "credit_card", label: "Банковская карта" },
-              ]}
-              onChange={(v) => dispatch(setBookingCreate({ payment_method: v as PaymentMethodType }))}
-            /> */}
 
           </div>
           

@@ -21,11 +21,11 @@ export const Employees = ({ query }: EmployeeProps) => {
     }
   );
 
-  const hasActiveFilters = !query.status || !query.role || !query.search;
+  // const hasActiveFilters = !query.status || !query.role || !query.search;
 
   const content = isLoading ? (
     <TableLoading rows={4} />
-  ) : isSuccess && (data.data.length > 0 && hasActiveFilters) ? (
+  ) : isSuccess && account?.has_employees ? (
     <EmployeeTable employees={data.data} meta={data.meta} isFetching={isFetching} profileId={account?.id} query={query} />
   ) : (
     <EmployeeEmpty />

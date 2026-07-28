@@ -1,20 +1,7 @@
 import { Route } from "@/app/routes/_app/_layout/bookings";
 import type { IBookingQuery } from "@/entities/booking"
-import { Button, Card, CardContent } from "@/shared/ui"
-import { cn } from "@/shared/utils";
+import { BookingStatusSort } from "@/features/booking";
 import { useNavigate } from "@tanstack/react-router";
-
-const variant = ["all", "new", "pending", "confirmed", "cancelled", "completed"] as BookingStatusType[] | "all"[];
-
-const BOOKING_STATUS: Record<BookingStatusType | "all", string> = {
-  "all": "Все",
-  "new": "Новые",
-  "pending": "В ожидании",
-  "confirmed": "Подтвержденные",
-  "completed": "Завершенные",
-  "cancelled": "Отмененные",
-  "expired": "Просрочен"
-};
 
 export const BookingSort = ({ status }: IBookingQuery) => {
   const navigate = useNavigate({ from: Route.fullPath });
@@ -28,22 +15,11 @@ export const BookingSort = ({ status }: IBookingQuery) => {
       }
     });
   }
+
   return (
     <div>
       <div className="flex items-center justify-between">
-        <Card>
-          <CardContent className="p-2 gap-2 flex">
-            {variant.map((v, idx) => (
-              <Button
-                key={idx}
-                variant={"action"}
-                className={cn((v === "all" ? !status : status === v) ? "bg-white" : "")}
-                size={"size_40"}
-                onClick={() => handleChange("status", v)}
-              >{BOOKING_STATUS[v]}</Button>
-            ))}
-          </CardContent>
-        </Card>
+        <BookingStatusSort status={status} handleChange={handleChange} />
 
         {/* <Search
           placeholder={"Поиск по имени и номеру телефона"}

@@ -1,12 +1,13 @@
+import type { CustomerProfile } from "@/entities/customers";
+
 export interface IDirectoryCustomer {
-  id: string;             // ID ПРОФИЛЯ КЛИЕНТА В КОМПАНИИ
-  profile_id: string;     // ID ПРОФИЛЯ КЛИЕНТА
-  first_name: string;
-  last_name: string;
-  full_name: string;
-  birthday: string | null;
-  avatar: string | null;
-  email: string;
-  phone: string;
+  id: string;
+  customer_attributes: CustomerProfile & {
+    profile_id: string;
+    birthday: string | null;
+    email: string | null;
+  };
+  visit_total: number;
   bookings_count: number;
+  bookings_total: number;
 }

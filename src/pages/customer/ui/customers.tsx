@@ -1,22 +1,25 @@
+import { accountSelector } from "@/entities/account";
 import { useGetCustomersQuery, type ICustomerQuery } from "@/entities/customers";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { CustomerEmpty, CustomerTable } from "@/widgets/customer";
 import { TableLoading } from "@/widgets/loading";
 import { Link } from "@tanstack/react-router";
+import { useSelector } from "react-redux";
 
 interface CustomerProps {
   query: ICustomerQuery & PaginationQuery;
 }
 
 export const Customers = ({ query }: CustomerProps) => {
+  const { account } = useSelector(accountSelector);
   const { isLoading, data, isSuccess, isFetching } = useGetCustomersQuery({ ...query });
 
-  const hasActiveFilters = !query.search || !query.sort;
+  // const hasActiveFilters = !query.search || !query.sort;
 
   const content = isLoading ? (
     <TableLoading rows={3} />
-  ) : isSuccess && (data.data.length > 0 && hasActiveFilters) ? (
+  ) : isSuccess && account?.has_customers ? (
     <CustomerTable customers={data.data} isFetching={isFetching} meta={data.meta} query={query} />
   ) : (
     <CustomerEmpty />

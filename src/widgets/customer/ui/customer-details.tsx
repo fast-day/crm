@@ -86,7 +86,7 @@ export const CustomerDetails = ({ customer }: CustomerDetailsProps) => {
           </div>
 
           <div className="flex flex-col col-span-2 space-y-6">
-            <Link to={"#"}>
+            <Link to={`bookings?full_name=${customer.profile.full_name}&limit=20`}>
               <Card>
                 <CardHeader>
                   <CardTitle>Записи</CardTitle>

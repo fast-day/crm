@@ -35,18 +35,16 @@ export const customerApi = API.injectEndpoints({
 
     /**
       ===== БРОНИРОВАНИЯ КЛИЕНТА =====
-            == В РАЗРАБОТКЕ ==
     **/
-    bookingCustomer: build.query<ICustomerBooking[], ICustomerDetailCredentials>({
-      query: ({ customer_id }) => ({
-        url: `/v1/customer/bookings/${customer_id}`,
+    bookingsCustomer: build.query<ApiResponse<ICustomerBooking>, ICustomerDetailCredentials>({
+      query: ({ customer_id, ...query }) => ({
+        url: buildQuery(`/v1/customer/bookings/${customer_id}`, { ...query }),
         method: "GET",
       }),
     }),
 
     /**
       ===== СОЗДАНИЕ КЛИЕНТА ОТ ЛИЦА КОМПАНИИ =====
-                == БЕТА ВЕРСИЯ ==
     **/
     createCustomer: build.mutation<ICustomers, ICustomerCreateCredentials>({
       query: (body) => ({
@@ -62,6 +60,6 @@ export const customerApi = API.injectEndpoints({
 export const {
   useGetCustomersQuery,
   useGetCustomerQuery,
-  useBookingCustomerQuery,
+  useBookingsCustomerQuery,
   useCreateCustomerMutation,
 } = customerApi;

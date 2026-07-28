@@ -6,15 +6,14 @@ import { useParams } from "@tanstack/react-router"
 
 export const BookingDetail = () => {
   const { booking_id } = useParams({ from: "/_app/_layout/bookings/$booking_id/" });
-
+  
   const { data, isLoading, isError } = useGetBookingQuery({ booking_id });
 
   return (
     <>
       <PageHeader>
         <div>
-          <PageHeaderTitle>Бронирование № {data?.tag}</PageHeaderTitle>
-          {data && <p className="text-sm leading-4">{data.location.name}</p>}
+          <PageHeaderTitle>Запись № {data?.tag}</PageHeaderTitle>
         </div>
         <PageHeaderActions>
           <PageHeaderBackAction />

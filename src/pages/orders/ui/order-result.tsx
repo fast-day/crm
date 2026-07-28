@@ -1,24 +1,18 @@
 import { useGetOrderQuery } from "@/entities/orders";
-import { Avatar } from "@/entities/user";
-import { ORDER_STATUS, ORDER_STATUS_TITLE } from "@/shared/constants/order-status.constant";
-import SvgCalendar from "@/shared/icons/Calendar";
-import { Badge, Button, Card, CardContent, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { formatPrice, minuteFormat } from "@/shared/utils";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { BookingNotFound } from "@/widgets/booking";
-import { Link } from "@tanstack/react-router";
-import { AlertCircle, CircleCheck, Clock, DollarSign } from "lucide-react";
 
 interface OrderResultProps {
   order_id: string;
 }
 
-const statusIcon: Record<OrderStatusType, React.ReactNode> = {
-  pending: <Clock />,
-  open:    <SvgCalendar />,
-  closed:  <AlertCircle />,
-  paid:    <CircleCheck />,
-  unpaid:  <DollarSign />,
-};
+// const statusIcon: Record<OrderStatusType, React.ReactNode> = {
+//   pending: <Clock />,
+//   open:    <SvgCalendar />,
+//   closed:  <AlertCircle />,
+//   paid:    <CircleCheck />,
+//   unpaid:  <DollarSign />,
+// };
 
 export const OrderResult = ({ order_id }: OrderResultProps) => {
   const { data, isLoading, isError } = useGetOrderQuery({ order_id });
@@ -38,7 +32,7 @@ export const OrderResult = ({ order_id }: OrderResultProps) => {
 
       {isError && <BookingNotFound />}
 
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
 
         <Card className="max-w-135 w-full mx-auto">
           <CardContent className="space-y-8">
@@ -132,7 +126,7 @@ export const OrderResult = ({ order_id }: OrderResultProps) => {
           </CardContent>
         </Card>
 
-      </div>
+      </div> */}
     </>
   )
 }

@@ -31,6 +31,15 @@ function formatDate(date: string): string {
   return `${parseInt(day, 10)} ${months[parseInt(month, 10) -1]}, ${year}`;
 }
 
+function formatTimeRange(start: string, end: string, timezone: string) {
+  const formatter = new Intl.DateTimeFormat("ru-RU", {
+    timeZone: timezone,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return `${formatter.format(new Date(start))}-${formatter.format(new Date(end))}`;
+}
+
 function formatDateToString(date: Date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -67,4 +76,4 @@ function formatDateWeek(date?: Date | string): string {
   return `${dayOfWeek}, ${dayNum} ${monthName}, ${year}г.`;
 }
 
-export { formatDateTime, formatDate, formatDateWeek, formatDateToString };
+export { formatDateTime, formatDate, formatTimeRange, formatDateWeek, formatDateToString };

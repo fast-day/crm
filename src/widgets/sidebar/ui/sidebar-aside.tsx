@@ -42,7 +42,7 @@ const menuItems: MenuItem[] = [
     to: "/orders",
     type: "ORDERS",
     label: "Платежи",
-    search: { limit: 20, status: "open" },
+    search: { limit: 20 },
     icon: <Cast width={20} height={20} />,
     permission: ["orders:*"],
   },

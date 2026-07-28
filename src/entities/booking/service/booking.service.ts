@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import type { IBooking, IBookingActionCredentials, IBookingConfirmCredentials, IBookingCredentials, IBookingDetail } from "../model/types/booking.type";
+import type { IBooking, IBookingActionCredentials, IBookingCompleteResult, IBookingConfirmCredentials, IBookingConfirmResult, IBookingCredentials, IBookingDetail } from "../model/types/booking.type";
 import { buildQuery } from "@/shared/lib";
 
 export const bookingApi = API.injectEndpoints({
@@ -56,7 +56,7 @@ export const bookingApi = API.injectEndpoints({
     /**
       ===== ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ =====
     **/
-    confirmBooking: builder.mutation<IBooking, IBookingConfirmCredentials>({
+    confirmBooking: builder.mutation<IBookingConfirmResult, IBookingConfirmCredentials>({
       query: ({ params, body }) => ({
         url: `/v1/booking/${params.booking_id}/confirm`,
         method: "PATCH",
@@ -66,9 +66,9 @@ export const bookingApi = API.injectEndpoints({
     }),
 
     /**
-      ===== ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ =====
+      ===== ЗАВЕРШЕНИЕ БРОНИРОВАНИЯ =====
     **/
-    completeBooking: builder.mutation<IBooking, { booking_id: string }>({
+    completeBooking: builder.mutation<IBookingCompleteResult, { booking_id: string }>({
       query: ({ booking_id }) => ({
         url: `/v1/booking/${booking_id}/complete`,
         method: "PATCH",
@@ -81,6 +81,7 @@ export const bookingApi = API.injectEndpoints({
 export const {
   useGetBookingsQuery,
   useGetBookingQuery,
+  useLazyGetBookingQuery,
   useCreateBookingMutation,
   useConfirmBookingMutation,
   useCompleteBookingMutation,

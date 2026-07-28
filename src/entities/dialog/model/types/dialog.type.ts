@@ -21,6 +21,15 @@ export type DialogNames =
 
   |
 
+  /** ===== ПРЕДУПРЕЖДЕНИЕ: ОТМЕНА СПОСОБА ОПЛАТЫ ===== **/
+  "cancel_payment_method"
+
+  |
+  /** ===== ПРЕДУПРЕЖДЕНИЕ: ВЫБЕРИТЕ СПОСОБ ОПЛАТЫ ===== **/
+  "select_payment_method"
+
+  |
+
   /** ===== ПРОФИЛЬ ===== **/
   "me_delete"
 
@@ -53,6 +62,12 @@ export type DialogDataMap = {
   /** ===== СОЗДАНИЕ БРОНИРОВАНИЯ ===== **/
   booking_service_create: undefined;
 
+  /** ===== ПРЕДУПРЕЖДЕНИЕ: ОТМЕНА СПОСОБА ОПЛАТЫ ===== **/
+  cancel_payment_method: undefined;
+
+  /** ===== ПРЕДУПРЕЖДЕНИЕ: ВЫБЕРИТЕ СПОСОБ ОПЛАТЫ ===== **/
+  select_payment_method: undefined;
+
   /** ===== ПРОФИЛЬ ===== **/
   me_delete: {
     profile_id: string;
@@ -68,5 +83,7 @@ export type DialogUnion =
   | { name: "schedule", data: DialogDataMap["schedule"] }
   | { name: "booking_service_create", data: DialogDataMap["booking_service_create"] }
   | { name: "me_delete", data: DialogDataMap["me_delete"] }
+  | { name : "cancel_payment_method", data?: undefined }
+  | { name : "select_payment_method", data?: undefined }
 
 export type DialogData<T extends DialogNames> = DialogDataMap[T];
