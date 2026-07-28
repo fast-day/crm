@@ -41,7 +41,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
 
                 <div className="space-y-6">
                   {booked && booked?.length > 0 && (
-                    <div className="grid gap-4">
+                    <div className="grid gap-3">
                       {booked.map((book, idx) => (
                         <BookingSelectServiceCard
                           key={idx}

@@ -2,7 +2,7 @@ import { Button, Card, CardContent } from "@/shared/ui";
 import { cn } from "@/shared/utils";
 
 interface IBookingStatusSortProps {
-  status: BookingStatusType;
+  status?: BookingStatusType;
   handleChange: (name: "status", status: BookingStatusType | "all") => void;
 }
 

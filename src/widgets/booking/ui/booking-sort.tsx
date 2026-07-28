@@ -19,7 +19,7 @@ export const BookingSort = ({ status }: IBookingQuery) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <BookingStatusSort status={status ?? "new"} handleChange={handleChange} />
+        <BookingStatusSort status={status} handleChange={handleChange} />
 
         {/* <Search
           placeholder={"Поиск по имени и номеру телефона"}
