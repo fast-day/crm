@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/sha
 import { Link } from "@tanstack/react-router"
 
 interface OrderContentNavbarProps extends IOrderDetail {
-  customer: Exclude<CustomerProfile, "birthday">;
+  customer: Omit<CustomerProfile, "birthday">;
 }
 
 export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }: OrderContentNavbarProps) => {

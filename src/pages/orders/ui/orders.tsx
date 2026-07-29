@@ -11,7 +11,10 @@ export interface OrderProps {
 
 export const Orders = ({ query }: OrderProps) => {
   const { account } = useSelector(accountSelector);
-  const { data, isLoading, isError, isSuccess, isFetching } = useGetOrdersQuery({ ...query });
+  const { data, isLoading, isError, isSuccess, isFetching } = useGetOrdersQuery(
+    { ...query },
+    { refetchOnMountOrArgChange: true },
+  );
   
   const content = isLoading ? (
     <TableLoading rows={6} />

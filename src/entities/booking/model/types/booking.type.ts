@@ -114,7 +114,7 @@ export interface IBooking {
   subtotal: number | null;
   payment_method: PaymentMethodType | null;
   order_id: string | null;
-  customer: Exclude<CustomerProfile, "birthday">;
+  customer: Omit<CustomerProfile, "birthday">;
   booking_services: IBookingService[];
 }
 
