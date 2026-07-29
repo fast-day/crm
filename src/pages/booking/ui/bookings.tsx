@@ -18,7 +18,8 @@ export const Bookings = ({ query }: BookingProps) => {
     {
       ...query,
       location_id: location!.id,
-    }
+    },
+    { refetchOnMountOrArgChange: true },
   );
   
   const content = isLoading ? (

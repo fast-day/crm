@@ -1,6 +1,5 @@
 import { useGetOrderQuery } from "@/entities/orders";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction } from "@/shared/ui";
-import { AppLoading } from "@/widgets/loading";
 import { OrderDetails, OrderNotFound } from "@/widgets/orders";
 
 interface OrderDetailProps {
@@ -9,7 +8,10 @@ interface OrderDetailProps {
 
 export const OrderDetail = ({ order_id }: OrderDetailProps) => {
 
-  const { data, isLoading, isError } = useGetOrderQuery({ order_id });
+  const { data, isLoading, isError, isFetching } = useGetOrderQuery(
+    { order_id },
+    { refetchOnMountOrArgChange: true },
+  );
 
   return (
     <>
@@ -20,9 +22,8 @@ export const OrderDetail = ({ order_id }: OrderDetailProps) => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <AppLoading/>}
       {isError && <OrderNotFound />}
-      {data && <OrderDetails order={data} />}
+      {data && <OrderDetails order={data} isFetching={isLoading || isFetching} />}
     </>
   )
 }

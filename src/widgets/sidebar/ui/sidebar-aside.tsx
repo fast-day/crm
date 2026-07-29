@@ -5,9 +5,7 @@ import { PaletteIcon } from "@/shared/icons"
 import SvgBook from "@/shared/icons/Book"
 import SvgCalendar from "@/shared/icons/Calendar"
 import SvgCustomer from "@/shared/icons/Customer"
-import SvgDashboard from "@/shared/icons/Dashboard"
 import SvgNotification from "@/shared/icons/Notification"
-// import SvgUsersGroup from "@/shared/icons/UsersGroup"
 import { useLocation } from "@tanstack/react-router"
 import { isRouteActive } from "../model/utils/navigation.util"
 import { useSelector } from "react-redux"
@@ -24,12 +22,12 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    to: "/",
-    type: "DASHBOARD",
-    label: "Дашбоард",
-    icon: <SvgDashboard width={20} height={20} />,
-  },
+  // {
+  //   to: "/",
+  //   type: "DASHBOARD",
+  //   label: "Дашбоард",
+  //   icon: <SvgDashboard width={20} height={20} />,
+  // },
   {
     to: "/bookings",
     type: "BOOKINGS",

@@ -15,13 +15,14 @@ interface OrderCheckoutProps {
 export const OrderCheckout = ({ booking_id, order_id }: OrderCheckoutProps) => {
   const { dialog } = useSelector(dialogSelector);
 
-  const { data: bookingData, isError: bookingError, isLoading: bookingLoading } = useGetBookingQuery({ booking_id });
+  const { data: bookingData, isError: bookingError, isLoading: bookingLoading } = useGetBookingQuery(
+    { booking_id },
+    { refetchOnMountOrArgChange: true },
+  );
   const { data: orderData, isError: orderError, isLoading: orderLoading } = useGetOrderQuery(
     { order_id: order_id! },
-    { skip: !order_id },
+    { skip: !order_id, refetchOnMountOrArgChange: true },
   );
-
-  console.log('update')
 
   const isLoading = bookingLoading || (Boolean(order_id) && orderLoading);
   const hasError = bookingError || orderError;

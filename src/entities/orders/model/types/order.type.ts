@@ -90,5 +90,5 @@ export interface IOrderDetail {
   payment_method: PaymentMethodType | null;
   is_payment: boolean;
   discount: number | null;
-  bookings: Exclude<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
+  bookings: Omit<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
 }

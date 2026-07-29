@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/sha
 import { Link } from "@tanstack/react-router"
 
 interface OrderContentNavbarProps extends IOrderDetail {
-  customer: Exclude<CustomerProfile, "birthday">;
+  customer: Omit<CustomerProfile, "birthday">;
 }
 
 export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }: OrderContentNavbarProps) => {
@@ -38,7 +38,7 @@ export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }:
           {(status === "paid" || status === "closed") && <OrderNew />}
           {(status === "unpaid" || status === "open" || status === "pending") && <OrderCheckout booking_id={bookings[0].id} order_id={order_id} />}
           {(status === "paid" || status === "unpaid" || status === "open" || status === "pending") && <OrderBookingView booking_id={bookings[0].id} />}
-          {(status === "paid" || status === "unpaid" || status === "open" || status === "pending") && <OrderCancel order_id={order_id} />}
+          {(status === "unpaid" || status === "open" || status === "pending") && <OrderCancel order_id={order_id} />}
 
         </div>
       </CardContent>

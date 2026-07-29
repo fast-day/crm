@@ -5,14 +5,14 @@ import { Card, CardContent } from "@/shared/ui"
 import { formatPrice, minuteFormat } from "@/shared/utils"
 
 interface IOrderResultServicesProps {
-  bookings: Exclude<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
+  bookings: Omit<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
 }
 
 export const OrderResultServices = ({ bookings }: IOrderResultServicesProps) => {
   return (
     <div>
       
-      <div className="grid grid-cols-[48px_1fr_140px] space-y-2">
+      <div className="grid grid-cols-[48px_1fr_140px] space-y-2 items-center">
         <div className="text-sm opacity-50 text-center">#</div>
         <div className="text-sm opacity-50">Название</div>
         <div className="text-sm opacity-50 text-end">Цена</div>
