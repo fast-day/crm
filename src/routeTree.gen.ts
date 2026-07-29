@@ -47,7 +47,6 @@ import { Route as AppLayoutCustomersCustomer_idBookingsIndexRouteImport } from '
 import { Route as AppLayoutBusinessServicesCreateIndexRouteImport } from './app/routes/_app/_layout/business/services/create/index'
 import { Route as AppLayoutBusinessServicesService_idIndexRouteImport } from './app/routes/_app/_layout/business/services/$service_id/index'
 import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
-import { Route as AppLayoutBookingsBooking_idResultIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/result/index'
 import { Route as AppLayoutBookingsBooking_idEditIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/edit/index'
 import { Route as AppLayoutBookingsBooking_idCheckoutIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/checkout/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/services/index'
@@ -291,12 +290,6 @@ const AppLayoutBusinessLocationsCreateIndexRoute =
     path: '/business/locations/create/',
     getParentRoute: () => AppLayoutRoute,
   } as any)
-const AppLayoutBookingsBooking_idResultIndexRoute =
-  AppLayoutBookingsBooking_idResultIndexRouteImport.update({
-    id: '/bookings/$booking_id/result/',
-    path: '/bookings/$booking_id/result/',
-    getParentRoute: () => AppLayoutRoute,
-  } as any)
 const AppLayoutBookingsBooking_idEditIndexRoute =
   AppLayoutBookingsBooking_idEditIndexRouteImport.update({
     id: '/bookings/$booking_id/edit/',
@@ -402,7 +395,6 @@ export interface FileRoutesByFullPath {
   '/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
-  '/bookings/$booking_id/result/': typeof AppLayoutBookingsBooking_idResultIndexRoute
   '/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/business/services/$service_id/': typeof AppLayoutBusinessServicesService_idIndexRoute
   '/business/services/create/': typeof AppLayoutBusinessServicesCreateIndexRoute
@@ -454,7 +446,6 @@ export interface FileRoutesByTo {
   '/settings/system': typeof AppLayoutSettingsSystemIndexRoute
   '/bookings/$booking_id/checkout': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/bookings/$booking_id/edit': typeof AppLayoutBookingsBooking_idEditIndexRoute
-  '/bookings/$booking_id/result': typeof AppLayoutBookingsBooking_idResultIndexRoute
   '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/business/services/$service_id': typeof AppLayoutBusinessServicesService_idIndexRoute
   '/business/services/create': typeof AppLayoutBusinessServicesCreateIndexRoute
@@ -509,7 +500,6 @@ export interface FileRoutesById {
   '/_app/_layout/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/_app/_layout/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/_app/_layout/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
-  '/_app/_layout/bookings/$booking_id/result/': typeof AppLayoutBookingsBooking_idResultIndexRoute
   '/_app/_layout/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/_app/_layout/business/services/$service_id/': typeof AppLayoutBusinessServicesService_idIndexRoute
   '/_app/_layout/business/services/create/': typeof AppLayoutBusinessServicesCreateIndexRoute
@@ -563,7 +553,6 @@ export interface FileRouteTypes {
     | '/settings/system/'
     | '/bookings/$booking_id/checkout/'
     | '/bookings/$booking_id/edit/'
-    | '/bookings/$booking_id/result/'
     | '/business/locations/create/'
     | '/business/services/$service_id/'
     | '/business/services/create/'
@@ -615,7 +604,6 @@ export interface FileRouteTypes {
     | '/settings/system'
     | '/bookings/$booking_id/checkout'
     | '/bookings/$booking_id/edit'
-    | '/bookings/$booking_id/result'
     | '/business/locations/create'
     | '/business/services/$service_id'
     | '/business/services/create'
@@ -669,7 +657,6 @@ export interface FileRouteTypes {
     | '/_app/_layout/settings/system/'
     | '/_app/_layout/bookings/$booking_id/checkout/'
     | '/_app/_layout/bookings/$booking_id/edit/'
-    | '/_app/_layout/bookings/$booking_id/result/'
     | '/_app/_layout/business/locations/create/'
     | '/_app/_layout/business/services/$service_id/'
     | '/_app/_layout/business/services/create/'
@@ -971,13 +958,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutBusinessLocationsCreateIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
-    '/_app/_layout/bookings/$booking_id/result/': {
-      id: '/_app/_layout/bookings/$booking_id/result/'
-      path: '/bookings/$booking_id/result'
-      fullPath: '/bookings/$booking_id/result/'
-      preLoaderRoute: typeof AppLayoutBookingsBooking_idResultIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
-    }
     '/_app/_layout/bookings/$booking_id/edit/': {
       id: '/_app/_layout/bookings/$booking_id/edit/'
       path: '/bookings/$booking_id/edit'
@@ -1091,7 +1071,6 @@ interface AppLayoutRouteChildren {
   AppLayoutSettingsSystemIndexRoute: typeof AppLayoutSettingsSystemIndexRoute
   AppLayoutBookingsBooking_idCheckoutIndexRoute: typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   AppLayoutBookingsBooking_idEditIndexRoute: typeof AppLayoutBookingsBooking_idEditIndexRoute
-  AppLayoutBookingsBooking_idResultIndexRoute: typeof AppLayoutBookingsBooking_idResultIndexRoute
   AppLayoutBusinessLocationsCreateIndexRoute: typeof AppLayoutBusinessLocationsCreateIndexRoute
   AppLayoutBusinessServicesService_idIndexRoute: typeof AppLayoutBusinessServicesService_idIndexRoute
   AppLayoutBusinessServicesCreateIndexRoute: typeof AppLayoutBusinessServicesCreateIndexRoute
@@ -1142,8 +1121,6 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
     AppLayoutBookingsBooking_idCheckoutIndexRoute,
   AppLayoutBookingsBooking_idEditIndexRoute:
     AppLayoutBookingsBooking_idEditIndexRoute,
-  AppLayoutBookingsBooking_idResultIndexRoute:
-    AppLayoutBookingsBooking_idResultIndexRoute,
   AppLayoutBusinessLocationsCreateIndexRoute:
     AppLayoutBusinessLocationsCreateIndexRoute,
   AppLayoutBusinessServicesService_idIndexRoute:
