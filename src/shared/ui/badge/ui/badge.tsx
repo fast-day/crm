@@ -44,7 +44,9 @@ const badgeVariants = cva(
         pending: "",
         closed: "",
         paid: "",
-        unpaid: ""
+        unpaid: "",
+        cancelled: "",
+        refund: "",
       },
       fill: {
         none: "",
@@ -58,12 +60,16 @@ const badgeVariants = cva(
       { status: "closed", fill: "soft", class: "bg-red/30 text-red" },
       { status: "paid", fill: "soft", class: "bg-green/30 text-green" },
       { status: "unpaid", fill: "soft", class: "bg-blue/30 text-blue" },
+      { status: "cancelled", fill: "soft", class: "bg-red/30 text-red" },
+      { status: "refund", fill: "soft", class: "bg-red/30 text-red" },
 
       { status: "open", fill: "solid", class: "bg-primary text-white" },
       { status: "pending", fill: "solid", class: "bg-orange text-white" },
       { status: "closed", fill: "solid", class: "bg-red text-white" },
       { status: "paid", fill: "solid", class: "bg-green text-white" },
       { status: "unpaid", fill: "solid", class: "bg-blue text-white" },
+      { status: "cancelled", fill: "solid", class: "bg-red text-red" },
+      { status: "refund", fill: "solid", class: "bg-red text-red" },
     ],
     defaultVariants: {
       status: "none",
