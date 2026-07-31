@@ -1,3 +1,4 @@
+import { AddFillIcon } from "@/shared/icons"
 import Cast from "@/shared/icons/Cast"
 import { Button, Empty } from "@/shared/ui"
 import { EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/shared/ui/empty/ui/empty"
@@ -10,16 +11,17 @@ export const OrderEmpty = () => {
         <EmptyMedia variant={"empty"}>
           <Cast />
         </EmptyMedia>
-        <EmptyTitle>Платежей пока нет.</EmptyTitle>
-        <EmptyDescription>Здесь появятся оплаты за записи, как только клиент внесёт первый платёж.</EmptyDescription>
+        <EmptyTitle>Платежей пока нет</EmptyTitle>
+        <EmptyDescription>Здесь появятся оплаты за записи, как только клиент внесёт первый платёж</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Link to={"/bookings"}>
+        <Link to={"/bookings/create"}>
           <Button
             variant={"dashed"}
             size={"size_54"} 
             animation={"toggle_sm"}
-          >Перейти к записям
+            iconLeft={<AddFillIcon width={22} height={22} className="text-primary"/>}
+          >Создать запись
           </Button>
         </Link>
       </EmptyContent>

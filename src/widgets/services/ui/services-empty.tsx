@@ -10,8 +10,8 @@ export const ServicesEmpty = () => {
         <EmptyMedia variant={"empty"}>
           <PaletteIcon />
         </EmptyMedia>
-        <EmptyTitle>Услуги не обнаружены</EmptyTitle>
-        <EmptyDescription>Давайте создадим вашу первую услугу</EmptyDescription>
+        <EmptyTitle>Услуг пока нет</EmptyTitle>
+        <EmptyDescription>Создайте первую услугу, чтобы клиенты могли на неё записаться</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Link to={"create"}>

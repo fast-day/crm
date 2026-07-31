@@ -16,20 +16,21 @@ export interface BookingProps {
 export const Bookings = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
   const { data, isLoading, isError, isSuccess, isFetching } = useGetBookingsQuery(
-    location ? { ...query, location_id: location.id } : skipToken,
+    location && account?.has_bookings ? { ...query, location_id: location.id } : skipToken,
     {
       refetchOnMountOrArgChange: true,
-      skip: !location,
     },
   );
 
   if (!location) return <AppLoading />;
   
-  const content = isLoading ? (
+  const content = account?.has_bookings ? (
+    <BookingEmpty />
+  ) : isLoading ? (
     <TableLoading rows={6} />
   ) : isError ? (
     <>error message</>
-  ) : isSuccess && account?.has_bookings ? (
+  ) : isSuccess ? (
     <BookingTable
       bookings={data.data}
       isFetching={isFetching}
@@ -54,7 +55,7 @@ export const Bookings = ({ query }: BookingProps) => {
                 animation={"toggle"}
                 className={"text-sm font-bold"}
                 iconLeft={<AddIcon width={21} height={21}/>}
-              >Новое бронирование</Button>
+              >Новая запись</Button>
             </Link>
           </Can>
         </PageHeaderActions>

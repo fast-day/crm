@@ -8,7 +8,7 @@ export const BookingCreate = () => {
   return (
     <>
       <PageHeader>
-        <PageHeaderTitle>Новое бронирование</PageHeaderTitle>
+        <PageHeaderTitle>Новая запись</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
         </PageHeaderActions>

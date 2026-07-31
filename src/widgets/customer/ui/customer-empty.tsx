@@ -1,5 +1,5 @@
 import { AddFillIcon, CustomerIcon } from "@/shared/icons"
-import { Button, Empty } from "@/shared/ui"
+import { Button, Empty, EmptyDescription } from "@/shared/ui"
 import { EmptyContent, EmptyHeader, EmptyMedia, EmptyTitle } from "@/shared/ui"
 import { Link } from "@tanstack/react-router"
 
@@ -10,8 +10,8 @@ export const CustomerEmpty = () => {
         <EmptyMedia variant={"empty"}>
           <CustomerIcon />
         </EmptyMedia>
-        <EmptyTitle>У вас еще нет клиентов</EmptyTitle>
-        {/* <EmptyDescription></EmptyDescription> */}
+        <EmptyTitle>Клиентов пока нет</EmptyTitle>
+        <EmptyDescription>Клиенты появятся здесь автоматически после первой записи, либо добавьте их вручную</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Link to={"/customers/create"}>

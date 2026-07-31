@@ -37,7 +37,7 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
           booking_id,
         },
         body: {
-          status: "pending",
+          status: "paid",
           payment_method: payment,
         }
       } satisfies IBookingConfirmCredentials;

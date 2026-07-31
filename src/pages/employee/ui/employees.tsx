@@ -23,11 +23,9 @@ export const Employees = ({ query }: EmployeeProps) => {
     } : skipToken,
   );
 
-  // const hasActiveFilters = !query.status || !query.role || !query.search;
-
   const content = isLoading ? (
     <TableLoading rows={4} />
-  ) : isSuccess && account?.has_employees ? (
+  ) : isSuccess ? (
     <EmployeeTable employees={data.data} meta={data.meta} isFetching={isFetching} profileId={account?.id} query={query} />
   ) : (
     <EmployeeEmpty />

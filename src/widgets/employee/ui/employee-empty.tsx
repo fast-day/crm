@@ -11,8 +11,8 @@ export const EmployeeEmpty = () => {
         <EmptyMedia variant={"empty"}>
           <SvgUsersGroup />
         </EmptyMedia>
-        <EmptyTitle>У вас еще нет сотрудников</EmptyTitle>
-        <EmptyDescription>Давайте добавим первого сотрудника</EmptyDescription>
+        <EmptyTitle>Сотрудников пока нет</EmptyTitle>
+        <EmptyDescription>Добавьте первого сотрудника, чтобы начать распределять записи</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Link to={"create"}>

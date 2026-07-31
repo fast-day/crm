@@ -4,6 +4,7 @@ import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { CustomerEmpty, CustomerTable } from "@/widgets/customer";
 import { TableLoading } from "@/widgets/loading";
+import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
 
@@ -13,13 +14,16 @@ interface CustomerProps {
 
 export const Customers = ({ query }: CustomerProps) => {
   const { account } = useSelector(accountSelector);
-  const { isLoading, data, isSuccess, isFetching } = useGetCustomersQuery({ ...query });
+  const { isLoading, data, isSuccess, isFetching } = useGetCustomersQuery(
+    account?.has_customers ? { ...query } : skipToken,
+    { refetchOnMountOrArgChange: true },
+  );
 
-  // const hasActiveFilters = !query.search || !query.sort;
-
-  const content = isLoading ? (
+  const content = !account?.has_customers ? (
+    <CustomerEmpty />
+  ) : isLoading ? (
     <TableLoading rows={3} />
-  ) : isSuccess && account?.has_customers ? (
+  ) : isSuccess ? (
     <CustomerTable customers={data.data} isFetching={isFetching} meta={data.meta} query={query} />
   ) : (
     <CustomerEmpty />
