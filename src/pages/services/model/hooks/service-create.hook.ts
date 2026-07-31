@@ -3,6 +3,8 @@ import type { ServiceType } from "../schema/service.schema";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useAppDispatch } from "@/shared/hooks";
+import { updateAccount } from "@/entities/account";
 
 interface UseCreateServiceReturnProps {
   isLoading: boolean;
@@ -11,6 +13,8 @@ interface UseCreateServiceReturnProps {
 
 export const useCreateService = (): UseCreateServiceReturnProps => {
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [create] = useCreateServiceMutation();
@@ -36,6 +40,8 @@ export const useCreateService = (): UseCreateServiceReturnProps => {
         formData.append("file", avatar);
         await uploadPhoto({ service_id: res.data.id, body: formData}).unwrap();
       }
+
+      dispatch(updateAccount({ has_services: true }));
 
       navigate({ to: "/business/services" });
     }

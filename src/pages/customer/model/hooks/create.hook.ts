@@ -3,6 +3,8 @@ import { toast } from "sonner";
 import type { customerSchemaType } from "../schemas/customer.schema";
 import { useNavigate } from "@tanstack/react-router";
 import { getErrorMessage } from "@/shared/utils";
+import { useAppDispatch } from "@/shared/hooks";
+import { updateAccount } from "@/entities/account";
 
 interface useCustomerCreateReturnProps {
   onSubmit: (data: customerSchemaType) => Promise<void>;
@@ -11,6 +13,7 @@ interface useCustomerCreateReturnProps {
 
 export const useCustomerCreate = (): useCustomerCreateReturnProps => {
   const [customer, { isLoading }] = useCreateCustomerMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
   const onSubmit = async (data: customerSchemaType): Promise<void> => {
@@ -19,9 +22,9 @@ export const useCustomerCreate = (): useCustomerCreateReturnProps => {
         ...data,
         is_banned: false,
       } satisfies ICustomerCreateCredentials;
-      const res = await customer(req).unwrap();
+      await customer(req).unwrap();
 
-      console.log(res);
+      dispatch(updateAccount({ has_customers: true }));
 
       navigate({ to: "/customers" });
     }

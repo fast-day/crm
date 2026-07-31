@@ -3,7 +3,6 @@ import { BookingCreateForm } from "@/widgets/booking"
 import { useSearch } from "@tanstack/react-router"
 
 export const BookingCreate = () => {
-
   const search = useSearch({ from: "/_app/_layout/bookings/create/" });
 
   return (

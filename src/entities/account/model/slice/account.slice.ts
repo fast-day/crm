@@ -47,6 +47,13 @@ export const accountSlice = createSlice({
         state.account.settings.pages = action.payload;
       }
     },
+    updateAccount: (state, action: PayloadAction<Partial<IMe>>) => {
+      if (!state.account) return;
+      state.account = {
+        ...state.account,
+        ...action.payload,
+      }
+    },
     logout: (state) => {
       deleteCookie("access_token");
       deleteCookie("refresh_token");
@@ -67,6 +74,7 @@ export const {
   setIsCompany,
   setPermission,
   updateSettings,
+  updateAccount,
   logout,
 } = accountSlice.actions;
 export default accountSlice.reducer;

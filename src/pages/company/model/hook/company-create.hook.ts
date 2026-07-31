@@ -4,7 +4,7 @@ import { useCompanyCreateMutation } from "../../service/company.service";
 import { toast } from "sonner";
 import type { CompanyCredentials } from "../type/company-create.type";
 import { useNavigate } from "@tanstack/react-router";
-import { setAccount, setLocation, useLazyMeQuery } from "@/entities/account";
+import { setAccount, setLocation } from "@/entities/account";
 import { useCallback } from "react";
 import { getErrorMessage } from "@/shared/utils";
 
@@ -26,7 +26,6 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
   const navigate = useNavigate();
   
   const [company] = useCompanyCreateMutation();
-  const [account] = useLazyMeQuery();
 
   const create = useCallback(async (firstName: string): Promise<void> => {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -41,7 +40,6 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
       } satisfies CompanyCredentials;
 
       const res = await company(payload).unwrap();
-
       dispatch(setAccount(res));
       dispatch(setLocation(res.locations[0]));
       navigate({ to: "/", replace: true });
@@ -50,7 +48,7 @@ export const useCompanyCreate = (): CompanyCreateReturnProps => {
       console.error("Не удалось создать компанию", err);
       toast.error(getErrorMessage(err));
     }
-  }, [dispatch, navigate, company, account]);
+  }, [dispatch, navigate, company]);
 
   return { create };
 }

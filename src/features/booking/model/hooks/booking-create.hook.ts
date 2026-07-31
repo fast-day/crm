@@ -4,6 +4,8 @@ import { validateBooking } from "../utils/validation.util";
 import { useAppDispatch } from "@/shared/hooks";
 import { useNavigate } from "@tanstack/react-router";
 import type { IDirectoryCustomer } from "@/entities/directories";
+import { updateAccount } from "@/entities/account";
+import { getErrorMessage } from "@/shared/utils";
 
 interface UseBookingCreateReturnProps {
   handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, location_id: string) => Promise<void>;
@@ -34,41 +36,48 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
       return;
     }
 
-    // console.log(booked[0].employee);
-
-    const req = {
-      services: booked.map(book => ({
-        service_id: book.service!.id,
-        price: book.service!.prices.price,
-        count: 1,
-        start_time: `${book.date}T${book.time!}`,
-        duration: book.service!.duration,
-        users: book.employee?.id ? [{
-          id: book.employee.profile_id,
-          first_name: book.employee.first_name,
-          last_name: book.employee.last_name,
+    try {
+      const req = {
+        services: booked.map(book => ({
+          service_id: book.service!.id,
+          price: book.service!.prices.price,
+          count: 1,
+          start_time: `${book.date}T${book.time!}`,
+          duration: book.service!.duration,
+          users: book.employee?.id ? [{
+            id: book.employee.profile_id,
+            first_name: book.employee.first_name,
+            last_name: book.employee.last_name,
+          }] : [],
+        })),
+        customers: customer ? [{
+          id: customer.customer_attributes.profile_id,
+          first_name: customer.customer_attributes.first_name,
+          last_name: customer.customer_attributes.last_name,
+          phone: customer.customer_attributes.phone,
         }] : [],
-      })),
-      customers: customer ? [{
-        id: customer.customer_attributes.profile_id,
-        first_name: customer.customer_attributes.first_name,
-        last_name: customer.customer_attributes.last_name,
-        phone: customer.customer_attributes.phone,
-      }] : [],
-      location_id,
-      comment: null,
-    } satisfies IBookingActionCredentials;
+        location_id,
+        comment: null,
+      } satisfies IBookingActionCredentials;
 
-    // console.log("action", req);
+      create(req).unwrap();
+      dispatch(resetBookingCreate());
+      dispatch(updateAccount({ has_bookings: true }));
+      navigate({ to: "/bookings" });
+    }
+    catch (error) {
+      toast.error(getErrorMessage(error));
+    }
 
-    toast.promise(create(req).unwrap(), {
-      success: () => {
-        dispatch(resetBookingCreate());
-        navigate({ to: "/bookings" });
-        return "Бронирование создано";
-      },
-      error: "Не удалось создать бронирование",
-    });
+    // toast.promise(create(req).unwrap(), {
+    //   success: () => {
+    //     dispatch(resetBookingCreate());
+    //     dispatch(updateAccount({ has_bookings: true }));
+    //     navigate({ to: "/bookings" });
+    //     return "Бронирование создано";
+    //   },
+    //   error: "Не удалось создать бронирование",
+    // });
   };
 
   return { handleSave, isLoading };

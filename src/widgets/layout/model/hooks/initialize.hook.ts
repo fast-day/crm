@@ -1,7 +1,7 @@
 import type { AppDispatch } from "@/app/providers/redux/config";
 import { setAccount, setLocation, setPermission, useLazyMeQuery, useLazyPermissionsQuery } from "@/entities/account";
 import { useNavigate } from "@tanstack/react-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
 type StateType = {
@@ -21,6 +21,7 @@ export const useInitialize = (): InitializeReturnProps => {
     error: null as Error | null,
     progress: 0,
   });
+  const hasInitialized = useRef(false);
 
   const navigate = useNavigate();
 
@@ -32,6 +33,9 @@ export const useInitialize = (): InitializeReturnProps => {
   }, [state.isInitialized, state.isLoading]);
 
   const initialize = useCallback(async (): Promise<void> => {
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+
     try {
       setState(p => ({ ...p, isLoading: true, progress: 0 }));
 
@@ -57,9 +61,10 @@ export const useInitialize = (): InitializeReturnProps => {
       setState(p => ({ ...p, isInitialized: true, isLoading: false, progress: 100 }))
     }
     catch (err) {
+      hasInitialized.current = false;
       setState(p => ({ ...p, error: err as Error, isLoading: false }));
     }
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (shouldInitialize) {

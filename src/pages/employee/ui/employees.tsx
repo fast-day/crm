@@ -5,6 +5,7 @@ import { AddIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { EmployeeEmpty, EmployeeTable } from "@/widgets/employee"
 import { TableLoading } from "@/widgets/loading"
+import { skipToken } from "@reduxjs/toolkit/query"
 import { Link } from "@tanstack/react-router"
 import { useSelector } from "react-redux"
 
@@ -15,10 +16,11 @@ interface EmployeeProps {
 export const Employees = ({ query }: EmployeeProps) => {
   const { location, account } = useSelector(accountSelector);
   const { isLoading, data, isSuccess, isFetching } = useGetEmployeesQuery(
+    location ?
     {
       ...query,
-      location_id: location?.id ?? "",
-    }
+      location_id: location.id,
+    } : skipToken,
   );
 
   // const hasActiveFilters = !query.status || !query.role || !query.search;

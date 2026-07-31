@@ -74,3 +74,4 @@ export type PermissionName =
   | "orders:write"
   | "orders:create"
   | "orders:cancel"
+  | "orders:refund"

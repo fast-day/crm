@@ -8,7 +8,6 @@ import { dialogSelector, useDialog } from "@/entities/dialog";
 import { BookingChangeService } from "./components/booking-change-service";
 
 export const BookingCreateForm = ({ date }: { date: string }) => {
-  // const dispatch = useAppDispatch();
   const { location } = useSelector(accountSelector);
   const { booked, customer, date: current_date } = useSelector(bookingSelector);
   const { dialog } = useSelector(dialogSelector);
