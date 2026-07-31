@@ -6,16 +6,13 @@ interface IBookingStatusSortProps {
   handleChange: (name: "status", status: BookingStatusType | "all") => void;
 }
 
-const variant = ["all", "new", "pending", "confirmed", "cancelled", "completed"] as BookingStatusType[] | "all"[];
+const variant = ["all", "new", "completed", "cancelled"] as BookingStatusType[] | "all"[];
 
 const BOOKING_STATUS: Record<BookingStatusType | "all", string> = {
   "all": "Все",
   "new": "Новые",
-  "pending": "В ожидании",
-  "confirmed": "Подтвержденные",
   "completed": "Завершенные",
   "cancelled": "Отмененные",
-  "expired": "Просрочен"
 };
 
 export const BookingStatusSort = ({ status, handleChange }: IBookingStatusSortProps) => {

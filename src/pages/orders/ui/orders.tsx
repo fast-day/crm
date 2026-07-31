@@ -1,6 +1,7 @@
 import { accountSelector } from "@/entities/account";
 import { useGetOrdersQuery, type IOrderQuery } from "@/entities/orders";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { RequestError } from "@/widgets/layout";
 import { TableLoading } from "@/widgets/loading";
 import { OrderEmpty, OrderTable } from "@/widgets/orders";
 import { skipToken } from "@reduxjs/toolkit/query";
@@ -17,12 +18,12 @@ export const Orders = ({ query }: OrderProps) => {
     { refetchOnMountOrArgChange: true },
   );
   
-  const content = account?.has_orders ? (
+  const content = !account?.has_orders ? (
     <OrderEmpty />
   ) : isLoading ? (
     <TableLoading rows={6} />
   ) : isError ? (
-    <>error message</>
+    <RequestError />
   ) : isSuccess ? (
     <OrderTable orders={data.data} isFetching={isFetching} meta={data.meta} query={query} />
   ) : (

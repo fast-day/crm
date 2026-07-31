@@ -21,11 +21,17 @@ const badgeVariants = cva(
 
         count: "w-6 h-6 rounded-lg bg-border flex items-center justify-center border-transparent text-primary",
 
+        paid_icon: "bg-green text-white border-none px-4 py-1.5 flex items-center justify-center",
+        unpaid_icon: "bg-blue/30 text-white border-none px-4 py-1.5 flex items-center justify-center relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-14 before:h-14 before:bg-blue before:rounded-full before:pointer-events-none",
+        cancelled_icon: "bg-red border-none px-4 py-1.5 flex items-center justify-center",
+        refund_icon: "bg-red border-none px-4 py-1.5 flex items-center justify-center",
+        
+        /*
+          ----- СТАРЫЕ СТАТУСЫ -----
+        */
         open_icon: "bg-primary text-white border-none px-4 py-1.5",
         pending_icon: "bg-orange border-none px-4 py-1.5",
         closed_icon: "bg-red border-none px-4 py-1.5 flex items-center justify-center",
-        paid_icon: "bg-green text-white border-none px-4 py-1.5 flex items-center justify-center",
-        unpaid_icon: "bg-blue/30 text-white border-none px-4 py-1.5 flex items-center justify-center relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-14 before:h-14 before:bg-blue before:rounded-full before:pointer-events-none",
 
         new_b: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-primary text-white",
         pending_b: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-orange text-white",

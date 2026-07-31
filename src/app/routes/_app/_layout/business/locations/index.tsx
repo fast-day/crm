@@ -1,18 +1,17 @@
-import type { ILocationQuery } from '@/entities/location'
 import { Locations } from '@/pages/location'
+import { querySearchSchema } from '@/shared/schemas/query.schema';
 import { createFileRoute } from '@tanstack/react-router'
+import z from 'zod'
+
+const locationSearchSchema = querySearchSchema.extend({
+  name: z.string().optional(),
+  search: z.string().optional(),
+  category: z.string().optional(),
+  active: z.coerce.number().optional(),
+});
 
 export const Route = createFileRoute('/_app/_layout/business/locations/')({
-  validateSearch: (search: Record<string, unknown>): ILocationQuery & PaginationQuery => {
-    return {
-      page: search.page as number,
-      limit: search.limit as number,
-      name: search.name as string,
-      search: search.search as string,
-      category: search.category as string,
-      active: search.active as number,
-    };
-  },
+  validateSearch: locationSearchSchema,
   component: RouteComponent,
 })
 

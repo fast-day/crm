@@ -2,6 +2,7 @@ import { useGetLocationsQuery, type ILocationQuery } from "@/entities/location"
 import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { RequestError } from "@/widgets/layout";
 import { TableLoading } from "@/widgets/loading";
 import { LocationEmpty, LocationTable } from "@/widgets/location";
 import { Link } from "@tanstack/react-router";
@@ -11,7 +12,7 @@ interface LocationProps {
 }
 
 export const Locations = ({ query }: LocationProps) => {
-  const { data: locations, isLoading, isSuccess, isFetching } = useGetLocationsQuery({ 
+  const { data: locations, isLoading, isError, isSuccess, isFetching } = useGetLocationsQuery({ 
     active: 1,
     ...query
   });
@@ -20,6 +21,8 @@ export const Locations = ({ query }: LocationProps) => {
 
   const content = isLoading ? (
     <TableLoading rows={4} />
+  ) : isError ? (
+    <RequestError />
   ) : isSuccess && (locations.data.length > 0 || hasActiveFilters) ? (
     <LocationTable locations={locations.data} isFetching={isFetching} meta={locations.meta} query={query} />
   ) : (

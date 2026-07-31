@@ -85,7 +85,7 @@ declare global {
   type SexType = "man" | "woman" | "none";
 
   /** СТАТУСЫ ДЛЯ БРОНИРОВАНИЯ **/
-  type BookingStatusType = "new" | "pending" | "expired" | "confirmed" | "cancelled" | "completed";
+  type BookingStatusType = "new" | "completed" | "cancelled";
 
   /** СТАТУСЫ ДЛЯ ЗАКАЗОВ **/
   type OrderStatusType = "paid" | "unpaid" | "cancelled" | "refund";

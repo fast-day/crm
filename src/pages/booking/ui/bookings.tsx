@@ -4,6 +4,7 @@ import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { BookingEmpty, BookingTable } from "@/widgets/booking";
+import { RequestError } from "@/widgets/layout";
 import { AppLoading, TableLoading } from "@/widgets/loading";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
@@ -24,12 +25,12 @@ export const Bookings = ({ query }: BookingProps) => {
 
   if (!location) return <AppLoading />;
   
-  const content = account?.has_bookings ? (
+  const content = !account?.has_bookings ? (
     <BookingEmpty />
   ) : isLoading ? (
     <TableLoading rows={6} />
   ) : isError ? (
-    <>error message</>
+    <RequestError />
   ) : isSuccess ? (
     <BookingTable
       bookings={data.data}

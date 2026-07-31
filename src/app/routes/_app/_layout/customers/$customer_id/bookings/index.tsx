@@ -1,22 +1,21 @@
-import type { IBookingQuery } from '@/entities/booking';
 import { CustomerBookings } from '@/pages/customer'
+import { querySearchSchema } from '@/shared/schemas/query.schema';
 import { createFileRoute } from '@tanstack/react-router'
+import z from 'zod';
+
+const customerBookingSearchSchema = querySearchSchema.extend({
+  employee: z.string().optional(),
+  service: z.string().optional(),
+  tag: z.string().optional(),
+  status: z.enum(["new", "completed", "cancelled"]).optional().catch(undefined),
+  sort: z.enum(["newest", "oldest", "price_asc", "price_desc"]).optional().catch("newest"),
+  full_name: z.string().optional(),
+});
 
 export const Route = createFileRoute(
   '/_app/_layout/customers/$customer_id/bookings/',
 )({
-  validateSearch: (search: Record<string, unknown>): PaginationQuery & Omit<IBookingQuery, "customer"> & { full_name: string } => {
-    return {
-      page: search.page as number,
-      limit: search.limit as number,
-      employee: search.employee as string,
-      service: search.service as string,
-      tag: search.tag as string,
-      status: search.status as BookingStatusType,
-      sort: search.sort as SortType,
-      full_name: search.full_name as string,
-    };
-  },
+  validateSearch: customerBookingSearchSchema,
   component: RouteComponent,
 })
 

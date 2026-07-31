@@ -4,6 +4,7 @@ import { Can } from "@/features/auth"
 import { AddIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { EmployeeEmpty, EmployeeTable } from "@/widgets/employee"
+import { RequestError } from "@/widgets/layout"
 import { TableLoading } from "@/widgets/loading"
 import { skipToken } from "@reduxjs/toolkit/query"
 import { Link } from "@tanstack/react-router"
@@ -15,7 +16,7 @@ interface EmployeeProps {
 
 export const Employees = ({ query }: EmployeeProps) => {
   const { location, account } = useSelector(accountSelector);
-  const { isLoading, data, isSuccess, isFetching } = useGetEmployeesQuery(
+  const { isLoading, data, isSuccess, isError, isFetching } = useGetEmployeesQuery(
     location ?
     {
       ...query,
@@ -25,6 +26,8 @@ export const Employees = ({ query }: EmployeeProps) => {
 
   const content = isLoading ? (
     <TableLoading rows={4} />
+  ) : isError ? (
+    <RequestError />
   ) : isSuccess ? (
     <EmployeeTable employees={data.data} meta={data.meta} isFetching={isFetching} profileId={account?.id} query={query} />
   ) : (
