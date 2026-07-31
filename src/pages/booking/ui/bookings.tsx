@@ -4,7 +4,9 @@ import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { BookingEmpty, BookingTable } from "@/widgets/booking";
-import { TableLoading } from "@/widgets/loading";
+import { RequestError } from "@/widgets/layout";
+import { AppLoading, TableLoading } from "@/widgets/loading";
+import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
 
@@ -15,18 +17,21 @@ export interface BookingProps {
 export const Bookings = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
   const { data, isLoading, isError, isSuccess, isFetching } = useGetBookingsQuery(
+    location && account?.has_bookings ? { ...query, location_id: location.id } : skipToken,
     {
-      ...query,
-      location_id: location!.id,
+      refetchOnMountOrArgChange: true,
     },
-    { refetchOnMountOrArgChange: true },
   );
+
+  if (!location) return <AppLoading />;
   
-  const content = isLoading ? (
+  const content = !account?.has_bookings ? (
+    <BookingEmpty />
+  ) : isLoading ? (
     <TableLoading rows={6} />
   ) : isError ? (
-    <>error message</>
-  ) : isSuccess && account?.has_bookings ? (
+    <RequestError />
+  ) : isSuccess ? (
     <BookingTable
       bookings={data.data}
       isFetching={isFetching}
@@ -51,7 +56,7 @@ export const Bookings = ({ query }: BookingProps) => {
                 animation={"toggle"}
                 className={"text-sm font-bold"}
                 iconLeft={<AddIcon width={21} height={21}/>}
-              >Новое бронирование</Button>
+              >Новая запись</Button>
             </Link>
           </Can>
         </PageHeaderActions>

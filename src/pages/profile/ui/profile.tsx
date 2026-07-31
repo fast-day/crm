@@ -5,6 +5,7 @@ import { PencilEditIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { EmployeeDetailLazy } from "@/widgets/employee";
 import { DeleteMeAccount, ProfileInfo } from "@/widgets/profile";
+import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
 
@@ -12,7 +13,9 @@ export const Profile = () => {
   const { location, account } = useSelector(accountSelector);
   const { dialog } = useSelector(dialogSelector);
   
-  const { data, isLoading, isError } = useGetEmployeeQuery({ location_id: location!.id, employee_id: account!.id });
+  const { data, isLoading, isError } = useGetEmployeeQuery(
+    location && account ? { location_id: location.id, employee_id: account.id } : skipToken,
+  );
   
   return (
     <>

@@ -5,11 +5,14 @@ import { useGetEmployeeQuery } from "@/entities/employee";
 import { EmployeeEditLazy, EmployeeNotFound } from "@/widgets/employee";
 import { EmployeeEditWrapper } from "./components/employee-edit-wrapper";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 export const EmployeeEdit = () => {
   const { employee_id } = useParams({ from: "/_app/_layout/employees/users/$employee_id/edit/" });
   const { location } = useSelector(useAccount);
-  const { data, isLoading, isError } = useGetEmployeeQuery({ location_id: location?.id, employee_id });
+  const { data, isLoading, isError } = useGetEmployeeQuery(
+    location ? { location_id: location.id, employee_id } : skipToken,
+  );
 
   return (
     <>

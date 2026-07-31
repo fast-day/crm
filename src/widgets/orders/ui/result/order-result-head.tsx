@@ -1,5 +1,5 @@
 import { ORDER_STATUS, ORDER_STATUS_TITLE } from "@/shared/constants/order-status.constant";
-import { BoxIcon, CheckIcon, CloseOrderIcon, PendingOrderIcon } from "@/shared/icons";
+import { BoxIcon, CheckIcon, CloseOrderIcon } from "@/shared/icons";
 import { Badge } from "@/shared/ui";
 import { formatDate } from "@/shared/utils";
 
@@ -17,9 +17,8 @@ export const OrderResultHead = ({ status, date, time }: IOrderResultHeadProps) =
         variant={`${status}_icon`}
       >
         {status === "paid" && <CheckIcon />}
-        {status === "closed" && <CloseOrderIcon />}
-        {status === "open" && <BoxIcon />}
-        {status === "pending" && <PendingOrderIcon />}
+        {status === "cancelled" && <CloseOrderIcon />}
+        {status === "refund" && <BoxIcon />}
       </Badge>
       
       <div className="flex flex-col items-center space-y-2.5">

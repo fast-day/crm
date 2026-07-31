@@ -5,6 +5,7 @@ import { Can } from "@/features/auth";
 import { PencilEditIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { EmployeeDetailLazy, EmployeeDetails, EmployeeNotFound, EmployeeDeleteDialog } from "@/widgets/employee";
+import { skipToken } from "@reduxjs/toolkit/query";
 import { Link, useParams } from "@tanstack/react-router"
 import { useSelector } from "react-redux";
 
@@ -13,7 +14,9 @@ export const EmployeeDetail = () => {
   const { location } = useSelector(accountSelector);
   const { dialog } = useSelector(dialogSelector);
 
-  const { data, isLoading, isError } = useGetEmployeeQuery({ location_id: location?.id, employee_id });
+  const { data, isLoading, isError } = useGetEmployeeQuery(
+    location ? { location_id: location.id, employee_id } : skipToken,
+  );
 
   return (
     <>

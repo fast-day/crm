@@ -1,4 +1,4 @@
-import { Link, useSearch } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router"
 import { useCheckInviteTokenMutation } from "../service/auth.service";
 import { useEffect } from "react";
 import { Loading } from "@/widgets/loading";
@@ -10,15 +10,18 @@ import { cn } from "@/shared/utils";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useInvite } from "../model/hooks/invite.hook";
 
-export const Invite = () => {
-  const search = useSearch({ from: "/_auth/_layout/invite" });
+interface IInviteProps {
+  token: string;
+  email: string;
+}
 
+export const Invite = ({ token, email }: IInviteProps) => {
   const [check, { isLoading, isError, error }] = useCheckInviteTokenMutation();
   const { onSubmit, isLoading: isSubmitted } = useInvite();
 
   useEffect(() => {
-    check({ token: search.token });
-  }, [search.token]);
+    check({ token: token });
+  }, [token]);
 
   if (isLoading) return <Loading />
 
@@ -45,10 +48,10 @@ export const Invite = () => {
       )}
       <div className={cn(isError ? "mt-4" : "mt-8")}>
         <Form
-          onSubmit={(data) => onSubmit(data, search.token)}
+          onSubmit={(data) => onSubmit(data, token)}
           schema={RegisterSchema}
           options={{ defaultValues: {
-            email: search.email ?? "",
+            email: email ?? "",
             first_name: "",
             last_name: "",
             phone: "",

@@ -85,10 +85,10 @@ declare global {
   type SexType = "man" | "woman" | "none";
 
   /** СТАТУСЫ ДЛЯ БРОНИРОВАНИЯ **/
-  type BookingStatusType = "new" | "pending" | "expired" | "confirmed" | "cancelled" | "completed";
+  type BookingStatusType = "new" | "completed" | "cancelled";
 
   /** СТАТУСЫ ДЛЯ ЗАКАЗОВ **/
-  type OrderStatusType = "pending" | "open" | "closed" | "paid" | "unpaid";
+  type OrderStatusType = "paid" | "unpaid" | "cancelled" | "refund";
 
   /** МЕТОДЫ ДЛЯ ОПЛАТЫ **/
   type PaymentMethodType = "online" | "cash" | "credit_card";

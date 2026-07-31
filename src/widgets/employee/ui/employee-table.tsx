@@ -44,7 +44,10 @@ export const EmployeeTable = ({ employees, isFetching, profileId, meta, query }:
                     <Avatar size={"large"} avatar_url={employee.avatar} name={employee.full_name} id={employee.id} />
                     <div>
                       <p>{employee.full_name}</p>
-                      <p className="text-11 leading-3 opacity-50 mt-px font-normal">{ROLE[employee.role.name]}{employee.position && `, ${employee.position}`}</p>
+                      <p className="text-11 leading-3 opacity-50 mt-px font-normal">
+                        {ROLE[employee.role.name]}{employee.position && `, ${employee.position}`}
+                        <span className="text-10">{profileId === employee.id && ". Да, да, это вы"}</span>
+                      </p>
                     </div>
                   </TableCell>
                   <TableCell>{employee.phone}</TableCell>

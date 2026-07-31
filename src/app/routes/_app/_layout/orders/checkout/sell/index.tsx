@@ -1,18 +1,14 @@
 import { OrderCheckout } from '@/pages/orders';
 import { createFileRoute } from '@tanstack/react-router'
+import z from 'zod';
 
-type OrderCheckoutType = {
-  booking_id: string;
-  order_id?: string;
-}
+const orderCheckoutSearchSchema = z.object({
+  booking_id: z.string().optional(),
+  order_id: z.string().optional(),
+});
 
 export const Route = createFileRoute('/_app/_layout/orders/checkout/sell/')({
-  validateSearch: (search: Record<string, unknown>): OrderCheckoutType => {
-    return {
-      booking_id: search.booking_id as string,
-      order_id: search.order_id as string,
-    }
-  },
+  validateSearch: orderCheckoutSearchSchema,
   component: RouteComponent,
 })
 

@@ -4,6 +4,8 @@ import { getErrorMessage, isApiError } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import type { EmployeeSchemaType, InviteCheckSchemaType } from "../schemas";
+import { useAppDispatch } from "@/shared/hooks";
+import { updateAccount } from "@/entities/account";
 
 type InviteStep = "check" | "invite" | "create";
 
@@ -33,9 +35,10 @@ export const useInvite = (): UseInviteReturnProps => {
   const [employee, setEmployee] = useState<IEmployeeByEmail | null>(null);
   const [isLoading, setIsLoading] = useState<InviteLoading>({ check: false, invite: false, create: false });
   const [error, setError] = useState<InviteError>({ check: "", invite: "", create: "" });
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
+  
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [checkEmployee] = useLazyGetEmployeeByEmailQuery();
   const [checkEmployeeInLocation] = useLazyCheckEmployeeInLocationQuery();
@@ -96,7 +99,8 @@ export const useInvite = (): UseInviteReturnProps => {
         }).unwrap();
       }
 
-      toast.success(res.message);
+      dispatch(updateAccount({ has_employees: true }));
+      // toast.success(res.message);
       navigate({ to: "/employees/users" });
     }
     catch (error) {

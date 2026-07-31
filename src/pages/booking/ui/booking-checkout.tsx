@@ -15,7 +15,7 @@ export const BookingCheckout = ({ booking_id }: BookingCheckoutProps) => {
     <>
       <PageHeader>
         <div>
-          <PageHeaderTitle>Подтверждение заказа</PageHeaderTitle>
+          <PageHeaderTitle>Подтверждение записи</PageHeaderTitle>
         </div>
         <PageHeaderActions>
           <PageHeaderBackAction />

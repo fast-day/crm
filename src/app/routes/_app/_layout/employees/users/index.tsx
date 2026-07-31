@@ -1,17 +1,16 @@
-import type { EmployeeStatus, IEmployeeQuery } from '@/entities/employee'
 import { Employees } from '@/pages/employee'
+import { querySearchSchema } from '@/shared/schemas/query.schema'
 import { createFileRoute } from '@tanstack/react-router'
+import z from 'zod';
+
+const employeeSearchSchema = querySearchSchema.extend({
+  search: z.string().optional(),
+  role: z.enum(["owner", "employee", "admin"]).optional().catch(undefined),
+  status: z.enum(["active", "disable", "invited"]).optional().catch(undefined),
+});
 
 export const Route = createFileRoute('/_app/_layout/employees/users/')({
-  validateSearch: (search: Record<string, unknown>): PaginationQuery & IEmployeeQuery => {
-    return {
-      page: search.page as number,
-      limit: search.limit as number,
-      search: search.search as string,
-      role: search.role as RoleType,
-      status: search.status as EmployeeStatus,
-    }
-  },
+  validateSearch: employeeSearchSchema,
   component: RouteComponent,
 })
 

@@ -3,13 +3,12 @@ import { BookingCreateForm } from "@/widgets/booking"
 import { useSearch } from "@tanstack/react-router"
 
 export const BookingCreate = () => {
-
   const search = useSearch({ from: "/_app/_layout/bookings/create/" });
 
   return (
     <>
       <PageHeader>
-        <PageHeaderTitle>Новое бронирование</PageHeaderTitle>
+        <PageHeaderTitle>Новая запись</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
         </PageHeaderActions>

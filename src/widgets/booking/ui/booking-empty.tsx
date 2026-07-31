@@ -10,8 +10,8 @@ export const BookingEmpty = () => {
         <EmptyMedia variant={"empty"}>
           <BookIcon />
         </EmptyMedia>
-        <EmptyTitle>Записей пока нет.</EmptyTitle>
-        <EmptyDescription>Создайте первую запись или дождитесь новой записи от клиента.</EmptyDescription>
+        <EmptyTitle>Записей пока нет</EmptyTitle>
+        <EmptyDescription>Создайте первую запись или дождитесь бронирования от клиента</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Link to={"/bookings/create"}>
@@ -20,7 +20,7 @@ export const BookingEmpty = () => {
             size={"size_54"} 
             animation={"toggle_sm"}
             iconLeft={<AddFillIcon width={22} height={22} className="text-primary"/>}
-          >Добавить бронирование
+          >Новая запись
           </Button>
         </Link>
       </EmptyContent>
