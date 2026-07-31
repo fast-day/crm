@@ -1,5 +1,6 @@
 import type { CustomerProfile } from "@/entities/customers";
 import type { IDirectoryCustomer } from "@/entities/directories";
+import type { IInvoice } from "@/entities/invoice";
 import type { ILocationAddress } from "@/entities/location";
 import type { ServicePrices } from "@/entities/services";
 
@@ -44,13 +45,13 @@ export type BookingServiceType = {
 export interface IBookingOrder {
   id: string;
   status: OrderStatusType;
+  tag: string;
   subtotal: number;
   total: number;
-  comment: string | null;
   discount: number | null;
   paid_at: boolean | null;
-  tag: string;
   payment_method: PaymentMethodType;
+  invoices: IInvoice[]
 }
 
 export interface IBookingLocation {
@@ -123,9 +124,18 @@ export interface IBookingDetailCustomerProfile extends CustomerProfile {
   email: string | null;
 }
 
+export interface IBookingInvoice {
+  total: number | null;
+  subtotal: number;
+  status: OrderStatusType;
+  order_id: string | null;
+}
+
 export interface IBookingDetail extends Omit<IBooking, "payment_method" | "subtotal" | "order_id" | "customer"> {
-  order: IBookingOrder | null;
+  orders: IBookingOrder[] | null;
+  order_id: string | null;
   customer: IDirectoryCustomer;
+  invoice: IBookingInvoice;
 }
 
 export interface IBookingServiceActionCredentials {
@@ -134,7 +144,6 @@ export interface IBookingServiceActionCredentials {
   count: number;
   start_time: string;
   duration: number;
-
   users: Partial<Omit<IBookingEmployee, "full_name" | "avatar" | "phone" | "position">>[];
 }
 

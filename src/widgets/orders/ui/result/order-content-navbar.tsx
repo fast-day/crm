@@ -35,8 +35,8 @@ export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }:
 
         <div className="space-y-4">
 
-          {(status === "paid" || status === "cancelled") && <OrderNew />}
-          {(status === "unpaid" || status === "cancelled") && <OrderCheckout booking_id={bookings[0].id} order_id={order_id} />}
+          {(status === "paid" || status === "refund") && <OrderNew />}
+          {(status === "unpaid") && <OrderCheckout booking_id={bookings[0].id} order_id={order_id} />}
           <OrderBookingView booking_id={bookings[0].id} />
           {(status === "unpaid") && <OrderCancel order_id={order_id} />}
 

@@ -19,11 +19,11 @@ export const OrderCheckoutSell = ({ booking, order }: IOrderCheckoutSellProps) =
   const { handleSave, handlePay, payment, selectPayment, isConfirming, IsCompleting } = useOrderSell();
 
   useEffect(() => {
-    if (booking.order?.status === "paid") {
-      navigate({ to: `/orders/${booking.order.id}`, replace: true });
+    if (booking.invoice?.status === "paid") {
+      navigate({ to: `/orders/${booking.order_id}`, replace: true });
       return;
     }
-  }, [booking.order?.status]);
+  }, [booking.invoice?.status]);
 
   return (
     <div className="mt-8 h-full">
@@ -35,7 +35,7 @@ export const OrderCheckoutSell = ({ booking, order }: IOrderCheckoutSellProps) =
           {payment && (
             <OrderPaymentResult
               payment={"online"}
-              subtotal={booking.order ? booking.order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0)}
+              subtotal={booking.order_id ? booking.invoice.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0)}
               cancel={() => selectPayment(null)}
             />
           )}

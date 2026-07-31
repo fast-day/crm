@@ -27,14 +27,23 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
               <p>Итого</p>
-              <span>{formatPrice(booking.order ? booking.order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} руб.</span>
+              <span>{formatPrice(booking.invoice.subtotal ? booking.invoice.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} руб.</span>
             </CardTitle>
           </CardHeader>
 
           <CardContent className="flex-1 flex flex-col">
             <div className="flex flex-col h-full space-y-6">
               
-              {booking.order && <BookingOrderCard order={booking.order} />}
+              {booking.orders && (
+                <div className="grid space-y-4">
+                  {booking.orders.map((order, idx) => (
+                    <BookingOrderCard
+                      key={idx}
+                      {...order}
+                    />
+                  ))}
+                </div>
+              )}
 
               <BookingCurrentDate
                 date={booking.date}
@@ -48,14 +57,14 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
               </CardContentLabel>
             </div>
 
-            {(!booking.order || booking.order.status !== "paid") && (
+            {(booking.status !== "completed") && (
               <div className="flex gap-3">
                 {/* <Link to={"edit"}>
                   <Button type={"button"} size={"icon_60"} variant={"white"} className="p-5">
                     <PencilEditIcon width={24} height={24} />
                   </Button>
                 </Link> */}
-                <Link to={`/orders/checkout/sell?booking_id=${booking.id}${booking.order ? `&order_id=${booking.order.id}` : ``}`} className="w-full">
+                <Link to={`/orders/checkout/sell?booking_id=${booking.id}${booking.order_id ? `&order_id=${booking.order_id}` : ``}`} className="w-full">
                   <Button
                     type={"button"}
                     size={"size_60"}

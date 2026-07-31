@@ -33,6 +33,7 @@ export { default as CustomerIcon } from "./Customer";
 export { default as DashboardIcon } from "./Dashboard";
 export { default as DatabricksIcon } from "./Databricks";
 export { default as DotsVerticalIcon } from "./DotsVertical";
+export { default as DownloadIcon } from "./Download";
 export { default as EditIcon } from "./Edit";
 export { default as EmployeeIcon } from "./Employee";
 export { default as ErrorIcon } from "./Error";

@@ -1,4 +1,5 @@
 import type { IBooking } from "@/entities/booking";
+import type { IInvoice } from "@/entities/invoice";
 import type { ServiceStatusType } from "@/entities/services";
 
 export type OrderSortType = "newest" | "oldest" | "price_asc" | "price_desc";
@@ -91,4 +92,5 @@ export interface IOrderDetail {
   is_payment: boolean;
   discount: number | null;
   bookings: Omit<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
+  invoices: IInvoice[];
 }
