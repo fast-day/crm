@@ -16,6 +16,7 @@ export const OrderCheckout = ({ booking_id, order_id }: IOrderCheckoutProps) => 
         type={"button"}
         isLoading={false}
         disabled={false}
+        animation={"toggle_sm"}
         iconRight={<ChevronIcon width={20} height={20} />}
       >Продолжить</Button>
     </Link>

@@ -60,7 +60,7 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
         comment: null,
       } satisfies IBookingActionCredentials;
 
-      create(req).unwrap();
+      await create(req).unwrap();
       dispatch(resetBookingCreate());
       dispatch(updateAccount({ has_bookings: true }));
       navigate({ to: "/bookings" });
@@ -68,16 +68,6 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
     catch (error) {
       toast.error(getErrorMessage(error));
     }
-
-    // toast.promise(create(req).unwrap(), {
-    //   success: () => {
-    //     dispatch(resetBookingCreate());
-    //     dispatch(updateAccount({ has_bookings: true }));
-    //     navigate({ to: "/bookings" });
-    //     return "Бронирование создано";
-    //   },
-    //   error: "Не удалось создать бронирование",
-    // });
   };
 
   return { handleSave, isLoading };

@@ -23,7 +23,7 @@ export const BookingOrderCard = ({ status, subtotal, id, tag, invoices }: IBooki
                 );
               })()}
           </Badge>
-          <div className="font-bold">{formatPrice(subtotal)} ₽</div>
+          <div className="font-bold">{formatPrice(status === "refund" ? -subtotal : subtotal)} ₽</div>
         </div>
 
         <div>

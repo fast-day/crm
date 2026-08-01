@@ -1,4 +1,4 @@
-import { OrderBookingView, OrderCancel, OrderCheckout } from "@/features/order";
+import { OrderBookingView, OrderCancel, OrderCheckout, OrderRefund } from "@/features/order";
 
 interface IOrderDetailActionsProps {
   status: OrderStatusType;
@@ -13,6 +13,7 @@ export const OrderDetailActions = ({ status, booking_id, order_id }: IOrderDetai
       {(status === "unpaid") && <OrderCheckout booking_id={booking_id} order_id={order_id} />}
       <OrderBookingView booking_id={booking_id} />
       {(status === "unpaid") && <OrderCancel order_id={order_id} />}
+      {(status === "paid") && <OrderRefund order_id={order_id} />}
     </div>
   )
 }

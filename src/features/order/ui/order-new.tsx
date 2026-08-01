@@ -9,6 +9,7 @@ export const OrderNew = () => {
       className={"p-5"}
       isLoading={false}
       disabled={false}
+      animation={"toggle_sm"}
       iconLeft={<NewOrderIcon width={20} height={20} />}
     >Новый платеж</Button>
   )

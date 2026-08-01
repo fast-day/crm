@@ -1,5 +1,5 @@
-import { useCompleteBookingMutation, useConfirmBookingMutation, type IBookingConfirmCredentials } from "@/entities/booking";
 import { useDialog } from "@/entities/dialog";
+import { useCreateOrderMutation, usePaidOrderMutation } from "@/entities/orders";
 import { getErrorMessage } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
@@ -8,10 +8,10 @@ import { toast } from "sonner";
 interface IUseOrderSellReturnProps {
   payment: PaymentMethodType | null;
   isConfirming: boolean;
-  IsCompleting: boolean;
+  isPaying: boolean;
 
   handleSave: (booking_id: string) => Promise<void>;
-  handlePay: (booking_id: string) => Promise<void>;
+  handlePay: (booking_id: string, order_id: string | null) => Promise<void>;
   selectPayment: (method: PaymentMethodType | null) => void;
 }
 
@@ -22,8 +22,8 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
 
   const { openDialog } = useDialog();
 
-  const [confirm, { isLoading: isConfirming }] = useConfirmBookingMutation();
-  const [complete, { isLoading: IsCompleting }] = useCompleteBookingMutation();
+  const [confirm, { isLoading: isConfirming }] = useCreateOrderMutation();
+  const [pay, { isLoading: isPaying }] = usePaidOrderMutation();
 
   const handleSave = async (booking_id: string): Promise<void> => {
     if (payment) {
@@ -32,32 +32,33 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
     }
 
     try {
-      const req = {
-        params: {
-          booking_id,
-        },
-        body: {
-          status: "unpaid",
-        }
-      } satisfies IBookingConfirmCredentials;
-      const res = await confirm(req).unwrap();
-      navigate({ to: `/orders/${res.order.id}` });
+      const res = await confirm({ booking_id }).unwrap();
+      navigate({ to: `/orders/${res.id}` });
     }
     catch (error) {
       toast.error(getErrorMessage(error));
     }
   }
 
-  const handlePay = async (booking_id: string): Promise<void> => {
+  const handlePay = async (booking_id: string, order_id: string | null): Promise<void> => {
     if (!payment) {
       openDialog("select_payment_method", undefined);
       return;
     };
 
     try {
-      const res = await complete({ booking_id }).unwrap();
-      console.log(res);
-      navigate({ to: `/orders/${res.order_id}`, replace: true });
+      let orderId = order_id;
+
+      if (!orderId) {
+        const order = await confirm({ booking_id }).unwrap();
+        orderId = order.id;
+      }
+
+      const res = await pay({
+        order_id: orderId,
+        body: { payment_method: payment },
+      }).unwrap();
+      navigate({ to: `/orders/${res.id}`, replace: true });
     }
     catch (error) {
       toast.error(getErrorMessage(error));
@@ -71,7 +72,7 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
   return {
     payment,
     isConfirming,
-    IsCompleting,
+    isPaying,
 
     handleSave,
     handlePay,

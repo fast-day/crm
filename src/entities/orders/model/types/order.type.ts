@@ -94,3 +94,13 @@ export interface IOrderDetail {
   bookings: Omit<IBooking[], "payment_method" | "order_id" | "payment_method" | "subtotal">;
   invoices: IInvoice[];
 }
+
+/**
+  ===== ОПЛАТА ЗАКАЗА =====
+**/
+export interface IOrderPaidCredentials {
+  order_id: string;
+  body: {
+    payment_method: PaymentMethodType;
+  }
+}

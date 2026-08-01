@@ -17,7 +17,7 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
   return (
     <div className="mt-8 h-full">
       
-      <div className="flex">
+      <div className="flex h-full">
       
         <ContentLayout>
           <BookingServices booking_services={booking.booking_services} />
@@ -54,7 +54,7 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
             </div>
           }
           actions={
-            (booking.status !== "new") && (
+            (booking.status === "new") && (
               <div className="flex gap-3">
                 {/* <Link to={"edit"}>
                   <Button type={"button"} size={"icon_60"} variant={"white"} className="p-5">

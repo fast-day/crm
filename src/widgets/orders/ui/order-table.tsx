@@ -43,7 +43,6 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
             orders.map((ord, index) => (
               <React.Fragment key={index}>
                 <TableRow
-                  // onClick={() => navigate({ to: (ord.status === "pending" || ord.status === "open" || ord.status === "unpaid" ? `/orders/checkout/sell?booking_id=${ord.booking_ids}&order_id=${ord.id}` : `/orders/${ord.id}`) })}
                   onClick={() => navigate({ to: `/orders/${ord.id}` })}
                 >
                   <TableCell className="flex-col justify-center items-start gap-0">
@@ -57,7 +56,7 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
                           <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id ?? "none"} />
                           <p>{ord.customer.full_name}</p>
                         </div>
-                        <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${ord.customer.phone}`}>{ord.customer.phone}</Link>
+                        <p className="text-xss leading-3 text-primary">{ord.customer.phone}</p>
                       </>
                     ) : (
                       <div className="flex items-center justify-center flex-1 w-full">-</div>
