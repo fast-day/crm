@@ -15,7 +15,7 @@ export const OrderInvoices = ({ invoices }: IOrderInvoicesProps) => {
             <InvoiceCard
               key={idx}
               {...invoice}
-              download={<InvoiceDownload invoice_id={invoice.id} />}
+              download={<InvoiceDownload invoice_id={invoice.id} tag={invoice.tag} />}
             />
           ))
         : 
