@@ -1,5 +1,6 @@
 import type { IBookingOrder } from "@/entities/booking";
 import { InvoiceOrderCard } from "@/entities/invoice";
+import { InvoiceDownload } from "@/features/invoice";
 import { ORDER_STATUS } from "@/shared/constants/order-status.constant";
 import { Card, CardContent, Button, Badge } from "@/shared/ui";
 import { formatPrice } from "@/shared/utils";
@@ -30,7 +31,11 @@ export const BookingOrderCard = ({ status, subtotal, id, tag, invoices }: IBooki
           {invoices.length > 0 ? (
             invoices.map((invoice, idx) => (
               <React.Fragment key={idx}>
-                <InvoiceOrderCard key={idx} {...invoice} />
+                <InvoiceOrderCard
+                  key={idx}
+                  {...invoice}
+                  download={<InvoiceDownload invoice_id={invoice.id} tag={invoice.tag} />}
+                />
                 <div className="border-b border-border" />
               </React.Fragment>
             ))
