@@ -1,17 +1,17 @@
 import type { CustomerProfile } from "@/entities/customers";
 import type { IOrderDetail } from "@/entities/orders";
 import { Avatar } from "@/entities/user"
-import { OrderBookingView, OrderCheckout, OrderNew, OrderCancel } from "@/features/order";
+import { OrderBookingView, OrderCheckout, OrderCancel } from "@/features/order";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/ui"
 import { Link } from "@tanstack/react-router"
 
-interface OrderContentNavbarProps extends IOrderDetail {
+interface OrderDetailsPanelProps extends IOrderDetail {
   customer: Omit<CustomerProfile, "birthday">;
 }
 
-export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }: OrderContentNavbarProps) => {
+export const OrderDetailsPanel = ({ customer, status, id: order_id, bookings }: OrderDetailsPanelProps) => {
   return (
-    <Card className="flex flex-col px-4">
+    <Card className="flex h-full overflow-y-auto flex-col px-4">
 
       <CardHeader className="px-0">
         <CardTitle>Содержание</CardTitle>
@@ -35,7 +35,7 @@ export const OrderContentNavbar = ({ customer, status, id: order_id, bookings }:
 
         <div className="space-y-4">
 
-          {(status === "paid" || status === "refund") && <OrderNew />}
+          {/* {(status === "paid" || status === "refund") && <OrderNew />} */}
           {(status === "unpaid") && <OrderCheckout booking_id={bookings[0].id} order_id={order_id} />}
           <OrderBookingView booking_id={bookings[0].id} />
           {(status === "unpaid") && <OrderCancel order_id={order_id} />}
