@@ -96,6 +96,17 @@ export interface IOrderDetail {
 }
 
 /**
+  ===== СОЗДАНИЕ ЗАКАЗА =====
+**/
+export interface IOrderCreateCredentials {
+  booking_id: string;
+  body?: {
+    comment?: string;
+    discount?: number;
+  }
+}
+
+/**
   ===== ОПЛАТА ЗАКАЗА =====
 **/
 export interface IOrderPaidCredentials {

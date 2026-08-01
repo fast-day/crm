@@ -1,6 +1,6 @@
 import { API } from "@/shared/api";
 import { buildQuery } from "@/shared/lib";
-import type { IOrder, IOrderDetail, IOrderPaidCredentials, IOrderQuery } from "../model/types/order.type";
+import type { IOrder, IOrderCreateCredentials, IOrderDetail, IOrderPaidCredentials, IOrderQuery } from "../model/types/order.type";
 
 export const orderApi = API.injectEndpoints({
   endpoints: builder => ({
@@ -28,10 +28,11 @@ export const orderApi = API.injectEndpoints({
     /**
       ===== СОЗДАНИЕ ЗАКАЗА =====
     **/
-   createOrder: builder.mutation<IOrderDetail, { booking_id: string }>({
-    query: ({ booking_id }) => ({
-      url: `/v1/orders/${booking_id}`,
-      method: "POST"
+   createOrder: builder.mutation<IOrderDetail, IOrderCreateCredentials>({
+    query: ({ booking_id, body }) => ({
+      url: `/v1/orders/${booking_id}/draft`,
+      method: "POST",
+      body,
     }),
    }),
 
