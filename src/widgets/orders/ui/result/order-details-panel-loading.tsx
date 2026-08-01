@@ -1,11 +1,11 @@
 import { Card, CardHeader, CardTitle, Skeleton } from "@/shared/ui"
 
-export const OrderContentNavbarLoading = () => {
+export const OrderDetailsPanelLoading = () => {
   return (
-    <Card className="flex flex-col px-4">
+    <Card className="flex flex-col px-4 min-w-95">
 
       <CardHeader className="px-0">
-        <CardTitle>Содержание</CardTitle>
+        <CardTitle>Итого</CardTitle>
       </CardHeader>
 
         <Skeleton className="w-full h-19" />

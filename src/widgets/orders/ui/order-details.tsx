@@ -1,8 +1,11 @@
 import type { IOrderDetail } from "@/entities/orders";
-import { OrderContentNavbar } from "./result/order-content-navbar";
 import { OrderResult } from "./result/order-result";
 import { OrderResultLoading } from "./result/order-result-loading";
-import { OrderContentNavbarLoading } from "./result/order-content-navbar-loading";
+import { OrderDetailsPanelLoading } from "./result/order-details-panel-loading";
+import { ContentLayout } from "@/widgets/layout";
+import { ContentPanel } from "@/widgets/ content-panel";
+import { CustomerCard } from "@/entities/customers";
+import { OrderDetailActions } from "./result/order-detail-actions";
 
 interface IOrderDetailsProps {
   order: IOrderDetail;
@@ -12,14 +15,22 @@ interface IOrderDetailsProps {
 export const OrderDetails = ({ order, isFetching }: IOrderDetailsProps) => {
   return (
     <div className="h-full">
-      <div className="grid grid-cols-3 gap-8 h-full">
-        <div className="col-span-2 space-y-8 flex justify-center">
-          <div className="flex flex-col w-full">
-            {isFetching ? <OrderResultLoading /> : <OrderResult {...order} />}
-          </div>
-        </div>
+      <div className="flex h-full">
 
-        {isFetching ? <OrderContentNavbarLoading /> :  <OrderContentNavbar {...order} customer={order.bookings[0].customer} />}
+        <ContentLayout>
+            {isFetching ? <OrderResultLoading /> : <OrderResult {...order} />}
+        </ContentLayout>
+
+        {isFetching ? (
+          <OrderDetailsPanelLoading />
+        ) : ( 
+          <ContentPanel
+            title={"Итого"}
+            actionClassName={"mt-auto"}
+            content={<CustomerCard {...order.bookings[0].customer} />}
+            actions={<OrderDetailActions status={order.status} order_id={order.id} booking_id={order.bookings[0].id} />}
+          />
+        )}
       </div>
     </div>
   )

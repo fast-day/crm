@@ -16,6 +16,7 @@ export const OrderBookingView = ({ booking_id }: IOrderBookingViewProps) => {
         className={"p-5"}
         isLoading={false}
         disabled={false}
+        animation={"toggle_sm"}
         iconRight={<ChevronIcon width={20} height={20} />}
       >Посмотреть запись</Button>
     </Link>

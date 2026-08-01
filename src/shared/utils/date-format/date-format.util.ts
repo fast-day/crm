@@ -31,6 +31,14 @@ function formatDate(date: string): string {
   return `${parseInt(day, 10)} ${months[parseInt(month, 10) -1]}, ${year}`;
 }
 
+/*
+  !!!!! ==  ОПТИМИЗИРОВАТЬ ПОД РАЗНЫЕ ФОРМАТЫ ДАТЫ  == !!!!!
+*/
+function formatDateToRus(date: string): string {
+  const [year, month, day] = date.split('-');
+  return `${day}.${month}.${year}`;
+}
+
 function formatTimeRange(start: string, end: string, timezone: string) {
   const formatter = new Intl.DateTimeFormat("ru-RU", {
     timeZone: timezone,
@@ -76,4 +84,11 @@ function formatDateWeek(date?: Date | string): string {
   return `${dayOfWeek}, ${dayNum} ${monthName}, ${year}г.`;
 }
 
-export { formatDateTime, formatDate, formatTimeRange, formatDateWeek, formatDateToString };
+export {
+  formatDateTime,
+  formatDate,
+  formatDateToRus,
+  formatTimeRange,
+  formatDateWeek,
+  formatDateToString
+};

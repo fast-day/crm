@@ -1,6 +1,8 @@
 import { useGetOrderQuery } from "@/entities/orders";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction } from "@/shared/ui";
+import { CloseIcon } from "@/shared/icons";
+import { Button, PageHeader, PageHeaderActions } from "@/shared/ui";
 import { OrderDetails, OrderNotFound } from "@/widgets/orders";
+import { Link } from "@tanstack/react-router";
 
 interface OrderDetailProps {
   order_id: string;
@@ -18,7 +20,11 @@ export const OrderDetail = ({ order_id }: OrderDetailProps) => {
     
       <PageHeader>
         <PageHeaderActions>
-          <PageHeaderBackAction />
+          <Link to={"/orders"} className="block">
+            <Button variant={"white"} size={"icon_44"} animation={"toggle"}>
+              <CloseIcon width={18} height={18} />
+            </Button>
+          </Link>
         </PageHeaderActions>
       </PageHeader>
 

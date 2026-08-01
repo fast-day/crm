@@ -110,7 +110,7 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
                 <div className="w-2 h-2 rounded-full bg-primary" />
                 <div className="font-medium">{PAYMENT_METHODS_ENUM[payment].label}</div>
               </div>
-              <div className="font-medium">{formatPrice(booking.order ? booking.order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} ₽</div>
+              <div className="font-medium">{formatPrice(booking.order_id ? booking.invoice.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} ₽</div>
 
               <Button
                 variant={"transparent"}
@@ -166,7 +166,7 @@ export const BookingCheckoutContent = ({ booking }: BookingCheckoutContentProps)
             <div className="space-y-8">
               <div className="flex items-center justify-between gap-2.5 py-8 border-b border-border">
                 <p className="font-medium opacity-50">Итого</p>
-                <span className="font-semibold">{formatPrice(booking.order ? booking.order.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} руб.</span>
+                <span className="font-semibold">{formatPrice(booking.order_id ? booking.invoice.subtotal : booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} руб.</span>
               </div>
               <div className="flex gap-3">
                 <Button type={"button"} isLoading={isLoading} disabled={isLoading} onClick={() => handleSave(booking.id)} size={"size_60"} variant={"white"} className="p-5">

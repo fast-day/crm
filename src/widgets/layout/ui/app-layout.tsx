@@ -4,6 +4,7 @@ import { useInitialize } from "../model/hooks/initialize.hook";
 import { useSelector } from "react-redux";
 import { useAccount } from "@/entities/account";
 import { Sidebar } from "@/widgets/sidebar";
+import { ConfirmDialog } from "@/features/confirm-dialog";
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
   const { isInitialized } = useInitialize();
@@ -22,6 +23,8 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
               {children}
             </div>
           </main>
+
+          <ConfirmDialog />
         </>
       )}
     </div>

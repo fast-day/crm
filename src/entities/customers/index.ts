@@ -6,3 +6,6 @@ export * from './model/types/customer-document.type';
 // SERVICES
 export * from './service/customer.service';
 export * from './service/documents.service';
+
+// UI
+export { CustomerCard } from './ui/customer-card';

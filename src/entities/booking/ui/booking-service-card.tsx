@@ -12,9 +12,10 @@ interface IBookingServiceCardProps {
   start_time: string;
   end_time: string;
   is_mimi?: boolean;
+  is_marking_order?: boolean;
 }
 
-export const BookingServiceCard = ({ service, employee, start_time, end_time, is_mimi=false }: IBookingServiceCardProps) => {
+export const BookingServiceCard = ({ service, employee, start_time, end_time, is_mimi=false, is_marking_order=false }: IBookingServiceCardProps) => {
   return (
     <Card>
       <CardContent className={`p-4 flex ${is_mimi ? "flex-col space-y-3" : "items-center justify-between gap-2.5"}`}>
@@ -32,11 +33,13 @@ export const BookingServiceCard = ({ service, employee, start_time, end_time, is
           <div>
             <Link to={`/business/services/${service.service.service_id}`} className="block font-semibold text-base leading-5 capitalize">{service.service.name}</Link>
             <div className="flex items-center gap-3.5">
-              <div className="leading-3.5">
-                <span className="text-sm font-medium">{start_time}</span>
-                <span className="text-sm font-medium"> - </span>
-                <span className="text-sm font-medium">{`${end_time}`}</span>
-              </div>
+              {!is_marking_order && (
+                <div className="leading-3.5">
+                  <span className="text-sm font-medium">{start_time}</span>
+                  <span className="text-sm font-medium"> - </span>
+                  <span className="text-sm font-medium">{end_time}</span>
+                </div>
+              )}
               <div className="text-sm font-medium opacity-50">{minuteFormat(service.service.duration)}</div>
               <Link to={`/employees/users/${employee.user_id}`} className="flex items-center gap-2">
                 <Avatar size={"xs"} avatar_url={employee.avatar} name={employee.first_name} id={employee.user_id} />

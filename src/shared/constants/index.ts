@@ -4,3 +4,4 @@ export * from './role.constant';
 export * from './employee.constant';
 export * from './online.constant';
 export * from './booking-status.constant';
+export * from './invoice-status.constant';

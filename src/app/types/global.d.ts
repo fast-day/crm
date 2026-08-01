@@ -90,6 +90,12 @@ declare global {
   /** СТАТУСЫ ДЛЯ ЗАКАЗОВ **/
   type OrderStatusType = "paid" | "unpaid" | "cancelled" | "refund";
 
+  /** СТАТУСЫ ДЛЯ СЧЕТА **/
+  type InvoiceStatusType = "success" | "failed";
+
+  /** ТИПЫ СЧЕТА **/
+  type InvoiceType = "paid" | "refunded";
+
   /** МЕТОДЫ ДЛЯ ОПЛАТЫ **/
   type PaymentMethodType = "online" | "cash" | "credit_card";
 
