@@ -1,4 +1,20 @@
 import { API } from "@/shared/api";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+
+function parseJsonSafely(text: string): unknown {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { title: "Ошибка", detail: text || "Неизвестная ошибка" };
+  }
+}
+
+async function resolveBlobError(error: FetchBaseQueryError): Promise<FetchBaseQueryError> {
+  if (typeof error.status !== "number" || !(error.data instanceof Blob)) return error;
+
+  const text = await error.data.text();
+  return { status: error.status, data: parseJsonSafely(text) };
+}
 
 const invoiceApi = API.injectEndpoints({
   endpoints: build => ({
@@ -12,9 +28,7 @@ const invoiceApi = API.injectEndpoints({
           responseHandler: (res) => res.blob(),
         });
 
-        if (result.error) {
-          return { error: result.error };
-        }
+        if (result.error) return { error: await resolveBlobError(result.error) };
 
         const blob = result.data as Blob;
         const url = URL.createObjectURL(blob);
