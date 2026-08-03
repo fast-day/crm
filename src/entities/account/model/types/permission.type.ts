@@ -75,3 +75,5 @@ export type PermissionName =
   | "orders:draft"
   | "orders:cancel"
   | "orders:refund"
+  | "orders:calculate"
+  | "invoice:download"

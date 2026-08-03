@@ -23,7 +23,7 @@ function validateAddedBooking(booking: BookingCreate): ValidationError[] {
   const errors:ValidationError[] = [];
 
   if (!booking.service)     errors.push({ field: "service", message: "Выберите услугу" });
-  if (!booking.employee)    errors.push({ field: "employee", message: "Выберите сотрудника" });
+  // if (!booking.employee)    errors.push({ field: "employee", message: "Выберите сотрудника" });
   if (!booking.date)        errors.push({ field: "date", message: "Выберите дату" });
   if (!booking.time)        errors.push({ field: "time", message: "Выберите время" });
 

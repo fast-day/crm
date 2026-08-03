@@ -11,9 +11,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './app/routes/__root'
-import { Route as NetworkLayoutRouteImport } from './app/routes/network/_layout'
-import { Route as AuthLayoutRouteImport } from './app/routes/_auth/_layout'
-import { Route as AppLayoutRouteImport } from './app/routes/_app/_layout'
+import { Route as AppRouteRouteImport } from './app/routes/_app/route'
+import { Route as NetworkLayoutRouteRouteImport } from './app/routes/network/_layout/route'
+import { Route as AuthLayoutRouteRouteImport } from './app/routes/_auth/_layout/route'
+import { Route as AppLayoutFocusRouteRouteImport } from './app/routes/_app/_layout-focus/route'
+import { Route as AppLayoutRouteRouteImport } from './app/routes/_app/_layout/route'
+import { Route as NetworkLayoutIndexRouteImport } from './app/routes/network/_layout/index'
 import { Route as AppLayoutIndexRouteImport } from './app/routes/_app/_layout/index'
 import { Route as AuthLayoutInviteRouteImport } from './app/routes/_auth/_layout/invite'
 import { Route as AppLayoutNotFoundRouteImport } from './app/routes/_app/_layout/$notFound'
@@ -29,7 +32,6 @@ import { Route as AppLayoutEmployeesIndexRouteImport } from './app/routes/_app/_
 import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_layout/customers/index'
 import { Route as AppLayoutBookingsIndexRouteImport } from './app/routes/_app/_layout/bookings/index'
 import { Route as AppLayoutSettingsSystemIndexRouteImport } from './app/routes/_app/_layout/settings/system/index'
-import { Route as AppLayoutOrdersOrder_idIndexRouteImport } from './app/routes/_app/_layout/orders/$order_id/index'
 import { Route as AppLayoutMeSecurityIndexRouteImport } from './app/routes/_app/_layout/me/security/index'
 import { Route as AppLayoutEmployeesUsersIndexRouteImport } from './app/routes/_app/_layout/employees/users/index'
 import { Route as AppLayoutCustomersCreateIndexRouteImport } from './app/routes/_app/_layout/customers/create/index'
@@ -38,9 +40,9 @@ import { Route as AppLayoutCompanyCreateIndexRouteImport } from './app/routes/_a
 import { Route as AppLayoutBusinessServicesIndexRouteImport } from './app/routes/_app/_layout/business/services/index'
 import { Route as AppLayoutBusinessLocationsIndexRouteImport } from './app/routes/_app/_layout/business/locations/index'
 import { Route as AppLayoutBookingsCreateIndexRouteImport } from './app/routes/_app/_layout/bookings/create/index'
-import { Route as AppLayoutBookingsBooking_idIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/index'
+import { Route as AppLayoutFocusOrdersOrder_idIndexRouteImport } from './app/routes/_app/_layout-focus/orders/$order_id/index'
+import { Route as AppLayoutFocusBookingsBooking_idIndexRouteImport } from './app/routes/_app/_layout-focus/bookings/$booking_id/index'
 import { Route as AppLayoutEmployeesScheduleEmployee_idRouteImport } from './app/routes/_app/_layout/employees/schedule/$employee_id'
-import { Route as AppLayoutOrdersCheckoutSellIndexRouteImport } from './app/routes/_app/_layout/orders/checkout/sell/index'
 import { Route as AppLayoutEmployeesUsersCreateIndexRouteImport } from './app/routes/_app/_layout/employees/users/create/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/index'
 import { Route as AppLayoutCustomersCustomer_idDocumentsIndexRouteImport } from './app/routes/_app/_layout/customers/$customer_id/documents/index'
@@ -50,6 +52,7 @@ import { Route as AppLayoutBusinessServicesService_idIndexRouteImport } from './
 import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
 import { Route as AppLayoutBookingsBooking_idEditIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/edit/index'
 import { Route as AppLayoutBookingsBooking_idCheckoutIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/checkout/index'
+import { Route as AppLayoutFocusOrdersCheckoutSellIndexRouteImport } from './app/routes/_app/_layout-focus/orders/checkout/sell/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/services/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/password/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idEditIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/edit/index'
@@ -66,306 +69,320 @@ const AuthLayoutRegisterLazyRouteImport = createFileRoute(
 )()
 const AuthLayoutLoginLazyRouteImport = createFileRoute('/_auth/_layout/login')()
 
-const NetworkLayoutRoute = NetworkLayoutRouteImport.update({
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NetworkLayoutRouteRoute = NetworkLayoutRouteRouteImport.update({
   id: '/network/_layout',
   path: '/network',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthLayoutRoute = AuthLayoutRouteImport.update({
+const AuthLayoutRouteRoute = AuthLayoutRouteRouteImport.update({
   id: '/_auth/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppLayoutRoute = AppLayoutRouteImport.update({
-  id: '/_app/_layout',
-  getParentRoute: () => rootRouteImport,
+const AppLayoutFocusRouteRoute = AppLayoutFocusRouteRouteImport.update({
+  id: '/_layout-focus',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppLayoutRouteRoute = AppLayoutRouteRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const NetworkLayoutIndexRoute = NetworkLayoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => NetworkLayoutRouteRoute,
 } as any)
 const AppLayoutIndexRoute = AppLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AuthLayoutRegisterLazyRoute = AuthLayoutRegisterLazyRouteImport.update({
   id: '/register',
   path: '/register',
-  getParentRoute: () => AuthLayoutRoute,
+  getParentRoute: () => AuthLayoutRouteRoute,
 } as any).lazy(() =>
   import('./app/routes/_auth/_layout/register.lazy').then((d) => d.Route),
 )
 const AuthLayoutLoginLazyRoute = AuthLayoutLoginLazyRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => AuthLayoutRoute,
+  getParentRoute: () => AuthLayoutRouteRoute,
 } as any).lazy(() =>
   import('./app/routes/_auth/_layout/login.lazy').then((d) => d.Route),
 )
 const AuthLayoutInviteRoute = AuthLayoutInviteRouteImport.update({
   id: '/invite',
   path: '/invite',
-  getParentRoute: () => AuthLayoutRoute,
+  getParentRoute: () => AuthLayoutRouteRoute,
 } as any)
 const AppLayoutNotFoundRoute = AppLayoutNotFoundRouteImport.update({
   id: '/$notFound',
   path: '/$notFound',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const NetworkLayoutServerIndexRoute =
   NetworkLayoutServerIndexRouteImport.update({
     id: '/server/',
     path: '/server/',
-    getParentRoute: () => NetworkLayoutRoute,
+    getParentRoute: () => NetworkLayoutRouteRoute,
   } as any)
 const NetworkLayoutClientIndexRoute =
   NetworkLayoutClientIndexRouteImport.update({
     id: '/client/',
     path: '/client/',
-    getParentRoute: () => NetworkLayoutRoute,
+    getParentRoute: () => NetworkLayoutRouteRoute,
   } as any)
 const AppLayoutSettingsIndexRoute = AppLayoutSettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutScheduleIndexRoute = AppLayoutScheduleIndexRouteImport.update({
   id: '/schedule/',
   path: '/schedule/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutOrdersIndexRoute = AppLayoutOrdersIndexRouteImport.update({
   id: '/orders/',
   path: '/orders/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutNotificationsIndexRoute =
   AppLayoutNotificationsIndexRouteImport.update({
     id: '/notifications/',
     path: '/notifications/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutMeIndexRoute = AppLayoutMeIndexRouteImport.update({
   id: '/me/',
   path: '/me/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutLogoutIndexRoute = AppLayoutLogoutIndexRouteImport.update({
   id: '/logout/',
   path: '/logout/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutEmployeesIndexRoute = AppLayoutEmployeesIndexRouteImport.update({
   id: '/employees/',
   path: '/employees/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutCustomersIndexRoute = AppLayoutCustomersIndexRouteImport.update({
   id: '/customers/',
   path: '/customers/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutBookingsIndexRoute = AppLayoutBookingsIndexRouteImport.update({
   id: '/bookings/',
   path: '/bookings/',
-  getParentRoute: () => AppLayoutRoute,
+  getParentRoute: () => AppLayoutRouteRoute,
 } as any)
 const AppLayoutSettingsSystemIndexRoute =
   AppLayoutSettingsSystemIndexRouteImport.update({
     id: '/settings/system/',
     path: '/settings/system/',
-    getParentRoute: () => AppLayoutRoute,
-  } as any)
-const AppLayoutOrdersOrder_idIndexRoute =
-  AppLayoutOrdersOrder_idIndexRouteImport.update({
-    id: '/orders/$order_id/',
-    path: '/orders/$order_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutMeSecurityIndexRoute =
   AppLayoutMeSecurityIndexRouteImport.update({
     id: '/me/security/',
     path: '/me/security/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersIndexRoute =
   AppLayoutEmployeesUsersIndexRouteImport.update({
     id: '/employees/users/',
     path: '/employees/users/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCustomersCreateIndexRoute =
   AppLayoutCustomersCreateIndexRouteImport.update({
     id: '/customers/create/',
     path: '/customers/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCustomersCustomer_idIndexRoute =
   AppLayoutCustomersCustomer_idIndexRouteImport.update({
     id: '/customers/$customer_id/',
     path: '/customers/$customer_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCompanyCreateIndexRoute =
   AppLayoutCompanyCreateIndexRouteImport.update({
     id: '/company/create/',
     path: '/company/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessServicesIndexRoute =
   AppLayoutBusinessServicesIndexRouteImport.update({
     id: '/business/services/',
     path: '/business/services/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessLocationsIndexRoute =
   AppLayoutBusinessLocationsIndexRouteImport.update({
     id: '/business/locations/',
     path: '/business/locations/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBookingsCreateIndexRoute =
   AppLayoutBookingsCreateIndexRouteImport.update({
     id: '/bookings/create/',
     path: '/bookings/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
-const AppLayoutBookingsBooking_idIndexRoute =
-  AppLayoutBookingsBooking_idIndexRouteImport.update({
+const AppLayoutFocusOrdersOrder_idIndexRoute =
+  AppLayoutFocusOrdersOrder_idIndexRouteImport.update({
+    id: '/orders/$order_id/',
+    path: '/orders/$order_id/',
+    getParentRoute: () => AppLayoutFocusRouteRoute,
+  } as any)
+const AppLayoutFocusBookingsBooking_idIndexRoute =
+  AppLayoutFocusBookingsBooking_idIndexRouteImport.update({
     id: '/bookings/$booking_id/',
     path: '/bookings/$booking_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutFocusRouteRoute,
   } as any)
 const AppLayoutEmployeesScheduleEmployee_idRoute =
   AppLayoutEmployeesScheduleEmployee_idRouteImport.update({
     id: '/employees/schedule/$employee_id',
     path: '/employees/schedule/$employee_id',
-    getParentRoute: () => AppLayoutRoute,
-  } as any)
-const AppLayoutOrdersCheckoutSellIndexRoute =
-  AppLayoutOrdersCheckoutSellIndexRouteImport.update({
-    id: '/orders/checkout/sell/',
-    path: '/orders/checkout/sell/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersCreateIndexRoute =
   AppLayoutEmployeesUsersCreateIndexRouteImport.update({
     id: '/employees/users/create/',
     path: '/employees/users/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersEmployee_idIndexRoute =
   AppLayoutEmployeesUsersEmployee_idIndexRouteImport.update({
     id: '/employees/users/$employee_id/',
     path: '/employees/users/$employee_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCustomersCustomer_idDocumentsIndexRoute =
   AppLayoutCustomersCustomer_idDocumentsIndexRouteImport.update({
     id: '/customers/$customer_id/documents/',
     path: '/customers/$customer_id/documents/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCustomersCustomer_idBookingsIndexRoute =
   AppLayoutCustomersCustomer_idBookingsIndexRouteImport.update({
     id: '/customers/$customer_id/bookings/',
     path: '/customers/$customer_id/bookings/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessServicesCreateIndexRoute =
   AppLayoutBusinessServicesCreateIndexRouteImport.update({
     id: '/business/services/create/',
     path: '/business/services/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessServicesService_idIndexRoute =
   AppLayoutBusinessServicesService_idIndexRouteImport.update({
     id: '/business/services/$service_id/',
     path: '/business/services/$service_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessLocationsCreateIndexRoute =
   AppLayoutBusinessLocationsCreateIndexRouteImport.update({
     id: '/business/locations/create/',
     path: '/business/locations/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBookingsBooking_idEditIndexRoute =
   AppLayoutBookingsBooking_idEditIndexRouteImport.update({
     id: '/bookings/$booking_id/edit/',
     path: '/bookings/$booking_id/edit/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBookingsBooking_idCheckoutIndexRoute =
   AppLayoutBookingsBooking_idCheckoutIndexRouteImport.update({
     id: '/bookings/$booking_id/checkout/',
     path: '/bookings/$booking_id/checkout/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
+  } as any)
+const AppLayoutFocusOrdersCheckoutSellIndexRoute =
+  AppLayoutFocusOrdersCheckoutSellIndexRouteImport.update({
+    id: '/orders/checkout/sell/',
+    path: '/orders/checkout/sell/',
+    getParentRoute: () => AppLayoutFocusRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersEmployee_idServicesIndexRoute =
   AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport.update({
     id: '/employees/users/$employee_id/services/',
     path: '/employees/users/$employee_id/services/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersEmployee_idPasswordIndexRoute =
   AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport.update({
     id: '/employees/users/$employee_id/password/',
     path: '/employees/users/$employee_id/password/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersEmployee_idEditIndexRoute =
   AppLayoutEmployeesUsersEmployee_idEditIndexRouteImport.update({
     id: '/employees/users/$employee_id/edit/',
     path: '/employees/users/$employee_id/edit/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCustomersCustomer_idDocumentsCreateIndexRoute =
   AppLayoutCustomersCustomer_idDocumentsCreateIndexRouteImport.update({
     id: '/customers/$customer_id/documents/create/',
     path: '/customers/$customer_id/documents/create/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutCustomersCustomer_idDocumentsDocument_idIndexRoute =
   AppLayoutCustomersCustomer_idDocumentsDocument_idIndexRouteImport.update({
     id: '/customers/$customer_id/documents/$document_id/',
     path: '/customers/$customer_id/documents/$document_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessServicesService_idLocationsIndexRoute =
   AppLayoutBusinessServicesService_idLocationsIndexRouteImport.update({
     id: '/business/services/$service_id/locations/',
     path: '/business/services/$service_id/locations/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessServicesService_idEmployeesIndexRoute =
   AppLayoutBusinessServicesService_idEmployeesIndexRouteImport.update({
     id: '/business/services/$service_id/employees/',
     path: '/business/services/$service_id/employees/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessServicesService_idEditIndexRoute =
   AppLayoutBusinessServicesService_idEditIndexRouteImport.update({
     id: '/business/services/$service_id/edit/',
     path: '/business/services/$service_id/edit/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessLocationsLocationLocation_idIndexRoute =
   AppLayoutBusinessLocationsLocationLocation_idIndexRouteImport.update({
     id: '/business/locations/_location/$location_id/',
     path: '/business/locations/$location_id/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute =
   AppLayoutBusinessLocationsLocationLocation_idEditIndexRouteImport.update({
     id: '/business/locations/_location/$location_id/edit/',
     path: '/business/locations/$location_id/edit/',
-    getParentRoute: () => AppLayoutRoute,
+    getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppLayoutIndexRoute
-  '/network': typeof NetworkLayoutRouteWithChildren
+  '/network': typeof NetworkLayoutRouteRouteWithChildren
   '/$notFound': typeof AppLayoutNotFoundRoute
   '/invite': typeof AuthLayoutInviteRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
+  '/network/': typeof NetworkLayoutIndexRoute
   '/bookings/': typeof AppLayoutBookingsIndexRoute
   '/customers/': typeof AppLayoutCustomersIndexRoute
   '/employees/': typeof AppLayoutEmployeesIndexRoute
@@ -378,7 +395,8 @@ export interface FileRoutesByFullPath {
   '/network/client/': typeof NetworkLayoutClientIndexRoute
   '/network/server/': typeof NetworkLayoutServerIndexRoute
   '/employees/schedule/$employee_id': typeof AppLayoutEmployeesScheduleEmployee_idRoute
-  '/bookings/$booking_id/': typeof AppLayoutBookingsBooking_idIndexRoute
+  '/bookings/$booking_id/': typeof AppLayoutFocusBookingsBooking_idIndexRoute
+  '/orders/$order_id/': typeof AppLayoutFocusOrdersOrder_idIndexRoute
   '/bookings/create/': typeof AppLayoutBookingsCreateIndexRoute
   '/business/locations/': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services/': typeof AppLayoutBusinessServicesIndexRoute
@@ -387,8 +405,8 @@ export interface FileRoutesByFullPath {
   '/customers/create/': typeof AppLayoutCustomersCreateIndexRoute
   '/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
   '/me/security/': typeof AppLayoutMeSecurityIndexRoute
-  '/orders/$order_id/': typeof AppLayoutOrdersOrder_idIndexRoute
   '/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
+  '/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
   '/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
@@ -398,7 +416,6 @@ export interface FileRoutesByFullPath {
   '/customers/$customer_id/documents/': typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   '/employees/users/$employee_id/': typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   '/employees/users/create/': typeof AppLayoutEmployeesUsersCreateIndexRoute
-  '/orders/checkout/sell/': typeof AppLayoutOrdersCheckoutSellIndexRoute
   '/business/locations/$location_id/': typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   '/business/services/$service_id/edit/': typeof AppLayoutBusinessServicesService_idEditIndexRoute
   '/business/services/$service_id/employees/': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -412,11 +429,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof AppLayoutIndexRoute
-  '/network': typeof NetworkLayoutRouteWithChildren
   '/$notFound': typeof AppLayoutNotFoundRoute
   '/invite': typeof AuthLayoutInviteRoute
   '/login': typeof AuthLayoutLoginLazyRoute
   '/register': typeof AuthLayoutRegisterLazyRoute
+  '/network': typeof NetworkLayoutIndexRoute
   '/bookings': typeof AppLayoutBookingsIndexRoute
   '/customers': typeof AppLayoutCustomersIndexRoute
   '/employees': typeof AppLayoutEmployeesIndexRoute
@@ -429,7 +446,8 @@ export interface FileRoutesByTo {
   '/network/client': typeof NetworkLayoutClientIndexRoute
   '/network/server': typeof NetworkLayoutServerIndexRoute
   '/employees/schedule/$employee_id': typeof AppLayoutEmployeesScheduleEmployee_idRoute
-  '/bookings/$booking_id': typeof AppLayoutBookingsBooking_idIndexRoute
+  '/bookings/$booking_id': typeof AppLayoutFocusBookingsBooking_idIndexRoute
+  '/orders/$order_id': typeof AppLayoutFocusOrdersOrder_idIndexRoute
   '/bookings/create': typeof AppLayoutBookingsCreateIndexRoute
   '/business/locations': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services': typeof AppLayoutBusinessServicesIndexRoute
@@ -438,8 +456,8 @@ export interface FileRoutesByTo {
   '/customers/create': typeof AppLayoutCustomersCreateIndexRoute
   '/employees/users': typeof AppLayoutEmployeesUsersIndexRoute
   '/me/security': typeof AppLayoutMeSecurityIndexRoute
-  '/orders/$order_id': typeof AppLayoutOrdersOrder_idIndexRoute
   '/settings/system': typeof AppLayoutSettingsSystemIndexRoute
+  '/orders/checkout/sell': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
   '/bookings/$booking_id/checkout': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/bookings/$booking_id/edit': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
@@ -449,7 +467,6 @@ export interface FileRoutesByTo {
   '/customers/$customer_id/documents': typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   '/employees/users/$employee_id': typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   '/employees/users/create': typeof AppLayoutEmployeesUsersCreateIndexRoute
-  '/orders/checkout/sell': typeof AppLayoutOrdersCheckoutSellIndexRoute
   '/business/locations/$location_id': typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   '/business/services/$service_id/edit': typeof AppLayoutBusinessServicesService_idEditIndexRoute
   '/business/services/$service_id/employees': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -463,14 +480,17 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_app/_layout': typeof AppLayoutRouteWithChildren
-  '/_auth/_layout': typeof AuthLayoutRouteWithChildren
-  '/network/_layout': typeof NetworkLayoutRouteWithChildren
+  '/_app': typeof AppRouteRouteWithChildren
+  '/_app/_layout': typeof AppLayoutRouteRouteWithChildren
+  '/_app/_layout-focus': typeof AppLayoutFocusRouteRouteWithChildren
+  '/_auth/_layout': typeof AuthLayoutRouteRouteWithChildren
+  '/network/_layout': typeof NetworkLayoutRouteRouteWithChildren
   '/_app/_layout/$notFound': typeof AppLayoutNotFoundRoute
   '/_auth/_layout/invite': typeof AuthLayoutInviteRoute
   '/_auth/_layout/login': typeof AuthLayoutLoginLazyRoute
   '/_auth/_layout/register': typeof AuthLayoutRegisterLazyRoute
   '/_app/_layout/': typeof AppLayoutIndexRoute
+  '/network/_layout/': typeof NetworkLayoutIndexRoute
   '/_app/_layout/bookings/': typeof AppLayoutBookingsIndexRoute
   '/_app/_layout/customers/': typeof AppLayoutCustomersIndexRoute
   '/_app/_layout/employees/': typeof AppLayoutEmployeesIndexRoute
@@ -483,7 +503,8 @@ export interface FileRoutesById {
   '/network/_layout/client/': typeof NetworkLayoutClientIndexRoute
   '/network/_layout/server/': typeof NetworkLayoutServerIndexRoute
   '/_app/_layout/employees/schedule/$employee_id': typeof AppLayoutEmployeesScheduleEmployee_idRoute
-  '/_app/_layout/bookings/$booking_id/': typeof AppLayoutBookingsBooking_idIndexRoute
+  '/_app/_layout-focus/bookings/$booking_id/': typeof AppLayoutFocusBookingsBooking_idIndexRoute
+  '/_app/_layout-focus/orders/$order_id/': typeof AppLayoutFocusOrdersOrder_idIndexRoute
   '/_app/_layout/bookings/create/': typeof AppLayoutBookingsCreateIndexRoute
   '/_app/_layout/business/locations/': typeof AppLayoutBusinessLocationsIndexRoute
   '/_app/_layout/business/services/': typeof AppLayoutBusinessServicesIndexRoute
@@ -492,8 +513,8 @@ export interface FileRoutesById {
   '/_app/_layout/customers/create/': typeof AppLayoutCustomersCreateIndexRoute
   '/_app/_layout/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
   '/_app/_layout/me/security/': typeof AppLayoutMeSecurityIndexRoute
-  '/_app/_layout/orders/$order_id/': typeof AppLayoutOrdersOrder_idIndexRoute
   '/_app/_layout/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
+  '/_app/_layout-focus/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
   '/_app/_layout/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/_app/_layout/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/_app/_layout/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
@@ -503,7 +524,6 @@ export interface FileRoutesById {
   '/_app/_layout/customers/$customer_id/documents/': typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   '/_app/_layout/employees/users/$employee_id/': typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   '/_app/_layout/employees/users/create/': typeof AppLayoutEmployeesUsersCreateIndexRoute
-  '/_app/_layout/orders/checkout/sell/': typeof AppLayoutOrdersCheckoutSellIndexRoute
   '/_app/_layout/business/locations/_location/$location_id/': typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   '/_app/_layout/business/services/$service_id/edit/': typeof AppLayoutBusinessServicesService_idEditIndexRoute
   '/_app/_layout/business/services/$service_id/employees/': typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -524,6 +544,7 @@ export interface FileRouteTypes {
     | '/invite'
     | '/login'
     | '/register'
+    | '/network/'
     | '/bookings/'
     | '/customers/'
     | '/employees/'
@@ -537,6 +558,7 @@ export interface FileRouteTypes {
     | '/network/server/'
     | '/employees/schedule/$employee_id'
     | '/bookings/$booking_id/'
+    | '/orders/$order_id/'
     | '/bookings/create/'
     | '/business/locations/'
     | '/business/services/'
@@ -545,8 +567,8 @@ export interface FileRouteTypes {
     | '/customers/create/'
     | '/employees/users/'
     | '/me/security/'
-    | '/orders/$order_id/'
     | '/settings/system/'
+    | '/orders/checkout/sell/'
     | '/bookings/$booking_id/checkout/'
     | '/bookings/$booking_id/edit/'
     | '/business/locations/create/'
@@ -556,7 +578,6 @@ export interface FileRouteTypes {
     | '/customers/$customer_id/documents/'
     | '/employees/users/$employee_id/'
     | '/employees/users/create/'
-    | '/orders/checkout/sell/'
     | '/business/locations/$location_id/'
     | '/business/services/$service_id/edit/'
     | '/business/services/$service_id/employees/'
@@ -570,11 +591,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/network'
     | '/$notFound'
     | '/invite'
     | '/login'
     | '/register'
+    | '/network'
     | '/bookings'
     | '/customers'
     | '/employees'
@@ -588,6 +609,7 @@ export interface FileRouteTypes {
     | '/network/server'
     | '/employees/schedule/$employee_id'
     | '/bookings/$booking_id'
+    | '/orders/$order_id'
     | '/bookings/create'
     | '/business/locations'
     | '/business/services'
@@ -596,8 +618,8 @@ export interface FileRouteTypes {
     | '/customers/create'
     | '/employees/users'
     | '/me/security'
-    | '/orders/$order_id'
     | '/settings/system'
+    | '/orders/checkout/sell'
     | '/bookings/$booking_id/checkout'
     | '/bookings/$booking_id/edit'
     | '/business/locations/create'
@@ -607,7 +629,6 @@ export interface FileRouteTypes {
     | '/customers/$customer_id/documents'
     | '/employees/users/$employee_id'
     | '/employees/users/create'
-    | '/orders/checkout/sell'
     | '/business/locations/$location_id'
     | '/business/services/$service_id/edit'
     | '/business/services/$service_id/employees'
@@ -620,7 +641,9 @@ export interface FileRouteTypes {
     | '/business/locations/$location_id/edit'
   id:
     | '__root__'
+    | '/_app'
     | '/_app/_layout'
+    | '/_app/_layout-focus'
     | '/_auth/_layout'
     | '/network/_layout'
     | '/_app/_layout/$notFound'
@@ -628,6 +651,7 @@ export interface FileRouteTypes {
     | '/_auth/_layout/login'
     | '/_auth/_layout/register'
     | '/_app/_layout/'
+    | '/network/_layout/'
     | '/_app/_layout/bookings/'
     | '/_app/_layout/customers/'
     | '/_app/_layout/employees/'
@@ -640,7 +664,8 @@ export interface FileRouteTypes {
     | '/network/_layout/client/'
     | '/network/_layout/server/'
     | '/_app/_layout/employees/schedule/$employee_id'
-    | '/_app/_layout/bookings/$booking_id/'
+    | '/_app/_layout-focus/bookings/$booking_id/'
+    | '/_app/_layout-focus/orders/$order_id/'
     | '/_app/_layout/bookings/create/'
     | '/_app/_layout/business/locations/'
     | '/_app/_layout/business/services/'
@@ -649,8 +674,8 @@ export interface FileRouteTypes {
     | '/_app/_layout/customers/create/'
     | '/_app/_layout/employees/users/'
     | '/_app/_layout/me/security/'
-    | '/_app/_layout/orders/$order_id/'
     | '/_app/_layout/settings/system/'
+    | '/_app/_layout-focus/orders/checkout/sell/'
     | '/_app/_layout/bookings/$booking_id/checkout/'
     | '/_app/_layout/bookings/$booking_id/edit/'
     | '/_app/_layout/business/locations/create/'
@@ -660,7 +685,6 @@ export interface FileRouteTypes {
     | '/_app/_layout/customers/$customer_id/documents/'
     | '/_app/_layout/employees/users/$employee_id/'
     | '/_app/_layout/employees/users/create/'
-    | '/_app/_layout/orders/checkout/sell/'
     | '/_app/_layout/business/locations/_location/$location_id/'
     | '/_app/_layout/business/services/$service_id/edit/'
     | '/_app/_layout/business/services/$service_id/employees/'
@@ -674,374 +698,395 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AppLayoutRoute: typeof AppLayoutRouteWithChildren
-  AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
-  NetworkLayoutRoute: typeof NetworkLayoutRouteWithChildren
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  AuthLayoutRouteRoute: typeof AuthLayoutRouteRouteWithChildren
+  NetworkLayoutRouteRoute: typeof NetworkLayoutRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/network/_layout': {
       id: '/network/_layout'
       path: '/network'
       fullPath: '/network'
-      preLoaderRoute: typeof NetworkLayoutRouteImport
+      preLoaderRoute: typeof NetworkLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/_layout': {
       id: '/_auth/_layout'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AuthLayoutRouteImport
+      preLoaderRoute: typeof AuthLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/_layout-focus': {
+      id: '/_app/_layout-focus'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppLayoutFocusRouteRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/_layout': {
       id: '/_app/_layout'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AppLayoutRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppLayoutRouteRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/network/_layout/': {
+      id: '/network/_layout/'
+      path: '/'
+      fullPath: '/network/'
+      preLoaderRoute: typeof NetworkLayoutIndexRouteImport
+      parentRoute: typeof NetworkLayoutRouteRoute
     }
     '/_app/_layout/': {
       id: '/_app/_layout/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppLayoutIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_auth/_layout/register': {
       id: '/_auth/_layout/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof AuthLayoutRegisterLazyRouteImport
-      parentRoute: typeof AuthLayoutRoute
+      parentRoute: typeof AuthLayoutRouteRoute
     }
     '/_auth/_layout/login': {
       id: '/_auth/_layout/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof AuthLayoutLoginLazyRouteImport
-      parentRoute: typeof AuthLayoutRoute
+      parentRoute: typeof AuthLayoutRouteRoute
     }
     '/_auth/_layout/invite': {
       id: '/_auth/_layout/invite'
       path: '/invite'
       fullPath: '/invite'
       preLoaderRoute: typeof AuthLayoutInviteRouteImport
-      parentRoute: typeof AuthLayoutRoute
+      parentRoute: typeof AuthLayoutRouteRoute
     }
     '/_app/_layout/$notFound': {
       id: '/_app/_layout/$notFound'
       path: '/$notFound'
       fullPath: '/$notFound'
       preLoaderRoute: typeof AppLayoutNotFoundRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/network/_layout/server/': {
       id: '/network/_layout/server/'
       path: '/server'
       fullPath: '/network/server/'
       preLoaderRoute: typeof NetworkLayoutServerIndexRouteImport
-      parentRoute: typeof NetworkLayoutRoute
+      parentRoute: typeof NetworkLayoutRouteRoute
     }
     '/network/_layout/client/': {
       id: '/network/_layout/client/'
       path: '/client'
       fullPath: '/network/client/'
       preLoaderRoute: typeof NetworkLayoutClientIndexRouteImport
-      parentRoute: typeof NetworkLayoutRoute
+      parentRoute: typeof NetworkLayoutRouteRoute
     }
     '/_app/_layout/settings/': {
       id: '/_app/_layout/settings/'
       path: '/settings'
       fullPath: '/settings/'
       preLoaderRoute: typeof AppLayoutSettingsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/schedule/': {
       id: '/_app/_layout/schedule/'
       path: '/schedule'
       fullPath: '/schedule/'
       preLoaderRoute: typeof AppLayoutScheduleIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/orders/': {
       id: '/_app/_layout/orders/'
       path: '/orders'
       fullPath: '/orders/'
       preLoaderRoute: typeof AppLayoutOrdersIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/notifications/': {
       id: '/_app/_layout/notifications/'
       path: '/notifications'
       fullPath: '/notifications/'
       preLoaderRoute: typeof AppLayoutNotificationsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/me/': {
       id: '/_app/_layout/me/'
       path: '/me'
       fullPath: '/me/'
       preLoaderRoute: typeof AppLayoutMeIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/logout/': {
       id: '/_app/_layout/logout/'
       path: '/logout'
       fullPath: '/logout/'
       preLoaderRoute: typeof AppLayoutLogoutIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/': {
       id: '/_app/_layout/employees/'
       path: '/employees'
       fullPath: '/employees/'
       preLoaderRoute: typeof AppLayoutEmployeesIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/': {
       id: '/_app/_layout/customers/'
       path: '/customers'
       fullPath: '/customers/'
       preLoaderRoute: typeof AppLayoutCustomersIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/bookings/': {
       id: '/_app/_layout/bookings/'
       path: '/bookings'
       fullPath: '/bookings/'
       preLoaderRoute: typeof AppLayoutBookingsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/settings/system/': {
       id: '/_app/_layout/settings/system/'
       path: '/settings/system'
       fullPath: '/settings/system/'
       preLoaderRoute: typeof AppLayoutSettingsSystemIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
-    }
-    '/_app/_layout/orders/$order_id/': {
-      id: '/_app/_layout/orders/$order_id/'
-      path: '/orders/$order_id'
-      fullPath: '/orders/$order_id/'
-      preLoaderRoute: typeof AppLayoutOrdersOrder_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/me/security/': {
       id: '/_app/_layout/me/security/'
       path: '/me/security'
       fullPath: '/me/security/'
       preLoaderRoute: typeof AppLayoutMeSecurityIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/users/': {
       id: '/_app/_layout/employees/users/'
       path: '/employees/users'
       fullPath: '/employees/users/'
       preLoaderRoute: typeof AppLayoutEmployeesUsersIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/create/': {
       id: '/_app/_layout/customers/create/'
       path: '/customers/create'
       fullPath: '/customers/create/'
       preLoaderRoute: typeof AppLayoutCustomersCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/$customer_id/': {
       id: '/_app/_layout/customers/$customer_id/'
       path: '/customers/$customer_id'
       fullPath: '/customers/$customer_id/'
       preLoaderRoute: typeof AppLayoutCustomersCustomer_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/company/create/': {
       id: '/_app/_layout/company/create/'
       path: '/company/create'
       fullPath: '/company/create/'
       preLoaderRoute: typeof AppLayoutCompanyCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/services/': {
       id: '/_app/_layout/business/services/'
       path: '/business/services'
       fullPath: '/business/services/'
       preLoaderRoute: typeof AppLayoutBusinessServicesIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/locations/': {
       id: '/_app/_layout/business/locations/'
       path: '/business/locations'
       fullPath: '/business/locations/'
       preLoaderRoute: typeof AppLayoutBusinessLocationsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/bookings/create/': {
       id: '/_app/_layout/bookings/create/'
       path: '/bookings/create'
       fullPath: '/bookings/create/'
       preLoaderRoute: typeof AppLayoutBookingsCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
-    '/_app/_layout/bookings/$booking_id/': {
-      id: '/_app/_layout/bookings/$booking_id/'
+    '/_app/_layout-focus/orders/$order_id/': {
+      id: '/_app/_layout-focus/orders/$order_id/'
+      path: '/orders/$order_id'
+      fullPath: '/orders/$order_id/'
+      preLoaderRoute: typeof AppLayoutFocusOrdersOrder_idIndexRouteImport
+      parentRoute: typeof AppLayoutFocusRouteRoute
+    }
+    '/_app/_layout-focus/bookings/$booking_id/': {
+      id: '/_app/_layout-focus/bookings/$booking_id/'
       path: '/bookings/$booking_id'
       fullPath: '/bookings/$booking_id/'
-      preLoaderRoute: typeof AppLayoutBookingsBooking_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      preLoaderRoute: typeof AppLayoutFocusBookingsBooking_idIndexRouteImport
+      parentRoute: typeof AppLayoutFocusRouteRoute
     }
     '/_app/_layout/employees/schedule/$employee_id': {
       id: '/_app/_layout/employees/schedule/$employee_id'
       path: '/employees/schedule/$employee_id'
       fullPath: '/employees/schedule/$employee_id'
       preLoaderRoute: typeof AppLayoutEmployeesScheduleEmployee_idRouteImport
-      parentRoute: typeof AppLayoutRoute
-    }
-    '/_app/_layout/orders/checkout/sell/': {
-      id: '/_app/_layout/orders/checkout/sell/'
-      path: '/orders/checkout/sell'
-      fullPath: '/orders/checkout/sell/'
-      preLoaderRoute: typeof AppLayoutOrdersCheckoutSellIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/users/create/': {
       id: '/_app/_layout/employees/users/create/'
       path: '/employees/users/create'
       fullPath: '/employees/users/create/'
       preLoaderRoute: typeof AppLayoutEmployeesUsersCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/users/$employee_id/': {
       id: '/_app/_layout/employees/users/$employee_id/'
       path: '/employees/users/$employee_id'
       fullPath: '/employees/users/$employee_id/'
       preLoaderRoute: typeof AppLayoutEmployeesUsersEmployee_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/$customer_id/documents/': {
       id: '/_app/_layout/customers/$customer_id/documents/'
       path: '/customers/$customer_id/documents'
       fullPath: '/customers/$customer_id/documents/'
       preLoaderRoute: typeof AppLayoutCustomersCustomer_idDocumentsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/$customer_id/bookings/': {
       id: '/_app/_layout/customers/$customer_id/bookings/'
       path: '/customers/$customer_id/bookings'
       fullPath: '/customers/$customer_id/bookings/'
       preLoaderRoute: typeof AppLayoutCustomersCustomer_idBookingsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/services/create/': {
       id: '/_app/_layout/business/services/create/'
       path: '/business/services/create'
       fullPath: '/business/services/create/'
       preLoaderRoute: typeof AppLayoutBusinessServicesCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/services/$service_id/': {
       id: '/_app/_layout/business/services/$service_id/'
       path: '/business/services/$service_id'
       fullPath: '/business/services/$service_id/'
       preLoaderRoute: typeof AppLayoutBusinessServicesService_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/locations/create/': {
       id: '/_app/_layout/business/locations/create/'
       path: '/business/locations/create'
       fullPath: '/business/locations/create/'
       preLoaderRoute: typeof AppLayoutBusinessLocationsCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/bookings/$booking_id/edit/': {
       id: '/_app/_layout/bookings/$booking_id/edit/'
       path: '/bookings/$booking_id/edit'
       fullPath: '/bookings/$booking_id/edit/'
       preLoaderRoute: typeof AppLayoutBookingsBooking_idEditIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/bookings/$booking_id/checkout/': {
       id: '/_app/_layout/bookings/$booking_id/checkout/'
       path: '/bookings/$booking_id/checkout'
       fullPath: '/bookings/$booking_id/checkout/'
       preLoaderRoute: typeof AppLayoutBookingsBooking_idCheckoutIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
+    }
+    '/_app/_layout-focus/orders/checkout/sell/': {
+      id: '/_app/_layout-focus/orders/checkout/sell/'
+      path: '/orders/checkout/sell'
+      fullPath: '/orders/checkout/sell/'
+      preLoaderRoute: typeof AppLayoutFocusOrdersCheckoutSellIndexRouteImport
+      parentRoute: typeof AppLayoutFocusRouteRoute
     }
     '/_app/_layout/employees/users/$employee_id/services/': {
       id: '/_app/_layout/employees/users/$employee_id/services/'
       path: '/employees/users/$employee_id/services'
       fullPath: '/employees/users/$employee_id/services/'
       preLoaderRoute: typeof AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/users/$employee_id/password/': {
       id: '/_app/_layout/employees/users/$employee_id/password/'
       path: '/employees/users/$employee_id/password'
       fullPath: '/employees/users/$employee_id/password/'
       preLoaderRoute: typeof AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/users/$employee_id/edit/': {
       id: '/_app/_layout/employees/users/$employee_id/edit/'
       path: '/employees/users/$employee_id/edit'
       fullPath: '/employees/users/$employee_id/edit/'
       preLoaderRoute: typeof AppLayoutEmployeesUsersEmployee_idEditIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/$customer_id/documents/create/': {
       id: '/_app/_layout/customers/$customer_id/documents/create/'
       path: '/customers/$customer_id/documents/create'
       fullPath: '/customers/$customer_id/documents/create/'
       preLoaderRoute: typeof AppLayoutCustomersCustomer_idDocumentsCreateIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/customers/$customer_id/documents/$document_id/': {
       id: '/_app/_layout/customers/$customer_id/documents/$document_id/'
       path: '/customers/$customer_id/documents/$document_id'
       fullPath: '/customers/$customer_id/documents/$document_id/'
       preLoaderRoute: typeof AppLayoutCustomersCustomer_idDocumentsDocument_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/services/$service_id/locations/': {
       id: '/_app/_layout/business/services/$service_id/locations/'
       path: '/business/services/$service_id/locations'
       fullPath: '/business/services/$service_id/locations/'
       preLoaderRoute: typeof AppLayoutBusinessServicesService_idLocationsIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/services/$service_id/employees/': {
       id: '/_app/_layout/business/services/$service_id/employees/'
       path: '/business/services/$service_id/employees'
       fullPath: '/business/services/$service_id/employees/'
       preLoaderRoute: typeof AppLayoutBusinessServicesService_idEmployeesIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/services/$service_id/edit/': {
       id: '/_app/_layout/business/services/$service_id/edit/'
       path: '/business/services/$service_id/edit'
       fullPath: '/business/services/$service_id/edit/'
       preLoaderRoute: typeof AppLayoutBusinessServicesService_idEditIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/locations/_location/$location_id/': {
       id: '/_app/_layout/business/locations/_location/$location_id/'
       path: '/business/locations/$location_id'
       fullPath: '/business/locations/$location_id/'
       preLoaderRoute: typeof AppLayoutBusinessLocationsLocationLocation_idIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/business/locations/_location/$location_id/edit/': {
       id: '/_app/_layout/business/locations/_location/$location_id/edit/'
       path: '/business/locations/$location_id/edit'
       fullPath: '/business/locations/$location_id/edit/'
       preLoaderRoute: typeof AppLayoutBusinessLocationsLocationLocation_idEditIndexRouteImport
-      parentRoute: typeof AppLayoutRoute
+      parentRoute: typeof AppLayoutRouteRoute
     }
   }
 }
 
-interface AppLayoutRouteChildren {
+interface AppLayoutRouteRouteChildren {
   AppLayoutNotFoundRoute: typeof AppLayoutNotFoundRoute
   AppLayoutIndexRoute: typeof AppLayoutIndexRoute
   AppLayoutBookingsIndexRoute: typeof AppLayoutBookingsIndexRoute
@@ -1054,7 +1099,6 @@ interface AppLayoutRouteChildren {
   AppLayoutScheduleIndexRoute: typeof AppLayoutScheduleIndexRoute
   AppLayoutSettingsIndexRoute: typeof AppLayoutSettingsIndexRoute
   AppLayoutEmployeesScheduleEmployee_idRoute: typeof AppLayoutEmployeesScheduleEmployee_idRoute
-  AppLayoutBookingsBooking_idIndexRoute: typeof AppLayoutBookingsBooking_idIndexRoute
   AppLayoutBookingsCreateIndexRoute: typeof AppLayoutBookingsCreateIndexRoute
   AppLayoutBusinessLocationsIndexRoute: typeof AppLayoutBusinessLocationsIndexRoute
   AppLayoutBusinessServicesIndexRoute: typeof AppLayoutBusinessServicesIndexRoute
@@ -1063,7 +1107,6 @@ interface AppLayoutRouteChildren {
   AppLayoutCustomersCreateIndexRoute: typeof AppLayoutCustomersCreateIndexRoute
   AppLayoutEmployeesUsersIndexRoute: typeof AppLayoutEmployeesUsersIndexRoute
   AppLayoutMeSecurityIndexRoute: typeof AppLayoutMeSecurityIndexRoute
-  AppLayoutOrdersOrder_idIndexRoute: typeof AppLayoutOrdersOrder_idIndexRoute
   AppLayoutSettingsSystemIndexRoute: typeof AppLayoutSettingsSystemIndexRoute
   AppLayoutBookingsBooking_idCheckoutIndexRoute: typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   AppLayoutBookingsBooking_idEditIndexRoute: typeof AppLayoutBookingsBooking_idEditIndexRoute
@@ -1074,7 +1117,6 @@ interface AppLayoutRouteChildren {
   AppLayoutCustomersCustomer_idDocumentsIndexRoute: typeof AppLayoutCustomersCustomer_idDocumentsIndexRoute
   AppLayoutEmployeesUsersEmployee_idIndexRoute: typeof AppLayoutEmployeesUsersEmployee_idIndexRoute
   AppLayoutEmployeesUsersCreateIndexRoute: typeof AppLayoutEmployeesUsersCreateIndexRoute
-  AppLayoutOrdersCheckoutSellIndexRoute: typeof AppLayoutOrdersCheckoutSellIndexRoute
   AppLayoutBusinessLocationsLocationLocation_idIndexRoute: typeof AppLayoutBusinessLocationsLocationLocation_idIndexRoute
   AppLayoutBusinessServicesService_idEditIndexRoute: typeof AppLayoutBusinessServicesService_idEditIndexRoute
   AppLayoutBusinessServicesService_idEmployeesIndexRoute: typeof AppLayoutBusinessServicesService_idEmployeesIndexRoute
@@ -1087,7 +1129,7 @@ interface AppLayoutRouteChildren {
   AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute: typeof AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute
 }
 
-const AppLayoutRouteChildren: AppLayoutRouteChildren = {
+const AppLayoutRouteRouteChildren: AppLayoutRouteRouteChildren = {
   AppLayoutNotFoundRoute: AppLayoutNotFoundRoute,
   AppLayoutIndexRoute: AppLayoutIndexRoute,
   AppLayoutBookingsIndexRoute: AppLayoutBookingsIndexRoute,
@@ -1101,7 +1143,6 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutSettingsIndexRoute: AppLayoutSettingsIndexRoute,
   AppLayoutEmployeesScheduleEmployee_idRoute:
     AppLayoutEmployeesScheduleEmployee_idRoute,
-  AppLayoutBookingsBooking_idIndexRoute: AppLayoutBookingsBooking_idIndexRoute,
   AppLayoutBookingsCreateIndexRoute: AppLayoutBookingsCreateIndexRoute,
   AppLayoutBusinessLocationsIndexRoute: AppLayoutBusinessLocationsIndexRoute,
   AppLayoutBusinessServicesIndexRoute: AppLayoutBusinessServicesIndexRoute,
@@ -1111,7 +1152,6 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutCustomersCreateIndexRoute: AppLayoutCustomersCreateIndexRoute,
   AppLayoutEmployeesUsersIndexRoute: AppLayoutEmployeesUsersIndexRoute,
   AppLayoutMeSecurityIndexRoute: AppLayoutMeSecurityIndexRoute,
-  AppLayoutOrdersOrder_idIndexRoute: AppLayoutOrdersOrder_idIndexRoute,
   AppLayoutSettingsSystemIndexRoute: AppLayoutSettingsSystemIndexRoute,
   AppLayoutBookingsBooking_idCheckoutIndexRoute:
     AppLayoutBookingsBooking_idCheckoutIndexRoute,
@@ -1131,7 +1171,6 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
     AppLayoutEmployeesUsersEmployee_idIndexRoute,
   AppLayoutEmployeesUsersCreateIndexRoute:
     AppLayoutEmployeesUsersCreateIndexRoute,
-  AppLayoutOrdersCheckoutSellIndexRoute: AppLayoutOrdersCheckoutSellIndexRoute,
   AppLayoutBusinessLocationsLocationLocation_idIndexRoute:
     AppLayoutBusinessLocationsLocationLocation_idIndexRoute,
   AppLayoutBusinessServicesService_idEditIndexRoute:
@@ -1154,44 +1193,77 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
     AppLayoutBusinessLocationsLocationLocation_idEditIndexRoute,
 }
 
-const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
-  AppLayoutRouteChildren,
+const AppLayoutRouteRouteWithChildren = AppLayoutRouteRoute._addFileChildren(
+  AppLayoutRouteRouteChildren,
 )
 
-interface AuthLayoutRouteChildren {
+interface AppLayoutFocusRouteRouteChildren {
+  AppLayoutFocusBookingsBooking_idIndexRoute: typeof AppLayoutFocusBookingsBooking_idIndexRoute
+  AppLayoutFocusOrdersOrder_idIndexRoute: typeof AppLayoutFocusOrdersOrder_idIndexRoute
+  AppLayoutFocusOrdersCheckoutSellIndexRoute: typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
+}
+
+const AppLayoutFocusRouteRouteChildren: AppLayoutFocusRouteRouteChildren = {
+  AppLayoutFocusBookingsBooking_idIndexRoute:
+    AppLayoutFocusBookingsBooking_idIndexRoute,
+  AppLayoutFocusOrdersOrder_idIndexRoute:
+    AppLayoutFocusOrdersOrder_idIndexRoute,
+  AppLayoutFocusOrdersCheckoutSellIndexRoute:
+    AppLayoutFocusOrdersCheckoutSellIndexRoute,
+}
+
+const AppLayoutFocusRouteRouteWithChildren =
+  AppLayoutFocusRouteRoute._addFileChildren(AppLayoutFocusRouteRouteChildren)
+
+interface AppRouteRouteChildren {
+  AppLayoutRouteRoute: typeof AppLayoutRouteRouteWithChildren
+  AppLayoutFocusRouteRoute: typeof AppLayoutFocusRouteRouteWithChildren
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppLayoutRouteRoute: AppLayoutRouteRouteWithChildren,
+  AppLayoutFocusRouteRoute: AppLayoutFocusRouteRouteWithChildren,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
+
+interface AuthLayoutRouteRouteChildren {
   AuthLayoutInviteRoute: typeof AuthLayoutInviteRoute
   AuthLayoutLoginLazyRoute: typeof AuthLayoutLoginLazyRoute
   AuthLayoutRegisterLazyRoute: typeof AuthLayoutRegisterLazyRoute
 }
 
-const AuthLayoutRouteChildren: AuthLayoutRouteChildren = {
+const AuthLayoutRouteRouteChildren: AuthLayoutRouteRouteChildren = {
   AuthLayoutInviteRoute: AuthLayoutInviteRoute,
   AuthLayoutLoginLazyRoute: AuthLayoutLoginLazyRoute,
   AuthLayoutRegisterLazyRoute: AuthLayoutRegisterLazyRoute,
 }
 
-const AuthLayoutRouteWithChildren = AuthLayoutRoute._addFileChildren(
-  AuthLayoutRouteChildren,
+const AuthLayoutRouteRouteWithChildren = AuthLayoutRouteRoute._addFileChildren(
+  AuthLayoutRouteRouteChildren,
 )
 
-interface NetworkLayoutRouteChildren {
+interface NetworkLayoutRouteRouteChildren {
+  NetworkLayoutIndexRoute: typeof NetworkLayoutIndexRoute
   NetworkLayoutClientIndexRoute: typeof NetworkLayoutClientIndexRoute
   NetworkLayoutServerIndexRoute: typeof NetworkLayoutServerIndexRoute
 }
 
-const NetworkLayoutRouteChildren: NetworkLayoutRouteChildren = {
+const NetworkLayoutRouteRouteChildren: NetworkLayoutRouteRouteChildren = {
+  NetworkLayoutIndexRoute: NetworkLayoutIndexRoute,
   NetworkLayoutClientIndexRoute: NetworkLayoutClientIndexRoute,
   NetworkLayoutServerIndexRoute: NetworkLayoutServerIndexRoute,
 }
 
-const NetworkLayoutRouteWithChildren = NetworkLayoutRoute._addFileChildren(
-  NetworkLayoutRouteChildren,
-)
+const NetworkLayoutRouteRouteWithChildren =
+  NetworkLayoutRouteRoute._addFileChildren(NetworkLayoutRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  AppLayoutRoute: AppLayoutRouteWithChildren,
-  AuthLayoutRoute: AuthLayoutRouteWithChildren,
-  NetworkLayoutRoute: NetworkLayoutRouteWithChildren,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  AuthLayoutRouteRoute: AuthLayoutRouteRouteWithChildren,
+  NetworkLayoutRouteRoute: NetworkLayoutRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

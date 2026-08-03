@@ -8,7 +8,7 @@ import { dialogSelector, useDialog } from "@/entities/dialog";
 import { BookingChangeService } from "./components/booking-change-service";
 
 export const BookingCreateForm = ({ date }: { date: string }) => {
-  const { location } = useSelector(accountSelector);
+  const { location, account } = useSelector(accountSelector);
   const { booked, customer, date: current_date } = useSelector(bookingSelector);
   const { dialog } = useSelector(dialogSelector);
 
@@ -62,7 +62,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                 </div>
 
                 <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
-                  <BookingChangeService location_id={location.id} date={date ?? current_date} />
+                  <BookingChangeService location_id={location.id} date={date ?? current_date} account={account} />
                 </Dialog>
 
               </CardContent>
@@ -102,7 +102,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
           <div>
             <Button
               type={"button"}
-              onClick={() => handleSave(booked, customer, location!.id)}
+              onClick={() => handleSave(booked, customer, account, location!.id)}
               isLoading={isLoading}
               disabled={isLoading}
             >Сохранить</Button>

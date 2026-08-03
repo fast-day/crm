@@ -9,12 +9,10 @@ export const Route = createFileRoute('/_auth/_layout')({
 
 function RouteComponent() {
   return (
-    <>
-      <AuthLayout>
-        <Outlet />
-        <OnlineHandler />
-        <NavigationHandler />
-      </AuthLayout>
-    </>
+    <AuthLayout>
+      <Outlet />
+      <OnlineHandler />
+      <NavigationHandler />
+    </AuthLayout>
   )
 }

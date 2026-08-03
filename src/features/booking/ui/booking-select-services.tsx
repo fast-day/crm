@@ -9,11 +9,12 @@ import type { ServiceSettingType } from "../model/types/booking-setting-service.
 interface BookingSelectServicesProps {
   location_id: string;
   service: IDirectoryLocationService | undefined;
-  services: Array<{ id: string }> | undefined;
+  // services: Array<{ id: string }> | undefined;
   setSetting: React.Dispatch<React.SetStateAction<ServiceSettingType>>;
+  user_id?: string;
 }
 
-export const BookingSelectServices = ({ location_id, service, services, setSetting }: BookingSelectServicesProps) => {
+export const BookingSelectServices = ({ location_id, service, setSetting, user_id }: BookingSelectServicesProps) => {
   const { data, isLoading } = useLocationServicesQuery(
     { location_id },
     { refetchOnMountOrArgChange: true },
@@ -53,7 +54,8 @@ export const BookingSelectServices = ({ location_id, service, services, setSetti
                   <div className="flex items-center gap-1">
                     <span className="text-11 leading-3">{minuteFormat(service.duration)} • {formatPrice(service.prices.price)} ₽</span>
                   </div>
-                  {services && !services.some(s => s.id === service.id) && <div className="text-11 text-red leading-3">Отключено для сотрудника</div>}
+                  {/* {services && !services.some(s => s.id === service.id) && <div className="text-11 text-red leading-3">Отключено для сотрудника</div>} */}
+                  {user_id && !service.users.some(u => u.id === user_id) && <div className="text-11 text-red leading-3">Отключено для сотрудника</div>}
                 </div>
               </SelectItem>
             ))

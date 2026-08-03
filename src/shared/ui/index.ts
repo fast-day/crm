@@ -24,3 +24,4 @@ export * from './file';
 export * from './pagination';
 export * from './input';
 export * from './sheet';
+export * from './notice';

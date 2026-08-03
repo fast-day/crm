@@ -1,5 +1,7 @@
 import { CustomerBookings } from '@/pages/customer'
+import { uuidSchema } from '@/shared/schemas/params-scheha';
 import { querySearchSchema } from '@/shared/schemas/query.schema';
+import { CustomerNotFound } from '@/widgets/customer';
 import { createFileRoute } from '@tanstack/react-router'
 import z from 'zod';
 
@@ -15,7 +17,16 @@ const customerBookingSearchSchema = querySearchSchema.extend({
 export const Route = createFileRoute(
   '/_app/_layout/customers/$customer_id/bookings/',
 )({
+  params: {
+    parse: (p) => ({
+      customer_id: uuidSchema.parse(p.customer_id),
+    }),
+    stringify: (p) => ({
+      customer_id: p.customer_id,
+    }),
+  },
   validateSearch: customerBookingSearchSchema,
+  errorComponent: () => <CustomerNotFound />,
   component: RouteComponent,
 })
 
