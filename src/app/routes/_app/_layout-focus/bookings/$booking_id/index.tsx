@@ -1,11 +1,9 @@
-import { BookingCheckout } from '@/pages/booking'
+import { BookingDetail } from '@/pages/booking'
 import { uuidSchema } from '@/shared/schemas/params-scheha';
 import { BookingNotFound } from '@/widgets/booking';
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute(
-  '/_app/_layout/bookings/$booking_id/checkout/',
-)({
+export const Route = createFileRoute('/_app/_layout-focus/bookings/$booking_id/')({
   params: {
     parse: (p) => ({
       booking_id: uuidSchema.parse(p.booking_id),
@@ -20,5 +18,5 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { booking_id } = Route.useParams();
-  return <BookingCheckout booking_id={booking_id} />
+  return <BookingDetail booking_id={booking_id} />
 }

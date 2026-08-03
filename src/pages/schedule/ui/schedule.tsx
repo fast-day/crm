@@ -2,7 +2,7 @@ import { useAccount } from "@/entities/account"
 import { dialogSelector } from "@/entities/dialog"
 import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule"
 import { isTimeValue, isWeekendValue, pad2, parseBackendDate, toDateKey, useCalendar, type DayInfo, type ScheduleEditInfo } from "@/features/calendar";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
+import { Notice, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { Calendar } from "@/widgets/calendar"
 import { ScheduleDialog } from "@/widgets/schedule"
 import { useMemo } from "react"
@@ -95,6 +95,12 @@ export const Schedule = () => {
         </PageHeaderActions>
       </PageHeader>
 
+      <Notice
+        variant={"warning"}
+        className={"mt-8"}
+        title={"Настройка расписания временно не работает"}
+        description={"Приносим свои извинения за предоставленные неудобства."}
+      />
       <Calendar
         calendar={calendar}
         scheduleEditByKey={scheduleEditByKey}

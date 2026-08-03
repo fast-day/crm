@@ -2,11 +2,12 @@ import { useGetBookingQuery } from "@/entities/booking";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { BookingDetails, BookingDetailsLoading, BookingNotFound } from "@/widgets/booking";
 import { RequestError } from "@/widgets/layout";
-import { useParams } from "@tanstack/react-router"
 
-export const BookingDetail = () => {
-  const { booking_id } = useParams({ from: "/_app/_layout/bookings/$booking_id/" });
-  
+interface IBookingDetailProps {
+  booking_id: string;
+}
+
+export const BookingDetail = ({ booking_id }: IBookingDetailProps) => {
   const { data, isLoading, isFetching, isError } = useGetBookingQuery(
     { booking_id },
     { refetchOnMountOrArgChange: true },

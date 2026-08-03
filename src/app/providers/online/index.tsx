@@ -9,7 +9,7 @@ export const OnlineHandler = () => {
 
   useEffect(() => {
     if (isOnline) return;
-    // navigate({ to: "/network/client", replace: true });
+    navigate({ to: "/network/client", replace: true });
   }, [isOnline, navigate]);
 
   return null;

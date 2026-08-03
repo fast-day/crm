@@ -7,7 +7,7 @@ const orderCheckoutSearchSchema = z.object({
   order_id: z.string().optional(),
 });
 
-export const Route = createFileRoute('/_app/_layout/orders/checkout/sell/')({
+export const Route = createFileRoute('/_app/_layout-focus/orders/checkout/sell/')({
   validateSearch: orderCheckoutSearchSchema,
   component: RouteComponent,
 })

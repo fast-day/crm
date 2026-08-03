@@ -18,9 +18,10 @@ export const BookingScheduleIntervals = ({ user_id, location_id, date, duration,
 
   return (
     <div>
-      {isError && <div className="text-xs text-center my-6">Сотрудник не работает в выбранный день.</div>}
+      {/* {isError && <div className="text-xs text-center my-6">Сотрудник не работает в выбранный день.</div>} */}
+      {/* {isError && <div className="text-xs text-center my-6">Сотрудник не работает в выбранный день.</div>} */}
       {isLoading && <div className="text-xs text-center my-6">Загружаем свободные слоты.</div>}
-      {!isLoading && !data?.length && <div className="text-xs text-center my-6">Нет свободных слотов.</div>}
+      {!isLoading && !data?.length && <div className="text-xs text-center my-8">Нет свободных слотов.</div>}
       <div className="grid grid-cols-3 gap-2.5">
         {!isError && data && data.map((item, idx) => (
           <BookingChangeTime

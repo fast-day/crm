@@ -4,11 +4,11 @@ import { validateBooking } from "../utils/validation.util";
 import { useAppDispatch } from "@/shared/hooks";
 import { useNavigate } from "@tanstack/react-router";
 import type { IDirectoryCustomer } from "@/entities/directories";
-import { updateAccount } from "@/entities/account";
+import { updateAccount, type IMe } from "@/entities/account";
 import { getErrorMessage } from "@/shared/utils";
 
 interface UseBookingCreateReturnProps {
-  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, location_id: string) => Promise<void>;
+  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, employee: IMe | null, location_id: string) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -20,6 +20,7 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
   const handleSave = async (
     booked: BookingCreate[] | null,
     customer: IDirectoryCustomer | null,
+    employee: IMe | null,
     location_id: string,
   ): Promise<void> => {
     if (!booked?.length) {
@@ -44,11 +45,22 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
           count: 1,
           start_time: `${book.date}T${book.time!}`,
           duration: book.service!.duration,
-          users: book.employee?.id ? [{
-            id: book.employee.profile_id,
-            first_name: book.employee.first_name,
-            last_name: book.employee.last_name,
-          }] : [],
+
+          /*
+            !===== ПОКА БЕЗ ВЫБОРА СОТРУДНИКА  =====!
+            ЧУТЬ ПОЗЖЕ ОПТИМИЗИРОВАТЬ ДО АВТОМАТИЧЕСКОГО ОПРЕДЕЛЕНИЯ
+            ЕСЛИ СОТРУДНИК 1, ТО ПО ДЕФОЛТУ ПРОКИДЫВАТЬ ЕГО, ЕСЛИ МНОГО - ДАВАТЬ ВОЗМОЖНОСТЬ ВЫБРАТЬ
+          */
+          users: employee?.id ? [{
+            id: employee.id,
+            first_name: employee.first_name,
+            last_name: employee.last_name,
+          }] : [],  
+          // users: book.employee?.id ? [{
+          //   id: book.employee.profile_id,
+          //   first_name: book.employee.first_name,
+          //   last_name: book.employee.last_name,
+          // }] : [],
         })),
         customers: customer ? [{
           id: customer.customer_attributes.profile_id,

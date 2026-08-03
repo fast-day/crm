@@ -1,32 +1,20 @@
-import { AppLoading } from "@/widgets/loading"
 import type { PropsWithChildren } from "react"
-import { useInitialize } from "../model/hooks/initialize.hook";
 import { useSelector } from "react-redux";
 import { useAccount } from "@/entities/account";
-import { Sidebar } from "@/widgets/sidebar";
-import { ConfirmDialog } from "@/features/confirm-dialog";
+import { MobileSidebar, Sidebar } from "@/widgets/sidebar";
+import { useMediaQuery } from 'react-responsive';
+import { BaseLayout } from "./base-layout";
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
-  const { isInitialized } = useInitialize();
   const { isCompany } = useSelector(useAccount);
+  const isTablet = useMediaQuery({ query: `(max-width: 1100px)` })
+
+  const sidebar = !isTablet && isCompany ? <Sidebar />
+    : isTablet && isCompany ? <MobileSidebar /> : null;
 
   return (
-    <div className="flex flex-1 min-h-full relative">
-      {!isInitialized ? (
-        <AppLoading />
-      ) : (
-        <>
-          {isCompany && <Sidebar />}
-
-          <main className={`flex flex-col flex-1 ${isCompany ? "pl-59" : ""}`}>
-            <div className="p-8 flex flex-col flex-1">
-              {children}
-            </div>
-          </main>
-
-          <ConfirmDialog />
-        </>
-      )}
-    </div>
+    <BaseLayout sidebar={sidebar} mainClassName={!isTablet && isCompany ? "pl-59" : "pb-20"}>
+      {children}
+    </BaseLayout>
   )
 }
