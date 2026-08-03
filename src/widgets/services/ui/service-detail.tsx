@@ -6,7 +6,6 @@ import { markClasses } from "@/shared/constants";
 // import { useAppDispatch } from "@/shared/hooks";
 import { AddFillIcon } from "@/shared/icons";
 import { Button } from "@/shared/ui";
-import { AvatarGroup } from "@/shared/ui/avatar";
 import { Card, CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardDescription, CardHeader, CardTitle } from "@/shared/ui/card/ui/card"
 import { cn, formatPrice } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
@@ -71,8 +70,8 @@ export const ServiceDetails = ({ service }: ServiceDetailProps) => {
         </div>
 
         <div className="flex flex-col col-span-2 space-y-6">
-          <AvatarGroup title={"Сотрудники"} to={"employees"} data={service.users} />
-          <AvatarGroup title={"Локации"} to={"locations"} data={service.locations} />
+          {/* <AvatarGroup title={"Сотрудники"} to={"employees"} data={service.users} /> */}
+          {/* <AvatarGroup title={"Локации"} to={"locations"} data={service.locations} /> */}
         </div>
         
       </div>

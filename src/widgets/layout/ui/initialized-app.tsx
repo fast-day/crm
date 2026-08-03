@@ -9,7 +9,7 @@ export const InitializedApp = () => {
 
   if (!isInitialized) {
     return (
-      <div className="flex flex-1 min-h-full relative">
+      <div className="flex flex-1 relative">
         <AppLoading />
       </div>
     );
