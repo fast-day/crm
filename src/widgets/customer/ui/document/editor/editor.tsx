@@ -21,44 +21,43 @@ export const Editor = ({ customer_id, document_id, name, data }: IEditorProps) =
   const ref = useRef<EditorJS | null>(null);
   const documentRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const isReadyRef = useRef(true);
   const [title, setTitle] = useState(name ?? "");
   const [outputData, setOutputData] = useState<OutputData | null>(null);
   const [document] = useCustomerUpdateDocumentMutation();
-const isFirstRun = useRef(true);
+
   useEffect(() => {
     if (!documentRef.current) return;
 
     const editor = new EditorJS({
-      holderId : "editorjs",
+      holder: "editorjs",
 
       data,
 
       tools: {
-        header: {
-          class: Header,
-          inlineToolbar : true
-        },
-        List: {
+        header: { class: Header, inlineToolbar: true },
+        list: {
           class: EditorjsList,
           inlineToolbar: true,
-          config: {
-            defaultStyle: 'unordered'
-          },
+          config: { defaultStyle: 'unordered' },
         },
         quote: Quote,
       },
       autofocus: name?.length ? true : false,
 
       onChange: async (api) => {
+        if (!isReadyRef.current) return;
         const output = await api.saver.save();
         setOutputData(output);
       },
 
     });
+    console.log("passing to EditorJS:", JSON.stringify(data, null, 2));
     
     ref.current = editor;
     
     editor.isReady.then(() => {
+      isReadyRef.current = true;
       if (!name?.trim()) {
         inputRef.current?.focus();
       }
@@ -72,13 +71,13 @@ const isFirstRun = useRef(true);
   const debounce = useDebounce(outputData, 3500);
   const titleDebounce = useDebounce(title, 3500);
 
-  const updateDocument = useCallback(async (content: OutputData | null, name?: string) => {
+  const updateDocument = useCallback(async (_content: OutputData | null, name?: string) => {
     try {
       const res = await document(
         {
           customer_id,
           document_id,
-          body: { name, content }
+          body: { name, content: undefined }
         }
       ).unwrap();
 
@@ -96,15 +95,9 @@ const isFirstRun = useRef(true);
     ref.current?.focus();
   }
 
-
-  /**
-    !=====! УБРАТЬ В БУДУЩЕМ КОСТЫЛЬ !=====! 
-  **/
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
-      return;
-    }
+    if (outputData === null) return;
+
     console.log("debounce", debounce);
     updateDocument(debounce, titleDebounce);
   }, [debounce, titleDebounce, updateDocument]);

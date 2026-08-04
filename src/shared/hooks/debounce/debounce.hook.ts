@@ -13,3 +13,7 @@ export function useDebounce<T>(value: T, delay = 500): T {
 
   return debouncedValue;
 }
+
+export function useIsPending<T>(val: T, debVal: T): boolean {
+  return val !== debVal;
+}
