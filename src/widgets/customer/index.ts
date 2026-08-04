@@ -6,7 +6,7 @@ export { CustomerNotFound } from './ui/customer-not-found';
 export { CustomerDetails } from './ui/customer-details';
 
 // UI DOCUMENT
-export { Editor } from './ui/document/editor/editor';
+export { Editor } from './ui/document/editor/blocknote-editor';
 export { CustomerDocumentsTable } from './ui/document/customer-documents-table';
 export { CustomerDocumentsLoading } from './ui/document/customer-documents-loading';
 export { CustomerDocumentLoading } from './ui/document/customer-document-loading';

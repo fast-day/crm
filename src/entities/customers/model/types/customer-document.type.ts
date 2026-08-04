@@ -1,5 +1,5 @@
-import type { OutputData } from "@editorjs/editorjs";
 import type { CustomerProfile } from "./customer.type";
+import type { Block } from "@blocknote/core";
 
 export interface ICustomerDocumentQuery {
   full_name?: string;
@@ -52,7 +52,7 @@ export interface ICustomerDocumentProfileInfo {
 }
 
 export interface ICustomerDetailDocument extends ICustomerDocument {
-  content: IDocumentContent | null;
+  content: Block[] | null;
   customer: ICustomerDocumentProfileInfo;
 }
 
@@ -64,7 +64,7 @@ export interface ICustomerUpdateDocumentCredentials {
   document_id: string;
   body: {
     name?: string;
-    content?: OutputData | null;
+    content?: Block[];
     is_pinned?: boolean;
     is_archived?: boolean;
     is_locked?: boolean;

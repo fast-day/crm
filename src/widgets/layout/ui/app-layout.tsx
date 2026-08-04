@@ -13,7 +13,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
     : isTablet && isCompany ? <MobileSidebar /> : null;
 
   return (
-    <BaseLayout sidebar={sidebar} mainClassName={!isTablet && isCompany ? "pl-59" : "pb-20"}>
+    <BaseLayout sidebar={sidebar} mainClassName={!isTablet && isCompany ? "pl-59" : ""}>
       {children}
     </BaseLayout>
   )
