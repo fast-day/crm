@@ -1,5 +1,6 @@
 import { cn } from "@/shared/utils";
 import type { ComponentProps } from "react";
+import { useMediaQuery } from "react-responsive";
 
 function Table({ className, ...props }: ComponentProps<"div">) {
   return (
@@ -12,6 +13,10 @@ function Table({ className, ...props }: ComponentProps<"div">) {
 }
 
 function TableHeader({ className, ...props }: ComponentProps<"div">) {
+  const isTablet = useMediaQuery({ query: "(max-width: 1100px)" })
+
+  if (isTablet) return null;
+
   return (
     <div
       data-ui="table-header"
@@ -35,7 +40,7 @@ function TableBody({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-ui="table-body"
-      className={cn("bg-card/60 rounded-3xl overflow-hidden peer-hover:rounded-t-none relative", className)}
+      className={cn("md:space-y-0 space-y-3 md:bg-card/60 md:rounded-3xl overflow-hidden peer-hover:rounded-t-none relative", className)}
       {...props}
     />
   )
@@ -55,7 +60,7 @@ function TableRow({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-ui="table-row"
-      className={cn("grid grid-flow-col auto-cols-fr hover:bg-card/60", className)}
+      className={cn("grid grid-flow-dense 1100:grid-flow-col md:rounded-none rounded-3xl auto-cols-fr md:bg-transparent bg-card/60 hover:bg-card/60", className)}
       {...props}
     />
   )
@@ -85,7 +90,7 @@ function TableSeparator({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-ui="table-cell-separator"
-      className={cn("border-b border-card", className)}
+      className={cn("md:border-b border-card-accent", className)}
       {...props}
     />
   )

@@ -1,4 +1,4 @@
-import { Button, Card, CardContent } from "@/shared/ui";
+import { Button } from "@/shared/ui";
 import { cn } from "@/shared/utils";
 
 interface IBookingStatusSortProps {
@@ -17,18 +17,14 @@ const BOOKING_STATUS: Record<BookingStatusType | "all", string> = {
 
 export const BookingStatusSort = ({ status, handleChange }: IBookingStatusSortProps) => {
   return (
-    <Card>
-      <CardContent className="p-2 gap-2 flex">
-        {variant.map((v, idx) => (
-          <Button
-            key={idx}
-            variant={"action"}
-            className={cn((v === "all" ? !status : status === v) ? "bg-white" : "")}
-            size={"size_40"}
-            onClick={() => handleChange("status", v)}
-          >{BOOKING_STATUS[v]}</Button>
-        ))}
-      </CardContent>
-    </Card>
+    variant.map((v, idx) => (
+      <Button
+        key={idx}
+        variant={"action"}
+        className={cn((v === "all" ? !status : status === v) ? "bg-white" : "bg-transparent", "")}
+        size={"size_40"}
+        onClick={() => handleChange("status", v)}
+      >{BOOKING_STATUS[v]}</Button>
+    ))
   )
 }

@@ -58,8 +58,8 @@ const menuItems: MenuItem[] = [
 export const MobileSidebar = () => {
   const { pathname } = useLocation();
   return (
-    <div className="fixed bottom-0 left-0 w-full z-10 px-4 pb-2.5">
-      <div className="bg-card-accent p-4 rounded-2xl grid grid-cols-5 items-center gap-2.5">
+    <div className="fixed bottom-0 left-0 w-full z-10">
+      <div className="bg-card-accent py-1.5 px-4 rounded-t-3xl grid grid-cols-5 items-center gap-2.5">
         
         {menuItems.map((page, idx) => {
           return (

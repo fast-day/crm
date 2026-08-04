@@ -1,7 +1,8 @@
 import { Route } from "@/app/routes/_app/_layout/orders";
 import type { IOrderQuery } from "@/entities/orders";
-import { Button, Card, CardContent } from "@/shared/ui"
+import { Button } from "@/shared/ui"
 import { cn } from "@/shared/utils";
+import { SortWrapper } from "@/widgets/sort";
 import { useNavigate } from "@tanstack/react-router";
 
 const variant = ["all", "cancelled", "paid", "unpaid", "refund"] as Exclude<OrderStatusType, "pending" | "open">[] | "all"[];
@@ -29,19 +30,17 @@ export const OrderSort = ({ status }: IOrderQuery) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <Card>
-          <CardContent className="p-2 gap-2 flex">
-            {variant.map((v, idx) => (
-              <Button
-                key={idx}
-                variant={"action"}
-                className={cn((v === "all" ? !status : status === v) ? "bg-white" : "")}
-                size={"size_40"}
-                onClick={() => handleChange("status", v)}
-              >{ORDER_STATUS[v]}</Button>
-            ))}
-          </CardContent>
-        </Card>
+        <SortWrapper>
+          {variant.map((v, idx) => (
+            <Button
+              key={idx}
+              variant={"action"}
+              className={cn((v === "all" ? !status : status === v) ? "bg-white" : "")}
+              size={"size_40"}
+              onClick={() => handleChange("status", v)}
+            >{ORDER_STATUS[v]}</Button>
+          ))}
+        </SortWrapper>
 
         {/* <Search
           placeholder={"Поиск по имени и номеру телефона"}

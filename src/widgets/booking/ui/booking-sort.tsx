@@ -1,6 +1,7 @@
 import { Route } from "@/app/routes/_app/_layout/bookings";
 import type { IBookingQuery } from "@/entities/booking"
 import { BookingStatusSort } from "@/features/booking";
+import { SortWrapper } from "@/widgets/sort";
 import { useNavigate } from "@tanstack/react-router";
 
 export const BookingSort = ({ status }: IBookingQuery) => {
@@ -19,7 +20,9 @@ export const BookingSort = ({ status }: IBookingQuery) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <BookingStatusSort status={status} handleChange={handleChange} />
+        <SortWrapper>
+          <BookingStatusSort status={status} handleChange={handleChange} />
+        </SortWrapper>
 
         {/* <Search
           placeholder={"Поиск по имени и номеру телефона"}
