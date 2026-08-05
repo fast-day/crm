@@ -9,7 +9,7 @@ export const AuthLayout = ({ children }: PropsWithChildren) => {
   if (isAuthenticated) return <Navigate to={"/"} replace />;
 
   return (
-    <div className="flex flex-col h-full py-8">
+    <div className="flex-1 flex flex-col h-full py-8">
       <div className="flex-1 flex">
         <div className="sm:max-w-115 mx-auto w-full flex flex-col flex-1 justify-center">{children}</div>
       </div>

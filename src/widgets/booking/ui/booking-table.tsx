@@ -8,6 +8,7 @@ import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
 import { BookingSort } from "./booking-sort";
+import { useMediaQuery } from "react-responsive";
 
 interface BookingTableProps {
   bookings?: IBooking[];
@@ -19,6 +20,7 @@ interface BookingTableProps {
 
 export const BookingTable = ({ bookings, isFetching, meta, query}: BookingTableProps) => {
   const navigate = useNavigate();
+  const isTablet = useMediaQuery({ query: "(max-width: 1100px)" })
 
   return (
     <div className="mt-8 space-y-6">
@@ -43,7 +45,7 @@ export const BookingTable = ({ bookings, isFetching, meta, query}: BookingTableP
           {bookings?.length ? 
             bookings.map((booking, index) => (
               <React.Fragment key={index}>
-                <TableRow onClick={() => navigate({ to: `${booking.id}` })}>
+                <TableRow className="" onClick={() => navigate({ to: `${booking.id}` })}>
                   <TableCell>
                     <div>
                       <p className="font-semibold">{formatDate(booking.date)}</p>
@@ -88,11 +90,13 @@ export const BookingTable = ({ bookings, isFetching, meta, query}: BookingTableP
                   <TableCell>
                     <Badge variant={`${booking.status}_b`}>{BOOKING_STATUS[booking.status]}</Badge>
                   </TableCell>
-                  <TableCellActions>
-                    <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
-                      <ChevronRightIcon width={17} height={17} />
-                    </Button>
-                  </TableCellActions>
+                  {!isTablet && (
+                    <TableCellActions>
+                      <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
+                        <ChevronRightIcon width={17} height={17} />
+                      </Button>
+                    </TableCellActions>
+                  )}
                 </TableRow>
                 {index !== bookings.length - 1 && <TableSeparator />}
               </React.Fragment>

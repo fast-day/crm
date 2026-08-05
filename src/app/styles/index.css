@@ -55,8 +55,12 @@
     --chart-5: oklch(0.769 0.188 70.08);
   }
 
+  html {
+    height: 100%;
+  }
+
   body {
-    min-height: 100vh;
+    height: 100%;
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-gilroy);
@@ -64,7 +68,7 @@
   }
 
   #root {
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }
