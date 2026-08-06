@@ -22,21 +22,21 @@ const menuItems: MenuItem[] = [
     to: "/bookings",
     type: "BOOKINGS",
     label: "Записи",
-    icon: <SvgBook width={20} height={20} />,
+    icon: <SvgBook width={24} height={24} />,
     permission: ["booking:*"],
   },
   {
     to: "/orders",
     type: "ORDERS",
     label: "Платежи",
-    icon: <Cast width={20} height={20} />,
+    icon: <Cast width={24} height={24} />,
     permission: ["orders:*"],
   },
   {
     to: "/bookings/create",
     icon: (
       <div className="size-12 rounded-xl text-primary bg-white flex items-center justify-center">
-        <AddFillIcon width={22} height={22} />
+        <AddFillIcon width={24} height={24} />
       </div>
     ),
     permission: ["booking:create"],
@@ -45,13 +45,13 @@ const menuItems: MenuItem[] = [
     to: "/customers",
     type: "CUSTOMERS",
     label: "Клиенты",
-    icon: <SvgCustomer width={20} height={20} />,
+    icon: <SvgCustomer width={24} height={24} />,
     permission: ["company-customers:*"],
   },
   {
     to: "/settings",
     label: "Еще",
-    icon: <SvgSetting width={20} height={20} />,
+    icon: <SvgSetting width={24} height={24} />,
   },
 ];
 
@@ -59,7 +59,7 @@ export const MobileSidebar = () => {
   const { pathname } = useLocation();
   return (
     <div className="fixed bottom-0 left-0 w-full z-10">
-      <div className="bg-card-accent py-1.5 px-4 rounded-t-3xl grid grid-cols-5 items-center gap-2.5">
+      <div className="bg-card-accent py-2.5 px-4 rounded-t-3xl grid grid-cols-5 items-center gap-2.5">
         
         {menuItems.map((page, idx) => {
           return (

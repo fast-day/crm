@@ -30,7 +30,7 @@ export const OrderCheckoutSell = ({ booking, order }: IOrderCheckoutSellProps) =
 
   return (
     <div className="mt-8 h-full">
-      <div className="flex h-full">
+      <div className="flex h-full gap-8 1100:flex-row flex-col">
 
         <ContentLayout className="max-w-full">
           <OrderSelectPaymentMethod current_method={payment} selectPayment={selectPayment} />

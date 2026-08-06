@@ -8,7 +8,7 @@ interface IOrderDetailActionsProps {
 
 export const OrderDetailActions = ({ status, booking_id, order_id }: IOrderDetailActionsProps) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mt-6">
       {/* {(status === "paid" || status === "refund") && <OrderNew />} */}
       {(status === "unpaid") && <OrderCheckout booking_id={booking_id} order_id={order_id} />}
       <OrderBookingView booking_id={booking_id} />
