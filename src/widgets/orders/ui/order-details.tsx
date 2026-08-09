@@ -15,7 +15,7 @@ interface IOrderDetailsProps {
 export const OrderDetails = ({ order, isFetching }: IOrderDetailsProps) => {
   return (
     <div className="h-full">
-      <div className="flex h-full">
+      <div className="flex h-full 1100:flex-row flex-col-reverse gap-8">
 
         <ContentLayout>
             {isFetching ? <OrderResultLoading /> : <OrderResult {...order} />}
@@ -25,6 +25,7 @@ export const OrderDetails = ({ order, isFetching }: IOrderDetailsProps) => {
           <OrderDetailsPanelLoading />
         ) : ( 
           <ContentPanel
+            className={"max-w-135"}
             title={"Итого"}
             actionClassName={"mt-auto"}
             content={<CustomerCard {...order.bookings[0].customer} />}

@@ -11,7 +11,7 @@ export const OrderSelectPaymentMethod = ({ current_method, selectPayment }: IOrd
   return (
     <div className="space-y-4">
       <h2 className="text-lg font-bold">Способ оплаты</h2>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-3 gap-2.5 md:gap-5">
         {PAYMENT_METHODS.map((method, idx) => (
           <PaymentMethodCard
             key={idx}

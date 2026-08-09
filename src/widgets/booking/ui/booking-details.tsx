@@ -17,7 +17,7 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
   return (
     <div className="mt-8 h-full">
       
-      <div className="flex h-full">
+      <div className="flex h-full flex-col-reverse 1100:flex-row gap-8">
       
         <ContentLayout>
           <BookingServices booking_services={booking.booking_services} />
