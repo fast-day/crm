@@ -90,6 +90,9 @@ declare global {
   /** СТАТУСЫ ДЛЯ ЗАКАЗОВ **/
   type OrderStatusType = "paid" | "unpaid" | "cancelled" | "refund";
 
+  /** ПРИЧИНЫ ОТМЕНЫ ЗАПИСИ **/
+  type BookingCancelReasonType = "client_cancelled" | "client_no_show" | "specialist_cancelled" | "other";
+
   /** СТАТУСЫ ДЛЯ СЧЕТА **/
   type InvoiceStatusType = "success" | "failed";
 
