@@ -136,6 +136,9 @@ export interface IBookingDetail extends Omit<IBooking, "payment_method" | "subto
   order_id: string | null;
   customer: IDirectoryCustomer;
   invoice: IBookingInvoice;
+  updated_date: string;
+  updated_time: string;
+  cancel_reason: BookingCancelReasonType | null;
 }
 
 export interface IBookingServiceActionCredentials {

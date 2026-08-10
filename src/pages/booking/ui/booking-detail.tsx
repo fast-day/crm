@@ -1,7 +1,9 @@
 import { useGetBookingQuery } from "@/entities/booking";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { CloseIcon } from "@/shared/icons";
+import { Button, PageHeader, PageHeaderActions, PageHeaderTitle } from "@/shared/ui"
 import { BookingDetails, BookingDetailsLoading, BookingNotFound } from "@/widgets/booking";
 import { RequestError } from "@/widgets/layout";
+import { Link } from "@tanstack/react-router";
 
 interface IBookingDetailProps {
   booking_id: string;
@@ -30,7 +32,11 @@ export const BookingDetail = ({ booking_id }: IBookingDetailProps) => {
           <PageHeaderTitle>Запись № {data?.tag}</PageHeaderTitle>
         </div>
         <PageHeaderActions>
-          <PageHeaderBackAction />
+          <Link to={"/bookings"} className="block">
+            <Button variant={"white"} size={"icon_44"} animation={"toggle"}>
+              <CloseIcon width={18} height={18} />
+            </Button>
+          </Link>
         </PageHeaderActions>
       </PageHeader>
 

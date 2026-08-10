@@ -1,4 +1,4 @@
-import { BookingCurrentDate, type IBookingDetail } from "@/entities/booking"
+import { BookingCurrentDate, BookingResultCard, type IBookingDetail } from "@/entities/booking"
 import { ChevronIcon } from "@/shared/icons";
 import { Button, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle } from "@/shared/ui";
 import { formatPrice } from "@/shared/utils";
@@ -41,11 +41,15 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
                 </div>
               )}
 
-              <BookingCurrentDate
-                date={booking.date}
-                start_time={booking.start_time}
-                end_time={booking.end_time}
-              />
+              {booking.status !== "new" ? (
+                <BookingResultCard {...booking} />
+              ) : (
+                <BookingCurrentDate
+                  date={booking.date}
+                  start_time={booking.start_time}
+                  end_time={booking.end_time}
+                />
+              )}
               
               <CardContentLabel>
                 <CardContentLabelTitle>Примечание к бронированию</CardContentLabelTitle>
