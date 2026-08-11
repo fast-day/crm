@@ -32,6 +32,7 @@ import { Route as AppLayoutEmployeesIndexRouteImport } from './app/routes/_app/_
 import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_layout/customers/index'
 import { Route as AppLayoutBookingsIndexRouteImport } from './app/routes/_app/_layout/bookings/index'
 import { Route as AppLayoutSettingsSystemIndexRouteImport } from './app/routes/_app/_layout/settings/system/index'
+import { Route as AppLayoutOrdersInvoicesIndexRouteImport } from './app/routes/_app/_layout/orders/invoices/index'
 import { Route as AppLayoutMeSecurityIndexRouteImport } from './app/routes/_app/_layout/me/security/index'
 import { Route as AppLayoutEmployeesUsersIndexRouteImport } from './app/routes/_app/_layout/employees/users/index'
 import { Route as AppLayoutCustomersCreateIndexRouteImport } from './app/routes/_app/_layout/customers/create/index'
@@ -186,6 +187,12 @@ const AppLayoutSettingsSystemIndexRoute =
   AppLayoutSettingsSystemIndexRouteImport.update({
     id: '/settings/system/',
     path: '/settings/system/',
+    getParentRoute: () => AppLayoutRouteRoute,
+  } as any)
+const AppLayoutOrdersInvoicesIndexRoute =
+  AppLayoutOrdersInvoicesIndexRouteImport.update({
+    id: '/orders/invoices/',
+    path: '/orders/invoices/',
     getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutMeSecurityIndexRoute =
@@ -405,6 +412,7 @@ export interface FileRoutesByFullPath {
   '/customers/create/': typeof AppLayoutCustomersCreateIndexRoute
   '/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
   '/me/security/': typeof AppLayoutMeSecurityIndexRoute
+  '/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
   '/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
   '/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
@@ -456,6 +464,7 @@ export interface FileRoutesByTo {
   '/customers/create': typeof AppLayoutCustomersCreateIndexRoute
   '/employees/users': typeof AppLayoutEmployeesUsersIndexRoute
   '/me/security': typeof AppLayoutMeSecurityIndexRoute
+  '/orders/invoices': typeof AppLayoutOrdersInvoicesIndexRoute
   '/settings/system': typeof AppLayoutSettingsSystemIndexRoute
   '/orders/checkout/sell': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
   '/bookings/$booking_id/checkout': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
@@ -513,6 +522,7 @@ export interface FileRoutesById {
   '/_app/_layout/customers/create/': typeof AppLayoutCustomersCreateIndexRoute
   '/_app/_layout/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
   '/_app/_layout/me/security/': typeof AppLayoutMeSecurityIndexRoute
+  '/_app/_layout/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
   '/_app/_layout/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/_app/_layout-focus/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
   '/_app/_layout/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
@@ -567,6 +577,7 @@ export interface FileRouteTypes {
     | '/customers/create/'
     | '/employees/users/'
     | '/me/security/'
+    | '/orders/invoices/'
     | '/settings/system/'
     | '/orders/checkout/sell/'
     | '/bookings/$booking_id/checkout/'
@@ -618,6 +629,7 @@ export interface FileRouteTypes {
     | '/customers/create'
     | '/employees/users'
     | '/me/security'
+    | '/orders/invoices'
     | '/settings/system'
     | '/orders/checkout/sell'
     | '/bookings/$booking_id/checkout'
@@ -674,6 +686,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/customers/create/'
     | '/_app/_layout/employees/users/'
     | '/_app/_layout/me/security/'
+    | '/_app/_layout/orders/invoices/'
     | '/_app/_layout/settings/system/'
     | '/_app/_layout-focus/orders/checkout/sell/'
     | '/_app/_layout/bookings/$booking_id/checkout/'
@@ -864,6 +877,13 @@ declare module '@tanstack/react-router' {
       path: '/settings/system'
       fullPath: '/settings/system/'
       preLoaderRoute: typeof AppLayoutSettingsSystemIndexRouteImport
+      parentRoute: typeof AppLayoutRouteRoute
+    }
+    '/_app/_layout/orders/invoices/': {
+      id: '/_app/_layout/orders/invoices/'
+      path: '/orders/invoices'
+      fullPath: '/orders/invoices/'
+      preLoaderRoute: typeof AppLayoutOrdersInvoicesIndexRouteImport
       parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/me/security/': {
@@ -1107,6 +1127,7 @@ interface AppLayoutRouteRouteChildren {
   AppLayoutCustomersCreateIndexRoute: typeof AppLayoutCustomersCreateIndexRoute
   AppLayoutEmployeesUsersIndexRoute: typeof AppLayoutEmployeesUsersIndexRoute
   AppLayoutMeSecurityIndexRoute: typeof AppLayoutMeSecurityIndexRoute
+  AppLayoutOrdersInvoicesIndexRoute: typeof AppLayoutOrdersInvoicesIndexRoute
   AppLayoutSettingsSystemIndexRoute: typeof AppLayoutSettingsSystemIndexRoute
   AppLayoutBookingsBooking_idCheckoutIndexRoute: typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   AppLayoutBookingsBooking_idEditIndexRoute: typeof AppLayoutBookingsBooking_idEditIndexRoute
@@ -1152,6 +1173,7 @@ const AppLayoutRouteRouteChildren: AppLayoutRouteRouteChildren = {
   AppLayoutCustomersCreateIndexRoute: AppLayoutCustomersCreateIndexRoute,
   AppLayoutEmployeesUsersIndexRoute: AppLayoutEmployeesUsersIndexRoute,
   AppLayoutMeSecurityIndexRoute: AppLayoutMeSecurityIndexRoute,
+  AppLayoutOrdersInvoicesIndexRoute: AppLayoutOrdersInvoicesIndexRoute,
   AppLayoutSettingsSystemIndexRoute: AppLayoutSettingsSystemIndexRoute,
   AppLayoutBookingsBooking_idCheckoutIndexRoute:
     AppLayoutBookingsBooking_idCheckoutIndexRoute,
