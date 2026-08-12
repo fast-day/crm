@@ -12,6 +12,6 @@ export const INVOICE_TYPE: Record<InvoiceType, InvoiceEnumType> = {
 };
 
 export const INVOICE_TYPE_TITLE: Record<InvoiceType, string> = {
-  paid: "Заказ завершен",
-  refunded: "Заказ возвращён"
+  paid: "Оплачено",
+  refunded: "Возвращено"
 };

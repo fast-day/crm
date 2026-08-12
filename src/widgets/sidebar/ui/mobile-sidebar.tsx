@@ -65,7 +65,7 @@ export const MobileSidebar = () => {
           return (
             <Link to={page.to} key={idx} className={cn("flex flex-col items-center gap-1")}>
               <span>{page.icon}</span>
-              {page.label && <span className={cn("text-xs leading-3 opacity-50", isRouteActive(pathname, page.to) ? "opacity-100" : "")}>{page.label}</span>}
+              {page.label && <span className={cn("text-xs leading-3 opacity-50", isRouteActive(pathname, page.to, [page.to]) ? "opacity-100" : "")}>{page.label}</span>}
             </Link>
           )
         })}

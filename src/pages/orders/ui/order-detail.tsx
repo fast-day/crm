@@ -9,7 +9,6 @@ interface OrderDetailProps {
 }
 
 export const OrderDetail = ({ order_id }: OrderDetailProps) => {
-
   const { data, isLoading, isError, isFetching } = useGetOrderQuery(
     { order_id },
     { refetchOnMountOrArgChange: true },
