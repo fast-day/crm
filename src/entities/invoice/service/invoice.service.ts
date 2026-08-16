@@ -1,5 +1,7 @@
 import { API } from "@/shared/api";
+import { buildQuery } from "@/shared/lib";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import type { IInvoice, IInvoiceQuery } from "../model/types/invoice.type";
 
 function parseJsonSafely(text: string): unknown {
   try {
@@ -19,7 +21,17 @@ async function resolveBlobError(error: FetchBaseQueryError): Promise<FetchBaseQu
 const invoiceApi = API.injectEndpoints({
   endpoints: build => ({
     /**
-      ===== УСТАНОВКА ФАЙЛА =====
+      ===== СПИСОК ЧЕКОВ =====
+    **/
+   getInvoices: build.query<ApiResponse<IInvoice>, IInvoiceQuery>({
+    query: (query) => ({
+      url: buildQuery(`/v1/invoice/`, { ...query }),
+      method: "GET",
+    }),
+   }),
+
+    /**
+      ===== УСТАНОВКА ЧЕКА =====
     **/
     downloadInvoice: build.mutation<null, { invoice_id: string, tag: string }>({
       async queryFn({ invoice_id, tag }, _api, _extraOptions, query) {
@@ -47,5 +59,6 @@ const invoiceApi = API.injectEndpoints({
 });
 
 export const {
+  useGetInvoicesQuery,
   useDownloadInvoiceMutation,
 } = invoiceApi;

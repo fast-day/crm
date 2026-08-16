@@ -32,21 +32,24 @@ export const ScheduleDialog = ({ location_id, data: props }: ScheduleDialogProps
 
   const onSubmit = async (data: IntervalsSchemaType): Promise<void> => {
     try {
-      const payloadBody = {
+      const payload = {
         date: props.schedule.date_key,
-        intervals: data.intervals,
+        intervals: data.intervals.map((interval) => ({
+          start: `${props.schedule.date_key}T${interval.start}`,
+          end: `${props.schedule.date_key}T${interval.end}`
+        })),
         user_id: props.user_id,
       } satisfies IScheduleCreateBodyCredentials;
       if (props.schedule_id != null) {
         await updateSchedule({
           params: { location_id, schedule_id: props.schedule_id },
-          body: payloadBody,
+          body: payload,
         }).unwrap()
         closeDialog();
       } else {
         await createSchedule({
           params: { location_id },
-          body: payloadBody,
+          body: payload,
         }).unwrap()
         closeDialog();
       }

@@ -13,17 +13,7 @@ export const scheduleAPI = API.injectEndpoints({
         method: "POST",
         body,
       }),
-      async onQueryStarted({ params, body }, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled
-          dispatch(scheduleAPI.util.updateQueryData(
-            "getEmployeeServices",
-            { user_id: body.user_id!, location_id: params.location_id },
-            (d) => { d.push(data) }
-          ));
-        }
-        catch { /*  */ }
-      }
+      invalidatesTags: (_res, error) => (error ? [] : [{ type: "SCHEDULE", id: "LIST" }]),
     }),
 
     /** 
@@ -45,6 +35,9 @@ export const scheduleAPI = API.injectEndpoints({
         url: buildQuery(`/v1/schedule/${user_id}/${location_id}`, { ...query }),
         method: "GET",
       }),
+      providesTags: res => res
+          ? [...res.map(({ id }) => ({ type: "SCHEDULE" as const, id })), { type: "SCHEDULE" as const, id: "LIST" }]
+          : [{ type: "SCHEDULE" as const, id: "LIST" }],
     }),
 
     /** 
@@ -56,22 +49,7 @@ export const scheduleAPI = API.injectEndpoints({
         method: "PATCH",
         body,
       }),
-      async onQueryStarted({ params, body }, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(scheduleAPI.util.updateQueryData(
-            "getEmployeeServices",
-            { user_id: body.user_id!, location_id: params.location_id },
-            (d) => {
-              const index = d.findIndex(item => item.id === params.schedule_id);
-              if (index !== -1) {
-                d[index] = { ...d[index], ...data };
-              }
-            }
-          ));
-        }
-        catch { /* */ }
-      }
+      invalidatesTags: (_res, error, { params }) => error ? [] : [{ type: "SCHEDULE", id: params.schedule_id }],
     }),
 
     /** 

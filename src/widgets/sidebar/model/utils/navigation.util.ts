@@ -1,4 +1,6 @@
-export const isRouteActive = (currentPath: string, routePath: string): boolean => {
-  if (routePath === '/') return currentPath === '/';
-  return currentPath.startsWith(routePath);
+export const isRouteActive = (pathname: string, to: string, paths: string[]) => {
+  const matches = paths.filter(p => pathname === p || pathname.startsWith(`${p}/`));
+  if (!matches.length) return false;
+  const best = matches.reduce((a, b) => (b.length > a.length ? b : a));
+  return best === to;
 };

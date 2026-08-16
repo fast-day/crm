@@ -5,6 +5,7 @@ import { isTimeValue, isWeekendValue, pad2, parseBackendDate, toDateKey, useCale
 import { Notice, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { Calendar } from "@/widgets/calendar"
 import { ScheduleDialog } from "@/widgets/schedule"
+import { skipToken } from "@reduxjs/toolkit/query";
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
 
@@ -17,14 +18,15 @@ export const Schedule = () => {
 
   const calendar = useCalendar(user_id);
 
-  const { data: schedules, isLoading, isFetching } = useGetEmployeeServicesQuery({
-    user_id,
-    location_id,
-    query: {
-      month: pad2(calendar.viewMonthIndex + 1),
-      year: String(calendar.viewYear),
-    }
-  });
+  const { data: schedules, isLoading, isFetching } = useGetEmployeeServicesQuery(
+    user_id && location_id ? { user_id, location_id,
+      query: {
+        month: pad2(calendar.viewMonthIndex + 1),
+        year: String(calendar.viewYear),
+      },
+    } : skipToken,
+    { refetchOnMountOrArgChange: true }
+  );
 
   const scheduleEditByKey = useMemo(() => {
     const map = new Map<string, ScheduleEditInfo>();
