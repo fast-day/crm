@@ -2,6 +2,7 @@ import { accountSlice } from "@/entities/account";
 import { bookingSlice } from "@/entities/booking";
 import { dialogSlice } from "@/entities/dialog";
 import { navigationSlice } from "@/entities/navigation";
+import { orderSlice } from "@/entities/orders";
 import { companySlice } from "@/pages/company";
 import { API } from "@/shared/api";
 import { configureStore } from "@reduxjs/toolkit";
@@ -19,6 +20,11 @@ export const store = configureStore({
       ===== BOOKINGS =====
     **/
     booking: bookingSlice,
+
+    /**
+      ===== ORDERS =====
+    **/
+    order: orderSlice,
 
     /**
       ===== DIALOG ===== 

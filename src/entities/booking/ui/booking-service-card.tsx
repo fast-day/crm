@@ -49,7 +49,7 @@ export const BookingServiceCard = ({ service, employee, start_time, end_time, is
           </div>
         </div>
         <div className="flex items-center justify-between">
-          {is_mimi && <BookingAddServiceActions booking_service_count={service.booking_service_count} />}
+          {is_mimi && <BookingAddServiceActions booking_service_id={service.booking_service_id} booking_service_count={service.booking_service_count} />}
           <div className="text-md font-bold">{formatPrice(service.booking_service_price)} ₽</div>
         </div>
       </CardContent>

@@ -42,7 +42,7 @@ export const OrderCheckout = ({ booking_id, order_id }: OrderCheckoutProps) => {
       {!isLoading && bookingError && <BookingNotFound />}
       {!isLoading && !bookingError && orderError && <OrderNotFound />}
       {!isLoading && !hasError && bookingData && (
-        <OrderCheckoutSell booking={bookingData} order={orderData} />
+        <OrderCheckoutSell booking_id={booking_id} booking={bookingData} order={orderData} />
       )}
       {dialog.name === "cancel_payment_method" && <CancelPaymentMethodDialog />}
       {dialog.name === "select_payment_method" && <SelectPaymentMethodDialog />}

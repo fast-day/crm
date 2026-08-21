@@ -1,4 +1,4 @@
-import type { IBooking } from "@/entities/booking";
+import type { IBooking, IBookingService } from "@/entities/booking";
 import type { IInvoice } from "@/entities/invoice";
 import type { ServiceStatusType } from "@/entities/services";
 
@@ -103,6 +103,7 @@ export interface IOrderCreateCredentials {
   body?: {
     comment?: string;
     discount?: number;
+    services?: Pick<IBookingService, "booking_service_id" | "booking_service_count">[];
   }
 }
 
@@ -114,4 +115,23 @@ export interface IOrderPaidCredentials {
   body: {
     payment_method: PaymentMethodType;
   }
+}
+
+/**
+  ===== ПЕРЕСЧЕТ ЗАКАЗА =====
+**/
+export type TCalculateOrderBodyCredentials = {
+  services: Pick<IBookingService, "booking_service_id" | "booking_service_count">[];
+  discount?: number;
+}
+
+export interface ICalculateOrderCredentials {
+  booking_id: string;
+  body: TCalculateOrderBodyCredentials;
+}
+
+export interface ICalculateOrder {
+  discount: number;
+  subtotal: number;
+  total: number;
 }

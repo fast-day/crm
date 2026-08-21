@@ -12,7 +12,7 @@ interface IContentPanelProps {
 
 export const ContentPanel = ({ className="", actionClassName="", title, headerExtra, content, actions }: IContentPanelProps) => {
   return (
-    <div className={cn("h-full max-w-180 w-full mx-auto 1100:w-auto", className)}>
+    <div className={cn("h-full max-w-180 w-full 1100:mx-0 mx-auto 1100:w-auto", className)}>
       <Card className={cn("flex h-full flex-col relative min-w-95")}>
         {title && (
           <CardHeader className="pb-0">

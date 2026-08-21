@@ -1,19 +1,19 @@
-import { BookingServiceCard, type IBookingService } from "@/entities/booking"
+import { BookingServiceCard } from "@/entities/booking"
+import { orderSelector } from "@/entities/orders"
+import { useAppSelector } from "@/shared/hooks"
 import { Badge } from "@/shared/ui"
 
-interface IOrderServicesProps {
-  booking_services: IBookingService[]
-}
-
-export const OrderServices = ({ booking_services }: IOrderServicesProps) => {
+export const OrderServices = () => {
+  const services = useAppSelector(orderSelector).services;
+  
   return (
     <div className="flex flex-col h-full space-y-6 mt-6">
 
       <div className="space-y-4">
-        <div className="flex items-center gap-2 font-bold">Услуги <Badge variant={"count"}>{booking_services.length}</Badge></div>
+        <div className="flex items-center gap-2 font-bold">Услуги <Badge variant={"count"}>{services.length}</Badge></div>
 
         <div className="grid gap-2.5">
-          {booking_services.length > 0 ? booking_services.map((service, idx) => (
+          {services.length > 0 ? services.map((service, idx) => (
             <BookingServiceCard
               key={idx}
               service={service}

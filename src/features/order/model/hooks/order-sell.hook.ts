@@ -1,3 +1,4 @@
+import type { IBookingService } from "@/entities/booking";
 import { useDialog } from "@/entities/dialog";
 import { useCreateOrderMutation, usePaidOrderMutation } from "@/entities/orders";
 import { getErrorMessage } from "@/shared/utils";
@@ -10,7 +11,7 @@ interface IUseOrderSellReturnProps {
   isConfirming: boolean;
   isPaying: boolean;
 
-  handleSave: (booking_id: string) => Promise<void>;
+  handleSave: (booking_id: string, services: IBookingService[]) => Promise<void>;
   handlePay: (booking_id: string, order_id: string | null) => Promise<void>;
   selectPayment: (method: PaymentMethodType | null) => void;
 }
@@ -25,14 +26,22 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
   const [confirm, { isLoading: isConfirming }] = useCreateOrderMutation();
   const [pay, { isLoading: isPaying }] = usePaidOrderMutation();
 
-  const handleSave = async (booking_id: string): Promise<void> => {
+  const handleSave = async (booking_id: string, services: IBookingService[]): Promise<void> => {
     if (payment) {
       openDialog("cancel_payment_method", undefined);
       return;
     }
 
     try {
-      const res = await confirm({ booking_id }).unwrap();
+      const res = await confirm({
+        booking_id,
+        body: {
+          services: services.map((service) => ({
+            booking_service_id: service.booking_service_id,
+            booking_service_count: service.booking_service_count,
+          })),
+        },
+      }).unwrap();
       navigate({ to: `/orders/${res.id}` });
     }
     catch (error) {
