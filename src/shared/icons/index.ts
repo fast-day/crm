@@ -73,6 +73,7 @@ export { default as PersonCircleIcon } from "./PersonCircle";
 export { default as PersonSquareIcon } from "./PersonSquare";
 export { default as PersonIcon } from "./Person";
 export { default as PlusIcon } from "./Plus";
+export { default as Plus2Icon } from "./Plus2";
 export { default as ResearchIcon } from "./Research";
 export { default as SearchIcon } from "./Search";
 export { default as SettingIcon } from "./Setting";
