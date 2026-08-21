@@ -1,6 +1,6 @@
 import { API } from "@/shared/api";
 import { buildQuery } from "@/shared/lib";
-import type { IOrder, IOrderCreateCredentials, IOrderDetail, IOrderPaidCredentials, IOrderQuery } from "../model/types/order.type";
+import type { ICalculateOrder, ICalculateOrderCredentials, IOrder, IOrderCreateCredentials, IOrderDetail, IOrderPaidCredentials, IOrderQuery } from "../model/types/order.type";
 
 export const orderApi = API.injectEndpoints({
   endpoints: builder => ({
@@ -26,68 +26,79 @@ export const orderApi = API.injectEndpoints({
     }),
 
     /**
-      ===== СОЗДАНИЕ ЗАКАЗА =====
+      ===== СОХРАНЕНИЕ ЗАКАЗА =====
     **/
-   createOrder: builder.mutation<IOrderDetail, IOrderCreateCredentials>({
-    query: ({ booking_id, body }) => ({
-      url: `/v1/orders/${booking_id}/draft`,
-      method: "POST",
-      body,
+    createOrder: builder.mutation<IOrderDetail, IOrderCreateCredentials>({
+      query: ({ booking_id, body }) => ({
+        url: `/v1/orders/${booking_id}/draft`,
+        method: "POST",
+        body,
+      }),
     }),
-   }),
 
     /**
       ===== ОТМЕНА ЗАКАЗА =====
     **/
-   cancelOrder: builder.mutation<IOrderDetail, { order_id: string }>({
-    query: ({ order_id }) => ({
-      url: `/v1/orders/${order_id}/cancel`,
-      method: "POST"
-    }),
+    cancelOrder: builder.mutation<IOrderDetail, { order_id: string }>({
+      query: ({ order_id }) => ({
+        url: `/v1/orders/${order_id}/cancel`,
+        method: "POST"
+      }),
 
-    async onQueryStarted({ order_id }, { dispatch, queryFulfilled }) {
-      try {
-        const { data } = await queryFulfilled;
-        dispatch(orderApi.util.updateQueryData(
-          "getOrder",
-          { order_id },
-          (d) => { Object.assign(d, data) }
-        ));
-      } catch { /* */ }
-    }
-   }),
+      async onQueryStarted({ order_id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(orderApi.util.updateQueryData(
+            "getOrder",
+            { order_id },
+            (d) => { Object.assign(d, data) }
+          ));
+        } catch { /* */ }
+      }
+    }),
 
     /**
       ===== ВОЗВРАТ СРЕДСТВ =====
     **/
-   refundOrder: builder.mutation<IOrderDetail, { order_id: string }>({
-    query: ({ order_id }) => ({
-      url: `/v1/orders/${order_id}/refund`,
-      method: "POST"
-    }),
+    refundOrder: builder.mutation<IOrderDetail, { order_id: string }>({
+      query: ({ order_id }) => ({
+        url: `/v1/orders/${order_id}/refund`,
+        method: "POST"
+      }),
 
-    async onQueryStarted({ order_id }, { dispatch, queryFulfilled }) {
-      try {
-        const { data } = await queryFulfilled;
-        dispatch(orderApi.util.updateQueryData(
-          "getOrder",
-          { order_id },
-          (d) => { Object.assign(d, data) }
-        ));
-      } catch { /* */ }
-    }
-   }),
+      async onQueryStarted({ order_id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(orderApi.util.updateQueryData(
+            "getOrder",
+            { order_id },
+            (d) => { Object.assign(d, data) }
+          ));
+        } catch { /* */ }
+      }
+    }),
 
     /**
       ===== ОПЛАТА ЗАКАЗА =====
     **/
-   paidOrder: builder.mutation<IOrderDetail, IOrderPaidCredentials>({
-    query: ({ order_id, body }) => ({
-      url: `/v1/orders/${order_id}/paid`,
-      method: "POST",
-      body,
+    paidOrder: builder.mutation<IOrderDetail, IOrderPaidCredentials>({
+      query: ({ order_id, body }) => ({
+        url: `/v1/orders/${order_id}/paid`,
+        method: "POST",
+        body,
+      }),
     }),
-   }),
+
+    /**
+      ===== ПЕРЕСЧЕТ ЗАКАЗА =====
+    **/
+    calculateOrder: builder.mutation<ICalculateOrder, ICalculateOrderCredentials>({
+      query: ({ booking_id, body }) => ({
+        url: `/v1/orders/${booking_id}/calculate`,
+        method: "POST",
+        body,
+      }),
+    }),
 
   }),
 });
@@ -101,4 +112,5 @@ export const {
   useCancelOrderMutation,
   useRefundOrderMutation,
   usePaidOrderMutation,
+  useCalculateOrderMutation,
 } = orderApi;

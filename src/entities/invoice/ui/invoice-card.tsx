@@ -1,6 +1,6 @@
 import { Badge, Card, CardContent } from "@/shared/ui";
 import type { IInvoice } from "../model/types/invoice.type";
-import { formatDateToRus } from "@/shared/utils";
+import { formatDateToRus, formatPrice } from "@/shared/utils";
 import { INVOICE_TYPE } from "@/shared/constants";
 
 interface IInvoiceCardProps extends IInvoice {
@@ -29,7 +29,7 @@ export const InvoiceCard = ({ type, tag, date, amount, download }: IInvoiceCardP
           <p className="text-sm font-medium leading-3.5 whitespace-nowrap">{tag}</p>
           <p className="text-sm font-medium leading-3.5 opacity-50">{formatDateToRus(date)}</p>
         </div>
-        <div className="text-end text-sm font-bold">{amount} ₽</div>
+        <div className="text-end text-sm font-bold">{formatPrice(amount)} ₽</div>
         <div className="flex items-center justify-end gap-2">
           {download}
         </div>

@@ -148,7 +148,7 @@ export const SidebarAside = () => {
             const isOpen = openGroup === idx || hasActiveChild;
 
             return (
-              <div className={cn(isOpen ? "bg-primary/40" : "", "grid rounded-13")}>
+              <div key={idx} className={cn(isOpen ? "bg-primary/40" : "", "grid rounded-13")}>
                 <Link
                   to={children[0].to}
                   className={cn(isOpen ? "text-white" : "text-white/70", "flex items-center gap-2 px-3 py-2")}

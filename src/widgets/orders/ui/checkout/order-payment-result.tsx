@@ -1,15 +1,18 @@
+import type { ICalculateOrder } from "@/entities/orders";
 import { PAYMENT_METHODS_ENUM } from "@/shared/constants/payment-methods.constant"
 import { TrashIcon } from "@/shared/icons";
 import { Button } from "@/shared/ui";
 import { formatPrice } from "@/shared/utils";
+import { LazyBlur } from "@/widgets/loading";
 
 interface IOrderPaymentResultProps {
   payment: PaymentMethodType;
-  subtotal: number;
+  calculate: ICalculateOrder;
+  calculateLoading: boolean;
   cancel: () => void;
 }
 
-export const OrderPaymentResult = ({ payment, subtotal, cancel }: IOrderPaymentResultProps) => {
+export const OrderPaymentResult = ({ payment, calculate, calculateLoading, cancel }: IOrderPaymentResultProps) => {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold">Оплата</h3>
@@ -18,7 +21,10 @@ export const OrderPaymentResult = ({ payment, subtotal, cancel }: IOrderPaymentR
           <div className="w-2 h-2 rounded-full bg-primary" />
           <div className="font-medium">{PAYMENT_METHODS_ENUM[payment].label}</div>
         </div>
-        <div className="font-medium">{formatPrice(subtotal)} ₽</div>
+        <div className="relative px-2 -mr-2">
+          {calculateLoading && <LazyBlur className="rounded-sm p-2 backdrop-blur-2!" />}
+          <span className="font-medium">{formatPrice(calculate.total)} ₽</span>
+        </div>
 
         <Button
           variant={"transparent"}

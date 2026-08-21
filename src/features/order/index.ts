@@ -1,5 +1,6 @@
 // HOOKS
 export { useOrderSell } from './model/hooks/order-sell.hook';
+export { useOrderCalculate } from './model/hooks/order-calculate.hook';
 
 // UI
 export { PaymentMethodCard } from './ui/payment-method';

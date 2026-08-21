@@ -1,9 +1,11 @@
+import type { IBookingService } from "@/entities/booking";
 import { useDialog } from "@/entities/dialog";
 import { useCreateOrderMutation, usePaidOrderMutation } from "@/entities/orders";
 import { getErrorMessage } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
+import { toServicePayload } from "../utils/to-service-payload.util";
 
 interface IUseOrderSellReturnProps {
   payment: PaymentMethodType | null;
@@ -15,7 +17,12 @@ interface IUseOrderSellReturnProps {
   selectPayment: (method: PaymentMethodType | null) => void;
 }
 
-export const useOrderSell = (): IUseOrderSellReturnProps => {
+interface IUseOrderSellProps {
+  isDirty: boolean;
+  services: IBookingService[];
+}
+
+export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrderSellReturnProps => {
   const navigate = useNavigate();
 
   const [payment, setPayment] = useState<PaymentMethodType | null>(null);
@@ -32,7 +39,12 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
     }
 
     try {
-      const res = await confirm({ booking_id }).unwrap();
+      const res = await confirm({
+        booking_id,
+        body: {
+          services: toServicePayload(services),
+        },
+      }).unwrap();
       navigate({ to: `/orders/${res.id}` });
     }
     catch (error) {
@@ -49,8 +61,13 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
     try {
       let orderId = order_id;
 
-      if (!orderId) {
-        const order = await confirm({ booking_id }).unwrap();
+      if (!orderId || isDirty) {
+        const order = await confirm({
+          booking_id,
+          body: {
+            services: toServicePayload(services),
+          },
+        }).unwrap();
         orderId = order.id;
       }
 
