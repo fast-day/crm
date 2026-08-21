@@ -26,10 +26,10 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
 
   const isFirstRender = useRef(true);
 
-  const { services, revision } = useAppSelector(orderSelector);
+  const { services, revision, isDirty } = useAppSelector(orderSelector);
   const debouncedServices = useDebounce(revision, 800);
 
-  const { handleSave, handlePay, payment, selectPayment, isConfirming, isPaying } = useOrderSell();
+  const { handleSave, handlePay, payment, selectPayment, isConfirming, isPaying } = useOrderSell({ isDirty, services });
 
   const { calculate, isLoading: calculateLoading, result: calculateResult } = useOrderCalculate();
   
@@ -42,9 +42,8 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
   
   useEffect(() => {
     dispatch(setServices(booking.booking_services));
-    console.log("booking.booking_services", booking.booking_services);
     calculate(booking_id, booking.booking_services);
-  }, [booking_id]);
+  }, [booking.booking_services]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -102,7 +101,7 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
                 className={"p-5"}
                 isLoading={isConfirming}
                 disabled={isConfirming}
-                onClick={() => handleSave(booking.id, services)}
+                onClick={() => handleSave(booking.id)}
               >Сохранить</Button>
               <Button
                 type={"button"}

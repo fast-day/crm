@@ -5,18 +5,24 @@ import { getErrorMessage } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
+import { toServicePayload } from "../utils/to-service-payload.util";
 
 interface IUseOrderSellReturnProps {
   payment: PaymentMethodType | null;
   isConfirming: boolean;
   isPaying: boolean;
 
-  handleSave: (booking_id: string, services: IBookingService[]) => Promise<void>;
+  handleSave: (booking_id: string) => Promise<void>;
   handlePay: (booking_id: string, order_id: string | null) => Promise<void>;
   selectPayment: (method: PaymentMethodType | null) => void;
 }
 
-export const useOrderSell = (): IUseOrderSellReturnProps => {
+interface IUseOrderSellProps {
+  isDirty: boolean;
+  services: IBookingService[];
+}
+
+export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrderSellReturnProps => {
   const navigate = useNavigate();
 
   const [payment, setPayment] = useState<PaymentMethodType | null>(null);
@@ -26,7 +32,7 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
   const [confirm, { isLoading: isConfirming }] = useCreateOrderMutation();
   const [pay, { isLoading: isPaying }] = usePaidOrderMutation();
 
-  const handleSave = async (booking_id: string, services: IBookingService[]): Promise<void> => {
+  const handleSave = async (booking_id: string): Promise<void> => {
     if (payment) {
       openDialog("cancel_payment_method", undefined);
       return;
@@ -36,10 +42,7 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
       const res = await confirm({
         booking_id,
         body: {
-          services: services.map((service) => ({
-            booking_service_id: service.booking_service_id,
-            booking_service_count: service.booking_service_count,
-          })),
+          services: toServicePayload(services),
         },
       }).unwrap();
       navigate({ to: `/orders/${res.id}` });
@@ -58,8 +61,13 @@ export const useOrderSell = (): IUseOrderSellReturnProps => {
     try {
       let orderId = order_id;
 
-      if (!orderId) {
-        const order = await confirm({ booking_id }).unwrap();
+      if (!orderId || isDirty) {
+        const order = await confirm({
+          booking_id,
+          body: {
+            services: toServicePayload(services),
+          },
+        }).unwrap();
         orderId = order.id;
       }
 
