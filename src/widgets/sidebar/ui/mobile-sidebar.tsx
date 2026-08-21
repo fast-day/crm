@@ -1,5 +1,5 @@
 import type { PageType } from "@/entities/settings";
-import { AddFillIcon, Plus2Icon } from "@/shared/icons"
+import { Plus2Icon } from "@/shared/icons"
 import SvgBook from "@/shared/icons/Book";
 import Cast from "@/shared/icons/Cast";
 import SvgCustomer from "@/shared/icons/Customer";
