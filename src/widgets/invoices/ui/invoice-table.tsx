@@ -35,7 +35,7 @@ export const InvoiceTable = ({ invoices, isFetching, meta }: InvoiceTableProps) 
               <React.Fragment key={index}>
                 <TableRow>
                   <TableCell className="flex-col justify-center items-start gap-0">
-                    
+                    {invoice.order_tag}
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
                     {invoice.order_tag}
