@@ -1,6 +1,7 @@
 import type { IBookingService } from "@/entities/booking";
 import { useCalculateOrderMutation, type ICalculateOrder } from "@/entities/orders"
 import { getErrorMessage } from "@/shared/utils";
+import { useCallback } from "react";
 import { toast } from "sonner";
 
 interface IUseOrderCalculateReturnProps {
@@ -20,7 +21,7 @@ export const useOrderCalculate = (): IUseOrderCalculateReturnProps => {
     fixedCacheKey: "order-calculate",
   });
 
-  const calculate = async (booking_id: string, services: IBookingService[]): Promise<void> => {
+  const calculate = useCallback(async (booking_id: string, services: IBookingService[]): Promise<void> => {
     try {
       await calc({
         booking_id,
@@ -34,9 +35,9 @@ export const useOrderCalculate = (): IUseOrderCalculateReturnProps => {
     }
     catch (err) {
       toast.error(getErrorMessage(err));
-      console.log("Не удалось расчитать стоимоть заказа");
+      console.error("Не удалось рассчитать стоимоть заказа");
     }
-  }
+  }, [calc]);
 
   return { calculate, isLoading, result: result ?? DEFAULT_CALCULATE_RESULT };
 }

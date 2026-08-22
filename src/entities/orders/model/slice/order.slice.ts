@@ -5,12 +5,14 @@ interface OrderState {
   services: IBookingService[];
   revision: number;
   isDirty: boolean;
+  payment_method: PaymentMethodType | null;
 }
 
 const initialState: OrderState = {
   services: [],
   revision: 0,
   isDirty: false,
+  payment_method: null,
 };
 
 export const orderSlice = createSlice({
@@ -28,12 +30,16 @@ export const orderSlice = createSlice({
         state.revision += 1;
         state.isDirty = true;
       }
-    }
+    },
+    setPaymentMethod: (state, action: PayloadAction<PaymentMethodType | null>) => {
+      state.payment_method = action.payload;
+    },
   },
 });
 
 export const {
   setServices,
   updateCount,
+  setPaymentMethod,
 } = orderSlice.actions;
 export default orderSlice.reducer;

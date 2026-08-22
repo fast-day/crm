@@ -1,11 +1,11 @@
-import { OnlineHandler } from "@/app/providers/online";
-import { NavigationHandler } from "@/features/navigation";
 import { AppLoading } from "@/widgets/loading";
 import { Outlet } from "@tanstack/react-router";
 import { useInitialize } from "../model/hooks/initialize.hook";
 
 export const InitializedApp = () => {
-  const { isInitialized } = useInitialize();
+  const { isLoading, isInitialized } = useInitialize();
+
+  console.log(isLoading)
 
   if (!isInitialized) {
     return (
@@ -18,8 +18,6 @@ export const InitializedApp = () => {
   return (
     <>
       <Outlet />
-      <OnlineHandler />
-      <NavigationHandler />
     </>
   )
 }

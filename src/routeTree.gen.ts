@@ -52,7 +52,6 @@ import { Route as AppLayoutBusinessServicesCreateIndexRouteImport } from './app/
 import { Route as AppLayoutBusinessServicesService_idIndexRouteImport } from './app/routes/_app/_layout/business/services/$service_id/index'
 import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
 import { Route as AppLayoutBookingsBooking_idEditIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/edit/index'
-import { Route as AppLayoutBookingsBooking_idCheckoutIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/checkout/index'
 import { Route as AppLayoutFocusOrdersCheckoutSellIndexRouteImport } from './app/routes/_app/_layout-focus/orders/checkout/sell/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idServicesIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/services/index'
 import { Route as AppLayoutEmployeesUsersEmployee_idPasswordIndexRouteImport } from './app/routes/_app/_layout/employees/users/$employee_id/password/index'
@@ -309,12 +308,6 @@ const AppLayoutBookingsBooking_idEditIndexRoute =
     path: '/bookings/$booking_id/edit/',
     getParentRoute: () => AppLayoutRouteRoute,
   } as any)
-const AppLayoutBookingsBooking_idCheckoutIndexRoute =
-  AppLayoutBookingsBooking_idCheckoutIndexRouteImport.update({
-    id: '/bookings/$booking_id/checkout/',
-    path: '/bookings/$booking_id/checkout/',
-    getParentRoute: () => AppLayoutRouteRoute,
-  } as any)
 const AppLayoutFocusOrdersCheckoutSellIndexRoute =
   AppLayoutFocusOrdersCheckoutSellIndexRouteImport.update({
     id: '/orders/checkout/sell/',
@@ -415,7 +408,6 @@ export interface FileRoutesByFullPath {
   '/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
   '/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
-  '/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/business/services/$service_id/': typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -467,7 +459,6 @@ export interface FileRoutesByTo {
   '/orders/invoices': typeof AppLayoutOrdersInvoicesIndexRoute
   '/settings/system': typeof AppLayoutSettingsSystemIndexRoute
   '/orders/checkout/sell': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
-  '/bookings/$booking_id/checkout': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/bookings/$booking_id/edit': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/business/services/$service_id': typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -525,7 +516,6 @@ export interface FileRoutesById {
   '/_app/_layout/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
   '/_app/_layout/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/_app/_layout-focus/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
-  '/_app/_layout/bookings/$booking_id/checkout/': typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   '/_app/_layout/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/_app/_layout/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/_app/_layout/business/services/$service_id/': typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -580,7 +570,6 @@ export interface FileRouteTypes {
     | '/orders/invoices/'
     | '/settings/system/'
     | '/orders/checkout/sell/'
-    | '/bookings/$booking_id/checkout/'
     | '/bookings/$booking_id/edit/'
     | '/business/locations/create/'
     | '/business/services/$service_id/'
@@ -632,7 +621,6 @@ export interface FileRouteTypes {
     | '/orders/invoices'
     | '/settings/system'
     | '/orders/checkout/sell'
-    | '/bookings/$booking_id/checkout'
     | '/bookings/$booking_id/edit'
     | '/business/locations/create'
     | '/business/services/$service_id'
@@ -689,7 +677,6 @@ export interface FileRouteTypes {
     | '/_app/_layout/orders/invoices/'
     | '/_app/_layout/settings/system/'
     | '/_app/_layout-focus/orders/checkout/sell/'
-    | '/_app/_layout/bookings/$booking_id/checkout/'
     | '/_app/_layout/bookings/$booking_id/edit/'
     | '/_app/_layout/business/locations/create/'
     | '/_app/_layout/business/services/$service_id/'
@@ -1019,13 +1006,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutBookingsBooking_idEditIndexRouteImport
       parentRoute: typeof AppLayoutRouteRoute
     }
-    '/_app/_layout/bookings/$booking_id/checkout/': {
-      id: '/_app/_layout/bookings/$booking_id/checkout/'
-      path: '/bookings/$booking_id/checkout'
-      fullPath: '/bookings/$booking_id/checkout/'
-      preLoaderRoute: typeof AppLayoutBookingsBooking_idCheckoutIndexRouteImport
-      parentRoute: typeof AppLayoutRouteRoute
-    }
     '/_app/_layout-focus/orders/checkout/sell/': {
       id: '/_app/_layout-focus/orders/checkout/sell/'
       path: '/orders/checkout/sell'
@@ -1129,7 +1109,6 @@ interface AppLayoutRouteRouteChildren {
   AppLayoutMeSecurityIndexRoute: typeof AppLayoutMeSecurityIndexRoute
   AppLayoutOrdersInvoicesIndexRoute: typeof AppLayoutOrdersInvoicesIndexRoute
   AppLayoutSettingsSystemIndexRoute: typeof AppLayoutSettingsSystemIndexRoute
-  AppLayoutBookingsBooking_idCheckoutIndexRoute: typeof AppLayoutBookingsBooking_idCheckoutIndexRoute
   AppLayoutBookingsBooking_idEditIndexRoute: typeof AppLayoutBookingsBooking_idEditIndexRoute
   AppLayoutBusinessLocationsCreateIndexRoute: typeof AppLayoutBusinessLocationsCreateIndexRoute
   AppLayoutBusinessServicesService_idIndexRoute: typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -1175,8 +1154,6 @@ const AppLayoutRouteRouteChildren: AppLayoutRouteRouteChildren = {
   AppLayoutMeSecurityIndexRoute: AppLayoutMeSecurityIndexRoute,
   AppLayoutOrdersInvoicesIndexRoute: AppLayoutOrdersInvoicesIndexRoute,
   AppLayoutSettingsSystemIndexRoute: AppLayoutSettingsSystemIndexRoute,
-  AppLayoutBookingsBooking_idCheckoutIndexRoute:
-    AppLayoutBookingsBooking_idCheckoutIndexRoute,
   AppLayoutBookingsBooking_idEditIndexRoute:
     AppLayoutBookingsBooking_idEditIndexRoute,
   AppLayoutBusinessLocationsCreateIndexRoute:

@@ -6,6 +6,7 @@ import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Dialog } from 
 import { useSelector } from "react-redux"
 import { dialogSelector, useDialog } from "@/entities/dialog";
 import { BookingChangeService } from "./components/booking-change-service";
+import { ContentPanel } from "@/widgets/ content-panel";
 
 export const BookingCreateForm = ({ date }: { date: string }) => {
   const { location, account } = useSelector(accountSelector);
@@ -26,89 +27,91 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
   // console.log("render", booked);
 
   return (
-    <div className="mt-8 relative flex gap-8 h-full">
-      <div className="max-w-140 mx-auto space-y-8 relative flex-1">
+    <div className="mt-8 h-full">
 
-        {location && (
-          <>
-            <Card>
-              <CardHeader className="pb-0 flex-row items-center justify-between gap-2.5">
-                <CardTitle>Услуги</CardTitle>
-                <Badge variant={"count"}>{booked?.length ?? 0}</Badge>
-              </CardHeader>
-              <CardContent>
+      <div className="relative flex h-full flex-col 1100:flex-row gap-8">
+        <div className="max-w-180 1100:max-w-140 w-full mx-auto space-y-8 relative">
 
-                <div className="space-y-6">
-                  {booked && booked?.length > 0 && (
-                    <div className="grid gap-3">
-                      {booked.map((book, idx) => (
-                        <BookingSelectServiceCard
-                          key={idx}
-                          onClick={() => console.log("book: ", book)}
-                          {...book}
-                        />
-                      ))}
-                    </div>
-                  )}
+          {location && (
+            <>
+              <Card>
+                <CardHeader className="pb-0 flex-row items-center justify-between gap-2.5">
+                  <CardTitle>Услуги</CardTitle>
+                  <Badge variant={"count"}>{booked?.length ?? 0}</Badge>
+                </CardHeader>
+                <CardContent>
 
-                  <Button
-                    type={"button"}
-                    onClick={() => openDialog("booking_service_create", undefined)}
-                    variant={"dashed"}
-                    size={"icon_42"}
-                    className="w-full rounded-lg text-sm"
-                    iconLeft={<AddIcon width={18} height={18}/>}
-                  >{booked.length > 0 ? "Добавить услугу" : "Выбрать услугу"}</Button>
-                </div>
+                  <div className="space-y-6">
+                    {booked && booked?.length > 0 && (
+                      <div className="grid gap-3">
+                        {booked.map((book, idx) => (
+                          <BookingSelectServiceCard
+                            key={idx}
+                            onClick={() => console.log("book: ", book)}
+                            {...book}
+                          />
+                        ))}
+                      </div>
+                    )}
 
-                <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
-                  <BookingChangeService location_id={location.id} date={date ?? current_date} account={account} />
-                </Dialog>
+                    <Button
+                      type={"button"}
+                      onClick={() => openDialog("booking_service_create", undefined)}
+                      variant={"dashed"}
+                      size={"icon_42"}
+                      className="w-full rounded-lg text-sm"
+                      iconLeft={<AddIcon width={18} height={18}/>}
+                    >{booked.length > 0 ? "Добавить услугу" : "Выбрать услугу"}</Button>
+                  </div>
 
-              </CardContent>
-            </Card>
+                  <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
+                    <BookingChangeService location_id={location.id} date={date ?? current_date} account={account} />
+                  </Dialog>
 
-            <Card>
-              <CardHeader className="pb-0">
-                <CardTitle>Клиент</CardTitle>
-              </CardHeader>
+                </CardContent>
+              </Card>
 
-              <CardContent className="space-y-5">
-                <BookingSelectCustomer customer={customer} />
+              <Card>
+                <CardHeader className="pb-0">
+                  <CardTitle>Клиент</CardTitle>
+                </CardHeader>
 
-                {customer && <BookingSelectCustomerInfo customer={customer} />}
-              </CardContent>
-            </Card>
-          </>
-        )}
+                <CardContent className="space-y-5">
+                  <BookingSelectCustomer customer={customer} />
+
+                  {customer && <BookingSelectCustomerInfo customer={customer} />}
+                </CardContent>
+              </Card>
+            </>
+          )}
+        </div>
+
+        <ContentPanel
+          title={"Детали записи"}
+          className={"h-auto"}
+          content={
+            <div className="space-y-8 flex flex-col flex-1">
+              <div className="flex items-center justify-between">
+                <div className="font-medium opacity-60">Итого</div>
+                <BookingTotalPrice booked={booked} />
+              </div>
+
+              <BookingSelectDate date={current_date} />
+            </div>
+          }
+          actions={
+            <>
+              <Button
+                type={"button"}
+                onClick={() => handleSave(booked, customer, account, location!.id)}
+                isLoading={isLoading}
+                disabled={isLoading}
+              >Сохранить</Button>
+            </>
+          }
+        />
       </div>
 
-      <Card className="max-w-93.75 w-full flex flex-col">
-        <CardHeader className="pb-0">
-          <CardTitle>Детали записи</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-1 flex flex-col space-y-8">
-          <div className="flex items-center justify-between">
-            <div className="font-medium opacity-60">Итого</div>
-            <BookingTotalPrice booked={booked} />
-          </div>
-
-          <div className="flex-1 space-y-6">
-
-            <BookingSelectDate date={current_date} />
-
-          </div>
-          
-          <div>
-            <Button
-              type={"button"}
-              onClick={() => handleSave(booked, customer, account, location!.id)}
-              isLoading={isLoading}
-              disabled={isLoading}
-            >Сохранить</Button>
-          </div>
-        </CardContent>
-      </Card>
 
     </div>
   )

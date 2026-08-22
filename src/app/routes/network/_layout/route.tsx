@@ -1,3 +1,4 @@
+import { OnlineHandler } from '@/app/providers/online'
 import { NetworkLayout } from '@/widgets/layout'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
@@ -9,6 +10,7 @@ function RouteComponent() {
   return (
     <NetworkLayout>
       <Outlet />
+      <OnlineHandler />
     </NetworkLayout>
   )
 }
