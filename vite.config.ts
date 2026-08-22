@@ -33,7 +33,7 @@ export default defineConfig({
       "e2e/**"
     ],
     coverage: {
-      reporter: ["text", "html", "lcov"],
+      reporter: ["text", "html", "json-summary"],
       thresholds: {
         lines: 60,
         functions: 60,
