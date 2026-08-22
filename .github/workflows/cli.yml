@@ -31,7 +31,7 @@ jobs:
           cache: "yarn"
 
       - name: Setup Go
-        run: yarn install --ignore-scripts --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Linter
         if: ${{ inputs.run_linter }}
