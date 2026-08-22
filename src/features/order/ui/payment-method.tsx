@@ -11,8 +11,8 @@ interface IPaymentMethodCardProps {
 export const PaymentMethodCard = ({ method, onClick, isSelected }: IPaymentMethodCardProps) => {
   return (
     <Card onClick={() => onClick(method)} className={cn("border-2 border-transparent cursor-pointer", isSelected ? "border-primary" : "")}>
-      <CardContent className="p-5">
-        <CardTitle className="text-xl">{PAYMENT_METHODS_ENUM[method].label}</CardTitle>
+      <CardContent className="p-3 lg:p-5">
+        <CardTitle className="text-md lg:text-xl lg:text-left text-center">{PAYMENT_METHODS_ENUM[method].label}</CardTitle>
       </CardContent>
     </Card>
   )

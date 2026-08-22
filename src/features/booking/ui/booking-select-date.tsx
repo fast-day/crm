@@ -59,7 +59,7 @@ export const BookingSelectDate = ({ date }: BookingSelectDateProps) => {
 
       {open && (
         <div
-          className="absolute top-full w-full left-1/2 -translate-x-1/2 mt-2 z-50 shadow-lg rounded-xl bg-popover border border-border"
+          className="absolute top-full max-w-85 w-full left-1/2 -translate-x-1/2 mt-2 z-50 shadow-lg rounded-xl bg-popover border border-border"
           onClick={(e) => e.stopPropagation()}
         >
           <Calendar

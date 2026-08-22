@@ -13,9 +13,9 @@ export const OrderServices = () => {
         <div className="flex items-center gap-2 font-bold">Услуги <Badge variant={"count"}>{services.length}</Badge></div>
 
         <div className="grid gap-2.5">
-          {services.length > 0 ? services.map((service, idx) => (
+          {services.length > 0 ? services.map((service) => (
             <BookingServiceCard
-              key={idx}
+              key={service.booking_service_id}
               service={service}
               employee={service.user}
               start_time={service.booking_service_start_time}
