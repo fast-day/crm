@@ -72,7 +72,7 @@ export const DirectoryAPI = API.injectEndpoints({
     **/
     employeeScheduleSlots: builder.query<DirectoryScheduleIntervalsType, IDirectoryScheduleIntervalsCredentials>({
       query: ({ params, query }) => ({
-        url: `/v1/directory/employee/schedule/${params.user_id}/${params.location_id}?date=${query.date}&duration=${query.duration}`,
+        url: `/v1/directory/employee/slots/${params.user_id}/${params.location_id}?date=${query.date}&duration=${query.duration}`,
         method: "GET",
       }),
     }),

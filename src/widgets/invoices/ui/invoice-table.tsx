@@ -35,7 +35,7 @@ export const InvoiceTable = ({ invoices, isFetching, meta }: InvoiceTableProps) 
               <React.Fragment key={index}>
                 <TableRow>
                   <TableCell className="flex-col justify-center items-start gap-0">
-                    {invoice.order_tag}
+                    {invoice.tag}
                   </TableCell>
                   <TableCell className="flex-col items-start justify-center">
                     {invoice.order_tag}
@@ -44,7 +44,7 @@ export const InvoiceTable = ({ invoices, isFetching, meta }: InvoiceTableProps) 
                     <p>{formatDate(invoice.date)}</p>
                   </TableCell>
                   <TableCell>
-                      <Badge status={invoice.type} fill={"soft"}>
+                      <Badge status={invoice.type} fill={"solid"}>
                         {(() => {
                           const method = INVOICE_TYPE[invoice.type];
                           const Icon = method.icon;
