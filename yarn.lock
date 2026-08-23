@@ -3709,6 +3709,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/history@npm:1.162.1":
+  version: 1.162.1
+  resolution: "@tanstack/history@npm:1.162.1"
+  checksum: 10/a69ea29375e2a3721a02e9d0bd43ddea3ba1e1e4282199325762ad7749bbc34357c7f561487468382ab089311b50257d3f1fe3787c29e3a0686aceffdeada3b7
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-router-devtools@npm:^1.167.1":
   version: 1.167.1
   resolution: "@tanstack/react-router-devtools@npm:1.167.1"
@@ -3726,18 +3733,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-router@npm:^1.133.27":
-  version: 1.170.15
-  resolution: "@tanstack/react-router@npm:1.170.15"
+"@tanstack/react-router@npm:^1.170.32":
+  version: 1.170.32
+  resolution: "@tanstack/react-router@npm:1.170.32"
   dependencies:
-    "@tanstack/history": "npm:1.162.0"
+    "@tanstack/history": "npm:1.162.1"
     "@tanstack/react-store": "npm:^0.9.3"
-    "@tanstack/router-core": "npm:1.171.13"
+    "@tanstack/router-core": "npm:1.171.27"
     isbot: "npm:^5.1.22"
   peerDependencies:
     react: ">=18.0.0 || >=19.0.0"
     react-dom: ">=18.0.0 || >=19.0.0"
-  checksum: 10/d338afa058bfca872e4ecbdd4d67c5a315333ba4deac6cf286d7391d2b302b4c730d55a119028c0c7d595c2fece0fa48eb17d77505879803982ed229ecf0072f
+  checksum: 10/13cfb19839aa75546d9df6f3f6138b7d88a96978eb5433a304b3a894414688c19a640a8b156ac0ab01f9bc7bb2f7e4d824c14e134f354c9701f12406c328aed7
   languageName: node
   linkType: hard
 
@@ -3788,6 +3795,18 @@ __metadata:
     seroval: "npm:^1.5.4"
     seroval-plugins: "npm:^1.5.4"
   checksum: 10/3e45e5f2424408d88d7df494b880e6e8fd33f0f67257911ef0aa7ab15db98a0dab6c934e68fac668831ad47881a745de629964effe53de1c2357e75f18f051a7
+  languageName: node
+  linkType: hard
+
+"@tanstack/router-core@npm:1.171.27":
+  version: 1.171.27
+  resolution: "@tanstack/router-core@npm:1.171.27"
+  dependencies:
+    "@tanstack/history": "npm:1.162.1"
+    cookie-es: "npm:^3.0.0"
+    seroval: "npm:^1.6.2"
+    seroval-plugins: "npm:^1.6.2"
+  checksum: 10/48e82479ac08b96d61577bc4ae6db2581c90a2b675da9fd39b8fb38036adfb3cbb70aa9a202dd26983773ba68d6fd131cc529860792015fa88dcfd7e3574be89
   languageName: node
   linkType: hard
 
@@ -4869,7 +4888,7 @@ __metadata:
     "@svgr/cli": "npm:^8.1.0"
     "@svgr/core": "npm:^8.1.0"
     "@tailwindcss/vite": "npm:^4.1.16"
-    "@tanstack/react-router": "npm:^1.133.27"
+    "@tanstack/react-router": "npm:^1.170.32"
     "@tanstack/react-router-devtools": "npm:^1.167.1"
     "@tanstack/react-table": "npm:^8.21.3"
     "@tanstack/router-plugin": "npm:^1.133.27"
@@ -8355,10 +8374,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"seroval-plugins@npm:^1.6.2":
+  version: 1.6.3
+  resolution: "seroval-plugins@npm:1.6.3"
+  peerDependencies:
+    seroval: ^1.0
+  checksum: 10/2235e2d3a834584677da5215310af923b170dcb736f51f06cc2d588bc8375e316ad20bc0e54bedb8c56ec794333669e8722a4119d76bb570751dd8ef9621331c
+  languageName: node
+  linkType: hard
+
 "seroval@npm:^1.5.4":
   version: 1.5.4
   resolution: "seroval@npm:1.5.4"
   checksum: 10/37fb735b2ccbcaa81da20b4ec4afa81dba75c95b82b6f70407b28b305d9ee1811b83e00d099b4912e5132fbccf68bdfddb01256eb8030ba67efea8960c9d1014
+  languageName: node
+  linkType: hard
+
+"seroval@npm:^1.6.2":
+  version: 1.6.3
+  resolution: "seroval@npm:1.6.3"
+  checksum: 10/c2f86e64b71cddfa721d54ef80de156a22819db3fb81b6a1f7b012ad2fd82e17dea2a675dc32b8ecc08656f94b49d7ba8c4bc39014e13202dc95becaa4241516
   languageName: node
   linkType: hard
 

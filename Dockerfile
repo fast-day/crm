@@ -1,4 +1,4 @@
-FROM node:24-alpine AS build
+FROM node:24-slim AS build
 
 ARG VITE_API_URL
 
@@ -9,7 +9,7 @@ WORKDIR /app
 RUN corepack enable && corepack prepare yarn@4.10.1 --activate
 
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --immutable
 
 COPY . ./
 RUN yarn build

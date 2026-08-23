@@ -41,7 +41,7 @@
     "@svgr/cli": "^8.1.0",
     "@svgr/core": "^8.1.0",
     "@tailwindcss/vite": "^4.1.16",
-    "@tanstack/react-router": "^1.133.27",
+    "@tanstack/react-router": "^1.170.32",
     "@tanstack/react-router-devtools": "^1.167.1",
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
