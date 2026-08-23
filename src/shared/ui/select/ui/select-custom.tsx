@@ -252,7 +252,7 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
       data-ui={"select-item"}
       data-selected={isSelected}
       className={cn(
-        "hover:backdrop-blur-3xl relative flex w-full items-center gap-2 rounded-[14px] py-3.5 px-4 text-md outline-hidden select-none cursor-pointer", 
+        "hover:backdrop-blur-3xl relative flex w-full items-center gap-2 rounded-14 py-3.5 px-4 text-md outline-hidden select-none cursor-pointer", 
         isSelected ? "backdrop-blur-3xl" : "", 
         className
       )}

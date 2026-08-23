@@ -1,9 +1,10 @@
-import { getCookie, getErrorMessage, setCookie } from "@/shared/utils";
+import { getCookie, getErrorMessage, setCookie, sleep } from "@/shared/utils";
 import { baseQuery } from "./base-query";
 import { toast } from "sonner";
 import { logout } from "@/entities/account";
 import { redirect } from "@/entities/navigation";
 import { router } from "@/app/router";
+import { isDev } from "@/shared/constants";
 
 type Verify = {
   success: boolean;
@@ -22,9 +23,9 @@ interface ReauthResponse {
 export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
   let res = await baseQuery(args, api, opt);
   
-  // if (isDev) {
-  //   await sleep(2000);
-  // }
+  if (isDev) {
+    await sleep(2000);
+  }
 
   if (res.error?.status === "FETCH_ERROR") {
     const currentPath = router.state.location.pathname;
@@ -49,7 +50,6 @@ export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
           setCookie("access_token", token, { path: "/", sameSite: "Strict", secure: false });
 
           res = await baseQuery(args, api, opt);
-          // console.log(`refresh.data && "access_token" in refresh.data ${refresh.data && "access_token" in refresh.data}`);
         } else {
           api.dispatch(logout());
         }

@@ -31,7 +31,6 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
   const handleSave = () => {
 
     const errors = validateAddedBooking(setting);
-    // console.log("🚀==== setting =====🚀",setting);
     if (errors.length > 0) {
       toast.error("Заполните все поля", { description: errors.map(e => e.message).join(" • ") });
       return;
@@ -39,7 +38,6 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
 
     dispatch(setBookingCreate({
       service: setting.service,
-      // employee: setting.employee,
       date: date,
       time: setting.time,
     }))
@@ -67,12 +65,9 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
           setSetting={setSetting}
           location_id={location_id}
           service={setting.service}
-          // services={setting.employee?.services}
           user_id={account?.id}
         />
         {(setting.service) && <BookingChangeServicePrice setSetting={setSetting} price={setting?.service?.prices.price}/>}
-
-        {/* <BookingSelectEmployee setSetting={setSetting} location_id={location_id} users={setting.service?.users} employee={account} /> */}
 
         {(setting.service && account?.id) && (
           <>

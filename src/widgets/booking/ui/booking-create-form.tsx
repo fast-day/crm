@@ -24,8 +24,6 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
     // if (Object.keys(payload).length > 0) dispatch(setBookingCreate(payload));
   // }, [date, location]);
 
-  // console.log("render", booked);
-
   return (
     <div className="mt-8 h-full">
 
@@ -65,7 +63,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                   </div>
 
                   <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
-                    <BookingChangeService location_id={location.id} date={date ?? current_date} account={account} />
+                    <BookingChangeService location_id={location.id} date={date} account={account} />
                   </Dialog>
 
                 </CardContent>
@@ -111,7 +109,6 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
           }
         />
       </div>
-
 
     </div>
   )

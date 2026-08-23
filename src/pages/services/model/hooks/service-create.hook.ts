@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { useAppDispatch } from "@/shared/hooks";
 import { updateAccount } from "@/entities/account";
+import { Route } from "@/app/routes/_app/_layout-focus/business/services/create/";
 
 interface UseCreateServiceReturnProps {
   isLoading: boolean;
@@ -13,6 +14,7 @@ interface UseCreateServiceReturnProps {
 
 export const useCreateService = (): UseCreateServiceReturnProps => {
   const navigate = useNavigate();
+  const { redirect } = Route.useSearch();
 
   const dispatch = useAppDispatch();
 
@@ -43,7 +45,7 @@ export const useCreateService = (): UseCreateServiceReturnProps => {
 
       dispatch(updateAccount({ has_services: true }));
 
-      navigate({ to: "/business/services" });
+      navigate({ to: redirect ? redirect : "/business/services" });
     }
     catch (err) {
       console.log(err instanceof Error && err.message);
