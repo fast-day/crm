@@ -6,8 +6,10 @@ ENV VITE_API_URL=${VITE_API_URL}
 
 WORKDIR /app
 
+RUN corepack enable && corepack prepare yarn@4.10.1 --activate
+
 COPY package.json yarn.lock ./
-RUN corepack enable && yarn install --immutable
+RUN yarn install
 
 COPY . ./
 RUN yarn build
