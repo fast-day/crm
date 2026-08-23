@@ -18,6 +18,7 @@ export const Services = ({ query }: ServiceProps) => {
   const { account } = useSelector(accountSelector);
   const { data, isLoading, isError, isSuccess } = useGetServicesQuery(
     account?.has_services ? { ...query } : skipToken,
+    { refetchOnMountOrArgChange: true },
   );
 
   const content = !account?.has_services ? (

@@ -3,9 +3,7 @@ import { Outlet } from "@tanstack/react-router";
 import { useInitialize } from "../model/hooks/initialize.hook";
 
 export const InitializedApp = () => {
-  const { isLoading, isInitialized } = useInitialize();
-
-  console.log(isLoading)
+  const { isInitialized } = useInitialize();
 
   if (!isInitialized) {
     return (

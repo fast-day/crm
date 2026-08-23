@@ -3,8 +3,10 @@ import { Avatar } from "@/entities/user";
 import { markClasses } from "@/shared/constants";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select/ui/select-custom";
 import { cn, formatPrice, minuteFormat } from "@/shared/utils";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import type { ServiceSettingType } from "../model/types/booking-setting-service.type";
+import { Button } from "@/shared/ui";
+import { PlusIcon } from "@/shared/icons";
 
 interface BookingSelectServicesProps {
   location_id: string;
@@ -15,6 +17,7 @@ interface BookingSelectServicesProps {
 }
 
 export const BookingSelectServices = ({ location_id, service, setSetting, user_id }: BookingSelectServicesProps) => {
+  const navigate = useNavigate();
   const { data, isLoading } = useLocationServicesQuery(
     { location_id },
     { refetchOnMountOrArgChange: true },
@@ -23,7 +26,7 @@ export const BookingSelectServices = ({ location_id, service, setSetting, user_i
   return (
     <div>
       <Select value={{
-        value: service?.name ?? "",
+        value: service?.id ?? "",
         label: service?.name ?? "",
         avatar: service?.id ? { id: service?.id, name: service?.name, avatar_url: service?.avatar } : undefined, 
       }}>
@@ -34,7 +37,7 @@ export const BookingSelectServices = ({ location_id, service, setSetting, user_i
           {isLoading ? (
             <div className="p-4 text-center text-sm opacity-60">Загрузка...</div>
           ) : (
-            data && data.map((service, idx) => (
+            data?.length ? data.map((service, idx) => (
               <SelectItem
                 key={idx}
                 value={{
@@ -58,7 +61,25 @@ export const BookingSelectServices = ({ location_id, service, setSetting, user_i
                   {user_id && !service.users.some(u => u.id === user_id) && <div className="text-11 text-red leading-3">Отключено для сотрудника</div>}
                 </div>
               </SelectItem>
-            ))
+            )) : (
+              <SelectItem
+                onChange={() => navigate({ to: "/business/services/create?redirect=/bookings/create" })}
+                className="p-2.5"
+                value={{
+                    value: "create",
+                    label: "create",
+                    avatar: undefined
+                }}
+              >
+                <Button
+                  type={"button"}
+                  variant={"dashed"}
+                  size={"size_48"}
+                  className={"w-full"}
+                  iconLeft={<PlusIcon width={20} height={20} />}
+                >Добавить услугу</Button>
+              </SelectItem>
+            )
           )}
         </SelectContent>
       </Select>

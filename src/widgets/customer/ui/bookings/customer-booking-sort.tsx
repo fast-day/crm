@@ -1,6 +1,7 @@
-import { Route } from "@/app/routes/_app/_layout/customers/$customer_id/bookings";
+import { Route } from "@/app/routes/_app/_layout-focus/customers/$customer_id/bookings";
 import type { IBookingQuery } from "@/entities/booking"
 import { BookingStatusSort } from "@/features/booking";
+import { SortWrapper } from "@/widgets/sort";
 import { useNavigate } from "@tanstack/react-router";
 
 export const CustomerBookingSort = ({ status }: IBookingQuery) => {
@@ -18,9 +19,9 @@ export const CustomerBookingSort = ({ status }: IBookingQuery) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <SortWrapper>
         <BookingStatusSort status={status} handleChange={handleChange} />
-      </div>
+      </SortWrapper>
     </div>
   )
 }

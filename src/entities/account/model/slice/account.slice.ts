@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie } from "@/shared/utils";
+import { clearStorageItem, deleteCookie, getCookie } from "@/shared/utils";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IMe, MeLocation, MeSettingPages } from "../types/me.type";
 import type { IPermission } from "../types/permission.type";
@@ -57,11 +57,14 @@ export const accountSlice = createSlice({
     logout: (state) => {
       deleteCookie("access_token");
       deleteCookie("refresh_token");
+      clearStorageItem("location");
+
       state.isAuthenticated = false;
       state.isCompany = false;
       state.account = null;
       state.location = null;
       state.permissions = null;
+
       localStorage.clear();
     },
   },

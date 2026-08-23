@@ -1,12 +1,14 @@
 import { useGetDetailServiceQuery } from "@/entities/services";
 import { PageHeader, PageHeaderTitle, PageHeaderActions, PageHeaderBackAction } from "@/shared/ui";
-import { useParams } from "@tanstack/react-router";
 import { ServicesForm } from "./components/services-form";
 import { ServiceFormLazy, ServiceNotFound } from "@/widgets/services";
 import { useEditService } from "../model/hooks/service-update.hook";
 
-export const ServiceEdit = () => {
-  const { service_id } = useParams({ from: "/_app/_layout/business/services/$service_id/edit/" });
+interface IServiceEditProps {
+  service_id: string;
+}
+
+export const ServiceEdit = ({ service_id }: IServiceEditProps) => {
   const { data, isLoading: isLoading, isError } = useGetDetailServiceQuery({ service_id });
   const { onSubmit, isLoading: isEdit } = useEditService(service_id);
   
