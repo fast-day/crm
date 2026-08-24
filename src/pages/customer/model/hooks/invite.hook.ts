@@ -6,6 +6,7 @@ import { getErrorMessage } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { useAppDispatch } from "@/shared/hooks";
 import { updateAccount } from "@/entities/account";
+import { Route } from "@/app/routes/_app/_layout-focus/customers/create/";
 
 type InviteStep = "checking" | "viewing" | "creating";
 
@@ -22,6 +23,8 @@ interface IUseCustomerInviteReturnProps {
 export const useCustomerInvite = (): IUseCustomerInviteReturnProps => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const { redirect } = Route.useSearch();
 
   const [step, setStep] = useState<InviteStep>("checking");
   const [foundCustomer, setFoundCustomer] = useState<ICheckCustomer | undefined>(undefined);
@@ -55,7 +58,7 @@ export const useCustomerInvite = (): IUseCustomerInviteReturnProps => {
 
       dispatch(updateAccount({ has_customers: true }));
 
-      navigate({ to: "/customers" });
+      navigate({ to: redirect ? redirect : "/customers" });
     }
     catch (error) {
       console.log(error);

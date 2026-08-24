@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { dialogSelector, useDialog } from "@/entities/dialog";
 import { BookingChangeService } from "./components/booking-change-service";
 import { ContentPanel } from "@/widgets/ content-panel";
+import { Link } from "@tanstack/react-router";
 
 export const BookingCreateForm = ({ date }: { date: string }) => {
   const { location, account } = useSelector(accountSelector);
@@ -63,15 +64,19 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                   </div>
 
                   <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
-                    <BookingChangeService location_id={location.id} date={date} account={account} />
+                    <BookingChangeService location_id={location.id} date={current_date ?? date} account={account} />
                   </Dialog>
 
                 </CardContent>
               </Card>
 
               <Card>
-                <CardHeader className="pb-0">
+                <CardHeader className="pb-0 flex items-center justify-between flex-row">
                   <CardTitle>Клиент</CardTitle>
+                  <Link
+                    to={"/customers/create?redirect=/bookings/create"}
+                    className="text-sm font-bold text-primary opacity-80 hover:opacity-100 duration-150"
+                  >Добавить</Link>
                 </CardHeader>
 
                 <CardContent className="space-y-5">
