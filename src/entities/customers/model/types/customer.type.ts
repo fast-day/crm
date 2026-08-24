@@ -44,3 +44,17 @@ export interface ICustomerCreateCredentials {
   note?: string | null;
   is_banned?: boolean;
 }
+
+export interface ICheckCustomer {
+  exists: boolean;
+  search_value: string;
+  customer_id: string | null;
+  profile: {
+    id: string | null;
+    first_name: string | null;
+    last_name: string | null;
+    full_name: string | null;
+    avatar: string | null;
+    phone: string | null;
+  };
+}

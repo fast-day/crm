@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import type { ICustomer, ICustomers, ICustomerDetailCredentials, ICustomerCreateCredentials, ICustomerQuery } from "../model/types/customer.type";
+import type { ICustomer, ICustomers, ICustomerDetailCredentials, ICustomerCreateCredentials, ICustomerQuery, ICheckCustomer } from "../model/types/customer.type";
 import type { ICustomerBooking } from "../model/types/customer-booking.type";
 import { buildQuery } from "@/shared/lib";
 
@@ -44,11 +44,21 @@ export const customerApi = API.injectEndpoints({
     }),
 
     /**
-      ===== СОЗДАНИЕ КЛИЕНТА ОТ ЛИЦА КОМПАНИИ =====
+      ===== ПРОВЕРКА НА СУЩЕСТВОВАНИЕ КЛИЕНТА =====
+    **/
+    checkCustomer: build.query<ICheckCustomer, { phone: string, }>({
+      query: ({ phone }) => ({
+        url: `/v1/customer/check/${phone}`,
+        method: "GET",
+      }),
+    }),
+
+    /**
+      ===== СОЗДАНИЕ КЛИЕНТА =====
     **/
     createCustomer: build.mutation<ICustomers, ICustomerCreateCredentials>({
       query: (body) => ({
-        url: `/v1/company/customer`,
+        url: `/v2/company/customer`,
         method: "POST",
         body,
       }),
@@ -61,5 +71,7 @@ export const {
   useGetCustomersQuery,
   useGetCustomerQuery,
   useBookingsCustomerQuery,
+  useCheckCustomerQuery,
+  useLazyCheckCustomerQuery,
   useCreateCustomerMutation,
 } = customerApi;

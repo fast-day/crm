@@ -1,13 +1,13 @@
 import { useCreateCustomerMutation, type ICustomerCreateCredentials } from "@/entities/customers";
 import { toast } from "sonner";
-import type { customerSchemaType } from "../schemas/customer.schema";
+import type { CustomerSchemaType } from "../schemas/customer.schema";
 import { useNavigate } from "@tanstack/react-router";
 import { getErrorMessage } from "@/shared/utils";
 import { useAppDispatch } from "@/shared/hooks";
 import { updateAccount } from "@/entities/account";
 
 interface useCustomerCreateReturnProps {
-  onSubmit: (data: customerSchemaType) => Promise<void>;
+  onSubmit: (data: CustomerSchemaType) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -16,7 +16,7 @@ export const useCustomerCreate = (): useCustomerCreateReturnProps => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
-  const onSubmit = async (data: customerSchemaType): Promise<void> => {
+  const onSubmit = async (data: CustomerSchemaType): Promise<void> => {
     try {
       const req = {
         ...data,
