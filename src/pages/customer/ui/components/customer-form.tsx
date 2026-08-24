@@ -1,12 +1,12 @@
 import type { ICustomer } from "@/entities/customers";
 import { Button, Card, CardContent, CardHeader, CardTitle, Form, FormWrapperAction, InputForm, TextareaForm } from "@/shared/ui"
-import { customerSchema, type customerSchemaType } from "../../model/schemas/customer.schema";
+import { customerSchema, type CustomerSchemaType } from "../../model/schemas/customer.schema";
 import { Controller } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 
 interface CustomerFormProps {
   data?: ICustomer;
-  onSubmit: (data: customerSchemaType) => Promise<void>;
+  onSubmit: (data: CustomerSchemaType) => Promise<void>;
   isLoading: boolean;
 }
 
