@@ -39,6 +39,7 @@ export const buttonVariants = cva(
         icon_20: "size-5",
         icon_24: "size-6",
         icon_28: "size-7",
+        icon_32: "size-8",
         icon_36: "size-9",
         icon_40: "size-10",
         icon_42: "size-10.5",
