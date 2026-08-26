@@ -1,7 +1,7 @@
 import { Route } from "@/app/routes/_app/_layout-focus/customers/$customer_id/bookings";
 import type { IBookingQuery } from "@/entities/booking"
 import { BookingStatusSort } from "@/features/booking";
-import { SortWrapper } from "@/widgets/sort";
+import { SortWrapper } from "@/shared/ui";
 import { useNavigate } from "@tanstack/react-router";
 
 export const CustomerBookingSort = ({ status }: IBookingQuery) => {

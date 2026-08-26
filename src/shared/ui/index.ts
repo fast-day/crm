@@ -25,3 +25,4 @@ export * from './pagination';
 export * from './input';
 export * from './sheet';
 export * from './notice';
+export { SortWrapper } from './sort';

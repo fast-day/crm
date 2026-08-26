@@ -24,7 +24,7 @@ export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
   let res = await baseQuery(args, api, opt);
   
   if (isDev) {
-    await sleep(2000);
+    await sleep(500);
   }
 
   if (res.error?.status === "FETCH_ERROR") {

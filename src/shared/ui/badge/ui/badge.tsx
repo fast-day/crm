@@ -57,8 +57,8 @@ const badgeVariants = cva(
       },
       fill: {
         none: "",
-        soft: "px-2 py-0.5 text-xss! border-none rounded-lg",
-        solid: "px-2 py-0.5 text-xss! border-none rounded-lg"
+        soft: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold",
+        solid: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold"
       }
     },
     compoundVariants: [

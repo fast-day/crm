@@ -1,0 +1,77 @@
+import { ChevronRightIcon } from "@/shared/icons"
+import { Badge, Button, TableMobile, TableMobileAction, TableMobileBody, TableMobileCell, TableMobileRow } from "@/shared/ui"
+import { formatDate, formatPrice } from "@/shared/utils";
+import { LazyBlur } from "@/widgets/loading";
+import { Link } from "@tanstack/react-router";
+import { Avatar } from "@/entities/user";
+import type { BookingTableProps } from "./types/props.type";
+import { BOOKING_STATUS } from "@/shared/constants";
+
+export const BookingTableMobile = ({ isFetching, bookings }: BookingTableProps) => {
+  return (
+    <TableMobile>
+      <TableMobileBody>
+        {isFetching && <LazyBlur />}
+        {bookings?.length ?
+          bookings.map((booking) => (
+            <TableMobileRow key={booking.id}>
+              <TableMobileCell>
+                  <Badge variant={`${booking.status}_b`}>{BOOKING_STATUS[booking.status]}</Badge>
+              </TableMobileCell>
+
+              <TableMobileCell thead={"Услуга"}>
+                <div>
+                  <p className="font-semibold">{formatDate(booking.date)}</p>
+                  <div className="flex items-center text-sm mt-0.5 opacity-80">
+                    <p>{booking.start_time}</p>
+                    <span> - </span>
+                    <p>{booking.end_time}</p>
+                  </div>
+                </div>
+              </TableMobileCell>
+
+              <TableMobileCell thead={"Клиент"}>
+                  {booking.booking_services.length > 0 ? (
+                    <>
+                      {booking.booking_services.slice(0,1).map((service, idx) => (
+                        <Link to={`/business/services/${service.service.service_id}`} onClick={(e)=>e.stopPropagation()} key={idx} className="flex items-center gap-2.5">
+                          <Avatar size={"tiny"} avatar_url={service.service.avatar} name={service.service.name} id={service.service.service_id} />
+                          <p className="leading-4">{service.service.name}</p>
+                        </Link>
+                      ))}
+                      {booking.booking_services.length > 1 && (
+                        <div className="text-11 font-medium rounded-md leading-2.5 bg-border w-5 h-5 flex items-center justify-center">+{booking.booking_services.length - 1}</div>
+                      )}
+                    </>
+                  ) : ( <div className="flex items-center w-full flex-1">-</div> )}
+              </TableMobileCell>
+
+              <TableMobileCell thead={"Сотрудник"}>
+                <div className="flex flex-col items-start justify-center">
+                  <div className="flex items-center gap-2.5">
+                    <Avatar size={"tiny"} avatar_url={booking.customer.avatar} name={booking.customer.full_name} id={booking.customer.id} />
+                    <p>{booking.customer.full_name}</p>
+                  </div>
+                  <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${booking.customer.phone}`}>{booking.customer.phone}</Link>
+                </div>
+              </TableMobileCell>
+
+              <TableMobileCell thead={"Цена"}>
+                  {formatPrice(booking.subtotal ?? booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} ₽
+              </TableMobileCell>
+
+              <TableMobileAction>
+                <Link to={`${booking.id}`}>
+                  <Button variant={"white"} size={"icon_32"} animation={"toggle_sm"} className={"rounded-10! rounded-tr-xl!"}>
+                    <ChevronRightIcon width={17} height={17} />
+                  </Button>
+                </Link>
+              </TableMobileAction>
+            </TableMobileRow>
+          )) : null}
+      
+      
+      </TableMobileBody>
+    </TableMobile>
+  )
+}

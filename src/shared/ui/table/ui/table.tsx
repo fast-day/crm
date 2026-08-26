@@ -79,7 +79,7 @@ function TableCell({ className, ...props }: ComponentProps<"div">) {
 function TableCellActions({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      data-ui="table-cell"
+      data-ui="table-cell-actions"
       className={cn("py-3.5 px-5 flex items-center justify-end gap-2", className)}
       {...props}
     />

@@ -1,9 +1,9 @@
 import { accountSelector } from "@/entities/account";
 import { useGetOrdersQuery, type IOrderQuery } from "@/entities/orders";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { RequestError } from "@/widgets/layout";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
+import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { TableLoading } from "@/widgets/loading";
-import { OrderEmpty, OrderTable } from "@/widgets/orders";
+import { OrderEmpty, OrderSort, OrderTable } from "@/widgets/orders";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useSelector } from "react-redux";
 
@@ -25,7 +25,16 @@ export const Orders = ({ query }: OrderProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <OrderTable orders={data.data} isFetching={isFetching} meta={data.meta} query={query} />
+    <PageTableWrapper>
+      <OrderSort {...query} />
+
+      <OrderTable
+        orders={data.data}
+        isFetching={isFetching}
+      />
+
+      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
+    </PageTableWrapper>
   ) : (
     <OrderEmpty />
   );

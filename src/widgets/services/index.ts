@@ -8,3 +8,4 @@ export { ServiceEmployeeSetting } from './ui/service-employee-setting';
 export { ServiceLocationSetting } from './ui/service-location-setting';
 export { ServiceSettingLazy } from './ui/service-setting-lazy';
 export { ServiceFormLazy } from './ui/service-form-lazy';
+export { ServiceSort } from './ui/service-sort';
