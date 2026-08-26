@@ -2,10 +2,10 @@ import { accountSelector } from "@/entities/account"
 import { useGetServicesQuery, type IServiceQuery } from "@/entities/services"
 import { Can } from "@/features/auth"
 import { AddIcon } from "@/shared/icons"
-import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { RequestError } from "@/widgets/layout"
+import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
+import { PageTableWrapper, RequestError } from "@/widgets/layout"
 import { TableLoading } from "@/widgets/loading"
-import { ServicesEmpty, ServicesTable } from "@/widgets/services"
+import { ServicesEmpty, ServiceSort, ServicesTable } from "@/widgets/services"
 import { skipToken } from "@reduxjs/toolkit/query"
 import { Link } from "@tanstack/react-router"
 import { useSelector } from "react-redux"
@@ -28,7 +28,13 @@ export const Services = ({ query }: ServiceProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <ServicesTable services={data.data} meta={data.meta} query={query} />
+    <PageTableWrapper>
+      <ServiceSort {...query} />
+
+      <ServicesTable services={data.data} />
+
+      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
+    </PageTableWrapper>
   ) : (
     <ServicesEmpty />
   );

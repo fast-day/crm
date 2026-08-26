@@ -1,9 +1,9 @@
 import { accountSelector } from "@/entities/account";
 import { useGetCustomersQuery, type ICustomerQuery } from "@/entities/customers";
 import { AddIcon } from "@/shared/icons";
-import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { CustomerEmpty, CustomerTable } from "@/widgets/customer";
-import { RequestError } from "@/widgets/layout";
+import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui";
+import { CustomerEmpty, CustomerSort, CustomerTable } from "@/widgets/customer";
+import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { TableLoading } from "@/widgets/loading";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
@@ -27,7 +27,16 @@ export const Customers = ({ query }: CustomerProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <CustomerTable customers={data.data} isFetching={isFetching} meta={data.meta} query={query} />
+    <PageTableWrapper>
+      <CustomerSort {...query} />
+
+      <CustomerTable
+        customers={data.data}
+        isFetching={isFetching}
+      />
+
+      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
+    </PageTableWrapper>
   ) : (
     <CustomerEmpty />
   );

@@ -2,9 +2,10 @@ import { accountSelector } from "@/entities/account";
 import { useGetBookingsQuery, type IBookingQuery } from "@/entities/booking"
 import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
-import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
 import { BookingEmpty, BookingTable } from "@/widgets/booking";
-import { RequestError } from "@/widgets/layout";
+import { BookingSort } from "@/widgets/booking/ui/booking-sort";
+import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { AppLoading, TableLoading } from "@/widgets/loading";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
@@ -32,13 +33,18 @@ export const Bookings = ({ query }: BookingProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <BookingTable
-      bookings={data.data}
-      isFetching={isFetching}
-      profileId={account?.id}
-      meta={data.meta}
-      query={query}
-    />
+    <PageTableWrapper>
+
+      <BookingSort {...query} />
+
+      <BookingTable
+        bookings={data.data}
+        isFetching={isFetching}
+        profileId={account?.id}
+      />
+
+      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
+    </PageTableWrapper>
   ) : (
     <BookingEmpty />
   );

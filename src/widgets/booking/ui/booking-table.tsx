@@ -1,32 +1,26 @@
-import type { IBooking, IBookingQuery } from "@/entities/booking";
+import type { IBooking } from "@/entities/booking";
 import { Avatar } from "@/entities/user";
 import { BOOKING_STATUS } from "@/shared/constants";
 import { ChevronRightIcon } from "@/shared/icons"
-import { Badge, Button, Pagination, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
+import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
 import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
-import { BookingSort } from "./booking-sort";
 import { useMediaQuery } from "react-responsive";
 
 interface BookingTableProps {
   bookings?: IBooking[];
   isFetching: boolean;
   profileId?: string;
-  meta: PaginationMeta;
-  query: IBookingQuery;
 }
 
-export const BookingTable = ({ bookings, isFetching, meta, query}: BookingTableProps) => {
+export const BookingTable = ({ bookings, isFetching }: BookingTableProps) => {
   const navigate = useNavigate();
   const isTablet = useMediaQuery({ query: "(max-width: 1100px)" })
 
   return (
-    <div className="mt-8 space-y-6">
-      
-      <BookingSort {...query} />
-
+    <>
       <Table>
         <TableHeader>
           <TableRow>
@@ -108,8 +102,6 @@ export const BookingTable = ({ bookings, isFetching, meta, query}: BookingTableP
           }
         </TableBody>
       </Table>
-
-      {meta.total_pages > 1 && <Pagination {...meta} />}
-    </div>
+    </>
   )
 }

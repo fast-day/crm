@@ -6,6 +6,7 @@ export { CustomerNotFound } from './ui/customer-not-found';
 export { CustomerDetails } from './ui/customer-details';
 export { FoundCustomer } from './ui/found-customer';
 export { CustomerCreateSheet } from './ui/customer-create-sheet';
+export { CustomerSort } from './ui/customer-sort';
 
 // UI DOCUMENT
 export { Editor } from './ui/document/editor/blocknote-editor';

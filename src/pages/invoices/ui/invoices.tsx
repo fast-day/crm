@@ -1,7 +1,7 @@
 import { useGetInvoicesQuery, type IInvoiceQuery } from "@/entities/invoice";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui";
 import { InvoiceTable } from "@/widgets/invoices";
-import { RequestError } from "@/widgets/layout";
+import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { TableLoading } from "@/widgets/loading";
 
 interface IInvoicesProps {
@@ -19,7 +19,10 @@ export const Invoices = ({ query }: IInvoicesProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <InvoiceTable invoices={data.data} isFetching={isFetching} meta={data.meta} />
+    <PageTableWrapper>
+      <InvoiceTable invoices={data.data} isFetching={isFetching} />
+      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
+    </PageTableWrapper>
   ) : (
     <>empty</>
   );

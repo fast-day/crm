@@ -1,8 +1,7 @@
 import { Route } from "@/app/routes/_app/_layout/orders";
 import type { IOrderQuery } from "@/entities/orders";
-import { Button } from "@/shared/ui"
+import { Button, SortWrapper } from "@/shared/ui"
 import { cn } from "@/shared/utils";
-import { SortWrapper } from "@/widgets/sort";
 import { useNavigate } from "@tanstack/react-router";
 
 const variant = ["all", "cancelled", "paid", "unpaid", "refund"] as Exclude<OrderStatusType, "pending" | "open">[] | "all"[];

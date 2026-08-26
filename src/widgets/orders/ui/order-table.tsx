@@ -1,30 +1,24 @@
 import { ChevronRightIcon } from "@/shared/icons"
-import { Badge, Button, Pagination, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
+import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
 import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import React from "react";
-import type { IOrder, IOrderQuery } from "@/entities/orders";
+import type { IOrder } from "@/entities/orders";
 import { PAYMENT_METHODS_ENUM } from "@/shared/constants/payment-methods.constant";
 import { ORDER_STATUS } from "@/shared/constants/order-status.constant";
-import { OrderSort } from "./order-sort";
 import { Avatar } from "@/entities/user";
 
 interface OrderTableProps {
   orders?: IOrder[];
   isFetching: boolean;
-  meta: PaginationMeta;
-  query: IOrderQuery;
 }
 
-export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) => {
+export const OrderTable = ({ orders, isFetching}: OrderTableProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-8 space-y-6">
-      
-      <OrderSort {...query} />
-
+    <>
       <Table>
         <TableHeader>
           <TableRow>
@@ -113,8 +107,6 @@ export const OrderTable = ({ orders, isFetching, meta, query}: OrderTableProps) 
           }
         </TableBody>
       </Table>
-
-      {meta.total_pages > 1 && <Pagination {...meta} />}
-    </div>
+    </>
   )
 }

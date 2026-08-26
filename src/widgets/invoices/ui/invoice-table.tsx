@@ -1,4 +1,4 @@
-import { Badge, Pagination, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
+import { Badge, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
 import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import React from "react";
@@ -9,13 +9,11 @@ import { INVOICE_TYPE } from "@/shared/constants";
 interface InvoiceTableProps {
   invoices?: IInvoice[];
   isFetching: boolean;
-  meta: PaginationMeta;
 }
 
-export const InvoiceTable = ({ invoices, isFetching, meta }: InvoiceTableProps) => {
+export const InvoiceTable = ({ invoices, isFetching }: InvoiceTableProps) => {
   return (
-    <div className="mt-8 space-y-6">
-
+    <>
       <Table>
         <TableHeader>
           <TableRow>
@@ -74,8 +72,6 @@ export const InvoiceTable = ({ invoices, isFetching, meta }: InvoiceTableProps) 
           }
         </TableBody>
       </Table>
-
-      {meta.total_pages > 1 && <Pagination {...meta} />}
-    </div>
+    </>
   )
 }
