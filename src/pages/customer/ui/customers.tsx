@@ -51,7 +51,8 @@ export const Customers = ({ query }: CustomerProps) => {
             <Button 
               size={"size_44"} 
               animation={"toggle"}
-              className={"text-sm font-bold"}
+              className={"text-sm font-bold size-11 1100:px-6 px-0"}
+              classNameChild={"1100:block hidden"}
               iconLeft={<AddIcon width={21} height={21}/>}
             >Добавить</Button>
           </Link>

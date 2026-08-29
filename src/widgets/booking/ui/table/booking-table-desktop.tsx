@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { LazyBlur } from "@/widgets/loading";
-import { Badge, Table, TableBody, TableCell, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
+import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
 import { formatDate, formatPrice } from "@/shared/utils";
 import type { BookingTableProps } from "./types/props.type";
 import { Avatar } from "@/entities/user";
 import { BOOKING_STATUS } from "@/shared/constants";
+import { ChevronRightIcon } from "lucide-react";
 
 export const BookingTableDesktop = ({ isFetching, bookings }: BookingTableProps) => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export const BookingTableDesktop = ({ isFetching, bookings }: BookingTableProps)
         {bookings?.length ? 
           bookings.map((booking, index) => (
             <React.Fragment key={booking.id}>
-              <TableRow className="" onClick={() => navigate({ to: `${booking.id}` })}>
+              <TableRow onClick={() => navigate({ to: `/bookings/${booking.id}` })}>
                 <TableCell>
                   <div>
                     <p className="font-semibold">{formatDate(booking.date)}</p>
@@ -73,6 +74,13 @@ export const BookingTableDesktop = ({ isFetching, bookings }: BookingTableProps)
                 <TableCell>
                   <Badge variant={`${booking.status}_b`}>{BOOKING_STATUS[booking.status]}</Badge>
                 </TableCell>
+                <TableCellActions>
+                  <Link to={`${booking.id}`}>
+                    <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
+                      <ChevronRightIcon width={17} height={17} />
+                    </Button>
+                  </Link>
+                </TableCellActions>
               </TableRow>
               {index !== bookings.length - 1 && <TableSeparator />}
             </React.Fragment>

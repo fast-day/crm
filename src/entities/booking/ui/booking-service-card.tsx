@@ -32,7 +32,7 @@ export const BookingServiceCard = ({ service, employee, start_time, end_time, is
           </Link>
           <div>
             <Link to={`/business/services/${service.service.service_id}`} className="block font-semibold text-base leading-5 capitalize">{service.service.name}</Link>
-            <div className="flex items-center gap-3.5">
+            <div className="flex 1100:items-center 1100:gap-3.5 gap-1 1100:flex-row flex-col">
               {!is_marking_order && (
                 <div className="leading-3.5">
                   <span className="text-sm font-medium">{start_time}</span>
@@ -50,7 +50,7 @@ export const BookingServiceCard = ({ service, employee, start_time, end_time, is
         </div>
         <div className="flex items-center justify-between">
           {is_mimi && <BookingAddServiceActions booking_service_id={service.booking_service_id} booking_service_count={service.booking_service_count} />}
-          <div className="text-md font-bold">{formatPrice(service.booking_service_price)} ₽</div>
+          <div className="text-md font-bold whitespace-nowrap">{formatPrice(service.booking_service_price)} ₽</div>
         </div>
       </CardContent>
     

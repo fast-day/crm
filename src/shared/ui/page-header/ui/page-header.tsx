@@ -8,7 +8,7 @@ function PageHeader ({ className, children, ...props }: ComponentProps<"div">) {
   return (
     <div 
       data-ui="page-header"
-      className={cn("flex items-center justify-between gap-7.5", className)}
+      className={cn("flex 1100:flex-row flex-col-reverse 1100:items-center justify-between 1100:gap-7.5 gap-5", className)}
       {...props}
     >{children}</div>
   )
@@ -18,7 +18,7 @@ function PageHeaderTitle ({ className, children, ...props }: ComponentProps<"h1"
   return (
     <h1 
       data-ui="page-header-title" 
-      className={cn("text-2xl font-extrabold leading-7.5", className)}
+      className={cn("1100:text-2xl text-xl font-extrabold leading-7.5", className)}
       {...props}
     >{children}</h1>
   )
@@ -28,7 +28,7 @@ function PageHeaderActions ({ className, children, ...props }: ComponentProps<"d
   return (
     <div 
       data-ui="page-header-actions" 
-      className={cn("flex gap-2.5", className)} 
+      className={cn("flex gap-2.5 1100:justify-items-end-safe items-center justify-between", className)} 
       {...props}
     >{children}</div>
   )
@@ -44,7 +44,8 @@ const PageHeaderBackAction = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<
         ref={ref}
         variant={"white"}
         animation={"toggle"}
-        className={"px-5 text-sm font-bold"}
+        className={"text-sm font-bold 1100:px-5 1100:size-auto size-11"}
+        classNameChild={"1100:block hidden"}
         size={"size_44"}
         onClick={() => history.back()}
         iconLeft={<ArrowBackUpIcon width={24} height={24} />}
