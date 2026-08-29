@@ -27,7 +27,7 @@ export const ContentPanel = ({ className="", actionClassName="", title, headerEx
 
           {content}
 
-          {actions && <div className={cn("sticky bottom-6 mt-6", actionClassName)}>{actions}</div>}
+          {actions && <div className={cn("1100:sticky 1100:bottom-6 mt-6", actionClassName)}>{actions}</div>}
 
         </CardContent>
       </Card>

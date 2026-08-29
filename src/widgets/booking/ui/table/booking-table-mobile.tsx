@@ -19,7 +19,7 @@ export const BookingTableMobile = ({ isFetching, bookings }: BookingTableProps) 
                   <Badge variant={`${booking.status}_b`}>{BOOKING_STATUS[booking.status]}</Badge>
               </TableMobileCell>
 
-              <TableMobileCell thead={"Услуга"}>
+              <TableMobileCell thead={"Дата"}>
                 <div>
                   <p className="font-semibold">{formatDate(booking.date)}</p>
                   <div className="flex items-center text-sm mt-0.5 opacity-80">
@@ -30,7 +30,7 @@ export const BookingTableMobile = ({ isFetching, bookings }: BookingTableProps) 
                 </div>
               </TableMobileCell>
 
-              <TableMobileCell thead={"Клиент"}>
+              <TableMobileCell thead={"Услуга"}>
                   {booking.booking_services.length > 0 ? (
                     <>
                       {booking.booking_services.slice(0,1).map((service, idx) => (
@@ -46,13 +46,20 @@ export const BookingTableMobile = ({ isFetching, bookings }: BookingTableProps) 
                   ) : ( <div className="flex items-center w-full flex-1">-</div> )}
               </TableMobileCell>
 
-              <TableMobileCell thead={"Сотрудник"}>
-                <div className="flex flex-col items-start justify-center">
+              <TableMobileCell thead={"Клиент"}>
+                <div className="flex flex-col items-start justify-center gap-1.5">
                   <div className="flex items-center gap-2.5">
                     <Avatar size={"tiny"} avatar_url={booking.customer.avatar} name={booking.customer.full_name} id={booking.customer.id} />
                     <p>{booking.customer.full_name}</p>
                   </div>
                   <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${booking.customer.phone}`}>{booking.customer.phone}</Link>
+                </div>
+              </TableMobileCell>
+
+              <TableMobileCell thead={"Сотрудник"}>
+                <div className="flex items-center gap-2.5">
+                  <Avatar size={"tiny"} avatar_url={booking.booking_services[0].user.avatar} name={booking.booking_services[0].user.full_name} id={booking.booking_services[0].user.user_id} />
+                  <p className="leading-4">{booking.booking_services[0].user.full_name}</p>
                 </div>
               </TableMobileCell>
 
