@@ -44,7 +44,7 @@ const PageHeaderBackAction = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<
         ref={ref}
         variant={"white"}
         animation={"toggle"}
-        className={"text-sm font-bold 1100:px-5 1100:size-auto size-11"}
+        className={"text-sm font-bold 1100:w-fit w-11 1100:px-5 px-0"}
         classNameChild={"1100:block hidden"}
         size={"size_44"}
         onClick={() => history.back()}
