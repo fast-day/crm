@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm, SelectForm, TextareaForm } from "@/shared/ui"
+import { Button, Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm } from "@/shared/ui"
 import { Controller } from "react-hook-form"
 import { PatternFormat } from "react-number-format"
 import { employeeSchema, type EmployeeSchemaType } from "../../model/schemas"
@@ -22,7 +22,7 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
   return (
     <Form
       id={formId}
-      className={"space-y-8 flex justify-center items-start gap-8 relative"}
+      className={"space-y-8 flex justify-center items-start 1100:flex-row flex-col-reverse gap-8 relative"}
       onSubmit={onSubmit}
       schema={employeeSchema}
       options={{
@@ -30,8 +30,8 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
           first_name: data?.profile.first_name ?? "",
           last_name: data?.profile.last_name ?? "",
           phone: data?.profile.phone ?? "",
-          position: data?.profile.position ?? "",
-          role: data?.profile.role.id.toString() ?? "",
+          // position: data?.profile.position ?? "",
+          // role: data?.profile.role.id.toString() ?? "",
           birthdate: data?.profile.birthday ?? "",
           note: data?.note ?? "",
           avatar: null,
@@ -88,7 +88,7 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
                     />
                   )}
                 />
-                <InputForm
+                {/* <InputForm
                   name={"position"}
                   id={"position"}
                   type={"text"}
@@ -98,12 +98,12 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
                   placeholder={"Должность"}
                   error={formState.errors["position"]}
                   required
-                />
+                /> */}
               </CardContent>
 
             </Card>
 
-            <Card>
+            {/* <Card>
               <CardHeader className="pb-0">
                 <CardTitle>Уроведь доступа</CardTitle>
               </CardHeader>
@@ -118,7 +118,7 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
                   required
                 />
               </CardContent>
-            </Card>
+            </Card> */}
 
             {isEdit && (
               <Card>
@@ -136,14 +136,14 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
                     placeholder={"Дата рождения"}
                     error={formState.errors["birthdate"]}
                   />
-                  <TextareaForm
+                  {/* <TextareaForm
                     name={"note"}
                     id={"note"}
                     register={register("note")}
                     label={"Заметка"}
                     placeholder={"Заметка"}
                     error={formState.errors["note"]}
-                  />
+                  /> */}
                 </CardContent>
               </Card>
             )}
@@ -166,8 +166,9 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
             control={control}
             name={"avatar"}
             render={({ field, fieldState }) => (
-              <div className="sticky top-4 self-start h-fit">
+              <div className="1100:sticky top-4 self-start h-fit">
                 <ImagePicker
+                  sizeCls={"w-32 h-32"}
                   value={field.value}
                   onChange={field.onChange}
                   preview_url={data?.profile.avatar}

@@ -1,61 +1,18 @@
-import type { ICustomers } from "@/entities/customers";
-import { Avatar } from "@/entities/user"
-import { ChevronRightIcon } from "@/shared/icons"
-import { Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
-import { LazyBlur } from "@/widgets/loading";
-import { Link, useNavigate } from "@tanstack/react-router";
-import React from "react";
-
-interface CustomerTableProps {
-  customers?: ICustomers[];
-  isFetching: boolean;
-}
+import { useMediaQuery } from "react-responsive";
+import { CustomerTableDesktop } from "./table/customer-table-desktop";
+import { CustomerTableMobile } from "./table/customer-table-mobile";
+import type { CustomerTableProps } from "./table/types/props.type";
 
 export const CustomerTable = ({ customers, isFetching }: CustomerTableProps) => {
-  const navigate = useNavigate();
+  const isTablet = useMediaQuery({ query: "(max-width: 1100px)" });
 
   return (
     <>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Имя</TableHead>
-            <TableHead>Номер телефона</TableHead>
-            <TableHead />
-          </TableRow>
-        </TableHeader>
-
-        <TableBody className="relative">
-          {isFetching && <LazyBlur />}
-          {customers?.length ? 
-            customers.map((employee, index) => (
-              <React.Fragment key={index}>
-                <TableRow onClick={() => navigate({ to: `${employee.id}` })}>
-                  <TableCell>
-                    <Avatar size={"large"} avatar_url={employee.avatar} name={employee.full_name} id={employee.id} />
-                    <div>
-                      <p>{employee.full_name}</p>
-                    </div>
-                  </TableCell>
-                  <TableCell>{employee.phone}</TableCell>
-                  <TableCellActions>
-                    <Link to={`${employee.id}`}>
-                      <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
-                        <ChevronRightIcon width={17} height={17} />
-                      </Button>
-                    </Link>
-                  </TableCellActions>
-                </TableRow>
-                {index !== customers.length - 1 && <TableSeparator />}
-              </React.Fragment>
-            )) : (
-              <TableRow>
-                <TableNotFound>Нет данных</TableNotFound>
-              </TableRow>
-            )
-          }
-        </TableBody>
-      </Table>
+      {isTablet ?
+        <CustomerTableMobile isFetching={isFetching} customers={customers} />
+        :
+        <CustomerTableDesktop isFetching={isFetching} customers={customers} />
+      }
     </>
   )
 }

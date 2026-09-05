@@ -7,7 +7,6 @@ import { getErrorMessage } from "@/shared/utils";
 
 interface UseEmployeeEditReturnProps {
   onSubmit: (data: EmployeeSchemaType) => Promise<void>;
-
   isLoading: boolean;
 }
 
@@ -21,17 +20,19 @@ export const useEmployeeEdit = (employeeId: string, employeeProfileId: string, l
   const onSubmit = async (data: EmployeeSchemaType): Promise<void> => {
     setIsLoading(true);
     try {
-      const { avatar, ...rest } = data;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { avatar, role, position, ...rest } = data;
+
       const req = {
         body: {
           ...rest,
-          role: Number(data.role),
+          // role: Number(data.role),
         },
         employee_id: employeeId,
         location_id: locationId,
       } satisfies IEmployeeUpdateCredentials;
 
-      const res = await edit(req).unwrap();
+      await edit(req).unwrap();
 
       if (avatar) {
         const formData = new FormData();
@@ -43,7 +44,8 @@ export const useEmployeeEdit = (employeeId: string, employeeProfileId: string, l
         }).unwrap();
       }
 
-      navigate({ to: `/employees/users/${res.profile.id}` });
+      // navigate({ to: `/employees/users/${res.profile.id}` });
+      navigate({ to: `/me` });
     }
     catch (error) {
       console.log("error edit", error);

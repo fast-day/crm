@@ -5,10 +5,20 @@ import { useParams } from "@tanstack/react-router"
 
 export const Customer = () => {
   const { customer_id } = useParams({ from: "/_app/_layout/customers/$customer_id/" });
-  const { data, isLoading, isError } = useGetCustomerQuery(
+  const { data, isLoading, isError, isSuccess } = useGetCustomerQuery(
     { customer_id },
     { refetchOnMountOrArgChange: true },
   );
+
+  const content = isLoading ? (
+    <CustomerDetailLazy />
+  ) : isError ? (
+    <CustomerNotFound />
+  ) : isSuccess ? (
+    <CustomerDetails customer={data} />
+  ) : (
+    <CustomerNotFound />
+  )
   
   return (
     <>
@@ -20,9 +30,7 @@ export const Customer = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <CustomerDetailLazy />}
-      {isError && <CustomerNotFound />}
-      {data && <CustomerDetails customer={data} />}
+      {content}
     </>
   )
 }

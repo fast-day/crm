@@ -1,10 +1,12 @@
-import { Route } from "@/app/routes/_app/_layout/employees/users/$employee_id/password";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { EmployeeChangePassword } from "@/widgets/employee"
 
-export const EmployeePassword = () => {
-  const { employee_id } = Route.useParams();
-  
+interface IEmployeePasswordProps {
+  employee_id: string;
+}
+
+export const EmployeePassword = ({ employee_id }: IEmployeePasswordProps) => {
+
   return (
     <>
       <PageHeader>

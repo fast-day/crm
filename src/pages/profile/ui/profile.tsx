@@ -3,7 +3,8 @@ import { dialogSelector } from "@/entities/dialog";
 import { useGetEmployeeQuery } from "@/entities/employee";
 import { PencilEditIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { EmployeeDetailLazy } from "@/widgets/employee";
+import { EmployeeDetailLazy, EmployeeEmpty } from "@/widgets/employee";
+import { RequestError } from "@/widgets/layout";
 import { DeleteMeAccount, ProfileInfo } from "@/widgets/profile";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
@@ -13,9 +14,19 @@ export const Profile = () => {
   const { location, account } = useSelector(accountSelector);
   const { dialog } = useSelector(dialogSelector);
   
-  const { data, isLoading, isError } = useGetEmployeeQuery(
+  const { data, isLoading, isError, isSuccess } = useGetEmployeeQuery(
     location && account ? { location_id: location.id, employee_id: account.id } : skipToken,
   );
+
+  const content = isLoading ? (
+    <EmployeeDetailLazy />
+  ) : isError ? (
+    <RequestError />
+  ) : isSuccess ? (
+    <ProfileInfo employee={data} />
+  ) : (
+    <EmployeeEmpty />
+  )
   
   return (
     <>
@@ -27,7 +38,8 @@ export const Profile = () => {
             <Button
               size={"size_44"}
               animation={"toggle"}
-              className={"text-sm font-bold"}
+              className={"text-sm font-bold 1100:w-fit w-11 1100:px-6 px-0"}
+              classNameChild={"1100:block hidden"}
               iconLeft={<PencilEditIcon width={21} height={21}/>}
               disabled={isLoading || isError}
             >Редактировать</Button>
@@ -35,9 +47,7 @@ export const Profile = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <EmployeeDetailLazy />}
-      {isError && <div className="text-center py-40">Ошибка</div>}
-      {data && <ProfileInfo employee={data} />}
+      {content}
 
       {dialog.name === "me_delete" && <DeleteMeAccount profile_id={dialog.data.profile_id} />}
     </>

@@ -4,7 +4,7 @@ import { useGetEmployeeQuery } from "@/entities/employee";
 import { Can } from "@/features/auth";
 import { PencilEditIcon } from "@/shared/icons"
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { EmployeeDetailLazy, EmployeeDetails, EmployeeNotFound, EmployeeDeleteDialog } from "@/widgets/employee";
+import { EmployeeDetailLazy, EmployeeDetails, EmployeeNotFound, EmployeeDeleteDialog, EmployeeEmpty } from "@/widgets/employee";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Link, useParams } from "@tanstack/react-router"
 import { useSelector } from "react-redux";
@@ -14,9 +14,20 @@ export const EmployeeDetail = () => {
   const { location } = useSelector(accountSelector);
   const { dialog } = useSelector(dialogSelector);
 
-  const { data, isLoading, isError } = useGetEmployeeQuery(
+  const { data, isLoading, isError, isSuccess } = useGetEmployeeQuery(
     location ? { location_id: location.id, employee_id } : skipToken,
+    { refetchOnMountOrArgChange: true },
   );
+
+  const content = isLoading ? (
+    <EmployeeDetailLazy />
+  ) : isError ? (
+    <EmployeeNotFound />
+  ) : isSuccess ? (
+    <EmployeeDetails employee={data} locationId={location!.id} />
+  ) : (
+    <EmployeeEmpty />
+  )
 
   return (
     <>
@@ -24,7 +35,8 @@ export const EmployeeDetail = () => {
         <PageHeaderTitle>Сотрудник {data?.profile && `- ${data.profile.full_name}`}</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
-          <Can permission={"employee:update"}>
+          {/* permission={"employee:update"} */}
+          <Can permission={"test"}>
             <Link to={`edit`}>
               <Button
                 size={"size_44"}
@@ -38,9 +50,7 @@ export const EmployeeDetail = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <EmployeeDetailLazy />}
-      {isError && <EmployeeNotFound />}
-      {data && <EmployeeDetails employee={data} locationId={location!.id} />}
+      {content}
 
       {/* ===== DIALOGS ===== */}
       {dialog.name === "delete_employee" && <EmployeeDeleteDialog employee={dialog.data} />}

@@ -1,10 +1,10 @@
-import { EmployeeServices } from '@/pages/employee'
-import { uuidSchema } from '@/shared/schemas/params-scheha'
+import { EmployeeEdit } from '@/pages/employee'
+import { uuidSchema } from '@/shared/schemas/params-schema'
 import { EmployeeNotFound } from '@/widgets/employee'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
-  '/_app/_layout/employees/users/$employee_id/services/',
+  '/_app/_layout-focus/employees/users/$employee_id/edit/',
 )({
   params: {
     parse: (p) => ({
@@ -19,5 +19,6 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  return <EmployeeServices />
+  const params = Route.useParams()
+  return <EmployeeEdit {...params} />
 }

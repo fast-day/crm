@@ -1,8 +1,9 @@
 import { Skeleton } from "@/shared/ui"
+import { PageDetailWrapper } from "@/widgets/layout"
 
 export const EmployeeDetailLazy = () => {
   return (
-    <div className="mt-8 grid grid-cols-5 gap-8 w-full">
+    <PageDetailWrapper>
       <div className="col-span-3 space-y-8">
         <Skeleton className="h-37.5" />
         <Skeleton className="h-85" />
@@ -13,6 +14,6 @@ export const EmployeeDetailLazy = () => {
         <Skeleton className="h-32"/>
         <Skeleton className="h-32"/>
       </div>
-    </div>
+    </PageDetailWrapper>
   )
 }

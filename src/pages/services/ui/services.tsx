@@ -16,7 +16,7 @@ interface ServiceProps {
 
 export const Services = ({ query }: ServiceProps) => {
   const { account } = useSelector(accountSelector);
-  const { data, isLoading, isError, isSuccess } = useGetServicesQuery(
+  const { data, isLoading, isError, isFetching, isSuccess } = useGetServicesQuery(
     account?.has_services ? { ...query } : skipToken,
     { refetchOnMountOrArgChange: true },
   );
@@ -31,7 +31,7 @@ export const Services = ({ query }: ServiceProps) => {
     <PageTableWrapper>
       <ServiceSort {...query} />
 
-      <ServicesTable services={data.data} />
+      <ServicesTable services={data.data} isFetching={isFetching} />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
     </PageTableWrapper>

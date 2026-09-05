@@ -75,7 +75,7 @@ export interface IEmployeeInviteCredentials {
   first_name: string;
   last_name?: string;
   role: number;
-  position: string;
+  position?: string;
   location_id: string;
   birth_date?: string;
   note?: string;
@@ -85,8 +85,8 @@ export interface IEmployeeEditCredentials {
   phone: string;
   first_name: string;
   last_name?: string;
-  role: number;
-  position: string;
+  // role: number;
+  // position: string;
   birth_date?: string | null;
   note?: string | null;
 }

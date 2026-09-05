@@ -16,7 +16,7 @@ export const BookingSelectCustomer = ({ customer }: BookingSelectCustomerProps) 
       <SelectTrigger className="h-16">
         <SelectValue placeholder="Клиент не выбран" />
       </SelectTrigger>
-      <SelectContent className="p-0 relative">
+      <SelectContent className="p-0">
         <SelectCustomerContent />
       </SelectContent>
     </Select>

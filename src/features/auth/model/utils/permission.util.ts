@@ -5,7 +5,7 @@ import type { IPermission, IRole, PermissionName } from "@/entities/account";
 **/
 const hasPermission = (role: IRole, permissions: IPermission[], perm: PermissionName | string): boolean => {
   if (!role) return false;
-  if (role === "owner") return true;
+  // if (role === "owner") return true;
   return permissions.some(p => p.name === perm);
 }
 
@@ -14,7 +14,7 @@ const hasPermission = (role: IRole, permissions: IPermission[], perm: Permission
 **/
 const hasAnyPermission = (role: IRole, permissions: IPermission[], perms: Array<PermissionName | string>): boolean => {
   if (!role) return false;
-  if (role === "owner") return true;
+  // if (role === "owner") return true;
 
   return perms.some(perm => permissions.some(p => p.name === perm));
 }
@@ -24,7 +24,7 @@ const hasAnyPermission = (role: IRole, permissions: IPermission[], perms: Array<
 **/
 const hasAllPermissions = (role: IRole, permissions: IPermission[], perms: Array<PermissionName | string>): boolean => {
   if (!role) return false;
-  if (role === "owner") return true;
+  // if (role === "owner") return true;
 
   return perms.every(perm => permissions.some(p => p.name === perm));
 }
@@ -34,7 +34,7 @@ const hasAllPermissions = (role: IRole, permissions: IPermission[], perms: Array
 **/
 const hasWildcardPermissions = (role: IRole, permissions: IPermission[], pattern: string,): boolean => {
   if (!role) return false;
-  if (role === "owner") return true;
+  // if (role === "owner") return true;
   
   const reg = new RegExp("^" + pattern.replace("*", ".*") + "$");
   return permissions.some(p => reg.test(p.name));

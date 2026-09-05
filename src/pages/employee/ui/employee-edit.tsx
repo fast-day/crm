@@ -1,18 +1,31 @@
 import { useSelector } from "react-redux";
-import { useParams } from "@tanstack/react-router";
 import { useAccount } from "@/entities/account";
 import { useGetEmployeeQuery } from "@/entities/employee";
-import { EmployeeEditLazy, EmployeeNotFound } from "@/widgets/employee";
+import { EmployeeEditLazy, EmployeeEmpty, EmployeeNotFound } from "@/widgets/employee";
 import { EmployeeEditWrapper } from "./components/employee-edit-wrapper";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { skipToken } from "@reduxjs/toolkit/query";
 
-export const EmployeeEdit = () => {
-  const { employee_id } = useParams({ from: "/_app/_layout/employees/users/$employee_id/edit/" });
+interface IEmployeeEditProps {
+  employee_id: string;
+}
+
+export const EmployeeEdit = ({ employee_id }: IEmployeeEditProps) => {
   const { location } = useSelector(useAccount);
-  const { data, isLoading, isError } = useGetEmployeeQuery(
+  const { data, isLoading, isError, isSuccess } = useGetEmployeeQuery(
     location ? { location_id: location.id, employee_id } : skipToken,
+    { refetchOnMountOrArgChange: true },
   );
+
+  const content = isLoading ? (
+    <EmployeeEditLazy /> 
+  ) : isError ? (
+    <EmployeeNotFound />
+  ) : isSuccess ? (
+    <EmployeeEditWrapper data={data} location_id={location!.id} />
+  ) : (
+    <EmployeeEmpty />
+  )
 
   return (
     <>
@@ -22,9 +35,8 @@ export const EmployeeEdit = () => {
           <PageHeaderBackAction />
         </PageHeaderActions>
       </PageHeader>
-      {isLoading && <EmployeeEditLazy /> }
-      {isError && <EmployeeNotFound />}
-      {data && <EmployeeEditWrapper data={data} location_id={location!.id} />}
+
+      {content}
     </>
   )
 }

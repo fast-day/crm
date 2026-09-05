@@ -34,7 +34,7 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
   return (
     <div className="mt-8 relative">
       <Form 
-        className="space-y-8 flex justify-center items-start gap-8"
+        className="space-y-8 flex justify-center 1100:flex-row flex-col-reverse items-start gap-8"
         onSubmit={(data) => onSubmit(data)} 
         options={{ defaultValues }}
         schema={serviceSchema}
@@ -65,16 +65,6 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
                     categories={categories}
                     isLoadingCategory={isLoadingCategory}
                   />
-
-
-                  {/* <TextareaForm
-                    name={"description"}
-                    id={"description"}
-                    register={register("description")}
-                    error={formState.errors["description"]}
-                    placeholder={"Заметка"}
-                    label={"Заметка"}
-                  /> */}
 
                   <div>
                     <RadioGroupForm name="mark" control={control} radioClassName={"flex items-center gap-2.5"}>
@@ -110,39 +100,6 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
                     />
                     {duration !== undefined && <span className="text-xs">{minuteFormat(duration)}</span>}
                   </div>
-                  {/* <div className="grid grid-cols-2 gap-5">
-                    <InputForm
-                      name={"time_start"}
-                      id={"time_start"}
-                      type={"text"}
-                      inputMode={"decimal"}
-                      inputSize={"size_56"}
-                      register={register("time_start")}
-                      label={"Старт услуги"}
-                      error={formState.errors["time_start"]}
-                      placeholder={"Старт услуги (10:00)"}
-                      required
-                    />
-                    <InputForm
-                      name={"time_end"}
-                      id={"time_end"}
-                      type={"text"}
-                      inputMode={"numeric"}
-                      inputSize={"size_56"}
-                      register={register("time_end")}
-                      label={"Завершение услуги"}
-                      error={formState.errors["time_end"]}
-                      placeholder={"Завершение услуги (18:00)"}
-                      required
-                    />
-                  </div> */}
-                  
-                  {/* ALERT */}
-                  {/* <div className="w-full p-4 rounded-2xl bg-warn-background/20 border-2 border-dashed border-warn-background/80">
-                    <p className="text-sm font-bold">Подсказка</p>
-                    <p className="text-xs leading-4.5 mt-0.5">Начало и конец оказания услуги — это временные рамки, в пределах которых услуга доступна клиентам.</p>
-                  </div> */}
-                
                 </CardContent>
               </Card>
 
@@ -195,8 +152,9 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
               control={control}
               name={"avatar"}
               render={({ field, fieldState }) => (
-                <div className="sticky top-8 self-start h-fit">
+                <div className="1100:sticky top-8 self-start h-fit">
                   <ImagePicker
+                    sizeCls={"h-32 w-32"}
                     value={field.value}
                     onChange={field.onChange}
                     preview_url={data?.avatar}

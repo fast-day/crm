@@ -1,6 +1,8 @@
 import { useGetCustomerDocumentsQuery, type ICustomerDocumentQuery } from "@/entities/customers";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { CustomerDocumentsLoading, CustomerDocumentsNotFound, CustomerDocumentsTable } from "@/widgets/customer";
+import { RequestError } from "@/widgets/layout";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 interface ICustomerDocumentsProps {
   query: PaginationQuery & ICustomerDocumentQuery;
@@ -9,13 +11,23 @@ interface ICustomerDocumentsProps {
 
 export const CustomerDocuments = ({ query, customer_id }: ICustomerDocumentsProps) => {
 
-  const { data, isLoading, isError } = useGetCustomerDocumentsQuery({
+  const { data, isLoading, isError, isSuccess } = useGetCustomerDocumentsQuery(
+    customer_id ? {
     customer_id,
     query: {
       page: query.page,
       limit: query.limit,
     },
-  }, { refetchOnMountOrArgChange: true });
+  } : skipToken,
+  { refetchOnMountOrArgChange: true });
+
+  const content = isLoading ? (
+    <CustomerDocumentsLoading />
+  ) : isError ? (
+    <CustomerDocumentsNotFound />
+  ) : isSuccess ? (
+    <CustomerDocumentsTable documents={data.data} meta={data.meta} />
+  ) : <RequestError />;
 
   return (
     <>
@@ -27,9 +39,7 @@ export const CustomerDocuments = ({ query, customer_id }: ICustomerDocumentsProp
         </PageHeaderActions>
       </PageHeader>
     
-      {isLoading && <CustomerDocumentsLoading />}
-      {isError && <CustomerDocumentsNotFound />}
-      {data && <CustomerDocumentsTable documents={data.data} meta={data.meta} />}
+      {content}
     </>
   )
 }

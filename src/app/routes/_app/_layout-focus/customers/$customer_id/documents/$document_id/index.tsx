@@ -1,5 +1,5 @@
 import { CustomerDocument } from '@/pages/customer';
-import { uuidSchema } from '@/shared/schemas/params-scheha';
+import { uuidSchema } from '@/shared/schemas/params-schema';
 import { CustomerDocumentNotFound } from '@/widgets/customer';
 import { createFileRoute } from '@tanstack/react-router'
 

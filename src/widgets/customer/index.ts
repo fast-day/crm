@@ -19,4 +19,5 @@ export { CustomerDocumentNotFound } from './ui/document/customer-document-not-fo
 export { CustomerDocumentsNotFound } from './ui/document/customer-documents-not-found';
 
 // UI BOOKINGS
-export { CustomerBookingsTable } from './ui/bookings/customer-bookings-table';
+export { CustomerBookingSort } from './ui/bookings/customer-booking-sort';
+export { CustomerBookingTable } from './ui/bookings/customer-booking-table';
