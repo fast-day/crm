@@ -1,7 +1,11 @@
 import type { IBookingQuery } from "@/entities/booking";
 import { useBookingsCustomerQuery } from "@/entities/customers";
-import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { CustomerBookingsTable } from "@/widgets/customer";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui";
+import { BookingEmpty } from "@/widgets/booking";
+import { CustomerBookingSort, CustomerBookingTable } from "@/widgets/customer";
+import { PageTableWrapper, RequestError } from "@/widgets/layout";
+import { TableLoading } from "@/widgets/loading";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 interface CustomerBookingsProps {
   customer_id: string;
@@ -10,7 +14,29 @@ interface CustomerBookingsProps {
 }
 
 export const CustomerBookings = ({ customer_id, query, client }: CustomerBookingsProps) => {
-  const { data, isLoading, isError, isFetching } = useBookingsCustomerQuery({ customer_id, ...query });
+  const { data, isLoading, isError, isSuccess, isFetching } = useBookingsCustomerQuery(
+    customer_id ? { customer_id, ...query } : skipToken,
+    { refetchOnMountOrArgChange: true, },
+  );
+
+  const content = isLoading ? (
+    <TableLoading rows={5} />
+  ) : isError ? (
+    <RequestError />
+  ) : isSuccess ? (
+    <PageTableWrapper>
+      <CustomerBookingSort {...query} />
+
+      <CustomerBookingTable
+        bookings={data.data}
+        isFetching={isFetching}
+      />
+
+      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
+    </PageTableWrapper>
+  ) : (
+    <BookingEmpty />
+  )
 
   return (
     <>
@@ -22,17 +48,7 @@ export const CustomerBookings = ({ customer_id, query, client }: CustomerBooking
         </PageHeaderActions>
       </PageHeader>
 
-      {isLoading && <>loading...</>}
-      {isError && <>not found</>}
-      {data && (
-        <CustomerBookingsTable
-          bookings={data.data}
-          meta={data.meta}
-          isFetching={isFetching}
-          query={query}
-        />
-      )
-      }
+      {content}
     </>
   )
 }

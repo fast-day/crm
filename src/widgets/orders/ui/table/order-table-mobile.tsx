@@ -1,21 +1,23 @@
 import { ChevronRightIcon } from "@/shared/icons"
-import { Badge, Button, TableMobile, TableMobileAction, TableMobileBody, TableMobileCell, TableMobileRow } from "@/shared/ui"
+import { Badge, Button, TableMobile, TableMobileAction, TableMobileBody, TableMobileCell, TableMobileRow, TableNotFound } from "@/shared/ui"
 import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { PAYMENT_METHODS_ENUM } from "@/shared/constants/payment-methods.constant";
 import { ORDER_STATUS } from "@/shared/constants/order-status.constant";
 import { Avatar } from "@/entities/user";
 import type { OrderTableProps } from "./types/props.type";
 
 export const OrderTableMobile = ({ isFetching, orders }: OrderTableProps) => {
+  const navigate = useNavigate();
+
   return (
     <TableMobile>
       <TableMobileBody>
         {isFetching && <LazyBlur />}
         {orders?.length ?
           orders.map((ord) => (
-            <TableMobileRow key={ord.id}>
+            <TableMobileRow key={ord.id} onClick={() => navigate({ to: `/orders/${ord.id}` })}>
               <TableMobileCell>
                 <Badge status={ord.status} fill={"solid"} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
                     {(() => {
@@ -40,12 +42,17 @@ export const OrderTableMobile = ({ isFetching, orders }: OrderTableProps) => {
 
               <TableMobileCell thead={"Клиент"}>
                 {ord.customer.id ? (
-                  <>
+                  <div>
                     <div className="flex items-center gap-2">
                       <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id ?? "none"} />
                       <p>{ord.customer.full_name}</p>
                     </div>
-                  </>
+                    <Link
+                      to={`tel:${ord.customer.phone}`}
+                      className={"text-10 leading-3 text-primary opacity-70 hover:opacity-100 duration-150"}
+                      onClick={(e) => e.stopPropagation()}
+                    >{ord.customer.phone}</Link>
+                  </div>
                 ) : (
                   <div className="flex items-center justify-center flex-1 w-full">-</div>
                 )}
@@ -73,15 +80,16 @@ export const OrderTableMobile = ({ isFetching, orders }: OrderTableProps) => {
               </TableMobileCell>
 
               <TableMobileAction>
-                <Link to={`${ord.id}`}>
-                  <Button variant={"white"} size={"icon_32"} animation={"toggle_sm"} className={"rounded-10! rounded-tr-xl!"}>
-                    <ChevronRightIcon width={17} height={17} />
-                  </Button>
-                </Link>
+                <Button variant={"white"} size={"icon_32"} animation={"toggle_sm"} className={"rounded-10! rounded-tr-xl!"}>
+                  <ChevronRightIcon width={17} height={17} />
+                </Button>
               </TableMobileAction>
             </TableMobileRow>
-          )) : null}
-      
+          )) : (
+            <TableMobileRow>
+              <TableNotFound>Нет данных</TableNotFound>
+            </TableMobileRow>
+          )}
       
       </TableMobileBody>
     </TableMobile>

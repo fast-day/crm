@@ -6,17 +6,18 @@ import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } 
 import { Calendar } from "@/widgets/calendar";
 import { EmployeeNotFound } from "@/widgets/employee";
 import { ScheduleDialog } from "@/widgets/schedule";
-import { useParams } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-export const EmployeeSchedule = () => {
+interface IEmployeeScheduleProps {
+  employee_id: string;
+}
+
+export const EmployeeSchedule = ({ employee_id }: IEmployeeScheduleProps) => {
   const { location } = useSelector(useAccount);
   const { dialog } = useSelector(dialogSelector);
   
   const location_id = location?.id ?? "";
-
-  const { employee_id } = useParams({ from: "/_app/_layout/employees/schedule/$employee_id" });
   
   const calendar = useCalendar(employee_id);
 

@@ -7,3 +7,4 @@ export { NetworkLayout } from './ui/network-layout';
 export { ContentLayout } from './ui/content-layout';
 export { RequestError } from './ui/request-error';
 export { PageTableWrapper } from './ui/page-table-wrapper';
+export { PageDetailWrapper } from './ui/page-detail-wrapper';

@@ -85,8 +85,8 @@ export interface IEmployeeEditCredentials {
   phone: string;
   first_name: string;
   last_name?: string;
-  role: number;
-  position: string;
+  // role: number;
+  // position: string;
   birth_date?: string | null;
   note?: string | null;
 }

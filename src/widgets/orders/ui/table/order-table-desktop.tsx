@@ -29,9 +29,7 @@ export const OrderTableDesktop = ({ orders, isFetching }: OrderTableProps) => {
         {orders?.length ? 
           orders.map((ord, index) => (
             <React.Fragment key={ord.id}>
-              <TableRow
-                onClick={() => navigate({ to: `/orders/${ord.id}` })}
-              >
+              <TableRow onClick={() => navigate({ to: `/orders/${ord.id}` })}>
                 <TableCell className="flex-col justify-center items-start gap-0">
                   <p>{formatDate(ord.date)}</p>
                   <p className="opacity-50">{ord.time}</p>
@@ -43,7 +41,11 @@ export const OrderTableDesktop = ({ orders, isFetching }: OrderTableProps) => {
                         <Avatar size={"tiny"} avatar_url={ord.customer.avatar} name={ord.customer.full_name} id={ord.customer.id ?? "none"} />
                         <p>{ord.customer.full_name}</p>
                       </div>
-                      <p className="text-xss leading-3 text-primary">{ord.customer.phone}</p>
+                      <Link
+                        to={`tel:${ord.customer.phone}`}
+                        className={"text-xss leading-3 text-primary"}
+                        onClick={(e) => e.stopPropagation()}
+                      >{ord.customer.phone}</Link>
                     </>
                   ) : (
                     <div className="flex items-center justify-center flex-1 w-full">-</div>

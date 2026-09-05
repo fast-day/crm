@@ -24,7 +24,8 @@ export const ServicesDetail = ({ service_id }: IServiceDetailProps) => {
               <Button 
                 size={"size_44"} 
                 animation={"toggle"}
-                className={"text-sm font-bold"}
+                className={"text-sm font-bold 1100:w-fit w-11 1100:px-6 px-0"}
+                classNameChild={"1100:block hidden"}
                 iconLeft={<PencilEditIcon width={21} height={21}/>}
                 disabled={isLoading || isError}
               >Редактировать</Button>

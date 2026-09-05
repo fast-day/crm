@@ -1,5 +1,5 @@
 import { LocationDetail } from '@/pages/location'
-import { uuidSchema } from '@/shared/schemas/params-scheha'
+import { uuidSchema } from '@/shared/schemas/params-schema'
 import { LocationNotFound } from '@/widgets/location'
 import { createFileRoute } from '@tanstack/react-router'
 

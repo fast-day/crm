@@ -5,8 +5,8 @@ import z from "zod";
 export const employeeSchema = z.object({
   first_name: z.string().min(1, "Обязательное поле"),
   last_name: z.string().optional(),
-  position: z.string().min(1, "Обязательное поле"),
-  role: z.string("Выберите роль").min(1, "Обязательное поле"),
+  // position: z.string().min(1, "Обязательное поле"),
+  // role: z.string("Выберите роль").min(1, "Обязательное поле"),
   phone: 
     z.string("Укажите номер телефона")
     .min(1, "Укажите номер телефона")
@@ -16,7 +16,7 @@ export const employeeSchema = z.object({
 
   /* ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ */
   birthdate: z.string().optional().nullable(),
-  note: z.string().optional().nullable(),
+  // note: z.string().optional().nullable(),
 
   avatar: avatarSchema,
 });

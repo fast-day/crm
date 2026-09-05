@@ -1,5 +1,5 @@
 import { ServiceEmployees } from '@/pages/services'
-import { uuidSchema } from '@/shared/schemas/params-scheha'
+import { uuidSchema } from '@/shared/schemas/params-schema'
 import { ServiceNotFound } from '@/widgets/services'
 import { createFileRoute } from '@tanstack/react-router'
 

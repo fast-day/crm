@@ -1,5 +1,5 @@
 import { OrderDetail } from '@/pages/orders'
-import { uuidSchema } from '@/shared/schemas/params-scheha';
+import { uuidSchema } from '@/shared/schemas/params-schema';
 import { OrderNotFound } from '@/widgets/orders';
 import { createFileRoute } from '@tanstack/react-router'
 

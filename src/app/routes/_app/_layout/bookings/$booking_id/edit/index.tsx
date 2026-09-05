@@ -1,5 +1,5 @@
 import { BookingEdit } from '@/pages/booking';
-import { uuidSchema } from '@/shared/schemas/params-scheha';
+import { uuidSchema } from '@/shared/schemas/params-schema';
 import { BookingNotFound } from '@/widgets/booking';
 import { createFileRoute } from '@tanstack/react-router'
 

@@ -4,11 +4,13 @@ import { useGetEmployeeQuery } from "@/entities/employee";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { EmployeeNotFound, EmployeeServiceSetting, EmployeeServiceSettingLazy } from "@/widgets/employee";
 import { skipToken } from "@reduxjs/toolkit/query";
-import { useParams } from "@tanstack/react-router"
 import { useSelector } from "react-redux";
 
-export const EmployeeServices = () => {
-  const { employee_id } = useParams({ from: "/_app/_layout/employees/users/$employee_id/services/" });
+interface IEmployeeServicesProps {
+  employee_id: string;
+}
+
+export const EmployeeServices = ({ employee_id }: IEmployeeServicesProps) => {
   const { location } = useSelector(useAccount);
 
   const { data: employee, isLoading: isLoadingEmployee, isError: isErrorEmployee } = useGetEmployeeQuery(

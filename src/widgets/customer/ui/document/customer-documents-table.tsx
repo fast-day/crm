@@ -11,7 +11,7 @@ interface ICustomerDocumentsTableProps {
 export const CustomerDocumentsTable = ({ documents, meta }: ICustomerDocumentsTableProps) => {
   return (
     <div className="space-y-8 mt-8">
-      <div className="grid grid-cols-4 gap-2.5">
+      <div className="grid 1100:grid-cols-3! xl:grid-cols-4! sm:grid-cols-2 grid-cols-1 gap-2.5">
 
         <Link to={"create"}>
           <Card className="h-31 flex bg-primary/20 border-2 border-dashed border-primary cursor-pointer">
