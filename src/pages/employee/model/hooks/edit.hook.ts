@@ -20,7 +20,9 @@ export const useEmployeeEdit = (employeeId: string, employeeProfileId: string, l
   const onSubmit = async (data: EmployeeSchemaType): Promise<void> => {
     setIsLoading(true);
     try {
-      const { avatar, ...rest } = data;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { avatar, role, position, ...rest } = data;
+
       const req = {
         body: {
           ...rest,

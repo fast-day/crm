@@ -75,7 +75,7 @@ export interface IEmployeeInviteCredentials {
   first_name: string;
   last_name?: string;
   role: number;
-  position: string;
+  position?: string;
   location_id: string;
   birth_date?: string;
   note?: string;

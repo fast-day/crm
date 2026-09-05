@@ -201,7 +201,7 @@ export const EmployeeInviteForm = () => {
                 {
                   ...employee, 
                   birthdate: null,
-                  note: null,
+                  // note: null,
                   role: employee.role.id.toString(),
                   avatar: null,
                 },

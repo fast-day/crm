@@ -5,8 +5,8 @@ import z from "zod";
 export const employeeSchema = z.object({
   first_name: z.string().min(1, "Обязательное поле"),
   last_name: z.string().optional(),
-  // position: z.string().min(1, "Обязательное поле"),
-  // role: z.string("Выберите роль").min(1, "Обязательное поле"),
+  position: z.string().min(1, "Обязательное поле").optional(),
+  role: z.string("Выберите роль").min(1, "Обязательное поле").optional(),
   phone: 
     z.string("Укажите номер телефона")
     .min(1, "Укажите номер телефона")

@@ -40,7 +40,8 @@ export const Employees = ({ query }: EmployeeProps) => {
         <PageHeaderTitle>Сотрудники</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
-          <Can permission={"employee:invite"}>
+          {/* permission={"employee:invite"} */}
+          <Can permission={"test"}>
             <Link to={"/employees/users/create"}>
               <Button 
                 size={"size_44"}
