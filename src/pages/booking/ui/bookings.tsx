@@ -17,6 +17,7 @@ export interface BookingProps {
 
 export const Bookings = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
+
   const { data, isLoading, isError, isSuccess, isFetching } = useGetBookingsQuery(
     location && account?.has_bookings ? { ...query, location_id: location.id } : skipToken,
     {
