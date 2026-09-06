@@ -33,6 +33,7 @@ import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_
 import { Route as AppLayoutBookingsIndexRouteImport } from './app/routes/_app/_layout/bookings/index'
 import { Route as AppLayoutSettingsSystemIndexRouteImport } from './app/routes/_app/_layout/settings/system/index'
 import { Route as AppLayoutOrdersInvoicesIndexRouteImport } from './app/routes/_app/_layout/orders/invoices/index'
+import { Route as AppLayoutOnlineOverviewIndexRouteImport } from './app/routes/_app/_layout/online/overview/index'
 import { Route as AppLayoutEmployeesUsersIndexRouteImport } from './app/routes/_app/_layout/employees/users/index'
 import { Route as AppLayoutCustomersCustomer_idIndexRouteImport } from './app/routes/_app/_layout/customers/$customer_id/index'
 import { Route as AppLayoutCompanyCreateIndexRouteImport } from './app/routes/_app/_layout/company/create/index'
@@ -191,6 +192,12 @@ const AppLayoutOrdersInvoicesIndexRoute =
   AppLayoutOrdersInvoicesIndexRouteImport.update({
     id: '/orders/invoices/',
     path: '/orders/invoices/',
+    getParentRoute: () => AppLayoutRouteRoute,
+  } as any)
+const AppLayoutOnlineOverviewIndexRoute =
+  AppLayoutOnlineOverviewIndexRouteImport.update({
+    id: '/online/overview/',
+    path: '/online/overview/',
     getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutEmployeesUsersIndexRoute =
@@ -400,6 +407,7 @@ export interface FileRoutesByFullPath {
   '/company/create/': typeof AppLayoutCompanyCreateIndexRoute
   '/customers/$customer_id/': typeof AppLayoutCustomersCustomer_idIndexRoute
   '/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
+  '/online/overview/': typeof AppLayoutOnlineOverviewIndexRoute
   '/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
   '/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/business/services/create/': typeof AppLayoutFocusBusinessServicesCreateIndexRoute
@@ -450,6 +458,7 @@ export interface FileRoutesByTo {
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
   '/customers/$customer_id': typeof AppLayoutCustomersCustomer_idIndexRoute
   '/employees/users': typeof AppLayoutEmployeesUsersIndexRoute
+  '/online/overview': typeof AppLayoutOnlineOverviewIndexRoute
   '/orders/invoices': typeof AppLayoutOrdersInvoicesIndexRoute
   '/settings/system': typeof AppLayoutSettingsSystemIndexRoute
   '/business/services/create': typeof AppLayoutFocusBusinessServicesCreateIndexRoute
@@ -506,6 +515,7 @@ export interface FileRoutesById {
   '/_app/_layout/company/create/': typeof AppLayoutCompanyCreateIndexRoute
   '/_app/_layout/customers/$customer_id/': typeof AppLayoutCustomersCustomer_idIndexRoute
   '/_app/_layout/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
+  '/_app/_layout/online/overview/': typeof AppLayoutOnlineOverviewIndexRoute
   '/_app/_layout/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
   '/_app/_layout/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/_app/_layout-focus/business/services/create/': typeof AppLayoutFocusBusinessServicesCreateIndexRoute
@@ -559,6 +569,7 @@ export interface FileRouteTypes {
     | '/company/create/'
     | '/customers/$customer_id/'
     | '/employees/users/'
+    | '/online/overview/'
     | '/orders/invoices/'
     | '/settings/system/'
     | '/business/services/create/'
@@ -609,6 +620,7 @@ export interface FileRouteTypes {
     | '/company/create'
     | '/customers/$customer_id'
     | '/employees/users'
+    | '/online/overview'
     | '/orders/invoices'
     | '/settings/system'
     | '/business/services/create'
@@ -664,6 +676,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/company/create/'
     | '/_app/_layout/customers/$customer_id/'
     | '/_app/_layout/employees/users/'
+    | '/_app/_layout/online/overview/'
     | '/_app/_layout/orders/invoices/'
     | '/_app/_layout/settings/system/'
     | '/_app/_layout-focus/business/services/create/'
@@ -860,6 +873,13 @@ declare module '@tanstack/react-router' {
       path: '/orders/invoices'
       fullPath: '/orders/invoices/'
       preLoaderRoute: typeof AppLayoutOrdersInvoicesIndexRouteImport
+      parentRoute: typeof AppLayoutRouteRoute
+    }
+    '/_app/_layout/online/overview/': {
+      id: '/_app/_layout/online/overview/'
+      path: '/online/overview'
+      fullPath: '/online/overview/'
+      preLoaderRoute: typeof AppLayoutOnlineOverviewIndexRouteImport
       parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/employees/users/': {
@@ -1085,6 +1105,7 @@ interface AppLayoutRouteRouteChildren {
   AppLayoutCompanyCreateIndexRoute: typeof AppLayoutCompanyCreateIndexRoute
   AppLayoutCustomersCustomer_idIndexRoute: typeof AppLayoutCustomersCustomer_idIndexRoute
   AppLayoutEmployeesUsersIndexRoute: typeof AppLayoutEmployeesUsersIndexRoute
+  AppLayoutOnlineOverviewIndexRoute: typeof AppLayoutOnlineOverviewIndexRoute
   AppLayoutOrdersInvoicesIndexRoute: typeof AppLayoutOrdersInvoicesIndexRoute
   AppLayoutSettingsSystemIndexRoute: typeof AppLayoutSettingsSystemIndexRoute
   AppLayoutBookingsBooking_idEditIndexRoute: typeof AppLayoutBookingsBooking_idEditIndexRoute
@@ -1114,6 +1135,7 @@ const AppLayoutRouteRouteChildren: AppLayoutRouteRouteChildren = {
   AppLayoutCustomersCustomer_idIndexRoute:
     AppLayoutCustomersCustomer_idIndexRoute,
   AppLayoutEmployeesUsersIndexRoute: AppLayoutEmployeesUsersIndexRoute,
+  AppLayoutOnlineOverviewIndexRoute: AppLayoutOnlineOverviewIndexRoute,
   AppLayoutOrdersInvoicesIndexRoute: AppLayoutOrdersInvoicesIndexRoute,
   AppLayoutSettingsSystemIndexRoute: AppLayoutSettingsSystemIndexRoute,
   AppLayoutBookingsBooking_idEditIndexRoute:

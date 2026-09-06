@@ -12,13 +12,10 @@ import SvgBook from "@/shared/icons/Book"
 import { usePermissions } from "@/features/auth/model/hooks/permission.hook"
 import { type PageType } from "@/entities/settings"
 import Cast from "@/shared/icons/Cast"
+import SvgNotification from "@/shared/icons/Notification"
+import { useMediaQuery } from "react-responsive"
 
 const MENU = [
-  // {
-  //   type: "DASHBOARD",
-  //   label: "Дашбоард",
-  //   icon: <SvgDashboard />,
-  // },
   {
     type: "BOOKINGS",
     label: "Записи",
@@ -60,12 +57,12 @@ const MENU = [
     icon: <PaletteIcon />,
     permission: ["service:*"],
   },
-  // {
-  //   to: "/notifications",
-  //   label: "Уведомления",
-  //   icon: <SvgNotification />,
-  //   permission: [],
-  // },
+  {
+    to: "/notifications",
+    label: "Уведомления",
+    icon: <SvgNotification />,
+    permission: [],
+  },
 ];
 
 interface SystemSettingContentProps {
@@ -73,6 +70,7 @@ interface SystemSettingContentProps {
 }
 
 export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) => {
+  const isTablet = useMediaQuery({ query: "(min-width: 1101px)" });
   const { account } = useSelector(accountSelector);
   const { hasWildcard } = usePermissions();
 
@@ -108,8 +106,8 @@ export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) =>
                   <CardHeader className="pb-0">
                     <CardTitle>Общие настройки</CardTitle>
                   </CardHeader>
-                  <CardContent className="pt-4">
-                    <div className="grid grid-cols-3 gap-4">
+                  <CardContent className="pt-4 flex gap-4 md:flex-row flex-col">
+                    <div>
                       <Controller
                         control={control}
                         name="logo"
@@ -118,7 +116,7 @@ export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) =>
                             <ImagePicker
                               value={field.value}
                               className={cn(
-                                "w-full h-41 bg-transparent border-dashed border-2 border-border hover:border-primary/60 duration-200",
+                                "w-32 h-32 bg-transparent border-dashed border-2 border-border hover:border-primary/60 duration-200",
                                 account?.company?.logo ? "border-transparent hover:border-transparent" : ""
                               )}
                               onChange={field.onChange}
@@ -134,6 +132,8 @@ export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) =>
                           </div>
                         )}
                       />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 1100:grid-cols-3! gap-4 flex-1">
                       <InputForm
                         name="name"
                         id="name"
@@ -157,43 +157,45 @@ export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) =>
                 </Card>
               )}
 
-              <Card>
-                <CardHeader className="pb-0">
-                  <CardTitle>Настройка меню</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-4">
-                  <div className="grid grid-cols-5 gap-2.5">
-                    {MENU.map((item, idx) => {
-                      if (item.permission) {
-                        const perms = Array.isArray(item.permission) ? item.permission : [item.permission];
-                        if (!perms.some(p => hasWildcard(p))) return null;
-                      }
+              {isTablet && (
+                <Card>
+                  <CardHeader className="pb-0">
+                    <CardTitle>Настройка меню</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+                      {MENU.map((item, idx) => {
+                        if (item.permission) {
+                          const perms = Array.isArray(item.permission) ? item.permission : [item.permission];
+                          if (!perms.some(p => hasWildcard(p))) return null;
+                        }
 
-                      const fieldIdx = pages?.findIndex(p => p.page === item.type);
-                      if (fieldIdx === -1 || fieldIdx === undefined) return null;
+                        const fieldIdx = pages?.findIndex(p => p.page === item.type);
+                        if (fieldIdx === -1 || fieldIdx === undefined) return null;
 
-                      return (
-                        <div key={idx} className="bg-background p-4 rounded-2xl flex flex-col items-center justify-center gap-2.5">
-                          <Controller
-                            control={control}
-                            name={`pages.${fieldIdx}.is_visible`}
-                            render={({ field }) => (
-                              <Switch
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                            )}
-                          />
-                          <div className="flex items-center gap-1.5">
-                            <span className="size-5">{item.icon}</span>
-                            <div className="text-sm font-medium">{item.label}</div>
+                        return (
+                          <div key={idx} className="bg-background p-4 rounded-2xl flex flex-col items-center justify-center gap-2.5">
+                            <Controller
+                              control={control}
+                              name={`pages.${fieldIdx}.is_visible`}
+                              render={({ field }) => (
+                                <Switch
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              )}
+                            />
+                            <div className="flex items-center gap-1.5">
+                              <span className="size-5">{item.icon}</span>
+                              <div className="text-sm font-medium">{item.label}</div>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </>
           );
         }}

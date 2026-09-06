@@ -25,7 +25,7 @@ export const Sidebar = () => {
                   <h1 className="text-base leading-5 font-extrabold text-start capitalize line-clamp-2 break-all">{account?.company?.name}</h1>
                   <div className="flex items-center gap-1">
                     <SubscribeIcon width={10} height={10} className="text-white/60" />
-                    <p className="text-10 font-medium text-white/60">Тарифный план (демо)</p>
+                    <p className="text-10 font-medium text-white/60">Демо</p>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { PaletteIcon, SettingIcon } from "@/shared/icons"
+import { PaletteIcon, SettingIcon, WorldIcon } from "@/shared/icons"
 import SvgPerson from "@/shared/icons/Person"
 import { Link } from "@tanstack/react-router"
 
@@ -17,6 +17,11 @@ const settings = [
     icon: <SvgPerson />,
     name: "Профиль",
     href: "/me",
+  },
+  {
+    icon: <WorldIcon />,
+    name: "Онлайн-запись",
+    href: "/online/overview"
   }
 ]
 
@@ -27,7 +32,7 @@ export const SettingsContent = () => {
 
 
         {settings.map((item, idx) => (
-          <Link to={item.href} key={idx} className="bg-card rounded-2xl sm:px-10 sm:py-12 p-10">
+          <Link to={item.href} key={idx} className="bg-card rounded-2xl sm:px-10 sm:py-12 p-6">
             <div className="flex items-center flex-col gap-2.5">
               <div className="md:size-8 size-6">{item.icon}</div>
               <p className="sm:text-base text-sm">{item.name}</p>
