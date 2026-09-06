@@ -37,6 +37,7 @@ function PageHeaderActions ({ className, children, ...props }: ComponentProps<"d
 const PageHeaderBackAction = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ ...props }, ref) => {
     const { history } = useRouter();
+
     return (
       <Button
         data-ui="page-header-back-action"

@@ -1,10 +1,11 @@
 import { useAccount } from "@/entities/account"
 import { dialogSelector } from "@/entities/dialog"
 import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule"
+import { Can } from "@/features/auth";
 import { isTimeValue, isWeekendValue, pad2, parseBackendDate, toDateKey, useCalendar, type DayInfo, type ScheduleEditInfo } from "@/features/calendar";
-import { Notice, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
+import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
 import { Calendar } from "@/widgets/calendar"
-import { ScheduleDialog } from "@/widgets/schedule"
+import { ScheduleDialog, ScheduleSetting } from "@/widgets/schedule"
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
@@ -93,16 +94,12 @@ export const Schedule = () => {
         <PageHeaderTitle>Расписание</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
-          {/* <ScheduleSetting /> */}
+          <Can permission={"test"}>
+            <ScheduleSetting />
+          </Can>
         </PageHeaderActions>
       </PageHeader>
 
-      <Notice
-        variant={"warning"}
-        className={"mt-8"}
-        title={"Настройка расписания временно не работает"}
-        description={"Приносим свои извинения за предоставленные неудобства."}
-      />
       <Calendar
         calendar={calendar}
         scheduleEditByKey={scheduleEditByKey}

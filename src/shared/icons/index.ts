@@ -77,6 +77,7 @@ export { default as Plus2Icon } from "./Plus2";
 export { default as ResearchIcon } from "./Research";
 export { default as SearchIcon } from "./Search";
 export { default as SettingIcon } from "./Setting";
+export { default as ShareIcon } from "./Share";
 export { default as ShopIcon } from "./Shop";
 export { default as ShoppingCartIcon } from "./ShoppingCart";
 export { default as StackFillIcon } from "./StackFill";

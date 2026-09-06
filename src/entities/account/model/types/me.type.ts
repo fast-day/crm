@@ -5,8 +5,9 @@ export interface IMeCompany {
   id: string;
   name: string;
   logo: string | null;
-  site_url: string;
   currency: CurrencyType;
+  site_url: string;
+  widget_url: string;
 }
 
 export interface IMeLocationTimezone {
