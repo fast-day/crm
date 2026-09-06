@@ -6,7 +6,7 @@ import z from 'zod'
 const bookingSearchSchema = querySearchSchema.extend({
   customer: z.string().optional(),
   tag: z.string().optional(),
-  status: z.enum(["new", "completed", "cancelled"]).optional().catch(undefined),
+  status: z.enum(["new", "completed", "cancelled"]).optional().catch(undefined).default("new"),
   sort: z.enum(["newest", "oldest", "price_asc", "price_desc"]).optional().catch("newest"),
 });
 

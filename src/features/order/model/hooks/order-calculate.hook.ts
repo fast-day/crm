@@ -1,7 +1,7 @@
 import type { IBookingService } from "@/entities/booking";
 import { useCalculateOrderMutation, type ICalculateOrder } from "@/entities/orders"
 import { getErrorMessage } from "@/shared/utils";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 interface IUseOrderCalculateReturnProps {
@@ -17,13 +17,15 @@ const DEFAULT_CALCULATE_RESULT: ICalculateOrder = {
 }
 
 export const useOrderCalculate = (): IUseOrderCalculateReturnProps => {
+  const [calculateResult, setCalculateResult] = useState<ICalculateOrder>(DEFAULT_CALCULATE_RESULT);
+
   const [calc, { data: result, isLoading }] = useCalculateOrderMutation({
     fixedCacheKey: "order-calculate",
   });
 
   const calculate = useCallback(async (booking_id: string, services: IBookingService[]): Promise<void> => {
     try {
-      await calc({
+      const res = await calc({
         booking_id,
         body: {
           services: services.map((service) => ({
@@ -32,6 +34,7 @@ export const useOrderCalculate = (): IUseOrderCalculateReturnProps => {
           })),
         }
       }).unwrap();
+      setCalculateResult(res);
     }
     catch (err) {
       toast.error(getErrorMessage(err));
@@ -39,5 +42,5 @@ export const useOrderCalculate = (): IUseOrderCalculateReturnProps => {
     }
   }, [calc]);
 
-  return { calculate, isLoading, result: result ?? DEFAULT_CALCULATE_RESULT };
+  return { calculate, isLoading, result: result ?? calculateResult };
 }
