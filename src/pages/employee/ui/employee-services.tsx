@@ -14,7 +14,7 @@ export const EmployeeServices = ({ employee_id }: IEmployeeServicesProps) => {
   const { location } = useSelector(useAccount);
 
   const { data: employee, isLoading: isLoadingEmployee, isError: isErrorEmployee } = useGetEmployeeQuery(
-    location ? { location_id: location.id, employee_id } : skipToken,
+    location ? { location_id: location.uuid, employee_id } : skipToken,
   );
   const { data: services, isLoading: isLoadingServices } = useServicesQuery();
 
@@ -34,7 +34,7 @@ export const EmployeeServices = ({ employee_id }: IEmployeeServicesProps) => {
           employee_id={employee_id}
           isLoading={isLoadingEmployee}
           services={services}
-          location_id={location!.id}
+          location_id={location!.uuid}
           active_service={employee?.services ?? []}
         />
       )

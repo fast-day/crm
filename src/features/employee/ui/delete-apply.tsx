@@ -33,7 +33,7 @@ export const EmployeeDeleteApply = ({ employee_id, closeDialog }: EmployeeDelete
   return (
     <Button
       variant={"dialog_apply"}
-      onClick={() => handleDelete(location!.id, employee_id)}
+      onClick={() => handleDelete(location!.uuid, employee_id)}
       isLoading={isLoading}
       disabled={isLoading}
     >Да, я хочу удалить</Button>

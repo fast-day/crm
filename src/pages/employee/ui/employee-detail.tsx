@@ -15,7 +15,7 @@ export const EmployeeDetail = () => {
   const { dialog } = useSelector(dialogSelector);
 
   const { data, isLoading, isError, isSuccess } = useGetEmployeeQuery(
-    location ? { location_id: location.id, employee_id } : skipToken,
+    location ? { location_id: location.uuid, employee_id } : skipToken,
     { refetchOnMountOrArgChange: true },
   );
 
@@ -24,7 +24,7 @@ export const EmployeeDetail = () => {
   ) : isError ? (
     <EmployeeNotFound />
   ) : isSuccess ? (
-    <EmployeeDetails employee={data} locationId={location!.id} />
+    <EmployeeDetails employee={data} locationId={location!.uuid} />
   ) : (
     <EmployeeEmpty />
   )

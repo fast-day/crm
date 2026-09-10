@@ -17,7 +17,7 @@ export const EmployeeSchedule = ({ employee_id }: IEmployeeScheduleProps) => {
   const { location } = useSelector(useAccount);
   const { dialog } = useSelector(dialogSelector);
   
-  const location_id = location?.id ?? "";
+  const location_id = location?.uuid ?? "";
   
   const calendar = useCalendar(employee_id);
 

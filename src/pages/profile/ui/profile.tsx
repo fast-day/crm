@@ -15,7 +15,7 @@ export const Profile = () => {
   const { dialog } = useSelector(dialogSelector);
   
   const { data, isLoading, isError, isSuccess } = useGetEmployeeQuery(
-    location && account ? { location_id: location.id, employee_id: account.id } : skipToken,
+    location && account ? { location_id: location.uuid, employee_id: account.uuid } : skipToken,
   );
 
   const content = isLoading ? (

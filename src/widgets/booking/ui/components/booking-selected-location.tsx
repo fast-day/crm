@@ -14,7 +14,7 @@ export const BookingSelectedLocation = ({ location }: IBookingSelectedLocation) 
           <div>Загрузка...</div>
         ) : (
           <div className="flex items-center gap-2.5">
-            <Avatar size={"md"} id={location?.id} name={location?.name} avatar_url={location?.avatar} />
+            <Avatar size={"md"} id={location?.uuid} name={location?.name} avatar_url={location?.avatar} />
 
             <div>
               <h3 className="text-base font-medium leading-5">{location?.name}</h3>

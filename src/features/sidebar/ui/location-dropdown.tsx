@@ -43,10 +43,10 @@ export const LocationDropdown = ({ avatar_url, name, locations, selectId }: Loca
         {locations.map((loc, idx) => (
           <HoverDropdownItemTrigger
             key={idx} 
-            className={`rounded-none ${selectId === loc.id ? "bg-primary/90 text-white/90" : ""}`}
+            className={`rounded-none ${selectId === loc.uuid ? "bg-primary/90 text-white/90" : ""}`}
             onClick={() => handleSelectLocation(loc)}
           >
-            <Avatar id={loc.id} avatar_url={loc.avatar} name={loc.name} opacity={35} />
+            <Avatar id={loc.uuid} avatar_url={loc.avatar} name={loc.name} opacity={35} />
             <p className="text-start text-md font-semibold leading-3">{loc.name}</p>
           </HoverDropdownItemTrigger>
         ))}

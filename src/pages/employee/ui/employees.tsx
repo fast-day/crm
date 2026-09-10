@@ -20,7 +20,7 @@ export const Employees = ({ query }: EmployeeProps) => {
     location ?
     {
       ...query,
-      location_id: location.id,
+      location_id: location.uuid,
     } : skipToken,
   );
 
@@ -29,7 +29,7 @@ export const Employees = ({ query }: EmployeeProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <EmployeeTable employees={data.data} meta={data.meta} isFetching={isFetching} profileId={account?.id} query={query} />
+    <EmployeeTable employees={data.data} meta={data.meta} isFetching={isFetching} profileId={account?.uuid} query={query} />
   ) : (
     <EmployeeEmpty />
   );

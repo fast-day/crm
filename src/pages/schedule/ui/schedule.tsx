@@ -14,8 +14,8 @@ export const Schedule = () => {
   const { account, location } = useSelector(useAccount);
   const { dialog } = useSelector(dialogSelector);
   
-  const user_id = account?.id ?? ""; 
-  const location_id = location?.id ?? "";
+  const user_id = account?.uuid ?? ""; 
+  const location_id = location?.uuid ?? "";
 
   const calendar = useCalendar(user_id);
 
