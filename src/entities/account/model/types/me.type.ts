@@ -32,7 +32,8 @@ export interface IMeLocationAddress {
 }
 
 export interface MeLocation {
-  id: string;
+  id: number;
+  uuid: string;
   name: string;
   avatar: string;
   full_address: string;
@@ -51,7 +52,8 @@ export interface MeSettings {
 }
 
 export interface IMe {
-  id: string;
+  id: number;
+  uuid: string;
   email: string;
   phone: string;
   role: IRole;

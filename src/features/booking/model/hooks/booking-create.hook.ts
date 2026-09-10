@@ -51,11 +51,11 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
             ЧУТЬ ПОЗЖЕ ОПТИМИЗИРОВАТЬ ДО АВТОМАТИЧЕСКОГО ОПРЕДЕЛЕНИЯ
             ЕСЛИ СОТРУДНИК 1, ТО ПО ДЕФОЛТУ ПРОКИДЫВАТЬ ЕГО, ЕСЛИ МНОГО - ДАВАТЬ ВОЗМОЖНОСТЬ ВЫБРАТЬ
           */
-          users: employee?.id ? [{
-            id: employee.id,
+          users: employee?.uuid ? [{
+            id: employee.uuid,
             first_name: employee.first_name,
             last_name: employee.last_name,
-          }] : [],  
+          }] : [],
           // users: book.employee?.id ? [{
           //   id: book.employee.profile_id,
           //   first_name: book.employee.first_name,

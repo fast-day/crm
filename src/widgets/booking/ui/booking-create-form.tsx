@@ -64,7 +64,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                   </div>
 
                   <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
-                    <BookingChangeService location_id={location.id} date={current_date ?? date} account={account} />
+                    <BookingChangeService location_id={location.uuid} date={current_date ?? date} account={account} />
                   </Dialog>
 
                 </CardContent>
@@ -106,7 +106,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
             <>
               <Button
                 type={"button"}
-                onClick={() => handleSave(booked, customer, account, location!.id)}
+                onClick={() => handleSave(booked, customer, account, location!.uuid)}
                 isLoading={isLoading}
                 disabled={isLoading}
               >Сохранить</Button>

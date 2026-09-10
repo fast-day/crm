@@ -13,7 +13,7 @@ interface IEmployeeEditProps {
 export const EmployeeEdit = ({ employee_id }: IEmployeeEditProps) => {
   const { location } = useSelector(useAccount);
   const { data, isLoading, isError, isSuccess } = useGetEmployeeQuery(
-    location ? { location_id: location.id, employee_id } : skipToken,
+    location ? { location_id: location.uuid, employee_id } : skipToken,
     { refetchOnMountOrArgChange: true },
   );
 
@@ -22,7 +22,7 @@ export const EmployeeEdit = ({ employee_id }: IEmployeeEditProps) => {
   ) : isError ? (
     <EmployeeNotFound />
   ) : isSuccess ? (
-    <EmployeeEditWrapper data={data} location_id={location!.id} />
+    <EmployeeEditWrapper data={data} location_id={location!.uuid} />
   ) : (
     <EmployeeEmpty />
   )

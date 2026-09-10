@@ -6,7 +6,7 @@ import { Link } from "@tanstack/react-router"
 import { useSelector } from "react-redux"
 
 export const OnlineOverview = () => {
-  const { account } = useSelector(accountSelector);
+  const { account, location } = useSelector(accountSelector);
 
   return (
     <>
@@ -29,9 +29,9 @@ export const OnlineOverview = () => {
                 <WorldIcon />
                 <div className="absolute top-0.5 right-0.5 w-3 h-3 rounded-full bg-green" />
               </div>
-              <div className="text-md font-semibold flex-1 line-clamp-1 break-all">{account ? `${account.company?.widget_url}/${account.locations[0].id}/${account.id}` : '-'}</div>
+              <div className="text-md font-semibold flex-1 line-clamp-1 break-all">{(account && location) ? `${account.company?.widget_url}/${location.id}/${account.id}` : '-'}</div>
               
-              <Link to={account?.company?.widget_url} target={"_blank"} className="bg-white size-12 rounded-2xl flex items-center justify-center">
+              <Link to={`${account?.company?.widget_url}/${(account && location) ? `${location.id}/${account.id}` : ''}`} target={"_blank"} className="bg-white size-12 rounded-2xl flex items-center justify-center">
                 <ShareIcon width={20} height={20} />
               </Link>
             </div>

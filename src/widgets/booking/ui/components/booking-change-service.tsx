@@ -65,7 +65,7 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
           setSetting={setSetting}
           location_id={location_id}
           service={setting.service}
-          user_id={account?.id}
+          user_id={account?.uuid}
         />
         {(setting.service) && <BookingChangeServicePrice setSetting={setSetting} price={setting?.service?.prices.price}/>}
 
@@ -74,7 +74,7 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
             <div className="text-lg font-bold">{formatDateWeek(date)}</div>
 
             <BookingScheduleIntervals
-              user_id={account.id}
+              user_id={account.uuid}
               location_id={location_id}
               date={date}
               current_time={setting.time}

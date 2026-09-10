@@ -17,7 +17,7 @@ export const EmployeeInviteForm = () => {
   return (
     <div className="mt-8 relative">
       <div className="space-y-8 relative">
-        <Form id="check" className="space-y-8 relative max-w-140 mx-auto" onSubmit={(data) => onCheck(data, location!.id)} schema={inviteCheckSchema}>
+        <Form id="check" className="space-y-8 relative max-w-140 mx-auto" onSubmit={(data) => onCheck(data, location!.uuid)} schema={inviteCheckSchema}>
           {({ register, formState }) => (
             <>
               <Card>
@@ -86,7 +86,7 @@ export const EmployeeInviteForm = () => {
           <Form
             id="create"
             className="flex items-start max-w-140 mx-auto gap-6"
-            onSubmit={(data) => onInvite(data, location?.id ?? "")}
+            onSubmit={(data) => onInvite(data, location?.uuid ?? "")}
             schema={employeeSchema}
           >
             {({ register, formState, control }) => (
@@ -205,7 +205,7 @@ export const EmployeeInviteForm = () => {
                   role: employee.role.id.toString(),
                   avatar: null,
                 },
-                location!.id,
+                location!.uuid,
               )}
               isLoading={isLoading.create}
               disabled={isLoading.create}

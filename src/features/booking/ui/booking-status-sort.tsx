@@ -3,13 +3,13 @@ import { cn } from "@/shared/utils";
 
 interface IBookingStatusSortProps {
   status?: BookingStatusType;
-  handleChange: (name: "status", status: BookingStatusType | "all") => void;
+  handleChange: (name: "status", status: BookingStatusType) => void;
 }
 
-const variant = ["all", "new", "completed", "cancelled"] as BookingStatusType[] | "all"[];
+const variant = ["new", "completed", "cancelled"] as BookingStatusType[];
 
-const BOOKING_STATUS: Record<BookingStatusType | "all", string> = {
-  "all": "Все",
+const BOOKING_STATUS: Record<BookingStatusType, string> = {
+  // "all": "Все",
   "new": "Новые",
   "completed": "Завершенные",
   "cancelled": "Отмененные",
@@ -21,7 +21,7 @@ export const BookingStatusSort = ({ status, handleChange }: IBookingStatusSortPr
       <Button
         key={idx}
         variant={"action"}
-        className={cn((v === "all" ? !status : status === v) ? "bg-white" : "bg-transparent", "")}
+        className={cn(status === v ? "bg-white" : "bg-transparent", "")}
         size={"size_40"}
         onClick={() => handleChange("status", v)}
       >{BOOKING_STATUS[v]}</Button>

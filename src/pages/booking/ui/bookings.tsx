@@ -19,7 +19,7 @@ export const Bookings = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
 
   const { data, isLoading, isError, isSuccess, isFetching } = useGetBookingsQuery(
-    location && account?.has_bookings ? { ...query, location_id: location.id } : skipToken,
+    location && account?.has_bookings ? { ...query, location_id: location.uuid } : skipToken,
     {
       refetchOnMountOrArgChange: true,
     },
@@ -41,7 +41,7 @@ export const Bookings = ({ query }: BookingProps) => {
       <BookingTable
         bookings={data.data}
         isFetching={isFetching}
-        profileId={account?.id}
+        profileId={account?.uuid}
       />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
