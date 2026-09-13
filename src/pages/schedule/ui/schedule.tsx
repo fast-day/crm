@@ -4,7 +4,7 @@ import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule
 import { Can } from "@/features/auth";
 import { isTimeValue, isWeekendValue, pad2, parseBackendDate, toDateKey, useCalendar, type DayInfo, type ScheduleEditInfo } from "@/features/calendar";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { Calendar } from "@/widgets/calendar"
+import { CalendarMonth } from "@/widgets/calendar";
 import { ScheduleDialog, ScheduleSetting } from "@/widgets/schedule"
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useMemo } from "react"
@@ -100,13 +100,14 @@ export const Schedule = () => {
         </PageHeaderActions>
       </PageHeader>
 
-      <Calendar
+      <CalendarMonth
         calendar={calendar}
         scheduleEditByKey={scheduleEditByKey}
         dayInfoByKey={dayInfoByKey}
         isLoading={isLoading}
         isFetching={isFetching}
       />
+
       {dialog.name === "schedule" && <ScheduleDialog location_id={location_id} data={dialog.data} />}
     </>
   )

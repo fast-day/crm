@@ -58,12 +58,12 @@ export const BookingTableMobile = ({ isFetching, bookings }: BookingTableProps) 
                 </div>
               </TableMobileCell>
 
-              <TableMobileCell thead={"Сотрудник"}>
+              {/* <TableMobileCell thead={"Сотрудник"}>
                 <div className="flex items-center gap-2.5">
                   <Avatar size={"tiny"} avatar_url={booking.booking_services[0].user.avatar} name={booking.booking_services[0].user.full_name} id={booking.booking_services[0].user.user_id} />
                   <p className="leading-4">{booking.booking_services[0].user.full_name}</p>
                 </div>
-              </TableMobileCell>
+              </TableMobileCell> */}
 
               <TableMobileCell thead={"Цена"}>
                   {formatPrice(booking.subtotal ?? booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} ₽

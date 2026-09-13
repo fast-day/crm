@@ -28,3 +28,5 @@ export type CalendarCell = {
   year: number;
   monthIndex: number;
 }
+
+export type CalendarViewMode = "month" | "week" | "day";

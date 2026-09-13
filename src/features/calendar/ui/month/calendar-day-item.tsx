@@ -1,6 +1,6 @@
 import { cn } from "@/shared/utils";
-import { formatInterval } from "../model/utils/calendar.util";
-import type { CalendarCell, DayInfo } from "../model/types/calendar.type";
+import { formatInterval } from "../../model/utils/calendar.util";
+import type { CalendarCell, DayInfo } from "../../model/types/calendar.type";
 import type { ScheduleDialogData } from "@/entities/schedule";
 
 interface CalendarDayItemProps {

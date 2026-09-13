@@ -17,7 +17,7 @@ export const BookingTableDesktop = ({ isFetching, bookings }: BookingTableProps)
           <TableHead>Дата</TableHead>
           <TableHead>Услуга</TableHead>
           <TableHead>Клиент</TableHead>
-          <TableHead>Сотрудник</TableHead>
+          {/* <TableHead>Сотрудник</TableHead> */}
           <TableHead>Цена</TableHead>
           <TableHead>Статус</TableHead>
           <TableHead />
@@ -62,12 +62,12 @@ export const BookingTableDesktop = ({ isFetching, bookings }: BookingTableProps)
                   </div>
                   <Link className="text-xss leading-3 text-primary" onClick={(e)=>e.stopPropagation()} to={`tel:${booking.customer.phone}`}>{booking.customer.phone}</Link>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <div className="flex items-center gap-2.5">
                     <Avatar size={"tiny"} avatar_url={booking.booking_services[0].user.avatar} name={booking.booking_services[0].user.full_name} id={booking.booking_services[0].user.user_id} />
                     <p className="leading-4">{booking.booking_services[0].user.full_name}</p>
                   </div>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   {formatPrice(booking.subtotal ?? booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} ₽
                 </TableCell>
