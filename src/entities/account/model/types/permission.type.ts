@@ -78,3 +78,12 @@ export type PermissionName =
   | "orders:refund"
   | "orders:calculate"
   | "invoice:download"
+
+  | "transactions:write"
+  | "transactions:create"
+  | "transactions:delete"
+  | "transactions-category:create"
+  | "transactions-category:update"
+  | "transactions-category:write"
+  | "transactions-category:delete"
+  

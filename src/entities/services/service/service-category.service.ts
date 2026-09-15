@@ -85,7 +85,7 @@ const ServiceCategoryApi = API.injectEndpoints({
         try {
           await queryFulfilled;
         } catch {
-          patch.undo(); // ✅ откатываем если сервер вернул ошибку
+          patch.undo();
         }
       },
     }),
