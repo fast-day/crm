@@ -1,4 +1,4 @@
-export type TransactionType = "expense" | "refund_deduction" | "expense";
+export type TransactionType = "earning" | "refund_deduction" | "expense";
 
 export interface TransactionResponse {
   total_amount: number;
@@ -19,9 +19,9 @@ export interface ITransaction {
   time: string;
 }
 
-export interface ITransactionQuery {
-  start_date: string;
-  end_date: string;
+export interface ITransactionQuery extends PaginationQuery {
+  start_date?: string;
+  end_date?: string;
   type?: TransactionType;
   category_id?: string;
 }

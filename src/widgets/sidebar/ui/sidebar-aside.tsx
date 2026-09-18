@@ -63,6 +63,14 @@ const menuItems: MenuItem[] = [
           icon: <SvgBook width={20} height={20} />,
           permission: ["invoices:*"],
         },
+        {
+          to: "/orders/transactions",
+          type: "ORDERS",
+          label: "Транзакции",
+          icon: <SvgBook width={20} height={20} />,
+          // permission: ["transactions:*"],
+          permission: ["orders:*"],
+        },
     ]
   },
   {
