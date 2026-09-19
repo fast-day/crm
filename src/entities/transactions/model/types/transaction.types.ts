@@ -20,8 +20,8 @@ export interface ITransaction {
 }
 
 export interface ITransactionQuery extends PaginationQuery {
-  start_date?: string;
-  end_date?: string;
+  start_date: string;
+  end_date: string;
   type?: TransactionType;
   category_id?: string;
 }

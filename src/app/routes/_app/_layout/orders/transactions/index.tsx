@@ -5,9 +5,9 @@ import { endOfMonth, format, startOfMonth } from "date-fns";
 import z from 'zod';
 
 const transactionSearchSchema = querySearchSchema.extend({
-  start_date: z.string().optional(),
-  end_date: z.string().optional(),
-  category_id: z.string().optional(),
+  start_date: z.string().optional().catch(undefined),
+  end_date: z.string().optional().catch(undefined),
+  category_id: z.number().optional().catch(undefined),
   type: z.enum(["earning", "refund_deduction", "expense"]).optional().catch(undefined),
 });
 

@@ -49,6 +49,7 @@ import { Route as AppLayoutFocusEmployeesScheduleEmployee_idRouteImport } from '
 import { Route as AppLayoutBusinessServicesService_idIndexRouteImport } from './app/routes/_app/_layout/business/services/$service_id/index'
 import { Route as AppLayoutBusinessLocationsCreateIndexRouteImport } from './app/routes/_app/_layout/business/locations/create/index'
 import { Route as AppLayoutBookingsBooking_idEditIndexRouteImport } from './app/routes/_app/_layout/bookings/$booking_id/edit/index'
+import { Route as AppLayoutFocusOrdersTransactionsCreateIndexRouteImport } from './app/routes/_app/_layout-focus/orders/transactions/create/index'
 import { Route as AppLayoutFocusOrdersCheckoutSellIndexRouteImport } from './app/routes/_app/_layout-focus/orders/checkout/sell/index'
 import { Route as AppLayoutFocusEmployeesUsersCreateIndexRouteImport } from './app/routes/_app/_layout-focus/employees/users/create/index'
 import { Route as AppLayoutFocusCustomersCustomer_idDocumentsIndexRouteImport } from './app/routes/_app/_layout-focus/customers/$customer_id/documents/index'
@@ -291,6 +292,12 @@ const AppLayoutBookingsBooking_idEditIndexRoute =
     path: '/bookings/$booking_id/edit/',
     getParentRoute: () => AppLayoutRouteRoute,
   } as any)
+const AppLayoutFocusOrdersTransactionsCreateIndexRoute =
+  AppLayoutFocusOrdersTransactionsCreateIndexRouteImport.update({
+    id: '/orders/transactions/create/',
+    path: '/orders/transactions/create/',
+    getParentRoute: () => AppLayoutFocusRouteRoute,
+  } as any)
 const AppLayoutFocusOrdersCheckoutSellIndexRoute =
   AppLayoutFocusOrdersCheckoutSellIndexRouteImport.update({
     id: '/orders/checkout/sell/',
@@ -423,6 +430,7 @@ export interface FileRoutesByFullPath {
   '/customers/$customer_id/documents/': typeof AppLayoutFocusCustomersCustomer_idDocumentsIndexRoute
   '/employees/users/create/': typeof AppLayoutFocusEmployeesUsersCreateIndexRoute
   '/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
+  '/orders/transactions/create/': typeof AppLayoutFocusOrdersTransactionsCreateIndexRoute
   '/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/business/services/$service_id/': typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -475,6 +483,7 @@ export interface FileRoutesByTo {
   '/customers/$customer_id/documents': typeof AppLayoutFocusCustomersCustomer_idDocumentsIndexRoute
   '/employees/users/create': typeof AppLayoutFocusEmployeesUsersCreateIndexRoute
   '/orders/checkout/sell': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
+  '/orders/transactions/create': typeof AppLayoutFocusOrdersTransactionsCreateIndexRoute
   '/bookings/$booking_id/edit': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/business/locations/create': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/business/services/$service_id': typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -533,6 +542,7 @@ export interface FileRoutesById {
   '/_app/_layout-focus/customers/$customer_id/documents/': typeof AppLayoutFocusCustomersCustomer_idDocumentsIndexRoute
   '/_app/_layout-focus/employees/users/create/': typeof AppLayoutFocusEmployeesUsersCreateIndexRoute
   '/_app/_layout-focus/orders/checkout/sell/': typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
+  '/_app/_layout-focus/orders/transactions/create/': typeof AppLayoutFocusOrdersTransactionsCreateIndexRoute
   '/_app/_layout/bookings/$booking_id/edit/': typeof AppLayoutBookingsBooking_idEditIndexRoute
   '/_app/_layout/business/locations/create/': typeof AppLayoutBusinessLocationsCreateIndexRoute
   '/_app/_layout/business/services/$service_id/': typeof AppLayoutBusinessServicesService_idIndexRoute
@@ -588,6 +598,7 @@ export interface FileRouteTypes {
     | '/customers/$customer_id/documents/'
     | '/employees/users/create/'
     | '/orders/checkout/sell/'
+    | '/orders/transactions/create/'
     | '/bookings/$booking_id/edit/'
     | '/business/locations/create/'
     | '/business/services/$service_id/'
@@ -640,6 +651,7 @@ export interface FileRouteTypes {
     | '/customers/$customer_id/documents'
     | '/employees/users/create'
     | '/orders/checkout/sell'
+    | '/orders/transactions/create'
     | '/bookings/$booking_id/edit'
     | '/business/locations/create'
     | '/business/services/$service_id'
@@ -697,6 +709,7 @@ export interface FileRouteTypes {
     | '/_app/_layout-focus/customers/$customer_id/documents/'
     | '/_app/_layout-focus/employees/users/create/'
     | '/_app/_layout-focus/orders/checkout/sell/'
+    | '/_app/_layout-focus/orders/transactions/create/'
     | '/_app/_layout/bookings/$booking_id/edit/'
     | '/_app/_layout/business/locations/create/'
     | '/_app/_layout/business/services/$service_id/'
@@ -1000,6 +1013,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutBookingsBooking_idEditIndexRouteImport
       parentRoute: typeof AppLayoutRouteRoute
     }
+    '/_app/_layout-focus/orders/transactions/create/': {
+      id: '/_app/_layout-focus/orders/transactions/create/'
+      path: '/orders/transactions/create'
+      fullPath: '/orders/transactions/create/'
+      preLoaderRoute: typeof AppLayoutFocusOrdersTransactionsCreateIndexRouteImport
+      parentRoute: typeof AppLayoutFocusRouteRoute
+    }
     '/_app/_layout-focus/orders/checkout/sell/': {
       id: '/_app/_layout-focus/orders/checkout/sell/'
       path: '/orders/checkout/sell'
@@ -1192,6 +1212,7 @@ interface AppLayoutFocusRouteRouteChildren {
   AppLayoutFocusCustomersCustomer_idDocumentsIndexRoute: typeof AppLayoutFocusCustomersCustomer_idDocumentsIndexRoute
   AppLayoutFocusEmployeesUsersCreateIndexRoute: typeof AppLayoutFocusEmployeesUsersCreateIndexRoute
   AppLayoutFocusOrdersCheckoutSellIndexRoute: typeof AppLayoutFocusOrdersCheckoutSellIndexRoute
+  AppLayoutFocusOrdersTransactionsCreateIndexRoute: typeof AppLayoutFocusOrdersTransactionsCreateIndexRoute
   AppLayoutFocusBusinessServicesService_idEditIndexRoute: typeof AppLayoutFocusBusinessServicesService_idEditIndexRoute
   AppLayoutFocusCustomersCustomer_idDocumentsDocument_idIndexRoute: typeof AppLayoutFocusCustomersCustomer_idDocumentsDocument_idIndexRoute
   AppLayoutFocusCustomersCustomer_idDocumentsCreateIndexRoute: typeof AppLayoutFocusCustomersCustomer_idDocumentsCreateIndexRoute
@@ -1222,6 +1243,8 @@ const AppLayoutFocusRouteRouteChildren: AppLayoutFocusRouteRouteChildren = {
     AppLayoutFocusEmployeesUsersCreateIndexRoute,
   AppLayoutFocusOrdersCheckoutSellIndexRoute:
     AppLayoutFocusOrdersCheckoutSellIndexRoute,
+  AppLayoutFocusOrdersTransactionsCreateIndexRoute:
+    AppLayoutFocusOrdersTransactionsCreateIndexRoute,
   AppLayoutFocusBusinessServicesService_idEditIndexRoute:
     AppLayoutFocusBusinessServicesService_idEditIndexRoute,
   AppLayoutFocusCustomersCustomer_idDocumentsDocument_idIndexRoute:
