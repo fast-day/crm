@@ -160,7 +160,8 @@
   --blur-xss: 3px;
 
   /* breakpoint */
-  --breakpoint-1100: 1101px
+  --breakpoint-1100: 1101px;
+  --breakpoint-440: 441px;
 
   /* ... */
 }

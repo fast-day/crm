@@ -1,8 +1,11 @@
 import { Route } from "@/app/routes/_app/_layout/orders/transactions";
 import type { ITransactionQuery, TransactionType } from "@/entities/transactions";
-import { Button, SortWrapper } from "@/shared/ui"
+import { Button, CalendarRange, SortWrapper } from "@/shared/ui"
 import { cn } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
+import { endOfMonth, format, startOfMonth } from "date-fns";
+import { useEffect, useState } from "react";
+import type { DateRange } from "react-day-picker";
 
 const variant = ["all", "earning", "refund_deduction", "expense"] as (TransactionType | "all")[];
 
@@ -13,8 +16,19 @@ const TRANSACTION_TYPE: Record<TransactionType | "all", string> = {
   "expense": "Расход",
 };
 
-export const TransactionSort = ({ type }: ITransactionQuery) => {
+export const TransactionSort = ({ type, start_date, end_date }: ITransactionQuery) => {
   const navigate = useNavigate({ from: Route.fullPath });
+  const [range, setRange] = useState<DateRange | undefined>(() => ({
+    from: start_date ? new Date(`${start_date}T00:00:00`) : startOfMonth(new Date()),
+    to: end_date ? new Date(`${end_date}T00:00:00`) : endOfMonth(new Date()),
+  }));
+
+  useEffect(() => {
+    setRange({
+      from: start_date ? new Date(`${start_date}T00:00:00`) : startOfMonth(new Date()),
+      to: end_date ? new Date(`${end_date}T00:00:00`) : endOfMonth(new Date()),
+    });
+  }, [start_date, end_date]);
   
   const handleChange = (name: "type", value: TransactionType | "all" ) => {
     navigate({
@@ -25,9 +39,20 @@ export const TransactionSort = ({ type }: ITransactionQuery) => {
       }
     });
   }
+
+  const handleDateApply = (r: DateRange) => {
+    navigate({
+      search: (p: ITransactionQuery) => ({
+        ...p,
+        start_date: format(r.from!, "yyyy-MM-dd"),
+        end_date: format(r.to!, "yyyy-MM-dd"),
+      }),
+    });
+  };
+
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex 1100:items-center 1100:gap-4 gap-3 1100:flex-row flex-col">
         <SortWrapper>
           {variant.map((v, idx) => (
             <Button
@@ -40,11 +65,12 @@ export const TransactionSort = ({ type }: ITransactionQuery) => {
           ))}
         </SortWrapper>
 
-        {/* <Search
-          placeholder={"Поиск по имени и номеру телефона"}
-          value={searchValue}
-          onValueChange={setSearchValue}
-        /> */}
+        <div>
+          <CalendarRange
+            range={range}
+            apply={handleDateApply}
+          />
+        </div>
       </div>
     </div>
   )

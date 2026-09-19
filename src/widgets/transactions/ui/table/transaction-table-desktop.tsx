@@ -5,7 +5,7 @@ import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
 import { Link, useNavigate } from "@tanstack/react-router";
 import type { OrderTableProps } from "./types/props.type";
-import { TRANSACTION_TYPE } from "@/shared/constants/transaction-typeconstant";
+import { TRANSACTION_TYPE } from "@/shared/constants/transaction-type.constant";
 
 export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTableProps) => {
   const navigate = useNavigate();
@@ -31,10 +31,11 @@ export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTable
                 <TableCell>
                   <Badge type={transaction.type} fill={"cube"}>
                     {(() => {
-                      const Icon = TRANSACTION_TYPE[transaction.type]
+                      const Icon = TRANSACTION_TYPE[transaction.type].icon
                       return <span className="size-5"><Icon /></span>
                     })()}
                   </Badge>
+                  <p className="">{TRANSACTION_TYPE[transaction.type].name}</p>
                 </TableCell>
                 <TableCell className="flex-col justify-center items-start gap-0">
                   <p>{formatDate(transaction.date)}</p>
