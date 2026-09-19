@@ -55,10 +55,16 @@ const badgeVariants = cva(
         refund: "",
         refunded: "",
       },
+      type: {
+        earning: "",
+        refund_deduction: "",
+        expense: "",
+      },
       fill: {
         none: "",
         soft: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold",
-        solid: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold"
+        solid: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold",
+        cube: "size-8 1100:size-10 rounded-md border-none rounded-12! 1100:rounded-xl font-semibold",
       }
     },
     compoundVariants: [
@@ -79,6 +85,10 @@ const badgeVariants = cva(
       { status: "cancelled", fill: "solid", class: "bg-red text-white" },
       { status: "refund", fill: "solid", class: "bg-red text-white" },
       { status: "refunded", fill: "solid", class: "bg-red text-white" },
+
+      { type: "earning", fill: "cube", class: "bg-green/30 text-green" },
+      { type: "refund_deduction", fill: "cube", class: "bg-red/30 text-red" },
+      { type: "expense", fill: "cube", class: "bg-orange/30 text-orange" },
     ],
     defaultVariants: {
       status: "none",
@@ -91,12 +101,12 @@ type BadgeProps = React.ComponentProps<"span"> & VariantProps<typeof badgeVarian
   asChild?: boolean
 }
 
-function Badge ({ className, variant, status, fill, asChild, ...props }: BadgeProps) {
+function Badge ({ className, variant, status, type, fill, asChild, ...props }: BadgeProps) {
   const Span = asChild ? Slot : "span"
   return (
     <Span
       data-ui="badge"
-      className={cn(badgeVariants({ variant, status, fill, className }), className)}
+      className={cn(badgeVariants({ variant, status, type, fill, className }), className)}
       {...props}
     />
   )

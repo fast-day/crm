@@ -32,6 +32,7 @@ import { Route as AppLayoutEmployeesIndexRouteImport } from './app/routes/_app/_
 import { Route as AppLayoutCustomersIndexRouteImport } from './app/routes/_app/_layout/customers/index'
 import { Route as AppLayoutBookingsIndexRouteImport } from './app/routes/_app/_layout/bookings/index'
 import { Route as AppLayoutSettingsSystemIndexRouteImport } from './app/routes/_app/_layout/settings/system/index'
+import { Route as AppLayoutOrdersTransactionsIndexRouteImport } from './app/routes/_app/_layout/orders/transactions/index'
 import { Route as AppLayoutOrdersInvoicesIndexRouteImport } from './app/routes/_app/_layout/orders/invoices/index'
 import { Route as AppLayoutOnlineOverviewIndexRouteImport } from './app/routes/_app/_layout/online/overview/index'
 import { Route as AppLayoutEmployeesUsersIndexRouteImport } from './app/routes/_app/_layout/employees/users/index'
@@ -186,6 +187,12 @@ const AppLayoutSettingsSystemIndexRoute =
   AppLayoutSettingsSystemIndexRouteImport.update({
     id: '/settings/system/',
     path: '/settings/system/',
+    getParentRoute: () => AppLayoutRouteRoute,
+  } as any)
+const AppLayoutOrdersTransactionsIndexRoute =
+  AppLayoutOrdersTransactionsIndexRouteImport.update({
+    id: '/orders/transactions/',
+    path: '/orders/transactions/',
     getParentRoute: () => AppLayoutRouteRoute,
   } as any)
 const AppLayoutOrdersInvoicesIndexRoute =
@@ -409,6 +416,7 @@ export interface FileRoutesByFullPath {
   '/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
   '/online/overview/': typeof AppLayoutOnlineOverviewIndexRoute
   '/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
+  '/orders/transactions/': typeof AppLayoutOrdersTransactionsIndexRoute
   '/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/business/services/create/': typeof AppLayoutFocusBusinessServicesCreateIndexRoute
   '/customers/$customer_id/bookings/': typeof AppLayoutFocusCustomersCustomer_idBookingsIndexRoute
@@ -460,6 +468,7 @@ export interface FileRoutesByTo {
   '/employees/users': typeof AppLayoutEmployeesUsersIndexRoute
   '/online/overview': typeof AppLayoutOnlineOverviewIndexRoute
   '/orders/invoices': typeof AppLayoutOrdersInvoicesIndexRoute
+  '/orders/transactions': typeof AppLayoutOrdersTransactionsIndexRoute
   '/settings/system': typeof AppLayoutSettingsSystemIndexRoute
   '/business/services/create': typeof AppLayoutFocusBusinessServicesCreateIndexRoute
   '/customers/$customer_id/bookings': typeof AppLayoutFocusCustomersCustomer_idBookingsIndexRoute
@@ -517,6 +526,7 @@ export interface FileRoutesById {
   '/_app/_layout/employees/users/': typeof AppLayoutEmployeesUsersIndexRoute
   '/_app/_layout/online/overview/': typeof AppLayoutOnlineOverviewIndexRoute
   '/_app/_layout/orders/invoices/': typeof AppLayoutOrdersInvoicesIndexRoute
+  '/_app/_layout/orders/transactions/': typeof AppLayoutOrdersTransactionsIndexRoute
   '/_app/_layout/settings/system/': typeof AppLayoutSettingsSystemIndexRoute
   '/_app/_layout-focus/business/services/create/': typeof AppLayoutFocusBusinessServicesCreateIndexRoute
   '/_app/_layout-focus/customers/$customer_id/bookings/': typeof AppLayoutFocusCustomersCustomer_idBookingsIndexRoute
@@ -571,6 +581,7 @@ export interface FileRouteTypes {
     | '/employees/users/'
     | '/online/overview/'
     | '/orders/invoices/'
+    | '/orders/transactions/'
     | '/settings/system/'
     | '/business/services/create/'
     | '/customers/$customer_id/bookings/'
@@ -622,6 +633,7 @@ export interface FileRouteTypes {
     | '/employees/users'
     | '/online/overview'
     | '/orders/invoices'
+    | '/orders/transactions'
     | '/settings/system'
     | '/business/services/create'
     | '/customers/$customer_id/bookings'
@@ -678,6 +690,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/employees/users/'
     | '/_app/_layout/online/overview/'
     | '/_app/_layout/orders/invoices/'
+    | '/_app/_layout/orders/transactions/'
     | '/_app/_layout/settings/system/'
     | '/_app/_layout-focus/business/services/create/'
     | '/_app/_layout-focus/customers/$customer_id/bookings/'
@@ -866,6 +879,13 @@ declare module '@tanstack/react-router' {
       path: '/settings/system'
       fullPath: '/settings/system/'
       preLoaderRoute: typeof AppLayoutSettingsSystemIndexRouteImport
+      parentRoute: typeof AppLayoutRouteRoute
+    }
+    '/_app/_layout/orders/transactions/': {
+      id: '/_app/_layout/orders/transactions/'
+      path: '/orders/transactions'
+      fullPath: '/orders/transactions/'
+      preLoaderRoute: typeof AppLayoutOrdersTransactionsIndexRouteImport
       parentRoute: typeof AppLayoutRouteRoute
     }
     '/_app/_layout/orders/invoices/': {
@@ -1107,6 +1127,7 @@ interface AppLayoutRouteRouteChildren {
   AppLayoutEmployeesUsersIndexRoute: typeof AppLayoutEmployeesUsersIndexRoute
   AppLayoutOnlineOverviewIndexRoute: typeof AppLayoutOnlineOverviewIndexRoute
   AppLayoutOrdersInvoicesIndexRoute: typeof AppLayoutOrdersInvoicesIndexRoute
+  AppLayoutOrdersTransactionsIndexRoute: typeof AppLayoutOrdersTransactionsIndexRoute
   AppLayoutSettingsSystemIndexRoute: typeof AppLayoutSettingsSystemIndexRoute
   AppLayoutBookingsBooking_idEditIndexRoute: typeof AppLayoutBookingsBooking_idEditIndexRoute
   AppLayoutBusinessLocationsCreateIndexRoute: typeof AppLayoutBusinessLocationsCreateIndexRoute
@@ -1137,6 +1158,7 @@ const AppLayoutRouteRouteChildren: AppLayoutRouteRouteChildren = {
   AppLayoutEmployeesUsersIndexRoute: AppLayoutEmployeesUsersIndexRoute,
   AppLayoutOnlineOverviewIndexRoute: AppLayoutOnlineOverviewIndexRoute,
   AppLayoutOrdersInvoicesIndexRoute: AppLayoutOrdersInvoicesIndexRoute,
+  AppLayoutOrdersTransactionsIndexRoute: AppLayoutOrdersTransactionsIndexRoute,
   AppLayoutSettingsSystemIndexRoute: AppLayoutSettingsSystemIndexRoute,
   AppLayoutBookingsBooking_idEditIndexRoute:
     AppLayoutBookingsBooking_idEditIndexRoute,

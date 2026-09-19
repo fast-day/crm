@@ -24,6 +24,7 @@ export { default as ChevronRightIcon } from "./ChevronRight";
 export { default as ChevronIcon } from "./Chevron";
 export { default as CloseOrderIcon } from "./CloseOrder";
 export { default as CloseIcon } from "./Close";
+export { default as CoinIcon } from "./Coin";
 export { default as ConfettiIcon } from "./Confetti";
 export { default as CookieIcon } from "./Cookie";
 export { default as CopyIcon } from "./Copy";

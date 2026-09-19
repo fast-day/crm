@@ -1,2 +1,3 @@
 // UI
-export { Calendar } from './ui/calendar';
+export { CalendarMonth } from './ui/month/calendar-month';
+export { CalendarTimeline } from './ui/timeline/timeline';

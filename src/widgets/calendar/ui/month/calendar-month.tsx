@@ -11,7 +11,7 @@ interface CalendarProps {
   isFetching: boolean;
 }
 
-export const Calendar = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoading=false, isFetching }: CalendarProps) => {
+export const CalendarMonth = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoading=false, isFetching }: CalendarProps) => {
   const handleChangeSchedule = (data: ScheduleDialogData) => {
     const editInfo = scheduleEditByKey.get(data.date_key);
     calendar.handleChangeSchedule(data, editInfo);

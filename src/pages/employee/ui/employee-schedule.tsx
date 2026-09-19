@@ -3,7 +3,7 @@ import { dialogSelector } from "@/entities/dialog";
 import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule";
 import { isTimeValue, isWeekendValue, parseBackendDate, toDateKey, useCalendar, type DayInfo, type ScheduleEditInfo } from "@/features/calendar";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { Calendar } from "@/widgets/calendar";
+import { CalendarMonth } from "@/widgets/calendar";
 import { EmployeeNotFound } from "@/widgets/employee";
 import { ScheduleDialog } from "@/widgets/schedule";
 import { useMemo } from "react";
@@ -93,7 +93,7 @@ export const EmployeeSchedule = ({ employee_id }: IEmployeeScheduleProps) => {
 
       {isError && <EmployeeNotFound />}
       {!isError && 
-        <Calendar 
+        <CalendarMonth 
           dayInfoByKey={dayInfoByKey}
           isLoading={isLoading || isFetching}
           isFetching={isFetching}
