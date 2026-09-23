@@ -7,13 +7,13 @@ import { cn } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { endOfMonth, isSameDay, isSameMonth, startOfMonth } from "date-fns";
 
-const variant = ["all", "earning", "refund_deduction", "expense"] as (TransactionType | "all")[];
+const variant = ["all", "earning", "refund_deduction"] as (Exclude<TransactionType, "expense"> | "all")[];
 
-const TRANSACTION_TYPE: Record<TransactionType | "all", string> = {
+const TRANSACTION_TYPE: Record<Exclude<TransactionType, "expense"> | "all", string> = {
   "all": "Все",
   "earning": "Доход от услуги",
   "refund_deduction": "Возврат средств",
-  "expense": "Расход",
+  // "expense": "Расход",
 };
 
 export const TransactionSort = ({ type, start_date, end_date, category_id }: ITransactionQuery) => {

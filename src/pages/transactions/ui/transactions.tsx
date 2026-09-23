@@ -31,7 +31,12 @@ export const Transactions = ({ query }: ITransactionsProps) => {
   ) : isSuccess ? (
     <PageTableWrapper>
 
-      <TransactionDigit total_amount={data.data[0].total_amount ?? 0} />
+      <TransactionDigit
+        total_amount={data.data[0].total_amount ?? 0}
+        type={query.type || "all"}
+        start_date={query.start_date}
+        end_date={query.end_date}
+      />
 
       <TransactionSort {...query} />
 
@@ -52,7 +57,7 @@ export const Transactions = ({ query }: ITransactionsProps) => {
         <PageHeaderTitle>Транзакции</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
-          <Can permission={"transactions:create"}>
+          <Can permission={"transactions:create-dev"}>
             <Link to={"create"}>
               <Button 
                 size={"size_44"}
