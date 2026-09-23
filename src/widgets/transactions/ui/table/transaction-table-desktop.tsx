@@ -14,10 +14,8 @@ export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTable
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Статус</TableHead>
+          <TableHead>Тип</TableHead>
           <TableHead>Дата</TableHead>
-          <TableHead>Категория</TableHead>
-          <TableHead>Описание</TableHead>
           <TableHead>Итого</TableHead>
           <TableHead />
         </TableRow>
@@ -29,27 +27,17 @@ export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTable
             <React.Fragment key={transaction.id}>
               <TableRow onClick={() => navigate({ to: `${transaction.id}` })}>
                 <TableCell>
-                  <Badge type={transaction.type} fill={"cube"}>
+                  <Badge type={transaction.category.mark} fill={"cube"}>
                     {(() => {
-                      const Icon = TRANSACTION_TYPE[transaction.type].icon
+                      const Icon = TRANSACTION_TYPE[transaction.category.icon];
                       return <span className="size-5"><Icon /></span>
                     })()}
                   </Badge>
-                  <p className="">{TRANSACTION_TYPE[transaction.type].name}</p>
+                  <p className="">{transaction.category.name}</p>
                 </TableCell>
                 <TableCell className="flex-col justify-center items-start gap-0">
                   <p>{formatDate(transaction.date)}</p>
                   <p className="opacity-50">{transaction.time}</p>
-                </TableCell>
-                <TableCell className="flex-col items-start justify-center">
-                  {transaction.category ? (
-                    <div>{transaction.category.name}</div>
-                  ) : (
-                    <div className="flex items-center justify-center flex-1 w-full">-</div>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {transaction.description ?? "-"}
                 </TableCell>
                 <TableCell className={transaction.amount.toString().includes("-") ? "text-red" : ""}>
                   {formatPrice(transaction.amount)} ₽

@@ -59,6 +59,15 @@ const badgeVariants = cva(
         earning: "",
         refund_deduction: "",
         expense: "",
+        red: "bg-red/30 text-red",
+        orange: "bg-orange/30 text-orange",
+        green: "bg-green/30 text-green",
+        blue: "bg-blue/30 text-blue",
+        purple: "bg-purple-500/30 text-purple-500",
+        teal: "bg-teal-500/30 text-teal-500",
+        pink: "bg-pink-500/30 text-pink-500",
+        primary: "bg-primary/30 text-primary",
+        gray: "bg-gray-500/30 text-gray"
       },
       fill: {
         none: "",

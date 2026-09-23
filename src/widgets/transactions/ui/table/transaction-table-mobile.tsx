@@ -16,15 +16,15 @@ export const TransactionTableMobile = ({ isFetching, transactions }: OrderTableP
         {transactions?.length ?
           transactions.map((transaction) => (
             <TableMobileRow key={transaction.id} onClick={() => navigate({ to: `${transaction.id}` })}>
-              <TableMobileCell thead="Статус">
+              <TableMobileCell thead="Тип">
                 <div className="flex items-center gap-2">
-                  <Badge type={transaction.type} fill={"cube"}>
+                  <Badge type={transaction.category.mark} fill={"cube"}>
                     {(() => {
-                      const Icon = TRANSACTION_TYPE[transaction.type].icon;
+                      const Icon = TRANSACTION_TYPE[transaction.category.icon];
                       return <span className="size-4 1100:size-5"><Icon /></span>
                     })()}
                   </Badge>
-                  <p className="text-xs 440:block hidden">{TRANSACTION_TYPE[transaction.type].name}</p>
+                  <p className="text-xs 440:block hidden">{transaction.category.name}</p>
                 </div>
               </TableMobileCell>
 
@@ -33,18 +33,6 @@ export const TransactionTableMobile = ({ isFetching, transactions }: OrderTableP
                   <p>{formatDate(transaction.date)}</p>
                   <p className="opacity-50">{transaction.time}</p>
                 </div>
-              </TableMobileCell>
-
-              <TableMobileCell thead={"Категория"}>
-                {transaction.category ? (
-                  <div>{transaction.category.name}</div>
-                ) : (
-                  <div className="flex items-center justify-center flex-1 w-full">-</div>
-                )}
-              </TableMobileCell>
-
-              <TableMobileCell thead={"Описание"}>
-                {transaction.description ?? "-"}
               </TableMobileCell>
 
               <TableMobileCell thead={"Цена"}>

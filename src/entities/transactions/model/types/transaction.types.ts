@@ -14,6 +14,8 @@ export interface ITransaction {
   category: {
     id: number | null;
     name: string | null;
+    icon: string;
+    mark: MarkType;
   }
   date: string;
   time: string;
