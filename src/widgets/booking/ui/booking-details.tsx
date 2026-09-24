@@ -65,7 +65,7 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
                     <PencilEditIcon width={24} height={24} />
                   </Button>
                 </Link> */}
-                <Link to={`/orders/checkout/sell?booking_id=${booking.id}${booking.order_id ? `&order_id=${booking.order_id}` : ``}`} className="w-full block">
+                <Link to={`/finance/orders/checkout/sell?booking_id=${booking.id}${booking.order_id ? `&order_id=${booking.order_id}` : ``}`} className="w-full block">
                   <Button
                     type={"button"}
                     size={"icon_60"}

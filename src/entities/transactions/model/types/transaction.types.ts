@@ -1,3 +1,6 @@
+import type { IInvoice } from "@/entities/invoice";
+import type { IOrder } from "@/entities/orders";
+
 export type TransactionType = "earning" | "refund_deduction" | "expense";
 
 export interface TransactionResponse {
@@ -33,6 +36,6 @@ export interface ITransactionCreateCredentials extends Partial<Omit<ITransaction
 }
 
 export interface ITransactionDetail extends ITransaction {
-  invoice: null;
-  order: null;
+  invoice: Omit<IInvoice, "order_id" | "order_tag"> | null;
+  order: Omit<IOrder, "booking_ids" | "customer"> | null;
 }

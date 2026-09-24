@@ -11,7 +11,7 @@ const transactionSearchSchema = querySearchSchema.extend({
   type: z.enum(["earning", "refund_deduction", "expense"]).optional().catch(undefined),
 });
 
-export const Route = createFileRoute('/_app/_layout/orders/transactions/')({
+export const Route = createFileRoute('/_app/_layout/finance/transactions/')({
   validateSearch: transactionSearchSchema,
   component: RouteComponent,
 })

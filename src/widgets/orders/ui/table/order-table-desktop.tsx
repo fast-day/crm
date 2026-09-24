@@ -29,7 +29,7 @@ export const OrderTableDesktop = ({ orders, isFetching }: OrderTableProps) => {
         {orders?.length ? 
           orders.map((ord, index) => (
             <React.Fragment key={ord.id}>
-              <TableRow onClick={() => navigate({ to: `/orders/${ord.id}` })}>
+              <TableRow onClick={() => navigate({ to: `/finance/orders/${ord.id}` })}>
                 <TableCell className="flex-col justify-center items-start gap-0">
                   <p>{formatDate(ord.date)}</p>
                   <p className="opacity-50">{ord.time}</p>

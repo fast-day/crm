@@ -1,4 +1,4 @@
-import { Route } from "@/app/routes/_app/_layout/orders";
+import { Route } from "@/app/routes/_app/_layout/finance/orders";
 import type { IOrderQuery } from "@/entities/orders";
 import { Button, SortWrapper } from "@/shared/ui"
 import { cn } from "@/shared/utils";
@@ -26,6 +26,7 @@ export const OrderSort = ({ status }: IOrderQuery) => {
       }
     });
   }
+
   return (
     <div>
       <div className="flex items-center justify-between">

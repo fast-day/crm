@@ -1,4 +1,4 @@
-import { Route } from "@/app/routes/_app/_layout/orders/transactions";
+import { Route } from "@/app/routes/_app/_layout/finance/transactions";
 import type { ITransactionQuery } from "@/entities/transactions";
 import { CalendarRange } from "@/shared/ui";
 import { useNavigate } from "@tanstack/react-router";

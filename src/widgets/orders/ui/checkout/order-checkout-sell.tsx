@@ -32,7 +32,7 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
   
   useEffect(() => {
     if (booking.invoice?.status === "paid") {
-      navigate({ to: `/orders/${booking.order_id}`, replace: true });
+      navigate({ to: `/finance/orders/${booking.order_id}`, replace: true });
       return;
     }
   }, [booking.invoice?.status]);

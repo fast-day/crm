@@ -1,4 +1,4 @@
-import { Route } from "@/app/routes/_app/_layout/orders/transactions";
+import { Route } from "@/app/routes/_app/_layout/finance/transactions";
 import type { ITransactionQuery, TransactionType } from "@/entities/transactions";
 import { TransactionDateFilter } from "@/features/transactions";
 import { CloseIcon } from "@/shared/icons";
@@ -11,7 +11,7 @@ const variant = ["all", "earning", "refund_deduction"] as (Exclude<TransactionTy
 
 const TRANSACTION_TYPE: Record<Exclude<TransactionType, "expense"> | "all", string> = {
   "all": "Все",
-  "earning": "Доход от услуги",
+  "earning": "Доход от услуг",
   "refund_deduction": "Возврат средств",
   // "expense": "Расход",
 };
@@ -40,7 +40,7 @@ export const TransactionSort = ({ type, start_date, end_date, category_id }: ITr
 
   return (
     <div>
-      <div className="flex 1100:items-center 1100:gap-4 gap-3 1100:flex-row flex-col">
+      <div className="flex md:items-center md:gap-4 gap-3 md:flex-row flex-col">
         <SortWrapper>
           {variant.map((v, idx) => (
             <Button

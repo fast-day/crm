@@ -45,7 +45,7 @@ export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrd
           services: toServicePayload(services),
         },
       }).unwrap();
-      navigate({ to: `/orders/${res.id}` });
+      navigate({ to: `/finance/orders/${res.id}` });
     }
     catch (error) {
       toast.error(getErrorMessage(error));
@@ -75,7 +75,7 @@ export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrd
         order_id: orderId,
         body: { payment_method: payment },
       }).unwrap();
-      navigate({ to: `/orders/${res.id}`, replace: true });
+      navigate({ to: `/finance/orders/${res.id}`, replace: true });
     }
     catch (error) {
       toast.error(getErrorMessage(error));

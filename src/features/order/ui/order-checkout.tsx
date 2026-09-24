@@ -9,7 +9,7 @@ interface IOrderCheckoutProps {
 
 export const OrderCheckout = ({ booking_id, order_id }: IOrderCheckoutProps) => {
   return (
-    <Link to={`/orders/checkout/sell?booking_id=${booking_id}&order_id=${order_id}`} className="block">
+    <Link to={`/finance/orders/checkout/sell?booking_id=${booking_id}&order_id=${order_id}`} className="block">
       <Button
         size={"size_60"}
         className={"w-full"}

@@ -26,7 +26,7 @@ const menuItems: MenuItem[] = [
     permission: ["booking:*"],
   },
   {
-    to: "/orders",
+    to: "/finance",
     type: "ORDERS",
     label: "Платежи",
     icon: <Cast width={24} height={24} />,

@@ -1,15 +1,11 @@
 import React from "react";
-import { ChevronRightIcon } from "@/shared/icons"
-import { Badge, Button, Table, TableBody, TableCell, TableCellActions, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
+import { Badge, Table, TableBody, TableCell, TableHead, TableHeader, TableNotFound, TableRow, TableSeparator } from "@/shared/ui"
 import { formatDate, formatPrice } from "@/shared/utils";
 import { LazyBlur } from "@/widgets/loading";
-import { Link, useNavigate } from "@tanstack/react-router";
 import type { OrderTableProps } from "./types/props.type";
 import { TRANSACTION_TYPE } from "@/shared/constants/transaction-type.constant";
 
 export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTableProps) => {
-  const navigate = useNavigate();
-
   return (
     <Table>
       <TableHeader>
@@ -17,7 +13,6 @@ export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTable
           <TableHead>Тип</TableHead>
           <TableHead>Дата</TableHead>
           <TableHead>Итого</TableHead>
-          <TableHead />
         </TableRow>
       </TableHeader>
       <TableBody className="relative">
@@ -25,7 +20,7 @@ export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTable
         {transactions?.length ? 
           transactions.map((transaction, index) => (
             <React.Fragment key={transaction.id}>
-              <TableRow onClick={() => navigate({ to: `${transaction.id}` })}>
+              <TableRow>
                 <TableCell>
                   <Badge type={transaction.category.mark} fill={"cube"}>
                     {(() => {
@@ -42,13 +37,6 @@ export const TransactionTableDesktop = ({ transactions, isFetching }: OrderTable
                 <TableCell className={transaction.amount.toString().includes("-") ? "text-red" : ""}>
                   {formatPrice(transaction.amount)} ₽
                 </TableCell>
-                <TableCellActions>
-                  <Link to={`${transaction.id}`}>
-                    <Button variant={"white"} size={"icon_40"} animation={"toggle_sm"}>
-                      <ChevronRightIcon width={17} height={17} />
-                    </Button>
-                  </Link>
-                </TableCellActions>
               </TableRow>
               {index !== transactions.length - 1 && <TableSeparator />}
             </React.Fragment>
