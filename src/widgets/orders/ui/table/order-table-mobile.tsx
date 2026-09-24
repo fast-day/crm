@@ -17,7 +17,7 @@ export const OrderTableMobile = ({ isFetching, orders }: OrderTableProps) => {
         {isFetching && <LazyBlur />}
         {orders?.length ?
           orders.map((ord) => (
-            <TableMobileRow key={ord.id} onClick={() => navigate({ to: `/orders/${ord.id}` })}>
+            <TableMobileRow key={ord.id} onClick={() => navigate({ to: `/finance/orders/${ord.id}` })}>
               <TableMobileCell>
                 <Badge status={ord.status} fill={"solid"} className="px-2 py-0.5 text-xss! font-bold rounded-lg border-none text-white">
                     {(() => {

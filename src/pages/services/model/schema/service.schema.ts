@@ -3,7 +3,7 @@ import z from "zod";
 
 export const serviceSchema = z.object({
   name: z.string().min(1, "Укажите название"),
-  mark: z.enum(["red", "orange", "green", "blue", "purple", "teal", "pink"]).optional(),
+  mark: z.enum(["red", "orange", "green", "blue", "purple", "teal", "pink", "primary", "gray"]).optional(),
   duration: z.number("Укажите продолжительность").min(1, "Укажите продолжительность").transform((val) => (val ? Number(val) : undefined)),
 
   // 

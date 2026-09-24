@@ -7,7 +7,7 @@ const invoiceSearchSchema = querySearchSchema.extend({
   status: z.enum(["success", "failed"]).optional().catch(undefined),
 });
 
-export const Route = createFileRoute('/_app/_layout/orders/invoices/')({
+export const Route = createFileRoute('/_app/_layout/finance/invoices/')({
   validateSearch: invoiceSearchSchema,
   component: RouteComponent,
 })

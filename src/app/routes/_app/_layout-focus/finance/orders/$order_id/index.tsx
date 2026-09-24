@@ -3,7 +3,7 @@ import { uuidSchema } from '@/shared/schemas/params-schema';
 import { OrderNotFound } from '@/widgets/orders';
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_app/_layout-focus/orders/$order_id/')({
+export const Route = createFileRoute('/_app/_layout-focus/finance/orders/$order_id/')({
   params: {
     parse: (p) => ({
       order_id: uuidSchema.parse(p.order_id),

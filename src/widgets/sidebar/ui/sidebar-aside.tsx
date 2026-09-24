@@ -40,7 +40,7 @@ const menuItems: MenuItem[] = [
     permission: ["booking:*"],
   },
   {
-    to: "/orders",
+    to: "/finance",
     type: "ORDERS",
     label: "Платежи",
     search: { limit: 20 },
@@ -49,7 +49,7 @@ const menuItems: MenuItem[] = [
     isMultiple: true,
     multiple: [
         {
-          to: "/orders",
+          to: "/finance/orders",
           type: "ORDERS",
           label: "Платежи",
           search: { limit: 20 },
@@ -57,14 +57,14 @@ const menuItems: MenuItem[] = [
           permission: ["orders:*"],
         },
         {
-          to: "/orders/invoices",
+          to: "/finance/invoices",
           type: "ORDERS",
           label: "Чеки",
           icon: <SvgBook width={20} height={20} />,
           permission: ["invoices:*"],
         },
         {
-          to: "/orders/transactions",
+          to: "/finance/transactions",
           type: "ORDERS",
           label: "Транзакции",
           icon: <SvgBook width={20} height={20} />,

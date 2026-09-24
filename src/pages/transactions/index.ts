@@ -1,5 +1,4 @@
 // UI
 export { Transactions } from './ui/transactions';
-
-// SCHEMA
-export * from './model/schemas/query.schema';
+export { TransactionCreate } from './ui/transaction-create';
+export { TransactionDetail } from './ui/transaction-detail';

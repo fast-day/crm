@@ -19,7 +19,7 @@ export const OrderDetail = ({ order_id }: OrderDetailProps) => {
     
       <PageHeader>
         <PageHeaderActions>
-          <Link to={"/orders"} className="block">
+          <Link to={"/finance/orders"} className="block">
             <Button variant={"white"} size={"icon_44"} animation={"toggle"}>
               <CloseIcon width={18} height={18} />
             </Button>

@@ -1,34 +1,23 @@
-import { Route } from "@/app/routes/_app/_layout/orders/transactions";
+import { Route } from "@/app/routes/_app/_layout/finance/transactions";
 import type { ITransactionQuery, TransactionType } from "@/entities/transactions";
-import { Button, CalendarRange, SortWrapper } from "@/shared/ui"
+import { TransactionDateFilter } from "@/features/transactions";
+import { CloseIcon } from "@/shared/icons";
+import { Button, SortWrapper } from "@/shared/ui"
 import { cn } from "@/shared/utils";
 import { useNavigate } from "@tanstack/react-router";
-import { endOfMonth, format, startOfMonth } from "date-fns";
-import { useEffect, useState } from "react";
-import type { DateRange } from "react-day-picker";
+import { endOfMonth, isSameDay, isSameMonth, startOfMonth } from "date-fns";
 
-const variant = ["all", "earning", "refund_deduction", "expense"] as (TransactionType | "all")[];
+const variant = ["all", "earning", "refund_deduction"] as (Exclude<TransactionType, "expense"> | "all")[];
 
-const TRANSACTION_TYPE: Record<TransactionType | "all", string> = {
+const TRANSACTION_TYPE: Record<Exclude<TransactionType, "expense"> | "all", string> = {
   "all": "Все",
-  "earning": "Доход от услуги",
+  "earning": "Доход от услуг",
   "refund_deduction": "Возврат средств",
-  "expense": "Расход",
+  // "expense": "Расход",
 };
 
-export const TransactionSort = ({ type, start_date, end_date }: ITransactionQuery) => {
+export const TransactionSort = ({ type, start_date, end_date, category_id }: ITransactionQuery) => {
   const navigate = useNavigate({ from: Route.fullPath });
-  const [range, setRange] = useState<DateRange | undefined>(() => ({
-    from: start_date ? new Date(`${start_date}T00:00:00`) : startOfMonth(new Date()),
-    to: end_date ? new Date(`${end_date}T00:00:00`) : endOfMonth(new Date()),
-  }));
-
-  useEffect(() => {
-    setRange({
-      from: start_date ? new Date(`${start_date}T00:00:00`) : startOfMonth(new Date()),
-      to: end_date ? new Date(`${end_date}T00:00:00`) : endOfMonth(new Date()),
-    });
-  }, [start_date, end_date]);
   
   const handleChange = (name: "type", value: TransactionType | "all" ) => {
     navigate({
@@ -40,19 +29,18 @@ export const TransactionSort = ({ type, start_date, end_date }: ITransactionQuer
     });
   }
 
-  const handleDateApply = (r: DateRange) => {
-    navigate({
-      search: (p: ITransactionQuery) => ({
-        ...p,
-        start_date: format(r.from!, "yyyy-MM-dd"),
-        end_date: format(r.to!, "yyyy-MM-dd"),
-      }),
-    });
-  };
+  const isFullMonth =
+    isSameMonth(start_date, end_date) &&
+    isSameDay(start_date, startOfMonth(start_date)) &&
+    isSameDay(end_date, endOfMonth(end_date));
+
+  const clearFilter = () => {
+    navigate({ search: null });
+  }
 
   return (
     <div>
-      <div className="flex 1100:items-center 1100:gap-4 gap-3 1100:flex-row flex-col">
+      <div className="flex md:items-center md:gap-4 gap-3 md:flex-row flex-col">
         <SortWrapper>
           {variant.map((v, idx) => (
             <Button
@@ -65,11 +53,18 @@ export const TransactionSort = ({ type, start_date, end_date }: ITransactionQuer
           ))}
         </SortWrapper>
 
-        <div>
-          <CalendarRange
-            range={range}
-            apply={handleDateApply}
-          />
+        <div className="flex items-center gap-2.5">
+          <TransactionDateFilter start_date={start_date} end_date={end_date} />
+          {(!isFullMonth || category_id) && (
+            <Button
+              type={"button"}
+              size={"icon_36"}
+              variant={"red"}
+              onClick={clearFilter}
+            >
+              <CloseIcon width={20} height={20} />
+            </Button>
+          )}
         </div>
       </div>
     </div>

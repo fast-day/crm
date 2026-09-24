@@ -6,4 +6,6 @@ export const markClasses: Record<MarkType, string> = {
   purple: "bg-purple-500",
   teal: "bg-teal-500",
   pink: "bg-pink-500",
+  primary: "bg-primary",
+  gray: "bg-gray-500",
 };

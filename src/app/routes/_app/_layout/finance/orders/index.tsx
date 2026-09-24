@@ -8,7 +8,7 @@ const orderSearchSchema = querySearchSchema.extend({
   sort: z.enum(["newest", "oldest", "price_asc", "price_desc"]).optional().catch("newest"),
 });
 
-export const Route = createFileRoute('/_app/_layout/orders/')({
+export const Route = createFileRoute('/_app/_layout/finance/orders/')({
   validateSearch: orderSearchSchema,
   component: RouteComponent,
 })

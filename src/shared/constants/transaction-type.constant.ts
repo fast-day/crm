@@ -1,13 +1,21 @@
-import type { TransactionType } from "@/entities/transactions";
-import { CoinIcon, CloseIcon, PaymentSuccessIcon } from "../icons";
+import { CoinIcon, CloseIcon, PaymentSuccessIcon, SubscribeIcon, GiftIcon, ShopIcon, MegaphoneIcon, PaletteIcon, HandbagIcon, GraphUpIcon, GraphDownIcon, LayersIcon, PieIcon, WalletIcon, RepeatIcon, RecipeIcon, ToolsIcon } from "../icons";
 
-type TransactionEnumType = {
-  name: string;
-  icon: React.ComponentType;
-}
-
-export const TRANSACTION_TYPE: Record<TransactionType, TransactionEnumType> = {
-  earning: { name: "Доход от услуги", icon: PaymentSuccessIcon},
-  refund_deduction: { name: "Возврат средств", icon: CloseIcon },
-  expense: { name: "Расход", icon: CoinIcon },
+export const TRANSACTION_TYPE: Record<string, React.ComponentType> = {
+  cart: PaymentSuccessIcon,
+  undo: CloseIcon,
+  coin: CoinIcon,
+  gift: GiftIcon,
+  handbag: HandbagIcon,
+  layers: LayersIcon,
+  pie: PieIcon,
+  wallet: WalletIcon,
+  repeat: RepeatIcon,
+  recipe: RecipeIcon,
+  reply: MegaphoneIcon,
+  shop: ShopIcon,
+  stars: SubscribeIcon,
+  tools: ToolsIcon,
+  increase: GraphUpIcon,
+  decrease: GraphDownIcon,
+  palette: PaletteIcon,
 };
