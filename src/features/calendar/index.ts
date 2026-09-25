@@ -7,7 +7,7 @@ export * from './model/constants/calendar.constant';
 
 // UTILS
 export * from './model/utils/calendar.util';
-export { minutesToTop } from './model/utils/minutes-to-top.util';
+export { minutesToTop, parseTimeToMinutes } from './model/utils/minutes-to-top.util';
 
 // TYPES
 export * from './model/types/calendar.type';
