@@ -1,16 +1,20 @@
 import { useNavigatorOnline } from "@/shared/hooks";
-import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 export const OnlineHandler = () => {
   const isOnline = useNavigatorOnline();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    if (isOnline) return;
-    navigate({ to: "/network/client", replace: true });
-  }, [isOnline, navigate]);
+    document.body.style.overflow = isOnline ? "" : "hidden";
+  }, [isOnline]);
 
-  return null;
+  if (isOnline) return null;
+
+  return (
+    <div className="fixed w-full h-full top-0 left-0 z-99 border-4 backdrop-blur-2 border-red flex justify-center">
+      <div className="p-2.5 bg-red/30 backdrop-blur-3xl w-full h-fit text-center">
+        <p className="text-red font-semibold">Нет подключения к сети</p>
+      </div>
+    </div>
+  );
 }

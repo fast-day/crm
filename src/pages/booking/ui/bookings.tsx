@@ -3,7 +3,7 @@ import { useGetBookingsQuery, type IBookingQuery } from "@/entities/booking"
 import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
-import { BookingEmpty, BookingTable } from "@/widgets/booking";
+import { BookingCalendar, BookingEmpty, BookingTable } from "@/widgets/booking";
 import { BookingSort } from "@/widgets/booking/ui/booking-sort";
 import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { AppLoading, TableLoading } from "@/widgets/loading";
@@ -38,10 +38,11 @@ export const Bookings = ({ query }: BookingProps) => {
 
       <BookingSort {...query} />
 
+      <BookingCalendar bookings={data.data} isFetching={isFetching} />
+
       <BookingTable
         bookings={data.data}
         isFetching={isFetching}
-        profileId={account?.uuid}
       />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
