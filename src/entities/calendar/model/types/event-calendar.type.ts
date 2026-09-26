@@ -1,6 +1,10 @@
 import type { ICustomer } from "@/entities/customers";
 
 export type TCalendarView = "day" | "week" | "month" | "year";
+export type TEventRenderView = "week" | "day" | "month";
+export type TBadgeVariant = "dot" | "colored" | "mixed";
+export type TCalendarBadgePosition = "first" | "middle" | "last" | "none";
+
 export type TWorkingHours = {
   [key: number]: {
     from: number;
