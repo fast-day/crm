@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 
 import type { Locale } from 'date-fns'
 
@@ -209,4 +209,8 @@ export function formatDateTime(date: Date, locale?: Locale, time?: string): stri
     pattern ? format(date, pattern.replace('{{date}}', datePattern(locale)), opts(locale)) : ''
 
   return `${side(before)}${clock}${side(after)}`
+}
+
+export function dateParserIso(date: string, time: string) {
+  return parseISO(`${date}T${time}`);
 }

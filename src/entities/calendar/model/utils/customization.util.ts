@@ -55,18 +55,14 @@ export interface ICalendarCustomization {
   renderMonthEvent?: TEventRenderer
   renderAgendaEvent?: TEventRenderer
   selectedEventId?: string | null
-  /** Pixel height of one hour row in the week/day grids. */
   hourHeight: number
-  /** Height of the week/day scroll area. `undefined` keeps the stock height. */
   height?: number | string
   autoHeight?: boolean
   maxEventsPerDayCell: number
-  /** Cap for the week all-day strip; beyond it the strip scrolls internally. */
   allDayMaxRows?: number
   onShowMore?: (date: string) => void
   classNames?: ICalendarClassNames
   dayCellClassName?: (date: Date) => string | undefined
-  /** Replaces the built-in Intl clock for the hour axis, now-marker and event times. */
   formatTime?: TTimeFormatter
 }
 

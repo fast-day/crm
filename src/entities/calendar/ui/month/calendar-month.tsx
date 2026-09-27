@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useCalendarCells } from "../../model/hooks/calendar-cells.hook";
 import { useCalendarEventPosition } from "../../model/hooks/calendar-event-position.hook";
-import type { ICalendarCell, IEvent } from "../../model/types/event-calendar.type"
+import type { IEvent } from "../../model/types/event-calendar.type"
 import { WEEK_DAYS } from "../../model/constants/calendar.constant";
 import { DayCell } from "./calendar-day-cell";
 
@@ -13,7 +13,7 @@ interface ICalendarMonthProps {
 
 export const CalendarMonth = ({ singleDays, multiDays, onSelectDay }: ICalendarMonthProps) => {
   const selectedDate = new Date();
-  const maxEventsPerDayCell = 3;
+  const maxEventsPerDayCell = 4;
 
   const { cells } = useCalendarCells(selectedDate);
   const { event_positions } = useCalendarEventPosition(multiDays, singleDays, selectedDate, maxEventsPerDayCell);

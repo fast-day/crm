@@ -16,8 +16,6 @@ export interface ITimelineViewProps {
 export const CalendarTimeline = ({ days, dayInfoByKey, bookingsByKey, slotsByKey, onSlotClick }: ITimelineViewProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const todayKey = format(new Date(), "yyyy-MM-dd");
-  
-  console.log(slotsByKey)
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -25,8 +23,6 @@ export const CalendarTimeline = ({ days, dayInfoByKey, bookingsByKey, slotsByKey
     const top = minutesToTop(now.getHours() * 60 + now.getMinutes());
     scrollRef.current.scrollTo({ top: top - 200, behavior: "instant" });
   }, []);
-
-  console.log(days)
 
   return (
     <div ref={scrollRef} className="flex">

@@ -109,6 +109,7 @@ export interface IBooking {
   status: BookingStatusType;
   tag: string;
   comment: string | null;
+  mark: MarkType;
   date: string;
   start_time: string;
   end_time: string;

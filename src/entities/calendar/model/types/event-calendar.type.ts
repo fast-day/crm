@@ -1,4 +1,4 @@
-import type { ICustomer } from "@/entities/customers";
+import type { IBooking } from "@/entities/booking";
 
 export type TCalendarView = "day" | "week" | "month" | "year";
 export type TEventRenderView = "week" | "day" | "month";
@@ -19,14 +19,7 @@ export interface ICalendarCell {
   date: Date;
 }
 
-export interface IEvent<M = unknown> {
-  id: string;
-  start_date: string;
-  end_date: string;
-  title: string;
-  description?: string;
-  mark: MarkType;
-  customers: ICustomer;
+export interface IEvent<M = unknown> extends IBooking {
   is_all_day?: boolean;
   meta?: M;
 }

@@ -1,13 +1,11 @@
 import { accountSelector } from "@/entities/account";
-import { useGetBookingsQuery, type IBookingQuery } from "@/entities/booking"
+import { type IBookingQuery } from "@/entities/booking"
 import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
-import { BookingCalendar, BookingEmpty, BookingTable } from "@/widgets/booking";
-import { BookingSort } from "@/widgets/booking/ui/booking-sort";
+import { BookingCalendar, BookingEmpty } from "@/widgets/booking";
 import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { AppLoading, TableLoading } from "@/widgets/loading";
-import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
 
@@ -15,15 +13,22 @@ export interface BookingProps {
   query: IBookingQuery & PaginationQuery;
 }
 
-export const Bookings = ({ query }: BookingProps) => {
+export const BookingCalendarPage = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
-
-  const { data, isLoading, isError, isSuccess, isFetching } = useGetBookingsQuery(
-    location && account?.has_bookings ? { ...query, location_id: location.uuid } : skipToken,
-    {
-      refetchOnMountOrArgChange: true,
-    },
-  );
+  console.log(query)
+  const isLoading = false;
+  const isError = false;
+  const isSuccess = true;
+  const data = {
+    meta: {
+      total_pages: 0,
+      page: 1,
+      limit: 1,
+      total: 0,
+      has_next: false,
+      has_prev: false,
+    }
+  };
 
   if (!location) return <AppLoading />;
   
@@ -36,14 +41,7 @@ export const Bookings = ({ query }: BookingProps) => {
   ) : isSuccess ? (
     <PageTableWrapper>
 
-      <BookingSort {...query} />
-
-      <BookingCalendar bookings={data.data} isFetching={isFetching} />
-
-      <BookingTable
-        bookings={data.data}
-        isFetching={isFetching}
-      />
+      <BookingCalendar view={"month"} />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
     </PageTableWrapper>

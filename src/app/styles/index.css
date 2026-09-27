@@ -33,8 +33,10 @@
     --green-accent: oklch(45.358% 0.14503 143.081);         /* #0C6910 */
 
     --orange: #EF9831;                                      /* #EF9831 */
+    --orange-accent: #c96e00;                               /* #EF9831 */
     
     --blue: oklch(53.397% 0.11435 265.046);                 /* #blue */
+    --blue-accent: oklch(28.837% 0.11139 263.369);          /* #blue */
 
     /* notify colors */
     --warn-background: oklch(84.518% 0.1348 75.42);         /* #FFBF5E */
@@ -116,8 +118,10 @@
   --color-green-accent: var(--green-accent);
 
   --color-orange: var(--orange);
+  --color-orange-accent: var(--orange-accent);
 
   --color-blue: var(--blue);
+  --color-blue-accent: var(--blue-accent);
 
   /* notify colors */
   --color-warn-background: var(--warn-background);
@@ -239,4 +243,8 @@
 
 .scrollbar-hidden {
   -ms-overflow-style: none;
+}
+
+@utility bg-calendar-disabled-hour {
+  background-image: repeating-linear-gradient(-60deg, var(--border) 0 0.5px, transparent 0.5px 8px);
 }
