@@ -1,4 +1,4 @@
-import { Route } from "@/app/routes/_app/_layout/bookings";
+import { Route } from "@/app/routes/_app/_layout/bookings/list";
 import type { IBookingQuery } from "@/entities/booking"
 import { BookingStatusSort } from "@/features/booking";
 import { SortWrapper } from "@/shared/ui";
