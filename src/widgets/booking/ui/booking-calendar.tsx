@@ -6,10 +6,10 @@ import type { ISchedule } from '@/entities/schedule';
 const data: IEvent[] = [
   {
     "id": "89815144-e574-4300-bece-8122607a9d2b",
-    "status": "new",
+    "status": "cancelled",
     "tag": "B-0509-IR2F1CBB",
     "comment": null,
-    "date": "2026-09-28",
+    "date": "2026-09-29",
     "start_time": "03:30",
     "end_time": "5:00",
     "subtotal": 10000,
@@ -60,7 +60,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-2208-TVWDQY6O",
     "comment": null,
-    "date": "2026-09-28",
+    "date": "2026-09-29",
     "start_time": "10:00",
     "end_time": "13:10",
     "subtotal": null,
@@ -111,7 +111,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-2208-TVWDQY6O",
     "comment": null,
-    "date": "2026-09-28",
+    "date": "2026-09-29",
     "start_time": "17:00",
     "end_time": "18:00",
     "subtotal": null,
@@ -159,7 +159,7 @@ const data: IEvent[] = [
   },
   {
     "id": "3829cbc4-3ea8-46f8-9935-eee82d2cf00f",
-    "status": "new",
+    "status": "completed",
     "tag": "B-2208-VKH4CR2Y",
     "comment": null,
     "date": "2026-09-30",
@@ -177,6 +177,34 @@ const data: IEvent[] = [
       "avatar": null
     },
     "booking_services": [
+      {
+        "booking_service_id": "18564d63-ed5b-4237-9678-5d0623d8cb3d",
+        "booking_service_start_time": "17:00",
+        "booking_service_end_time": "17:10",
+        "booking_service_duration": 10,
+        "booking_service_price": 100,
+        "booking_service_count": 1,
+        "service": {
+          "service_id": "2edb4239-cb0c-4eb4-a953-76168e3e16c0",
+          "name": "тест 2",
+          "mark": "green",
+          "duration": 10,
+          "avatar": null,
+          "category": "тест",
+          "prices": {
+            "price": 1000,
+            "cost_price": null
+          }
+        },
+        "user": {
+          "user_id": "5a4844eb-c1b5-46e9-b4bc-fc0ee988005b",
+          "first_name": "Кирилл",
+          "last_name": "Колесников",
+          "full_name": "Кирилл Колесников",
+          "phone": "+7 (961) 328 58-27",
+          "avatar": "http://localhost:9000/user-avatars/8df70798a123bb3bfa41e18aa932dd09.jpeg"
+        }
+      },
       {
         "booking_service_id": "18564d63-ed5b-4237-9678-5d0623d8cb3d",
         "booking_service_start_time": "17:00",

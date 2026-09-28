@@ -14,7 +14,7 @@ export const calendarItemVariant = cva(undefined, {
       gray: "bg-gray-500 text-white",
     },
     head: {
-      red: "bg-red-100 text-white",
+      red: "bg-red-accent text-white",
       orange: "bg-orange-accent text-white",
       green: "bg-green-accent text-white",
       blue: "bg-blue text-white",

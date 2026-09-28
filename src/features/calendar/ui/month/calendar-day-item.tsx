@@ -31,7 +31,7 @@ export const CalendarDayItem = ({ dayInfo, isMarked, isToday, isSelected, handle
         "h-40 rounded-xl border-2 flex flex-col items-center relative overflow-hidden p-5", 
         isSelected ? "border-primary/30 bg-muted" : "border-transparent bg-muted-foreground",
         !cell.inMonth ? "bg-transparent! border-accent/10 text-accent/40! justify-center" : "",
-        isMarked ? "bg-muted" : "bg-red-100/17 text-red-100",
+        isMarked ? "bg-muted" : "bg-red-accent/17 text-red-100",
       )}
       aria-label={`День ${cell.day}`}
     >

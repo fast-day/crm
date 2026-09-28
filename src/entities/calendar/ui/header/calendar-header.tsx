@@ -19,7 +19,7 @@ const VIEWS_ICON: Record<Exclude<TCalendarView, "month" | "year">, React.Compone
 export const CalendarHeader = ({ view, onViewChange }: ICalendarHeaderProps) => {
   return (
     <div>
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2.5 py-2">
         <Link to={"/bookings/list"}>        
           <Button variant={"white"} size={"icon_42"}>
             <ListIcon width={22} height={22} />
@@ -29,7 +29,7 @@ export const CalendarHeader = ({ view, onViewChange }: ICalendarHeaderProps) => 
           <Button
             key={v}
             variant={"white"}
-            size={"icon_42"}
+            size={"icon_40"}
             className={cn(v === view && "bg-primary text-white")}
             onClick={() => onViewChange?.(v)}
           >

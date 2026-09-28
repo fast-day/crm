@@ -82,7 +82,7 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
   return (
     <div className='flex flex-col max-w-[calc(100dvw-40px)] min-w-0'>
       <div className='overflow-x-auto scrollbar-hidden w-full min-w-0'>
-        <div className='lg:min-w-fit min-w-237.5'>
+        <div className='min-w-264.5'>
           <div className='contents'>
             <div className='sticky top-0 z-20 flex'>
               <div className='w-10' />
@@ -90,7 +90,7 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
                 {weekDays.map((day, idx) => (
                   <span
                     key={idx}
-                    className={'py-1.5 space-x-px min-w-32.5'}
+                    className={'py-1.5 space-x-px min-w-36'}
                   >
                     <span className='text-11 font-medium opacity-50'>{WEEK_DAYS[idx]}</span>
                     <span className='ml-1 font-bold text-foreground'>
@@ -128,7 +128,7 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
                       const dayIntervals = getDayIntervals(day);
 
                       return (
-                        <div key={idx} className='relative min-w-32.5'>
+                        <div key={idx} className='relative min-w-36'>
                           {hours.map((hour, hourIdx) => (
                             <div
                               key={hour}

@@ -27,7 +27,7 @@
     --card-accent: oklch(89.675% 0.00971 72.47);            /* #E1DCD6 */
 
     --red: oklch(69.103% 0.17056 26.222);                   /* #f36a61 */
-    --red-100: oklch(66.604% 0.22173 30.905);               /* #ff4931 */
+    --red-accent: oklch(66.604% 0.22173 30.905);            /* #ff4931 */
     
     --green: oklch(67.311% 0.16242 144.231);                /* #4caf50 */
     --green-accent: oklch(45.358% 0.14503 143.081);         /* #0C6910 */
@@ -112,7 +112,7 @@
   --color-card-accent: var(--card-accent);
   
   --color-red: var(--red);
-  --color-red-100: var(--red-100);
+  --color-red-accent: var(--red-accent);
   
   --color-green: var(--green);
   --color-green-accent: var(--green-accent);
