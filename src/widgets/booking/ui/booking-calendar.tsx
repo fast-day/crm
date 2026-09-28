@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { CalendarCustomizationContext, type ICalendarCustomization } from '@/entities/calendar/model/utils/customization.util'
-import { CalendarWeek, type ICalendarProps, type IEvent } from '@/entities/calendar'
+import { CalendarDay, CalendarHeader, CalendarWeek, type ICalendarProps, type IEvent, type TCalendarView } from '@/entities/calendar'
 import type { ISchedule } from '@/entities/schedule';
 
 const data: IEvent[] = [
@@ -9,7 +9,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-0509-IR2F1CBB",
     "comment": null,
-    "date": "2026-09-21",
+    "date": "2026-09-28",
     "start_time": "03:30",
     "end_time": "5:00",
     "subtotal": 10000,
@@ -60,7 +60,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-2208-TVWDQY6O",
     "comment": null,
-    "date": "2026-09-22",
+    "date": "2026-09-28",
     "start_time": "10:00",
     "end_time": "13:10",
     "subtotal": null,
@@ -111,7 +111,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-2208-TVWDQY6O",
     "comment": null,
-    "date": "2026-09-22",
+    "date": "2026-09-28",
     "start_time": "17:00",
     "end_time": "18:00",
     "subtotal": null,
@@ -162,7 +162,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-2208-VKH4CR2Y",
     "comment": null,
-    "date": "2026-09-27",
+    "date": "2026-09-30",
     "start_time": "09:30",
     "end_time": "12:00",
     "subtotal": null,
@@ -213,7 +213,7 @@ const data: IEvent[] = [
     "status": "new",
     "tag": "B-2208-VKH4CR2Y",
     "comment": null,
-    "date": "2026-09-27",
+    "date": "2026-09-30",
     "start_time": "12:00",
     "end_time": "12:10",
     "subtotal": null,
@@ -259,8 +259,7 @@ const data: IEvent[] = [
     ],
     mark: 'purple',
   }
-]
-
+];
 
 const MOCK_WORKING_HOURS: ISchedule[] = [
   {
@@ -275,7 +274,21 @@ const MOCK_WORKING_HOURS: ISchedule[] = [
   },
 ];
 
+const MOCK_DAY_WORKING_HOURS: ISchedule =
+  {
+    id: 38,
+    date: "2026-09-27",
+    intervals: [
+      {
+        start: "08:05",
+        end: "12:45",
+      },
+    ],
+  };
+
 export const BookingCalendar = ({
+  view,
+  onViewChange,
   renderEvent,
   renderMonthEvent,
   renderAgendaEvent,
@@ -324,12 +337,30 @@ export const BookingCalendar = ({
     ]
   )
 
+  const handleChangeView = useCallback((v: TCalendarView) => { onViewChange?.(v)}, [onViewChange]);
+
   return (
     <CalendarCustomizationContext.Provider value={customization}>
-      <CalendarWeek
-        singleDayEvents={data}
-        workingHours={MOCK_WORKING_HOURS}
-      />
+      <div>
+        <CalendarHeader
+          view={view}
+          onViewChange={handleChangeView}
+        />
+
+        {view === "week" && (
+          <CalendarWeek
+            singleDayEvents={data}
+            workingHours={MOCK_WORKING_HOURS}
+          />
+        )}
+
+        {view === "day" && (
+          <CalendarDay
+            singleDayEvents={data}
+            workingHours={MOCK_DAY_WORKING_HOURS}
+          />
+        )}
+      </div>
     </CalendarCustomizationContext.Provider>
   )
 }

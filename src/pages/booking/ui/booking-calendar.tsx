@@ -41,7 +41,7 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
   ) : isSuccess ? (
     <PageTableWrapper>
 
-      <BookingCalendar view={"month"} />
+      <BookingCalendar view={"week"} />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
     </PageTableWrapper>

@@ -1,5 +1,5 @@
 import { addDays, areIntervalsOverlapping, format, isSameDay, isSameWeek, startOfWeek } from 'date-fns';
-import { DEFAULT_VISIBLE_HOURS, WEEK_DAYS } from '../../model/constants/calendar.constant';
+import { DEFAULT_VISIBLE_HOURS, STOCK_SLOT_CLASSES, WEEK_DAYS } from '../../model/constants/calendar.constant';
 import type { IEvent } from '../../model/types/event-calendar.type'
 import { useCalendarCustomization } from '../../model/utils/customization.util';
 import { dateParserIso } from '../../model/utils/formatter.util';
@@ -17,13 +17,6 @@ interface ICalendarWeekProps {
   workingHours: ISchedule[];
   canAdd?: boolean;
 }
-
-const STOCK_SLOT_CLASSES = [
-  "absolute inset-x-0 top-0 h-[24px] cursor-pointer transition-colors hover:bg-primary/80 hover:opacity-100 opacity-0 flex items-center justify-center text-white text-xs",
-  "absolute inset-x-0 top-[24px] h-[24px] cursor-pointer transition-colors hover:bg-primary/80 hover:opacity-100 opacity-0 flex items-center justify-center text-white text-xs",
-  "absolute inset-x-0 top-[48px] h-[24px] cursor-pointer transition-colors hover:bg-primary/80 hover:opacity-100 opacity-0 flex items-center justify-center text-white text-xs",
-  "absolute inset-x-0 top-[72px] h-[24px] cursor-pointer transition-colors hover:bg-primary/80 hover:opacity-100 opacity-0 flex items-center justify-center text-white text-xs",
-];
 
 export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICalendarWeekProps) => {
   const { hourHeight, classNames } = useCalendarCustomization();
@@ -73,7 +66,7 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
       ),
     ));
 
-    if (!hasOverlap) return { ...style, with: "100%", left: "0%" };
+    if (!hasOverlap) return { ...style, width: "100%", left: "0%" };
 
     return style;
   }
@@ -119,8 +112,8 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
                     >
                       <div className='absolute -top-3 right-2 flex h-6 items-center'>
                         {idx !== 0 && (
-                          <span className='text-xs font-semibold opacity-50'>
-                            {hour}
+                          <span className='text-xs font-medium opacity-50'>
+                            {hour}:00
                           </span>
                         )}
                       </div>
@@ -145,7 +138,7 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
                               )}
                               style={{ height: `${hourHeight}px` }}
                             >
-                            {hourIdx !== 0 && <div className='pointer-events-none absolute inset-x-0 top-0 border-b border-border'/>}
+                              {hourIdx !== 0 && <div className='pointer-events-none absolute inset-x-0 top-0 border-b border-border'/>}
 
                               {[0, 15, 30, 45].map((minute, qIdx) => {
                                 const start = hour * 60 + minute;
@@ -178,11 +171,11 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
 
                           {groupedEvents.map((group, idx) => group.map((event) => (
                             <div
-                              key={event.id}
+                              key={`group-week-${event.date}T${event.start_time}`}
                               className={"absolute"}
                               style={getEventStyle(event, day, idx, groupEvents.length, groupedEvents)}
                             >
-                              <CalendarEventBlock event={event} />
+                              <CalendarEventBlock event={event} view={"week"} />
                             </div>
                           )))}
                         </div>
