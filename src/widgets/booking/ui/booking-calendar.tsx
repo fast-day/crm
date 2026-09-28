@@ -341,7 +341,7 @@ export const BookingCalendar = ({
 
   return (
     <CalendarCustomizationContext.Provider value={customization}>
-      <div>
+      <div className='space-y-6'>
         <CalendarHeader
           view={view}
           onViewChange={handleChangeView}

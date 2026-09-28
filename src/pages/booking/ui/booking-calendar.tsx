@@ -1,5 +1,6 @@
 import { accountSelector } from "@/entities/account";
 import { type IBookingQuery } from "@/entities/booking"
+import type { TCalendarView } from "@/entities/calendar";
 import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
@@ -7,6 +8,7 @@ import { BookingCalendar, BookingEmpty } from "@/widgets/booking";
 import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { AppLoading, TableLoading } from "@/widgets/loading";
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export interface BookingProps {
@@ -15,7 +17,11 @@ export interface BookingProps {
 
 export const BookingCalendarPage = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
+
+  const [view, setView] = useState<TCalendarView>("week");
+
   console.log(query)
+
   const isLoading = false;
   const isError = false;
   const isSuccess = true;
@@ -41,7 +47,10 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
   ) : isSuccess ? (
     <PageTableWrapper>
 
-      <BookingCalendar view={"week"} />
+      <BookingCalendar
+        view={view}
+        onViewChange={setView}
+      />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
     </PageTableWrapper>
