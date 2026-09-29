@@ -365,7 +365,10 @@ export const BookingCalendar = ({
     ]
   )
 
-  const handleChangeView = useCallback((v: TCalendarView) => { onViewChange?.(v)}, [onViewChange]);
+  const handleChangeView = useCallback((v: TCalendarView) => {
+    onViewChange?.(v);
+    localStorage.setItem("calendar_view", v);
+  }, [onViewChange]);
 
   return (
     <CalendarCustomizationContext.Provider value={customization}>

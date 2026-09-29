@@ -18,9 +18,9 @@ export interface BookingProps {
 export const BookingCalendarPage = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
 
-  const [view, setView] = useState<TCalendarView>("week");
+  const [view, setView] = useState<TCalendarView>(localStorage.getItem("calendar_view") as TCalendarView ?? "week");
 
-  console.log(query)
+  console.log(query);
 
   const isLoading = false;
   const isError = false;

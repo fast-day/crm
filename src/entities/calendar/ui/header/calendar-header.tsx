@@ -19,12 +19,12 @@ const VIEWS_ICON: Record<Exclude<TCalendarView, "month" | "year">, React.Compone
 
 export const CalendarHeader = ({ view, onViewChange }: ICalendarHeaderProps) => {
   return (
-    <div className="flex md:items-center gap-5 md:justify-between md:flex-row flex-col-reverse">
+    <div className="flex md:items-center gap-2.5 md:gap-5 md:justify-between md:flex-row flex-col-reverse">
       <div className="hidden md:block md:w-35.5" />
       
       <CalendarDateNavigator view={view} />
       
-      <div className="flex items-center gap-2.5 py-2">
+      <div className="flex items-center justify-end gap-2.5 py-2">
         <Link to={"/bookings/list"}>        
           <Button
             variant={"white"}
