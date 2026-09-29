@@ -1,7 +1,8 @@
-import { addDays, addMonths, addWeeks, addYears, differenceInDays, differenceInMinutes, eachDayOfInterval, endOfMonth, format, isSameDay, isWithinInterval, parseISO, startOfDay, startOfMonth, subDays, subMonths, subWeeks, subYears, type Locale } from "date-fns";
+import { addDays, addMonths, addWeeks, addYears, differenceInDays, differenceInMinutes, eachDayOfInterval, endOfMonth, endOfWeek, format, isSameDay, isWithinInterval, parseISO, startOfDay, startOfMonth, startOfWeek, subDays, subMonths, subWeeks, subYears, type Locale } from "date-fns";
 import type { ICalendarCell, IEvent, TCalendarView, TVisibleHours } from "../types/event-calendar.type";
 import { dateParserIso } from "./formatter.util";
 import type { ISchedule, IScheduleIntervals } from "@/entities/schedule";
+import { ru } from "date-fns/locale";
 
 export const getCalendarCells = (date: Date): ICalendarCell[] => {
   const currentYear = date.getFullYear();
@@ -50,6 +51,35 @@ export const navigateDate = (date: Date, view: TCalendarView, direction: "previo
   }
 
   return operations[view](date, 1);
+}
+
+export const formatCalendarPeriod = (date: Date, view: TCalendarView): string | { primary: string; secondary: string } => {
+  switch (view) {
+    case "day":
+      return {
+        primary: format(date, "d MMM", { locale: ru }),
+        secondary: format(date, "eeee", { locale: ru }),
+      };
+
+    case "week": {
+      const start = startOfWeek(date, { weekStartsOn: 1 });
+      const end = endOfWeek(date, { weekStartsOn: 1 });
+
+      const startStr = format(start, "d MMM", { locale: ru });
+      const endStr = format(end, "d MMM", { locale: ru });
+
+      return `${startStr} – ${endStr}`;
+    }
+
+    case "month":
+      return format(date, "LLLL yyyy", { locale: ru });
+
+    case "year":
+      return format(date, "yyyy", { locale: ru });
+
+    default:
+      return format(date, "d MMM yyyy", { locale: ru });
+  }
 }
 
 export const getCurrentEvents = (events: IEvent[]) => {

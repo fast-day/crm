@@ -1,16 +1,17 @@
 import type { ISchedule } from "@/entities/schedule";
 import type { IEvent } from "../../model/types/event-calendar.type";
 import { useCalendarCustomization } from "../../model/utils/customization.util"
-import { DEFAULT_VISIBLE_HOURS, STOCK_SLOT_CLASSES } from "../../model/constants/calendar.constant";
+import { STOCK_SLOT_CLASSES } from "../../model/constants/calendar.constant";
 import { useCalendarVisibleHours } from "../../model/hooks/calendar-visible-hours.hook";
 import { Fragment, useMemo } from "react";
 import { getEventBlockStyle, groupEvents, isSlotWorking } from "../../model/utils/event-calendar.util";
 import { dateParserIso } from "../../model/utils/formatter.util";
-import { areIntervalsOverlapping, format, isToday } from "date-fns";
-import { ru } from "date-fns/locale";
+import { areIntervalsOverlapping, isToday } from "date-fns";
 import { cn } from "@/shared/utils";
 import { CalendarEventBlock } from "../week/calendar-event";
 import { CalendarTimeline } from "../week/calendar-timeline";
+import { useSelector } from "react-redux";
+import { calendarSelector } from "../../model/selector/calendar.selector";
 
 interface ICalendarDayProps {
   singleDayEvents: IEvent[];
@@ -19,20 +20,20 @@ interface ICalendarDayProps {
 }
 
 export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendarDayProps) => {
+  const currentDateIso = useSelector(calendarSelector).currentDate;
+  const visibleHours = useSelector(calendarSelector).visibleHours;
   const { hourHeight, classNames } = useCalendarCustomization();
-
-  const selectedDate = new Date();
-  const visibleHours = DEFAULT_VISIBLE_HOURS;
   
   const { hours, earliest_event_hour, latest_event_hour } = useCalendarVisibleHours(
     visibleHours,
     singleDayEvents,
     [workingHours],
   );
- 
+  
   const isScaled = hourHeight !== 96;
   const quarter = hourHeight / 4;
-
+  
+  const selectedDate = useMemo(() => new Date(currentDateIso), [currentDateIso]);
   const dayEvents = useMemo(() => singleDayEvents.filter((e) => {
     const date = dateParserIso(e.date, e.start_time);
     return (
@@ -74,16 +75,6 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
   return (
     <div className="flex">
       <div className="flex flex-1 flex-col">
-        <div>
-
-          <div className="relative z-20 flex border-b border-border">
-            <div className="w-10"/>
-            <span className="flex-1 py-2 text-center text-sm font-medium border-l border-border opacity-50">
-              <span className="capitalize">{format(selectedDate, "EEEEEE", { locale: ru })}</span>{" "}
-              <span className="font-bold text-foreground">{format(selectedDate, "d")}</span>
-            </span>
-          </div>
-        </div>
 
         <div>
           <div className="flex">

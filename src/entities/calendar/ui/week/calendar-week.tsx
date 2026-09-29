@@ -1,5 +1,5 @@
 import { addDays, areIntervalsOverlapping, format, isSameDay, isSameWeek, startOfWeek } from 'date-fns';
-import { DEFAULT_VISIBLE_HOURS, STOCK_SLOT_CLASSES, WEEK_DAYS } from '../../model/constants/calendar.constant';
+import { STOCK_SLOT_CLASSES, WEEK_DAYS } from '../../model/constants/calendar.constant';
 import type { IEvent } from '../../model/types/event-calendar.type'
 import { useCalendarCustomization } from '../../model/utils/customization.util';
 import { dateParserIso } from '../../model/utils/formatter.util';
@@ -11,6 +11,9 @@ import { CalendarEventBlock } from './calendar-event';
 import { CalendarTimeline } from './calendar-timeline';
 import type { ISchedule, IScheduleIntervals } from '@/entities/schedule';
 import { Fragment } from 'react/jsx-runtime';
+import { useSelector } from 'react-redux';
+import { calendarSelector } from '../../model/selector/calendar.selector';
+import { useMemo } from 'react';
 
 interface ICalendarWeekProps {
   singleDayEvents: IEvent[];
@@ -19,16 +22,18 @@ interface ICalendarWeekProps {
 }
 
 export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICalendarWeekProps) => {
+  const currentDateIso = useSelector(calendarSelector).currentDate;
+  const visibleHours = useSelector(calendarSelector).visibleHours;
+  
   const { hourHeight, classNames } = useCalendarCustomization();
   
-  const selectedDate = new Date();
-  const visibleHours = DEFAULT_VISIBLE_HOURS;
-
   const { hours, earliest_event_hour, latest_event_hour } = useCalendarVisibleHours(
     visibleHours,
     singleDayEvents,
     workingHours,
   );
+
+  const selectedDate = useMemo(() => new Date(currentDateIso), [currentDateIso]);
   
   const weekStart = startOfWeek(selectedDate, { weekStartsOn: 1 });
   const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
