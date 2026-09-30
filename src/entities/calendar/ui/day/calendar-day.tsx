@@ -15,7 +15,7 @@ import { calendarSelector } from "../../model/selector/calendar.selector";
 
 interface ICalendarDayProps {
   singleDayEvents: IEvent[];
-  workingHours: ISchedule;
+  workingHours?: ISchedule;
   canAdd?: boolean;
 }
 
@@ -27,7 +27,7 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
   const { hours, earliest_event_hour, latest_event_hour } = useCalendarVisibleHours(
     visibleHours,
     singleDayEvents,
-    [workingHours],
+    [{ ...workingHours, intervals: workingHours?.intervals ?? [] } as ISchedule],
   );
   
   const isScaled = hourHeight !== 96;
@@ -102,9 +102,8 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
                     {[0, 15, 30, 45].map((minute, qIdx) => {
                       const start = hour * 60 + minute;
                       const end = start + 15;
-                      const isDisabled = !isSlotWorking(start, end, workingHours.intervals);
+                      const isDisabled = !isSlotWorking(start, end, workingHours?.intervals ?? []);
                       
-
                       return (
                         <Fragment key={minute}>
                           <div

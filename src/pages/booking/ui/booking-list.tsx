@@ -34,17 +34,14 @@ export const BookingListPage = ({ query }: BookingProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <PageTableWrapper>
-
-      <BookingSort {...query} />
-
+    <>
       <BookingTable
         bookings={data.data}
         isFetching={isFetching}
       />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
-    </PageTableWrapper>
+    </>
   ) : (
     <BookingEmpty />
   );
@@ -69,7 +66,10 @@ export const BookingListPage = ({ query }: BookingProps) => {
         </PageHeaderActions>
       </PageHeader>
 
-      {content}
+      <PageTableWrapper>
+        {account?.has_bookings && <BookingSort {...query} />}
+        {content}
+      </PageTableWrapper>
     </>
   )
 }

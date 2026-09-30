@@ -1,12 +1,13 @@
 import { accountSelector } from "@/entities/account";
-import { type IBookingQuery } from "@/entities/booking"
+import { useGetCalendarBookingsQuery, type IBookingQuery } from "@/entities/booking"
 import type { TCalendarView } from "@/entities/calendar";
 import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
-import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle, Pagination } from "@/shared/ui"
+import { Button, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { BookingCalendar, BookingEmpty } from "@/widgets/booking";
 import { PageTableWrapper, RequestError } from "@/widgets/layout";
 import { AppLoading, TableLoading } from "@/widgets/loading";
+import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,26 +19,17 @@ export interface BookingProps {
 export const BookingCalendarPage = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
 
-  const [view, setView] = useState<TCalendarView>(localStorage.getItem("calendar_view") as TCalendarView ?? "week");
+  const [view, setView] = useState<TCalendarView>(localStorage.getItem("booking_calendar_view") as TCalendarView ?? "week");
 
-  console.log(query);
-
-  const isLoading = false;
-  const isError = false;
-  const isSuccess = true;
-  const data = {
-    meta: {
-      total_pages: 0,
-      page: 1,
-      limit: 1,
-      total: 0,
-      has_next: false,
-      has_prev: false,
-    }
-  };
+  const { data, isLoading, isError, isSuccess, isFetching } = useGetCalendarBookingsQuery(
+    location && account?.has_bookings ? { ...query, location_id: location.uuid } : skipToken,
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
 
   if (!location) return <AppLoading />;
-  
+
   const content = !account?.has_bookings ? (
     <BookingEmpty />
   ) : isLoading ? (
@@ -45,15 +37,15 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <PageTableWrapper>
-
+    <>
       <BookingCalendar
         view={view}
         onViewChange={setView}
+        isFetching={isFetching}
+        bookings={data.bookings}
+        intervals={data.intervals}
       />
-
-      {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
-    </PageTableWrapper>
+    </>
   ) : (
     <BookingEmpty />
   );
@@ -78,7 +70,9 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
         </PageHeaderActions>
       </PageHeader>
 
-      {content}
+      <PageTableWrapper>
+        {content}
+      </PageTableWrapper>
     </>
   )
 }

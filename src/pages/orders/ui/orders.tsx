@@ -25,16 +25,14 @@ export const Orders = ({ query }: OrderProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <PageTableWrapper>
-      <OrderSort {...query} />
-
+    <>
       <OrderTable
         orders={data.data}
         isFetching={isFetching}
       />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
-    </PageTableWrapper>
+    </>
   ) : (
     <OrderEmpty />
   );
@@ -48,7 +46,10 @@ export const Orders = ({ query }: OrderProps) => {
         </PageHeaderActions>
       </PageHeader>
 
-      {content}
+      <PageTableWrapper>
+        <OrderSort {...query} />
+        {content}
+      </PageTableWrapper>
     </>
   )
 }

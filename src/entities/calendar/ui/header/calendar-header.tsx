@@ -25,7 +25,10 @@ export const CalendarHeader = ({ view, onViewChange }: ICalendarHeaderProps) => 
       <CalendarDateNavigator view={view} />
       
       <div className="flex items-center justify-end gap-2.5 py-2">
-        <Link to={"/bookings/list"}>        
+        <Link
+          to={"/bookings/list"}
+          onClick={() => localStorage.setItem("booking_calendar_view", "list")}
+        >        
           <Button
             variant={"white"}
             size={"icon_42"}

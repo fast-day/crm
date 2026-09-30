@@ -26,7 +26,7 @@ export const BookingSort = ({ status }: IBookingQuery) => {
     });
   }
 
-  const onViewChange = (v: TCalendarView) => localStorage.setItem("calendar_view", v);
+  const onViewChange = (v: TCalendarView) => localStorage.setItem("booking_calendar_view", v);
 
   return (
     <div>
@@ -45,9 +45,8 @@ export const BookingSort = ({ status }: IBookingQuery) => {
             <ListIcon width={20} height={20} />
           </Button>
           {views.map((v) => (
-            <Link to={"/bookings/calendar"}>        
+            <Link key={v} to={"/bookings/calendar"}>        
               <Button
-                key={v}
                 type={"button"}
                 variant={"white"}
                 size={"icon_40"}

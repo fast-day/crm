@@ -8,6 +8,7 @@ export interface ICalendarProps {
   view: TCalendarView;
   onViewChange?: (view: TCalendarView) => void;
 
+  isFetching?: boolean;
   canAdd?: boolean;
   canEdit?: boolean;
   canDelete?: boolean;
@@ -44,3 +45,4 @@ export interface ICalendarProps {
   dayCellClassName?: (date: Date) => string | undefined;
   formatTime?: TTimeFormatter;
 }
+
