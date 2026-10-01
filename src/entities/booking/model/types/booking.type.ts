@@ -2,6 +2,7 @@ import type { CustomerProfile } from "@/entities/customers";
 import type { IDirectoryCustomer } from "@/entities/directories";
 import type { IInvoice } from "@/entities/invoice";
 import type { ILocationAddress } from "@/entities/location";
+import type { ISchedule } from "@/entities/schedule";
 import type { ServicePrices } from "@/entities/services";
 
 export interface IBookingCustomer {
@@ -70,7 +71,16 @@ export interface IBookingQuery extends PaginationQuery {
   sort?: SortType;
 }
 
+export interface IBookingCalendarQuery extends PaginationQuery {
+  start_date?: string;
+  end_date?: string;
+}
+
 export interface IBookingCredentials extends IBookingQuery {
+  location_id: string;
+}
+
+export interface IBookingCalendarCredentials extends IBookingCalendarQuery {
   location_id: string;
 }
 
@@ -109,6 +119,7 @@ export interface IBooking {
   status: BookingStatusType;
   tag: string;
   comment: string | null;
+  mark: MarkType;
   date: string;
   start_time: string;
   end_time: string;
@@ -117,6 +128,11 @@ export interface IBooking {
   order_id: string | null;
   customer: Omit<CustomerProfile, "birthday">;
   booking_services: IBookingService[];
+}
+
+export interface ICalendarBookings {
+  bookings: IBooking[];
+  intervals: ISchedule[];
 }
 
 export interface IBookingDetailCustomerProfile extends CustomerProfile {

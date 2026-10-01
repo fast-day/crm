@@ -41,6 +41,8 @@ import { Route as AppLayoutCustomersCustomer_idIndexRouteImport } from './app/ro
 import { Route as AppLayoutCompanyCreateIndexRouteImport } from './app/routes/_app/_layout/company/create/index'
 import { Route as AppLayoutBusinessServicesIndexRouteImport } from './app/routes/_app/_layout/business/services/index'
 import { Route as AppLayoutBusinessLocationsIndexRouteImport } from './app/routes/_app/_layout/business/locations/index'
+import { Route as AppLayoutBookingsListIndexRouteImport } from './app/routes/_app/_layout/bookings/list/index'
+import { Route as AppLayoutBookingsCalendarIndexRouteImport } from './app/routes/_app/_layout/bookings/calendar/index'
 import { Route as AppLayoutFocusMeSecurityIndexRouteImport } from './app/routes/_app/_layout-focus/me/security/index'
 import { Route as AppLayoutFocusCustomersCreateIndexRouteImport } from './app/routes/_app/_layout-focus/customers/create/index'
 import { Route as AppLayoutFocusBookingsCreateIndexRouteImport } from './app/routes/_app/_layout-focus/bookings/create/index'
@@ -246,6 +248,18 @@ const AppLayoutBusinessLocationsIndexRoute =
     path: '/business/locations/',
     getParentRoute: () => AppLayoutRouteRoute,
   } as any)
+const AppLayoutBookingsListIndexRoute =
+  AppLayoutBookingsListIndexRouteImport.update({
+    id: '/bookings/list/',
+    path: '/bookings/list/',
+    getParentRoute: () => AppLayoutRouteRoute,
+  } as any)
+const AppLayoutBookingsCalendarIndexRoute =
+  AppLayoutBookingsCalendarIndexRouteImport.update({
+    id: '/bookings/calendar/',
+    path: '/bookings/calendar/',
+    getParentRoute: () => AppLayoutRouteRoute,
+  } as any)
 const AppLayoutFocusMeSecurityIndexRoute =
   AppLayoutFocusMeSecurityIndexRouteImport.update({
     id: '/me/security/',
@@ -429,6 +443,8 @@ export interface FileRoutesByFullPath {
   '/bookings/create/': typeof AppLayoutFocusBookingsCreateIndexRoute
   '/customers/create/': typeof AppLayoutFocusCustomersCreateIndexRoute
   '/me/security/': typeof AppLayoutFocusMeSecurityIndexRoute
+  '/bookings/calendar/': typeof AppLayoutBookingsCalendarIndexRoute
+  '/bookings/list/': typeof AppLayoutBookingsListIndexRoute
   '/business/locations/': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services/': typeof AppLayoutBusinessServicesIndexRoute
   '/company/create/': typeof AppLayoutCompanyCreateIndexRoute
@@ -484,6 +500,8 @@ export interface FileRoutesByTo {
   '/bookings/create': typeof AppLayoutFocusBookingsCreateIndexRoute
   '/customers/create': typeof AppLayoutFocusCustomersCreateIndexRoute
   '/me/security': typeof AppLayoutFocusMeSecurityIndexRoute
+  '/bookings/calendar': typeof AppLayoutBookingsCalendarIndexRoute
+  '/bookings/list': typeof AppLayoutBookingsListIndexRoute
   '/business/locations': typeof AppLayoutBusinessLocationsIndexRoute
   '/business/services': typeof AppLayoutBusinessServicesIndexRoute
   '/company/create': typeof AppLayoutCompanyCreateIndexRoute
@@ -545,6 +563,8 @@ export interface FileRoutesById {
   '/_app/_layout-focus/bookings/create/': typeof AppLayoutFocusBookingsCreateIndexRoute
   '/_app/_layout-focus/customers/create/': typeof AppLayoutFocusCustomersCreateIndexRoute
   '/_app/_layout-focus/me/security/': typeof AppLayoutFocusMeSecurityIndexRoute
+  '/_app/_layout/bookings/calendar/': typeof AppLayoutBookingsCalendarIndexRoute
+  '/_app/_layout/bookings/list/': typeof AppLayoutBookingsListIndexRoute
   '/_app/_layout/business/locations/': typeof AppLayoutBusinessLocationsIndexRoute
   '/_app/_layout/business/services/': typeof AppLayoutBusinessServicesIndexRoute
   '/_app/_layout/company/create/': typeof AppLayoutCompanyCreateIndexRoute
@@ -603,6 +623,8 @@ export interface FileRouteTypes {
     | '/bookings/create/'
     | '/customers/create/'
     | '/me/security/'
+    | '/bookings/calendar/'
+    | '/bookings/list/'
     | '/business/locations/'
     | '/business/services/'
     | '/company/create/'
@@ -658,6 +680,8 @@ export interface FileRouteTypes {
     | '/bookings/create'
     | '/customers/create'
     | '/me/security'
+    | '/bookings/calendar'
+    | '/bookings/list'
     | '/business/locations'
     | '/business/services'
     | '/company/create'
@@ -718,6 +742,8 @@ export interface FileRouteTypes {
     | '/_app/_layout-focus/bookings/create/'
     | '/_app/_layout-focus/customers/create/'
     | '/_app/_layout-focus/me/security/'
+    | '/_app/_layout/bookings/calendar/'
+    | '/_app/_layout/bookings/list/'
     | '/_app/_layout/business/locations/'
     | '/_app/_layout/business/services/'
     | '/_app/_layout/company/create/'
@@ -983,6 +1009,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutBusinessLocationsIndexRouteImport
       parentRoute: typeof AppLayoutRouteRoute
     }
+    '/_app/_layout/bookings/list/': {
+      id: '/_app/_layout/bookings/list/'
+      path: '/bookings/list'
+      fullPath: '/bookings/list/'
+      preLoaderRoute: typeof AppLayoutBookingsListIndexRouteImport
+      parentRoute: typeof AppLayoutRouteRoute
+    }
+    '/_app/_layout/bookings/calendar/': {
+      id: '/_app/_layout/bookings/calendar/'
+      path: '/bookings/calendar'
+      fullPath: '/bookings/calendar/'
+      preLoaderRoute: typeof AppLayoutBookingsCalendarIndexRouteImport
+      parentRoute: typeof AppLayoutRouteRoute
+    }
     '/_app/_layout-focus/me/security/': {
       id: '/_app/_layout-focus/me/security/'
       path: '/me/security'
@@ -1180,6 +1220,8 @@ interface AppLayoutRouteRouteChildren {
   AppLayoutNotificationsIndexRoute: typeof AppLayoutNotificationsIndexRoute
   AppLayoutScheduleIndexRoute: typeof AppLayoutScheduleIndexRoute
   AppLayoutSettingsIndexRoute: typeof AppLayoutSettingsIndexRoute
+  AppLayoutBookingsCalendarIndexRoute: typeof AppLayoutBookingsCalendarIndexRoute
+  AppLayoutBookingsListIndexRoute: typeof AppLayoutBookingsListIndexRoute
   AppLayoutBusinessLocationsIndexRoute: typeof AppLayoutBusinessLocationsIndexRoute
   AppLayoutBusinessServicesIndexRoute: typeof AppLayoutBusinessServicesIndexRoute
   AppLayoutCompanyCreateIndexRoute: typeof AppLayoutCompanyCreateIndexRoute
@@ -1211,6 +1253,8 @@ const AppLayoutRouteRouteChildren: AppLayoutRouteRouteChildren = {
   AppLayoutNotificationsIndexRoute: AppLayoutNotificationsIndexRoute,
   AppLayoutScheduleIndexRoute: AppLayoutScheduleIndexRoute,
   AppLayoutSettingsIndexRoute: AppLayoutSettingsIndexRoute,
+  AppLayoutBookingsCalendarIndexRoute: AppLayoutBookingsCalendarIndexRoute,
+  AppLayoutBookingsListIndexRoute: AppLayoutBookingsListIndexRoute,
   AppLayoutBusinessLocationsIndexRoute: AppLayoutBusinessLocationsIndexRoute,
   AppLayoutBusinessServicesIndexRoute: AppLayoutBusinessServicesIndexRoute,
   AppLayoutCompanyCreateIndexRoute: AppLayoutCompanyCreateIndexRoute,

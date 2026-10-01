@@ -54,7 +54,7 @@ export interface IServiceChangeResponse {
 
 export type ServicePrices = {
   price: number;
-  cost_price: number;
+  cost_price: number | null;
 }
 
 export interface IServices {

@@ -15,7 +15,7 @@ export interface BookingProps {
   query: IBookingQuery & PaginationQuery;
 }
 
-export const Bookings = ({ query }: BookingProps) => {
+export const BookingListPage = ({ query }: BookingProps) => {
   const { location, account } = useSelector(accountSelector);
 
   const { data, isLoading, isError, isSuccess, isFetching } = useGetBookingsQuery(
@@ -34,18 +34,14 @@ export const Bookings = ({ query }: BookingProps) => {
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <PageTableWrapper>
-
-      <BookingSort {...query} />
-
+    <>
       <BookingTable
         bookings={data.data}
         isFetching={isFetching}
-        profileId={account?.uuid}
       />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
-    </PageTableWrapper>
+    </>
   ) : (
     <BookingEmpty />
   );
@@ -57,7 +53,7 @@ export const Bookings = ({ query }: BookingProps) => {
         <PageHeaderActions>
           <PageHeaderBackAction />
           <Can permission={"booking:create"}>
-            <Link to={"/bookings/create"}>
+            <Link to={"/bookings/create"} search={{ return_to: "/bookings/list", }}>
               <Button 
                 size={"size_44"}
                 animation={"toggle"}
@@ -70,7 +66,10 @@ export const Bookings = ({ query }: BookingProps) => {
         </PageHeaderActions>
       </PageHeader>
 
-      {content}
+      <PageTableWrapper>
+        {account?.has_bookings && <BookingSort {...query} />}
+        {content}
+      </PageTableWrapper>
     </>
   )
 }

@@ -67,13 +67,18 @@ const badgeVariants = cva(
         teal: "bg-teal-500/30 text-teal-500",
         pink: "bg-pink-500/30 text-pink-500",
         primary: "bg-primary/30 text-primary",
-        gray: "bg-gray-500/30 text-gray"
+        gray: "bg-gray-500/30 text-gray",
+        booking_new: "bg-white text-accent",
+        booking_completed: "bg-green-100 text-green-900",
+        booking_cancelled: "bg-red-100 text-red-900",
       },
       fill: {
         none: "",
         soft: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold",
         solid: "px-2 py-0.5 text-xss! border-none rounded-lg font-semibold",
         cube: "size-8 1100:size-10 rounded-md border-none rounded-12! 1100:rounded-xl font-semibold",
+        booking_new: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none",
+        booking: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none",
       }
     },
     compoundVariants: [
@@ -98,6 +103,10 @@ const badgeVariants = cva(
       { type: "earning", fill: "cube", class: "bg-green/30 text-green" },
       { type: "refund_deduction", fill: "cube", class: "bg-red/30 text-red" },
       { type: "expense", fill: "cube", class: "bg-orange/30 text-orange" },
+
+      { type: "booking_new", fill: "booking", class: undefined },
+      { type: "booking_completed", fill: "booking", class: undefined },
+      { type: "booking_cancelled", fill: "booking", class: undefined },
     ],
     defaultVariants: {
       status: "none",

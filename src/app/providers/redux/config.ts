@@ -1,5 +1,6 @@
 import { accountSlice } from "@/entities/account";
 import { bookingSlice } from "@/entities/booking";
+import { calendarSlice } from "@/entities/calendar";
 import { dialogSlice } from "@/entities/dialog";
 import { navigationSlice } from "@/entities/navigation";
 import { orderSlice } from "@/entities/orders";
@@ -30,6 +31,11 @@ export const store = configureStore({
       ===== DIALOG ===== 
     **/
    dialog: dialogSlice,
+
+    /**
+      ===== CALENDAR ===== 
+    **/
+   calendar: calendarSlice,
   },
 
   middleware(getDefaultMiddleware) {

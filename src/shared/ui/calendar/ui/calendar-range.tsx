@@ -5,8 +5,8 @@ import { ru } from "date-fns/locale"
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../../button";
 import { CalendarIcon } from "@/shared/icons";
-import { formatDateRange } from "../model/utils/format-range";
 import { cn } from "@/shared/utils";
+import { formatDateRange } from "@/entities/calendar/model/utils/format-range";
 
 interface ICalendarRangeProps {
   range: DateRange | undefined;

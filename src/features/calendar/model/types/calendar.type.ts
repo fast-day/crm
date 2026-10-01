@@ -30,3 +30,12 @@ export type CalendarCell = {
 }
 
 export type CalendarViewMode = "month" | "week" | "day";
+
+export type CalendarVoidProps = {
+  date_key: string;
+  year: number;
+  month_index: number;
+  day: number;
+  in_month: boolean;
+  day_info?: DayInfo;
+}

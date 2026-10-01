@@ -26,12 +26,6 @@ export interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  // {
-  //   to: "/",
-  //   type: "DASHBOARD",
-  //   label: "Дашбоард",
-  //   icon: <SvgDashboard width={20} height={20} />,
-  // },
   {
     to: "/bookings",
     type: "BOOKINGS",

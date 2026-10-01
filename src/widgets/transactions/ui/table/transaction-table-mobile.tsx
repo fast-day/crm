@@ -20,7 +20,7 @@ export const TransactionTableMobile = ({ isFetching, transactions }: OrderTableP
                       return <span className="size-4 1100:size-5"><Icon /></span>
                     })()}
                   </Badge>
-                  <p className="text-xs 440:block hidden">{transaction.category.name}</p>
+                  <p className="text-xs">{transaction.category.name}</p>
                 </div>
               </TableMobileCell>
 

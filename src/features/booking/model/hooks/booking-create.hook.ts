@@ -6,23 +6,30 @@ import { useNavigate } from "@tanstack/react-router";
 import type { IDirectoryCustomer } from "@/entities/directories";
 import { updateAccount, type IMe } from "@/entities/account";
 import { getErrorMessage } from "@/shared/utils";
+import { Route } from "@/app/routes/_app/_layout-focus/bookings/create/";
 
 interface UseBookingCreateReturnProps {
-  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, employee: IMe | null, location_id: string) => Promise<void>;
+  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, employee: IMe | null, location_id?: string) => Promise<void>;
   isLoading: boolean;
 }
 
 export const useBookingCreate = (): UseBookingCreateReturnProps => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const query = Route.useSearch()
   const [create, { isLoading }] = useCreateBookingMutation();
 
   const handleSave = async (
     booked: BookingCreate[] | null,
     customer: IDirectoryCustomer | null,
     employee: IMe | null,
-    location_id: string,
+    location_id?: string,
   ): Promise<void> => {
+    if (!location_id) {
+      toast.error("Произошла ошибка. Пожалуйста перезагрузите страницу");
+      return;
+    }
+
     if (!booked?.length) {
       toast.error("Нет данных для создания записи");
       return;
@@ -36,6 +43,8 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
       });
       return;
     }
+
+    const { return_to, return_start_date, return_end_date } = query;
 
     try {
       const req = {
@@ -75,7 +84,14 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
       await create(req).unwrap();
       dispatch(resetBookingCreate());
       dispatch(updateAccount({ has_bookings: true }));
-      navigate({ to: "/bookings" });
+
+      if (return_to === "/bookings/calendar") {
+        navigate({ to: "/bookings/calendar", search: { start_date: return_start_date, end_date: return_end_date } });
+      } else if (return_to === "/bookings/list") {
+        navigate({ to: "/bookings/list" });
+      } else {
+        navigate({ to: "/bookings" });
+      }
     }
     catch (error) {
       toast.error(getErrorMessage(error));

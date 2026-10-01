@@ -6,3 +6,4 @@ export { BookingCreateForm } from './ui/booking-create-form';
 export { BookingEmpty } from './ui/booking-empty';
 export { BookingDetailsLoading } from './ui/booking-details-loading';
 export { BookingSort } from './ui/booking-sort';
+export { BookingCalendar } from './ui/booking-calendar';

@@ -3,7 +3,7 @@ import { getAvatarColor } from "../model/utils/get-color.util";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const avatarVariants = cva(
-  "flex items-center gap-0.5 text-lg justify-center bg-primary-foreground/35 relative overflow-hidden",
+  "flex items-center gap-0.5 text-lg justify-center bg-primary-foreground/35 text-accent! relative overflow-hidden",
   {
     variants: {
       size: {
