@@ -5,20 +5,28 @@ import { setCalendarCurrentDate } from "../../model/slice/calendar.slice";
 import { Button } from "@/shared/ui";
 import { ChevronIcon } from "@/shared/icons";
 import type { TCalendarView } from "../../model/types/event-calendar.type";
-import { formatCalendarPeriod, navigateDate } from "../../model/utils/event-calendar.util";
+import { formatCalendarPeriod, getCalendarDateRange, navigateDate } from "../../model/utils/event-calendar.util";
 import { useMemo } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import type { IBookingCalendarQuery } from "@/entities/booking";
 
 interface ICalendarDateNavigatorProps {
   view: TCalendarView;
 }
 
 export const CalendarDateNavigator = ({ view }: ICalendarDateNavigatorProps) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentDateIso = useSelector(calendarSelector).currentDate;
 
   const selectedDate = useMemo(() => new Date(currentDateIso), [currentDateIso]);
 
-  const handleSelectedDate = (date: Date) => dispatch(setCalendarCurrentDate(date.toISOString()));
+  const handleSelectedDate = (date: Date) => {
+    dispatch(setCalendarCurrentDate(date.toISOString()));
+
+    const range = getCalendarDateRange(date, view);
+    navigate({ to: ".", search: (prev : IBookingCalendarQuery & PaginationQuery) => ({ ...prev, ...range }) });
+  };
 
   const handlePrev = () => {
     handleSelectedDate(navigateDate(selectedDate, view, "previous"));

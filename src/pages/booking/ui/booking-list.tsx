@@ -53,7 +53,7 @@ export const BookingListPage = ({ query }: BookingProps) => {
         <PageHeaderActions>
           <PageHeaderBackAction />
           <Can permission={"booking:create"}>
-            <Link to={"/bookings/create"}>
+            <Link to={"/bookings/create"} search={{ return_to: "/bookings/list", }}>
               <Button 
                 size={"size_44"}
                 animation={"toggle"}

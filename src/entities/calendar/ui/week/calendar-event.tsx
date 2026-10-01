@@ -16,7 +16,7 @@ interface ICalendarEventBlockProps {
   view?: TEventRenderView;
 }
 
-const MIN_EVENT_HEIGHT = 25;
+// const MIN_EVENT_HEIGHT = 25;
 
 export const CalendarEventBlock = ({ event, className, view="week" }: ICalendarEventBlockProps) => {
   const { renderEvent, selectedEventId, hourHeight, classNames } = useCalendarCustomization();
@@ -24,8 +24,9 @@ export const CalendarEventBlock = ({ event, className, view="week" }: ICalendarE
   const start = useMemo(() => dateParserIso(event.date, event.start_time), [event.date, event.start_time]);
   const end = useMemo(() => dateParserIso(event.date, event.end_time), [event.date, event.end_time]);
   const duration = useMemo(() => differenceInMinutes(end, start), [end, start]);
-  const heightInPx = useMemo(() => Math.max((duration / 60) * hourHeight - 2, MIN_EVENT_HEIGHT), [duration, hourHeight]);
-
+  // const heightInPx = useMemo(() => Math.max((duration / 60) * hourHeight - 2, MIN_EVENT_HEIGHT), [duration, hourHeight]);
+  const heightInPx = useMemo(() => (duration / 60) * hourHeight - 2, [duration, hourHeight]);
+  
   const isMark = isMarkColor(event.mark);
   const selected = selectedEventId !== null && selectedEventId === event.id;
   const custom = !!renderEvent;

@@ -29,7 +29,7 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
     singleDayEvents,
     [{ ...workingHours, intervals: workingHours?.intervals ?? [] } as ISchedule],
   );
-  
+
   const isScaled = hourHeight !== 96;
   const quarter = hourHeight / 4;
   
@@ -41,7 +41,7 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
       date.getMonth() === selectedDate.getMonth() &&
       date.getFullYear() === selectedDate.getFullYear()
     )
-  }), [singleDayEvents]);
+  }), [singleDayEvents, selectedDate]);
 
   const groupedEvents = useMemo(() => groupEvents(dayEvents), [dayEvents]);
   
@@ -111,7 +111,7 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
                               "pointer-events-none absolute inset-x-0",
                               isDisabled && "bg-calendar-disabled-hour",
                             )}
-                            style={isScaled
+                            style={!isScaled
                               ? { top: `${quarter * qIdx}px`, height: `${quarter}px` }
                               : { top: `${24 * qIdx}px`, height: "24px" }
                             }

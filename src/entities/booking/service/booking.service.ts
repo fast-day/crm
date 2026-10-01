@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import type { IBooking, IBookingActionCredentials, IBookingCompleteResult, IBookingConfirmCredentials, IBookingConfirmResult, IBookingCredentials, IBookingDetail, ICalendarBookings } from "../model/types/booking.type";
+import type { IBooking, IBookingActionCredentials, IBookingCalendarCredentials, IBookingCompleteResult, IBookingConfirmCredentials, IBookingConfirmResult, IBookingCredentials, IBookingDetail, ICalendarBookings } from "../model/types/booking.type";
 import { buildQuery } from "@/shared/lib";
 
 export const bookingApi = API.injectEndpoints({
@@ -18,9 +18,9 @@ export const bookingApi = API.injectEndpoints({
     /**
       ===== СПИСОК ВСЕХ БРОНИРОВАНИЙ: КАЛЕНДАРЬ =====
     **/
-    getCalendarBookings: builder.query<ICalendarBookings, IBookingCredentials>({
+    getCalendarBookings: builder.query<ICalendarBookings, IBookingCalendarCredentials>({
       query: ({ location_id, ...query }) => ({
-        url: buildQuery(`/v1/bookings/location/${location_id}`, { ...query }),
+        url: buildQuery(`/v1/bookings/calendar`, { location: location_id, ...query }),
         method: "GET",
       }),
     }),

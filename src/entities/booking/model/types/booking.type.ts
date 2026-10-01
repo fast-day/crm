@@ -71,7 +71,16 @@ export interface IBookingQuery extends PaginationQuery {
   sort?: SortType;
 }
 
+export interface IBookingCalendarQuery extends PaginationQuery {
+  start_date?: string;
+  end_date?: string;
+}
+
 export interface IBookingCredentials extends IBookingQuery {
+  location_id: string;
+}
+
+export interface IBookingCalendarCredentials extends IBookingCalendarQuery {
   location_id: string;
 }
 

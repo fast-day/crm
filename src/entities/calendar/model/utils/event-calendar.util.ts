@@ -53,6 +53,40 @@ export const navigateDate = (date: Date, view: TCalendarView, direction: "previo
   return operations[view](date, 1);
 }
 
+export const getCalendarDateRange = (date: Date, view: TCalendarView): { start_date: string; end_date: string } => {
+  switch (view) {
+    case "day":
+      return {
+        start_date: format(date, "yyyy-MM-dd"),
+        end_date: format(date, "yyyy-MM-dd"),
+      };
+
+    case "week": {
+      const start = startOfWeek(date, { weekStartsOn: 1 });
+      const end = endOfWeek(date, { weekStartsOn: 1 });
+      return {
+        start_date: format(start, "yyyy-MM-dd"),
+        end_date: format(end, "yyyy-MM-dd"),
+      };
+    }
+
+    case "month": {
+      const start = startOfMonth(date);
+      const end = endOfMonth(date);
+      return {
+        start_date: format(start, "yyyy-MM-dd"),
+        end_date: format(end, "yyyy-MM-dd"),
+      };
+    }
+
+    default:
+      return {
+        start_date: format(date, "yyyy-MM-dd"),
+        end_date: format(date, "yyyy-MM-dd"),
+      };
+  }
+}
+
 export const formatCalendarPeriod = (date: Date, view: TCalendarView): string | { primary: string; secondary: string } => {
   switch (view) {
     case "day":

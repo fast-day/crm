@@ -6,6 +6,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { toServicePayload } from "../utils/to-service-payload.util";
+import { updateAccount } from "@/entities/account";
+import { useAppDispatch } from "@/shared/hooks";
 
 interface IUseOrderSellReturnProps {
   payment: PaymentMethodType | null;
@@ -24,6 +26,7 @@ interface IUseOrderSellProps {
 
 export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrderSellReturnProps => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [payment, setPayment] = useState<PaymentMethodType | null>(null);
 
@@ -45,6 +48,8 @@ export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrd
           services: toServicePayload(services),
         },
       }).unwrap();
+
+      dispatch(updateAccount({ has_bookings: true }));
       navigate({ to: `/finance/orders/${res.id}` });
     }
     catch (error) {
@@ -75,6 +80,8 @@ export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrd
         order_id: orderId,
         body: { payment_method: payment },
       }).unwrap();
+
+      dispatch(updateAccount({ has_bookings: true }));
       navigate({ to: `/finance/orders/${res.id}`, replace: true });
     }
     catch (error) {
