@@ -92,7 +92,7 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
                 variant={"white"}
                 className={"p-5"}
                 isLoading={isConfirming}
-                disabled={isConfirming}
+                disabled={isConfirming || isPaying}
                 onClick={() => handleSave(booking.id)}
               >Сохранить</Button>
               <Button
@@ -100,7 +100,7 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
                 size={"size_60"}
                 className={"w-full"}
                 isLoading={isPaying}
-                disabled={isPaying}
+                disabled={isPaying || isConfirming}
                 onClick={() => handlePay(booking.id, booking.order_id)}
               >Оплатить</Button>
             </div>
