@@ -47,7 +47,7 @@ export const BookingOrderCard = ({ status, subtotal, id, tag, invoices }: IBooki
         </div>
 
         <div className="mt-4">
-          <Link to={`/orders/${id}`} className="block">
+          <Link to={`/finance/orders/${id}`} className="block">
             <Button variant={"accent"} size={"size_48"} className="w-full bg-primary">Заказ № {tag}</Button>
           </Link>
         </div>

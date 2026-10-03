@@ -35,8 +35,9 @@ export const CalendarEventBlock = ({ event, className, view="week" }: ICalendarE
   const colorStyle = isMark ? undefined : ({ backgroundColor: "bg-primary" } as React.CSSProperties);
 
   const defaultContent = (
-    <div className="truncate w-full">
-      <div className={cn(calendarItemVariant({ head: event.mark }), "px-2 h-6.25 flex items-center justify-between")}>
+    <div className="truncate w-full relative">
+      <div className={cn(calendarItemVariant({ line: event.mark }), "absolute top-0 h-full w-1.25")} />
+      <div className={cn("px-2 h-6.25 flex items-center justify-between")}>
         <span className="text-xs font-medium">{event.start_time}-{event.end_time}</span>
         <Badge
           fill={"booking"}
