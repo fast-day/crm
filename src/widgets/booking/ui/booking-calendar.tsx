@@ -12,12 +12,14 @@ import { isSameWeek } from 'date-fns';
 
 interface IBookingCalendarProps extends ICalendarProps {
   start_date?: string;
+  end_date?: string;
   bookings?: IBooking[];
   intervals?: ISchedule[];
 }
 
 export const BookingCalendar = ({
   start_date,
+  end_date,
   bookings,
   intervals,
   isFetching,
@@ -89,7 +91,6 @@ export const BookingCalendar = ({
     const today = new Date();
 
     const baseDate = v === "day" && view === "week" && isSameWeek(current, today, { weekStartsOn: 1 }) ? today : current;
-
     dispatch(setCalendarCurrentDate(baseDate.toISOString()));
 
     const range = getCalendarDateRange(baseDate, v);
@@ -111,6 +112,8 @@ export const BookingCalendar = ({
             <CalendarWeek
               singleDayEvents={bookings ?? []}
               workingHours={intervals ?? []}
+              queryStartDate={start_date}
+              queryEndDate={end_date}
             />
           )}
 
@@ -118,6 +121,8 @@ export const BookingCalendar = ({
             <CalendarDay
               singleDayEvents={bookings ?? []}
               workingHours={intervals?.[0]}
+              queryStartDate={start_date}
+              queryEndDate={end_date}
             />
           )}
         </div>

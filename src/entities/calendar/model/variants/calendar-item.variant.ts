@@ -6,7 +6,7 @@ export const calendarItemVariant = cva(undefined, {
       red: "bg-red text-white",
       orange: "bg-orange text-white",
       green: "bg-green text-white",
-      blue: "bg-blue-accent text-white",
+      blue: "bg-blue text-white",
       purple: "bg-purple-500 text-white",
       teal: "bg-teal-500 text-white",
       pink: "bg-pink-500 text-white",
@@ -24,6 +24,17 @@ export const calendarItemVariant = cva(undefined, {
       primary: "bg-accent text-white",
       gray: "bg-gray-700 text-white",
     },
+    line: {
+      red: "bg-red-accent",
+      orange: "bg-orange-accent",
+      green: "bg-green-accent",
+      blue: "bg-blue-accent",
+      purple: "bg-purple-700",
+      teal: "bg-teal-700",
+      pink: "bg-pink-700",
+      primary: "bg-accent",
+      gray: "bg-gray-700",
+    },
     position: {
       first: "relative z-10 mr-0 w-[calc(100%_-_3px)] rounded-r-none border-r-0 [&>span]:mr-2.5",
       middle: "relative z-10 mx-0 w-[calc(100%_+_1px)] rounded-none border-x-0",
@@ -33,5 +44,7 @@ export const calendarItemVariant = cva(undefined, {
   },
   defaultVariants: {
     color: "primary",
+    head: "primary",
+    line: "primary",
   }
 });

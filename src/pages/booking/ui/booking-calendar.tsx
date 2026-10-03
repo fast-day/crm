@@ -43,6 +43,7 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
       <BookingCalendar
         view={view}
         start_date={query.start_date}
+        end_date={query.end_date}
         onViewChange={setView}
         isFetching={isFetching}
         bookings={data.bookings}

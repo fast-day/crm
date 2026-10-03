@@ -6,20 +6,23 @@ import { useCalendarVisibleHours } from "../../model/hooks/calendar-visible-hour
 import { Fragment, useMemo } from "react";
 import { getEventBlockStyle, groupEvents, isSlotWorking } from "../../model/utils/event-calendar.util";
 import { dateParserIso } from "../../model/utils/formatter.util";
-import { areIntervalsOverlapping, isToday } from "date-fns";
+import { areIntervalsOverlapping, format, isToday } from "date-fns";
 import { cn } from "@/shared/utils";
 import { CalendarEventBlock } from "../week/calendar-event";
 import { CalendarTimeline } from "../week/calendar-timeline";
 import { useSelector } from "react-redux";
 import { calendarSelector } from "../../model/selector/calendar.selector";
+import { Link } from "@tanstack/react-router";
 
 interface ICalendarDayProps {
   singleDayEvents: IEvent[];
   workingHours?: ISchedule;
   canAdd?: boolean;
+  queryStartDate?: string;
+  queryEndDate?: string;
 }
 
-export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendarDayProps) => {
+export const CalendarDay = ({ singleDayEvents, workingHours, canAdd, ...query }: ICalendarDayProps) => {
   const currentDateIso = useSelector(calendarSelector).currentDate;
   const visibleHours = useSelector(calendarSelector).visibleHours;
   const { hourHeight, classNames } = useCalendarCustomization();
@@ -34,6 +37,7 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
   const quarter = hourHeight / 4;
   
   const selectedDate = useMemo(() => new Date(currentDateIso), [currentDateIso]);
+  const selectedDateStr = useMemo(() => format(selectedDate, "yyyy-MM-dd"), [selectedDate]);
   const dayEvents = useMemo(() => singleDayEvents.filter((e) => {
     const date = dateParserIso(e.date, e.start_time);
     return (
@@ -66,10 +70,6 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
     if (!hasOverlap) return { ...style, width: "100%", left: "0%" };
 
     return style;
-  }
-
-  const handleSlotClick = (date: Date, time: { hour: number, minute: number }) => {
-    console.log(date, time);
   }
 
   return (
@@ -118,12 +118,19 @@ export const CalendarDay = ({ singleDayEvents, workingHours, canAdd }: ICalendar
                           />
 
                           {canAdd !== false && !isDisabled && (
-                            <div
-                              {...slot(qIdx)}
-                              onClick={() => handleSlotClick(selectedDate, { hour, minute })}
+                            <Link
+                              to={'/bookings/create'}
+                              search={{
+                                date: selectedDateStr,
+                                return_to: "/bookings/calendar",
+                                return_start_date: query.queryStartDate ?? "",
+                                return_end_date: query.queryEndDate ?? "",
+                              }}
                             >
-                              +{hour}:{minute === 0 ? "00" : minute}
-                            </div>
+                              <div {...slot(qIdx)}>
+                                +{hour}:{minute === 0 ? "00" : minute}
+                              </div>
+                            </Link>
                           )}
                         </Fragment>
                       );
