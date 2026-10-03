@@ -14,14 +14,17 @@ import { Fragment } from 'react/jsx-runtime';
 import { useSelector } from 'react-redux';
 import { calendarSelector } from '../../model/selector/calendar.selector';
 import { useMemo } from 'react';
+import { Link } from '@tanstack/react-router';
 
 interface ICalendarWeekProps {
   singleDayEvents: IEvent[];
   workingHours: ISchedule[];
   canAdd?: boolean;
+  queryStartDate?: string;
+  queryEndDate?: string;
 }
 
-export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICalendarWeekProps) => {
+export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true, ...query }: ICalendarWeekProps) => {
   const currentDateIso = useSelector(calendarSelector).currentDate;
   const visibleHours = useSelector(calendarSelector).visibleHours;
   
@@ -80,10 +83,6 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
     return workingHours.find(s => isSameDay(new Date(s.date), day))?.intervals ?? [];
   };
 
-  const handleSlotClick = (date: Date, hour: number, minute: number) => {
-    console.log({ date, hour, minute });
-  }
-
   return (
     <div className='flex flex-col max-w-[calc(100dvw-40px)] min-w-0'>
       <div className='overflow-x-auto scrollbar-hidden w-full min-w-0'>
@@ -131,6 +130,7 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
                     {weekDays.map((day, idx) => {
                       const groupedEvents = getGroupedEvents(day);
                       const dayIntervals = getDayIntervals(day);
+                      const dayStr = format(day, "yyyy-MM-dd");
 
                       return (
                         <div key={idx} className='relative min-w-36'>
@@ -164,9 +164,19 @@ export const CalendarWeek = ({ singleDayEvents, workingHours, canAdd=true }: ICa
                                     />
 
                                     {canAdd !== false && !isDisabled && (
-                                      <div {...slot(qIdx)} onClick={() => handleSlotClick(day, hour, minute)}>
-                                        +{hour}:{minute === 0 ? "00" : minute}
-                                      </div>
+                                      <Link
+                                        to={'/bookings/create'}
+                                        search={{
+                                          date: dayStr,
+                                          return_to: "/bookings/calendar",
+                                          return_start_date: query.queryStartDate ?? "",
+                                          return_end_date: query.queryEndDate ?? "",
+                                        }}
+                                      >
+                                        <div {...slot(qIdx)}>
+                                          +{hour}:{minute === 0 ? "00" : minute}
+                                        </div>
+                                      </Link>
                                     )}
                                   </Fragment>
                                 );

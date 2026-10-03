@@ -12,7 +12,7 @@ import { Link } from "@tanstack/react-router";
 export const BookingCreateForm = ({ date }: { date: string }) => {
   const { location, account } = useSelector(accountSelector);
   const { booked, customer, date: current_date } = useSelector(bookingSelector);
-  const { dialog } = useSelector(dialogSelector);
+  const dialogName = useSelector(dialogSelector).dialog.name;
 
   const { closeDialog, openDialog } = useDialog();
 
@@ -63,7 +63,7 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                     >{booked.length > 0 ? "Добавить услугу" : "Выбрать услугу"}</Button>
                   </div>
 
-                  <Dialog open={dialog.name === "booking_service_create"} onOpenChange={closeDialog}>
+                  <Dialog open={dialogName === "booking_service_create"} onOpenChange={closeDialog}>
                     <BookingChangeService location_id={location.uuid} date={date ? date : current_date} account={account} />
                   </Dialog>
 
