@@ -30,7 +30,7 @@ export const BookingListPage = ({ query }: BookingProps) => {
   const content = !account?.has_bookings ? (
     <BookingEmpty />
   ) : isLoading ? (
-    <TableLoading rows={5} />
+    <TableLoading rows={6} />
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (

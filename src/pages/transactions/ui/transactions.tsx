@@ -25,28 +25,18 @@ export const Transactions = ({ query }: ITransactionsProps) => {
   );
 
   const content = isLoading ? (
-    <TableLoading rows={6} />
+    <TableLoading rows={3} isAction={false} />
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
-    <PageTableWrapper>
-
-      <TransactionDigit
-        total_amount={data.data[0].total_amount ?? 0}
-        type={query.type || "all"}
-        start_date={query.start_date}
-        end_date={query.end_date}
-      />
-
-      <TransactionSort {...query} />
-
+    <>
       <TransactionTable
         transactions={data.data[0].transactions}
         isFetching={isFetching}
       />
 
       {data.meta.total_pages > 1 && <Pagination {...data.meta} />}
-    </PageTableWrapper>
+    </>
   ) : (
     <TransactionsEmpty />
   );
@@ -71,7 +61,19 @@ export const Transactions = ({ query }: ITransactionsProps) => {
         </PageHeaderActions>
       </PageHeader>
 
-      {content}
+      <PageTableWrapper>
+        <TransactionDigit
+          total_amount={data?.data[0].total_amount ?? 4000}
+          type={query.type || "all"}
+          start_date={query.start_date}
+          end_date={query.end_date}
+          isLazy={isLoading || isFetching}
+        />
+        
+        <TransactionSort {...query} />
+        
+        {content}
+      </PageTableWrapper>
     </>
   )
 }
