@@ -58,7 +58,7 @@ export const ChangeYear = ({ goNextYear, goPrevYear, handleSelectDate, handleVie
 
         {isMonthYearOpen && (
           <div
-            className="absolute right-0 top-full mt-3 z-20 w-90 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-xl overflow-hidden"
+            className="absolute right-0 top-full mt-3 z-20 w-90 rounded-2xl border border-border/50 bg-card-accent overflow-hidden"
             role="dialog"
             aria-label="Календарь выбор месяца и года"
           >
