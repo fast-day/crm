@@ -25,6 +25,8 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
       time: undefined,
     }
   );
+
+  console.log(setting)
   
   const { closeDialog } = useDialog();
 
@@ -67,7 +69,7 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
           service={setting.service}
           user_id={account?.uuid}
         />
-        {(setting.service) && <BookingChangeServicePrice setSetting={setSetting} price={setting?.service?.prices.price}/>}
+        {(setting.service) && <BookingChangeServicePrice setSetting={setSetting} price={setting?.service?.prices.price} />}
 
         {(setting.service && account?.id) && (
           <>
