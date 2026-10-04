@@ -38,8 +38,8 @@ export const OrderResultServices = ({ bookings }: IOrderResultServicesProps) => 
                   <div className="font-medium text-sm leading-4">{service.service.name}</div>
                   <div className="flex items-center gap-2">
                     <div className="text-xss font-medium leading-4">{minuteFormat(service.service.duration)}</div>
-                    <span className="font-extrabold opacity-80 leading-4">·</span>
-                    <p className="text-xss font-medium leading-4">{service.user.full_name}</p>
+                    {/* <span className="font-extrabold opacity-80 leading-4">·</span> */}
+                    {/* <p className="text-xss font-medium leading-4">{service.user.full_name}</p> */}
                   </div>
                 </div>
               </div>

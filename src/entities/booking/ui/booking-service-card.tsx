@@ -1,21 +1,20 @@
 import { Avatar } from "@/entities/user";
 import { formatPrice, minuteFormat } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
-import type { IBookingUserType, IBookingService } from "../model/types/booking.type";
+import type { IBookingService } from "../model/types/booking.type";
 import { Card, CardContent } from "@/shared/ui";
 import { PaletteIcon } from "@/shared/icons";
 import { BookingAddServiceActions } from "@/features/booking";
 
 interface IBookingServiceCardProps {
   service: IBookingService;
-  employee: IBookingUserType;
   start_time: string;
   end_time: string;
   is_mimi?: boolean;
   is_marking_order?: boolean;
 }
 
-export const BookingServiceCard = ({ service, employee, start_time, end_time, is_mimi=false, is_marking_order=false }: IBookingServiceCardProps) => {
+export const BookingServiceCard = ({ service, start_time, end_time, is_mimi=false, is_marking_order=false }: IBookingServiceCardProps) => {
   return (
     <Card>
       <CardContent className={`p-4 flex ${is_mimi ? "flex-col space-y-3" : "items-center justify-between gap-2.5"}`}>
@@ -41,10 +40,10 @@ export const BookingServiceCard = ({ service, employee, start_time, end_time, is
                 </div>
               )}
               <div className="text-sm font-medium opacity-50">{minuteFormat(service.service.duration)}</div>
-              <Link to={`/employees/users/${employee.user_id}`} className="flex items-center gap-2">
+              {/* <Link to={`/employees/users/${employee.user_id}`} className="flex items-center gap-2">
                 <Avatar size={"xs"} avatar_url={employee.avatar} name={employee.first_name} id={employee.user_id} />
                 <p className="text-sm font-medium leading-3.5">{employee.full_name}</p>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
