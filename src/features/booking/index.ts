@@ -13,6 +13,7 @@ export { BookingStatusSort } from './ui/booking-status-sort';
 export { BookingAddServiceActions } from './ui/booking-add-service-actions';
 export { BookingChangeMark } from './ui/booking-change-mark';
 export { RemoveBookingService } from './ui/remove-booking-service';
+export { BookingAction } from './ui/booking-action';
 
 // HOOKS
 export { useBookingCreate } from './model/hooks/booking-create.hook';

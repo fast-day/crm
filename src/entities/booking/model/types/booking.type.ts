@@ -183,26 +183,7 @@ export interface IBookingActionCredentials {
   status?: BookingStatusType;
 }
 
-export interface IBookingConfirmCredentials {
-  params: {
-    booking_id: string;
-  }
-  body: {
-    status: OrderStatusType;
-    payment_method?: PaymentMethodType;
-  }
-}
-
-export interface IBookingConfirmResult {
-  id: string;
+export interface IBookingChangeStatusCredentials {
   status: BookingStatusType;
-  tag: string;
-  order: IBookingOrder;
-}
-
-export interface IBookingCompleteResult {
-  booking_status: BookingStatusType;
-  booking_id: string;
-  order_id: string;
-  order: IBookingOrder;
+  params: { booking_id: string; };
 }

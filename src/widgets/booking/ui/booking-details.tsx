@@ -5,7 +5,7 @@ import { formatPrice } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { BookingServices } from "./components/booking-services";
 import { BookingDetailCustomer } from "./components/booking-detail-customer";
-import { BookingOrderCard } from "@/features/booking";
+import { BookingAction, BookingOrderCard } from "@/features/booking";
 import { ContentPanel } from "@/widgets/ content-panel";
 import { ContentLayout } from "@/widgets/layout";
 
@@ -59,16 +59,12 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
           }
           actions={
             (booking.status === "new") && (
-              <div className="flex gap-3">
-                {/* <Link to={"edit"}>
-                  <Button type={"button"} size={"icon_60"} variant={"white"} className="p-5">
-                    <PencilEditIcon width={24} height={24} />
-                  </Button>
-                </Link> */}
+              <div className="flex 420:flex-row flex-col gap-3">
+                <BookingAction booking_id={booking.id} />
                 <Link to={`/finance/orders/checkout/sell?booking_id=${booking.id}${booking.order_id ? `&order_id=${booking.order_id}` : ``}`} className="w-full block">
                   <Button
                     type={"button"}
-                    size={"icon_60"}
+                    size={"size_60"}
                     className={"w-full"}
                     iconRight={<ChevronIcon width={20} height={20} />}
                   >Продолжить</Button>
