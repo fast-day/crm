@@ -177,7 +177,7 @@ export interface IBookingActionCredentials {
 
   services: IBookingServiceActionCredentials[];
   customers: Partial<Omit<IBookingCustomer, "full_name" | "avatar" | "birthday" | "email" | "profile_id">>[];
-
+  mark: MarkType;
   comment?: string | null;
   location_id: string;
   status?: BookingStatusType;

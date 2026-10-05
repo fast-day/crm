@@ -1,10 +1,10 @@
+import type { BookingCreate } from "@/entities/booking";
 import { Input } from "@/shared/ui"
-import type { ServiceSettingType } from "../model/types/booking-setting-service.type";
 import { useState } from "react";
 
 interface BookingChangeServicePriceProps {
   price: number | undefined;
-  setSetting: React.Dispatch<React.SetStateAction<ServiceSettingType>>;
+  setSetting: React.Dispatch<React.SetStateAction<BookingCreate>>;
 }
 
 export const BookingChangeServicePrice = ({ price, setSetting }: BookingChangeServicePriceProps) => {

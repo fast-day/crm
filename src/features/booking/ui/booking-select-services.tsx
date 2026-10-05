@@ -4,15 +4,15 @@ import { markClasses } from "@/shared/constants";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select/ui/select-custom";
 import { cn, formatPrice, minuteFormat } from "@/shared/utils";
 import { Link, useNavigate } from "@tanstack/react-router";
-import type { ServiceSettingType } from "../model/types/booking-setting-service.type";
 import { Button } from "@/shared/ui";
 import { PlusIcon } from "@/shared/icons";
+import type { BookingCreate } from "@/entities/booking";
 
 interface BookingSelectServicesProps {
   location_id: string;
   service: IDirectoryLocationService | undefined;
   // services: Array<{ id: string }> | undefined;
-  setSetting: React.Dispatch<React.SetStateAction<ServiceSettingType>>;
+  setSetting: React.Dispatch<React.SetStateAction<BookingCreate>>;
   user_id?: string;
 }
 

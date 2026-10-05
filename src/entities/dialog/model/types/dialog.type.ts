@@ -1,3 +1,4 @@
+import type { BookingCreate } from "@/entities/booking";
 import type { IScheduleIntervals } from "@/entities/schedule";
 import type { DayInfo } from "@/features/calendar";
 
@@ -60,7 +61,10 @@ export type DialogDataMap = {
   };
 
   /** ===== СОЗДАНИЕ БРОНИРОВАНИЯ ===== **/
-  booking_service_create: undefined;
+  booking_service_create: {
+    index: number;
+    booked: BookingCreate;
+  } | undefined;
 
   /** ===== ПРЕДУПРЕЖДЕНИЕ: ОТМЕНА СПОСОБА ОПЛАТЫ ===== **/
   cancel_payment_method: undefined;

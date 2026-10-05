@@ -1,14 +1,15 @@
-import { BookingChangeServicePrice, BookingSelectServices, type ServiceSettingType } from "@/features/booking"
+import { BookingChangeServicePrice, BookingSelectServices } from "@/features/booking"
 import { Button, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/shared/ui"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookingScheduleIntervals } from "./booking-schedule-intervals";
 import { formatDateWeek } from "@/shared/utils";
 import { useAppDispatch } from "@/shared/hooks";
-import { setBookingCreate } from "@/entities/booking";
-import { useDialog } from "@/entities/dialog";
+import { setBookingCreate, updateBookingCreate, type BookingCreate } from "@/entities/booking";
+import { dialogSelector, useDialog } from "@/entities/dialog";
 import { validateAddedBooking } from "@/features/booking/model/utils/validation.util";
 import { toast } from "sonner";
 import type { IMe } from "@/entities/account";
+import { useSelector } from "react-redux";
 
 interface BookingChangeServiceProps {
   location_id: string;
@@ -18,37 +19,30 @@ interface BookingChangeServiceProps {
 
 export const BookingChangeService = ({ location_id, date, account }: BookingChangeServiceProps) => {
   const dispatch = useAppDispatch();
-  const [setting, setSetting] = useState<ServiceSettingType>(
-    {
-      service: undefined,
-      date: date ?? undefined,
-      time: undefined,
-    }
-  );
-
-  console.log(setting)
-  
   const { closeDialog } = useDialog();
+  
+  const dialog = useSelector(dialogSelector).dialog;
+  const editing = dialog.name === "booking_service_create" ? dialog.data : undefined;
+
+  const empty: BookingCreate = { service: undefined, date, time: undefined, location: undefined, employee: undefined, };
+  const [setting, setSetting] = useState<BookingCreate>(empty);
+
+  useEffect(() => {
+    setSetting(editing ? { ...editing.booked } : empty);
+  }, [editing]);
 
   const handleSave = () => {
-
     const errors = validateAddedBooking(setting);
     if (errors.length > 0) {
       toast.error("Заполните все поля", { description: errors.map(e => e.message).join(" • ") });
       return;
     }
 
-    dispatch(setBookingCreate({
-      service: setting.service,
-      date: date,
-      time: setting.time,
-    }))
+    const item = { service: setting.service, date, time: setting.time };
+
+    dispatch(editing ? updateBookingCreate({ index: editing.index, item }) : setBookingCreate(item));
     closeDialog();
-    setSetting({
-      service: undefined,
-      date,
-      time: undefined,
-    });
+    setSetting({ service: undefined, date, time: undefined });
   }
 
   const onSelectInterval = (time: string) => {
@@ -58,7 +52,7 @@ export const BookingChangeService = ({ location_id, date, account }: BookingChan
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Добавление услуги</DialogTitle>
+        <DialogTitle>{editing ? "Редактирование услуги" : "Добавление услуги"}</DialogTitle>
         <DialogDescription></DialogDescription>
       </DialogHeader>
 

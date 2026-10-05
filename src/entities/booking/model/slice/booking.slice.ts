@@ -16,6 +16,7 @@ interface BookingState {
   booked: BookingCreate[];
   customer: IDirectoryCustomer | null;
   date: string;
+  mark: MarkType;
 }
 
 function getTodayFormatted(): string {
@@ -31,6 +32,7 @@ const initialState: BookingState = {
   booked: [],
   customer: null,
   date: getTodayFormatted(),
+  mark: "primary",
 };
 
 export const bookingSlice = createSlice({
@@ -39,6 +41,12 @@ export const bookingSlice = createSlice({
   reducers: {
     setBookingCreate: (state, action: PayloadAction<BookingCreate>) => {
       state.booked.push(action.payload);
+    },
+    updateBookingCreate: (state, action: PayloadAction<{ index: number; item: BookingCreate }>) => {
+      state.booked[action.payload.index] = action.payload.item;
+    },
+    removeBookingCreate: (state, action: PayloadAction<number>) => {
+      state.booked = state.booked.filter((_, i) => i !== action.payload);
     },
     changeBookingServicePrice: () => {
       // if (state.booked) {
@@ -60,15 +68,21 @@ export const bookingSlice = createSlice({
     },
     setBookingDate: (state, action: PayloadAction<string>) => {
       state.date = action.payload;
-    }
+    },
+    setBookingMark: (state, action: PayloadAction<MarkType>) => {
+      state.mark = action.payload;
+    },
   },
 });
 
 export const {
   setBookingCreate,
+  updateBookingCreate,
+  removeBookingCreate,
   changeBookingServicePrice,
   resetBookingCreate,
   setBookingCustomer,
   setBookingDate,
+  setBookingMark,
 } = bookingSlice.actions;
 export default bookingSlice.reducer;

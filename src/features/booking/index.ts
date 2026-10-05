@@ -11,6 +11,8 @@ export { BookingSelectDate } from './ui/booking-select-date';
 export { BookingOrderCard } from './ui/booking-order-card';
 export { BookingStatusSort } from './ui/booking-status-sort';
 export { BookingAddServiceActions } from './ui/booking-add-service-actions';
+export { BookingChangeMark } from './ui/booking-change-mark';
+export { RemoveBookingService } from './ui/remove-booking-service';
 
 // HOOKS
 export { useBookingCreate } from './model/hooks/booking-create.hook';

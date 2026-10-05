@@ -32,11 +32,14 @@ export const CalendarEventBlock = ({ event, className, view="week" }: ICalendarE
   const custom = !!renderEvent;
 
   const sizeStyle = custom && selected ? { minHeight: `${heightInPx}px` } : { height: `${heightInPx}px` }
-  const colorStyle = isMark ? undefined : ({ backgroundColor: "bg-primary" } as React.CSSProperties);
+  const colorStyle = isMark ? undefined : ({ backgroundColor: "var(--primary)" } as React.CSSProperties);
 
   const defaultContent = (
     <div className="truncate w-full relative">
-      <div className={cn(calendarItemVariant({ line: event.mark }), "absolute top-0 h-full w-1.25")} />
+      <div
+        className={cn(calendarItemVariant({ line: event.mark }), "absolute top-0 h-full w-1.25")}
+        style={{ ...colorStyle }}
+      />
       <div className={cn("px-2 h-6.25 flex items-center justify-between")}>
         <span className="text-xs font-medium">{event.start_time}-{event.end_time}</span>
         <Badge
@@ -72,7 +75,7 @@ export const CalendarEventBlock = ({ event, className, view="week" }: ICalendarE
         data-selected={selected ? "" : undefined}
         className={cn(
           "flex gap-1.5 truncate whitespace-nowrap rounded-10 text-sm",
-          calendarItemVariant({ color: event.mark ?? "primary" }),
+          calendarItemVariant({ color: event.mark }),
           duration < 35 && "p-0 justify-center",
           !isMark && "bg-primary",
           custom && selected && "relative z-10",
