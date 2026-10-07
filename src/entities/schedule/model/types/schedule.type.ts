@@ -74,7 +74,7 @@ export interface IScheduleUpdateResponse {
   date: string;
 }
 
-export type ScheduleDialogData = {
+export type TScheduleItem = {
   date_key: string;
   year: number;
   month_index: number;

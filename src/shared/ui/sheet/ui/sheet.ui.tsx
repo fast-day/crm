@@ -108,7 +108,7 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-card backdrop-blur-xs",
+        "fixed inset-0 z-50 bg-card-accent/30",
         "animate-in fade-in-0 duration-100",
         className
       )}

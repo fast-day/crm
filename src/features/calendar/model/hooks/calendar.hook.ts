@@ -3,7 +3,7 @@ import { MONTHS } from "../constants/calendar.constant";
 import { toBackendDateString, toDateKey } from "../utils/calendar.util";
 import type { CalendarCell, ScheduleEditInfo } from "../types/calendar.type";
 import { useDialog } from "@/entities/dialog";
-import type { ScheduleDialogData } from "@/entities/schedule";
+import type { TScheduleItem } from "@/entities/schedule";
 
 export interface UseCalendarReturnProps {
   goPrevMonth: () => void;
@@ -11,8 +11,10 @@ export interface UseCalendarReturnProps {
   goPrevYear: () => void;
   goNextYear: () => void;
   handleSelectDate: (dateKey: string | null) => void;
-  handleChangeSchedule: (data: ScheduleDialogData, editInfo?: ScheduleEditInfo) => void; // ← вот это
+  handleChangeSchedule: (data: TScheduleItem, editInfo?: ScheduleEditInfo) => void;
+  handleSelectDateItem: (data: TScheduleItem & Partial<ScheduleEditInfo>) => void;
   handleViewMonthIndex: (idx: number) => void;
+  toggleFlexMode: () => void;
 
   viewYear: number;
   yearMin: number;
@@ -22,6 +24,8 @@ export interface UseCalendarReturnProps {
   calendarTitle: string;
   calendarCells: CalendarCell[];
   todayDateKey: string;
+  customizedDate: (TScheduleItem & Partial<ScheduleEditInfo>)[];
+  isFlexMode: boolean;
 }
 
 export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
@@ -29,6 +33,8 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
   const [viewYear, setViewYear] = useState(() => today.getFullYear());
   const [viewMonthIndex, setViewMonthIndex] = useState(() => today.getMonth());
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
+  const [isFlexMode, setIsFlexMode] = useState(false);
+  const [customizedDate, setCustomizedDate] = useState<(TScheduleItem & Partial<ScheduleEditInfo>)[]>([]);
 
   const { openDialog } = useDialog();
 
@@ -78,7 +84,7 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
 
   const handleSelectDate = (dateKey: string | null) => setSelectedDateKey(dateKey);
 
-  const handleChangeSchedule = (data: ScheduleDialogData, editInfo?: ScheduleEditInfo) => {
+  const handleChangeSchedule = (data: TScheduleItem, editInfo?: ScheduleEditInfo) => {
     if (!data.in_month || !user_id) return;
 
     const backDate = toBackendDateString(data.year, data.month_index, data.day);
@@ -98,6 +104,18 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
       day_info: data.day_info,
     });
   }
+
+  const handleSelectDateItem = (data: TScheduleItem & Partial<ScheduleEditInfo>) => {
+    setCustomizedDate(p => p.some(d => d.date_key === data.date_key)
+      ? p.filter(d => d.date_key !== data.date_key)
+      : [...p, data]
+    );
+  };
+
+  const toggleFlexMode = () => {
+    setIsFlexMode(p => !p);
+    setCustomizedDate([]);
+  };
 
   const handleViewMonthIndex = (idx: number) => setViewMonthIndex(idx);
 
@@ -142,7 +160,9 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
     goNextYear,
     handleSelectDate,
     handleChangeSchedule,
+    handleSelectDateItem,
     handleViewMonthIndex,
+    toggleFlexMode,
 
     viewYear,
     yearMin,
@@ -152,5 +172,7 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
     calendarTitle,
     calendarCells,
     todayDateKey,
+    customizedDate,
+    isFlexMode,
   };
 };

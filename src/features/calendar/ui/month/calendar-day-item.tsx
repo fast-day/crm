@@ -1,23 +1,24 @@
 import { cn } from "@/shared/utils";
 import { formatInterval } from "../../model/utils/calendar.util";
 import type { CalendarCell, DayInfo } from "../../model/types/calendar.type";
-import type { ScheduleDialogData } from "@/entities/schedule";
+import type { TScheduleItem } from "@/entities/schedule";
 
 interface CalendarDayItemProps {
   dayInfo?: DayInfo;
   isMarked: boolean;
   isToday: boolean;
   isSelected: boolean;
-  handleChangeSchedule: (data: ScheduleDialogData) => void;
+  onClick: (data: TScheduleItem) => void;
   cell: CalendarCell;
+  isCurrentDay?: boolean;
 }
 
-export const CalendarDayItem = ({ dayInfo, isMarked, isToday, isSelected, handleChangeSchedule, cell }: CalendarDayItemProps) => {
+export const CalendarDayItem = ({ dayInfo, isMarked, isToday, isCurrentDay, onClick, cell, isSelected=false }: CalendarDayItemProps) => {
   return (
     <div
       onClick={() => {
         if (!cell.inMonth) return;
-        handleChangeSchedule({
+        onClick({
           date_key: cell.dateKey,
           year: cell.year,
           month_index: cell.monthIndex,
@@ -28,9 +29,10 @@ export const CalendarDayItem = ({ dayInfo, isMarked, isToday, isSelected, handle
       }}
       aria-disabled={!cell.inMonth}
       className={cn(
-        "1100:aspect-square h-19 1100:h-auto w-full 100:max-w-35 rounded-xl border-2 flex flex-col items-center relative overflow-hidden 1100:py-5 1100:px-3 p-4", 
-        isSelected ? "border-primary/30 bg-muted" : "border-transparent bg-muted-foreground",
-        !cell.inMonth ? "bg-transparent! border-accent/10 text-accent/40! justify-center" : "",
+        "1100:aspect-square h-19 1100:h-auto w-full 100:max-w-35 rounded-xl border-2 flex flex-col items-center relative overflow-hidden 1100:py-5 1100:px-3 p-4 border-transparent cursor-pointer", 
+        isCurrentDay && "border-primary/30 bg-muted",
+        isSelected && "border-primary",
+        !cell.inMonth && "bg-transparent! border-accent/10 text-accent/40! justify-center",
         isMarked ? "bg-muted" : "bg-red-accent/30 text-red-accent",
       )}
       aria-label={`День ${cell.day}`}
