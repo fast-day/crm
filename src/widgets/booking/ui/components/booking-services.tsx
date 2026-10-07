@@ -17,7 +17,6 @@ export const BookingServices = ({ booking_services }: IBookingServicesProps) => 
             <BookingServiceCard
               key={idx}
               service={service}
-              employee={service.user}
               start_time={service.booking_service_start_time}
               end_time={service.booking_service_end_time}
             />

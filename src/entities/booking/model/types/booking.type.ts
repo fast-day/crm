@@ -177,32 +177,13 @@ export interface IBookingActionCredentials {
 
   services: IBookingServiceActionCredentials[];
   customers: Partial<Omit<IBookingCustomer, "full_name" | "avatar" | "birthday" | "email" | "profile_id">>[];
-
+  mark: MarkType;
   comment?: string | null;
   location_id: string;
   status?: BookingStatusType;
 }
 
-export interface IBookingConfirmCredentials {
-  params: {
-    booking_id: string;
-  }
-  body: {
-    status: OrderStatusType;
-    payment_method?: PaymentMethodType;
-  }
-}
-
-export interface IBookingConfirmResult {
-  id: string;
+export interface IBookingChangeStatusCredentials {
   status: BookingStatusType;
-  tag: string;
-  order: IBookingOrder;
-}
-
-export interface IBookingCompleteResult {
-  booking_status: BookingStatusType;
-  booking_id: string;
-  order_id: string;
-  order: IBookingOrder;
+  params: { booking_id: string; };
 }

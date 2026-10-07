@@ -44,7 +44,5 @@ export const calendarItemVariant = cva(undefined, {
   },
   defaultVariants: {
     color: "primary",
-    head: "primary",
-    line: "primary",
   }
 });

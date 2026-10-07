@@ -129,7 +129,7 @@ function HoverDropdownContent ({ align="center", side="bottom", children, classN
   return createPortal(
     <div
       ref={ref}
-      data-ui="dropdown-content"
+      data-ui="hover-dropdown-content"
       data-state={ctx.open ? "open" : "closed"}
       style={coords ? { top: coords.top, left: coords.left } : undefined}
       className={cn(`
@@ -151,7 +151,7 @@ function HoverDropdownItem ({ children, className }: React.ComponentProps<"div">
   if (!ctx) return null;
 
   return (
-    <div data-ui="dropdown-item" data-action="dropdown-item" onClick={ctx.close} className={cn("flex items-center gap-3 px-2.5 py-2 hover:bg-primary/90 active:opacity-55 hover:text-white/90 duration-200 text-white/70 cursor-pointer rounded-12", className)}>{children}</div>
+    <div data-ui="hover-dropdown-item" data-action="hover-dropdown-item" onClick={ctx.close} className={cn("flex items-center gap-3 px-2.5 py-2 hover:bg-primary/90 active:opacity-55 hover:text-white/90 duration-200 text-white/70 cursor-pointer rounded-12", className)}>{children}</div>
   )
 }
 
@@ -166,8 +166,8 @@ function HoverDropdownItemTrigger ({ children, onClick, ...props }: React.Button
 
   return (
     <Button 
-      data-ui="dropdown-button"
-      data-action="dropdown-button"
+      data-ui="hover-dropdown-button"
+      data-action="hover-dropdown-button"
       onClick={handleClick}
       size={"none"}
       type={"button"}
@@ -186,8 +186,8 @@ function HoverDropdownItemLink ({ children, className, href, ...props }: HoverDr
   return (
     <Link 
       to={href}
-      data-ui="dropdown-link"
-      data-action="dropdown-link"
+      data-ui="hover-dropdown-link"
+      data-action="hover-dropdown-link"
       onClick={() => ctx.close()}
       className={cn("flex items-center gap-2 px-2.5 py-2 hover:bg-primary/90 active:opacity-55 hover:text-white/90 duration-200 text-white/70 font-medium text-sm leading-4 rounded-12", className)}
       {...props}
@@ -198,12 +198,12 @@ function HoverDropdownItemLink ({ children, className, href, ...props }: HoverDr
 }
 
 function HoverDropdownSeparator ({ className="" }: { className?: string }) {
-  return <div data-ui="dropdown-separator" className={cn("h-px bg-primary my-1", className)} />;
+  return <div data-ui="hover-dropdown-separator" className={cn("h-px bg-primary my-1", className)} />;
 }
 
 function HoverDropdownLabel ({ children, className }: React.ComponentProps<"div">) {
   return (
-    <div data-ui="dropdown-label" className={cn("text-white/70 px-3 py-2.5 font-semibold text-sm", className)}>
+    <div data-ui="hover-dropdown-label" className={cn("text-white/70 px-3 py-2.5 font-semibold text-sm", className)}>
       {children}
     </div>
   )

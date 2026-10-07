@@ -17,7 +17,7 @@ export const OrderServices = () => {
             <BookingServiceCard
               key={service.booking_service_id}
               service={service}
-              employee={service.user}
+              // employee={service.user}
               start_time={service.booking_service_start_time}
               end_time={service.booking_service_end_time}
               is_mimi

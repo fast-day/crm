@@ -2,6 +2,7 @@ import type { ScheduleDialogData } from "@/entities/schedule";
 import { CalendarDayItem, ChangeYear, CurrentDate, WEEKDAYS_MONDAY_START, type DayInfo, type ScheduleEditInfo } from "@/features/calendar"
 import type { UseCalendarReturnProps } from "@/features/calendar/model/hooks/calendar.hook";
 import { LazyBlur } from "@/widgets/loading";
+import { useMediaQuery } from "react-responsive";
 
 interface CalendarProps {
   calendar: UseCalendarReturnProps;
@@ -12,6 +13,8 @@ interface CalendarProps {
 }
 
 export const CalendarMonth = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoading=false, isFetching }: CalendarProps) => {
+  const isTablet = useMediaQuery({ query: `(max-width: 1099px)` });
+
   const handleChangeSchedule = (data: ScheduleDialogData) => {
     const editInfo = scheduleEditByKey.get(data.date_key);
     calendar.handleChangeSchedule(data, editInfo);
@@ -19,8 +22,9 @@ export const CalendarMonth = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoa
 
   return (
     <div className="mt-8">
+      
       <div className="flex items-start justify-between gap-6 flex-wrap">
-        <CurrentDate calendarTitle={calendar.calendarTitle} goPrevMonth={calendar.goPrevMonth} goNextMonth={calendar.goNextMonth} />
+        {!isTablet && <CurrentDate calendarTitle={calendar.calendarTitle} goPrevMonth={calendar.goPrevMonth} goNextMonth={calendar.goNextMonth} />}
 
         <ChangeYear
           goPrevYear={calendar.goPrevYear}
@@ -35,16 +39,18 @@ export const CalendarMonth = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoa
         />
       </div>
 
-      <div className="mt-6 max-w-317 w-full mx-auto">
-        <div className="grid grid-cols-7 gap-2.5">
-          {WEEKDAYS_MONDAY_START.map((w) => (
-            <div key={w} className="text-md font-extrabold text-center">
-              {w}
-            </div>
-          ))}
-        </div>
+      <div className="mt-6 max-w-260 w-full mx-auto">
+        {!isTablet && (
+          <div className="grid grid-cols-7 gap-2.5">
+            {WEEKDAYS_MONDAY_START.map((w) => (
+              <div key={w} className="text-xs opacity-50 xl:text-sm font-bold text-center">
+                {w}
+              </div>
+            ))}
+          </div>
+        )}
 
-        <div className="grid grid-cols-7 gap-2.5 mt-2.5 relative">
+        <div className="grid grid-cols-1 1100:grid-cols-7 gap-2.5 mt-2.5 relative">
           {isFetching && <LazyBlur />}
           {isLoading && <div className="absolute top-0 left-0 h-full w-full rounded-xl z-10 backdrop-blur-xs" />}
           {calendar.calendarCells.map((cell) => {

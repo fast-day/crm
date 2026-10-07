@@ -13,8 +13,9 @@ interface ServiceCategoryProps<F extends FieldValues> {
   isLoadingCategory: boolean;
 }
 
+const EMPTY: { id: number; name: string }[] = [];
 
-export const ServiceCategory = <F extends FieldValues>({ name, control, categories=[] }: ServiceCategoryProps<F>) => {
+export const ServiceCategory = <F extends FieldValues>({ name, control, categories=EMPTY }: ServiceCategoryProps<F>) => {
   const [isCreating, setIsCreating] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [localCategories, setLocalCategories] = useState(categories);

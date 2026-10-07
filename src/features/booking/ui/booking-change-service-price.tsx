@@ -1,31 +1,37 @@
+import type { BookingCreate } from "@/entities/booking";
 import { Input } from "@/shared/ui"
-import type { ServiceSettingType } from "../model/types/booking-setting-service.type";
+import { useState } from "react";
 
 interface BookingChangeServicePriceProps {
   price: number | undefined;
-  setSetting: React.Dispatch<React.SetStateAction<ServiceSettingType>>;
+  setSetting: React.Dispatch<React.SetStateAction<BookingCreate>>;
 }
 
 export const BookingChangeServicePrice = ({ price, setSetting }: BookingChangeServicePriceProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const num = Number(value);
+  const [text, setText] = useState(price?.toString() ?? "");
 
-    if (!isNaN(num)) {
-      setSetting(p => {
-        if (!p.service) return p;
-        return { ...p, service: { ...p.service, prices: { ...p.service.prices, price: num } } };
-      });
-    }
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (!/^\d*$/.test(value)) return;
+
+    setText(value);
+    setSetting(p => {
+      if (!p.service) return p;
+      return {
+        ...p,
+        service: { ...p.service, prices: { ...p.service.prices, price: Number(value) } },
+      };
+    });
+  };
 
   return (
     <Input
       name={"service-price"}
       id={"service-price"}
-      type={"number"}
+      type={"text"}
+      inputMode={"numeric"}
       inputSize={"size_60"}
-      value={price ?? ""}
+      value={text}
       onChange={handleChange}
       label={"RUB"}
       step={1}

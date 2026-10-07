@@ -9,7 +9,7 @@ import { getErrorMessage } from "@/shared/utils";
 import { Route } from "@/app/routes/_app/_layout-focus/bookings/create/";
 
 interface UseBookingCreateReturnProps {
-  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, employee: IMe | null, location_id?: string) => Promise<void>;
+  handleSave: (booked: BookingCreate[] | null, customer: IDirectoryCustomer | null, employee: IMe | null, mark: MarkType, location_id?: string) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -23,6 +23,7 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
     booked: BookingCreate[] | null,
     customer: IDirectoryCustomer | null,
     employee: IMe | null,
+    mark: MarkType,
     location_id?: string,
   ): Promise<void> => {
     if (!location_id) {
@@ -54,22 +55,16 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
           count: 1,
           start_time: `${book.date}T${book.time!}`,
           duration: book.service!.duration,
-
           /*
-            !===== ПОКА БЕЗ ВЫБОРА СОТРУДНИКА  =====!
-            ЧУТЬ ПОЗЖЕ ОПТИМИЗИРОВАТЬ ДО АВТОМАТИЧЕСКОГО ОПРЕДЕЛЕНИЯ
-            ЕСЛИ СОТРУДНИК 1, ТО ПО ДЕФОЛТУ ПРОКИДЫВАТЬ ЕГО, ЕСЛИ МНОГО - ДАВАТЬ ВОЗМОЖНОСТЬ ВЫБРАТЬ
+          !===== ПОКА БЕЗ ВЫБОРА СОТРУДНИКА  =====!
+          ЧУТЬ ПОЗЖЕ ОПТИМИЗИРОВАТЬ ДО АВТОМАТИЧЕСКОГО ОПРЕДЕЛЕНИЯ
+          ЕСЛИ СОТРУДНИК 1, ТО ПО ДЕФОЛТУ ПРОКИДЫВАТЬ ЕГО, ЕСЛИ МНОГО - ДАВАТЬ ВОЗМОЖНОСТЬ ВЫБРАТЬ
           */
           users: employee?.uuid ? [{
             id: employee.uuid,
             first_name: employee.first_name,
             last_name: employee.last_name,
           }] : [],
-          // users: book.employee?.id ? [{
-          //   id: book.employee.profile_id,
-          //   first_name: book.employee.first_name,
-          //   last_name: book.employee.last_name,
-          // }] : [],
         })),
         customers: customer ? [{
           id: customer.customer_attributes.profile_id,
@@ -77,6 +72,7 @@ export const useBookingCreate = (): UseBookingCreateReturnProps => {
           last_name: customer.customer_attributes.last_name,
           phone: customer.customer_attributes.phone,
         }] : [],
+        mark,
         location_id,
         comment: null,
       } satisfies IBookingActionCredentials;

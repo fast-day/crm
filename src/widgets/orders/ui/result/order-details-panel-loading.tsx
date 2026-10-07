@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, Skeleton } from "@/shared/ui"
 
 export const OrderDetailsPanelLoading = () => {
   return (
-    <Card className="flex flex-col px-4 min-w-95">
+    <Card className="flex flex-col px-4 max-w-135 w-full mx-auto 1100:max-w-95 1100:min-w-95 1100:mx-0">
 
       <CardHeader className="px-0">
         <CardTitle>Итого</CardTitle>

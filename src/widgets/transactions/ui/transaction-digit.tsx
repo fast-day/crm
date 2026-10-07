@@ -1,5 +1,5 @@
 import type { TransactionType } from "@/entities/transactions";
-import { Card, CardContent, CardDescription, CardTitle } from "@/shared/ui";
+import { Card, CardContent, CardDescription, CardTitle, Skeleton } from "@/shared/ui";
 import { formatPrice } from "@/shared/utils";
 import { transactionMessage } from "../model/utils/message.util";
 
@@ -8,15 +8,25 @@ interface ITransactionDigitProps {
   type: TransactionType | "all";
   start_date: string;
   end_date: string;
+  isLazy?: boolean;
 }
 
-export const TransactionDigit = ({ total_amount, type, start_date, end_date }: ITransactionDigitProps) => {
+export const TransactionDigit = ({ total_amount, type, start_date, end_date, isLazy }: ITransactionDigitProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2.5">
       <Card>
         <CardContent className="space-y-1.5">
-          <CardTitle className="text-4xl font-extrabold">{formatPrice(total_amount)} ₽</CardTitle>
-          <CardDescription className="opacity-60">{transactionMessage(type, { start_date, end_date })} {formatPrice(total_amount)} ₽</CardDescription>
+          {isLazy ? (
+            <>
+              <Skeleton className="w-50 h-10 rounded-12" />
+              <Skeleton className="md:h-5 h-8.5 md:rounded-10 rounded-12" />
+            </>
+          ) : (
+            <>
+              <CardTitle className="text-4xl font-extrabold">{formatPrice(total_amount)} ₽</CardTitle>
+              <CardDescription className="opacity-60">{transactionMessage(type, { start_date, end_date })} {formatPrice(total_amount)} ₽</CardDescription>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -1,6 +1,6 @@
 import { accountSelector } from "@/entities/account"
 import { BookingSelectCustomerInfo, bookingSelector, BookingSelectServiceCard, BookingTotalPrice } from "@/entities/booking";
-import { BookingSelectCustomer, BookingSelectDate, useBookingCreate } from "@/features/booking";
+import { BookingChangeMark, BookingSelectCustomer, BookingSelectDate, RemoveBookingService, useBookingCreate } from "@/features/booking";
 import { AddIcon } from "@/shared/icons";
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Dialog } from "@/shared/ui"
 import { useSelector } from "react-redux"
@@ -11,7 +11,7 @@ import { Link } from "@tanstack/react-router";
 
 export const BookingCreateForm = ({ date }: { date: string }) => {
   const { location, account } = useSelector(accountSelector);
-  const { booked, customer, date: current_date } = useSelector(bookingSelector);
+  const { booked, customer, date: current_date, mark } = useSelector(bookingSelector);
   const dialogName = useSelector(dialogSelector).dialog.name;
 
   const { closeDialog, openDialog } = useDialog();
@@ -46,7 +46,8 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
                         {booked.map((book, idx) => (
                           <BookingSelectServiceCard
                             key={idx}
-                            onClick={() => console.log("book: ", book)}
+                            onClick={() => openDialog("booking_service_create", { index: idx, booked: book })}
+                            removeComponent={<RemoveBookingService idx={idx} />}
                             {...book}
                           />
                         ))}
@@ -100,13 +101,17 @@ export const BookingCreateForm = ({ date }: { date: string }) => {
               </div>
 
               <BookingSelectDate date={date ? date : current_date} />
+              
+              <div className="mt-auto">
+                <BookingChangeMark />
+              </div>
             </div>
           }
           actions={
             <>
               <Button
                 type={"button"}
-                onClick={() => handleSave(booked, customer, account, location?.uuid)}
+                onClick={() => handleSave(booked, customer, account, mark, location?.uuid)}
                 isLoading={isLoading}
                 disabled={isLoading}
               >Сохранить</Button>

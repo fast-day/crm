@@ -10,11 +10,12 @@ interface BookingSelectServiceCardProps {
   date?: string;
   time?: string;
   onClick: () => void;
+  removeComponent?: React.ReactNode;
 }
 
-export const BookingSelectServiceCard = ({ service, employee, date, time, onClick }: BookingSelectServiceCardProps) => {
+export const BookingSelectServiceCard = ({ service, employee, date, time, onClick, removeComponent }: BookingSelectServiceCardProps) => {
   return (
-    <Card onClick={onClick} className="cursor-pointer">
+    <Card onClick={onClick} className="cursor-pointer relative">
       <CardContent className="flex gap-2.5 p-4">
         {service && (
           <div className="relative">
@@ -43,6 +44,7 @@ export const BookingSelectServiceCard = ({ service, employee, date, time, onClic
           </div>
         </div>
         {service && <div className="text-md font-bold">{formatPrice(service.prices.price)} ₽</div>}
+        {removeComponent && removeComponent}
       </CardContent>
     </Card>
   )

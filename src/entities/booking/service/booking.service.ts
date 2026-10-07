@@ -1,22 +1,23 @@
 import { API } from "@/shared/api";
-import type { IBooking, IBookingActionCredentials, IBookingCalendarCredentials, IBookingCompleteResult, IBookingConfirmCredentials, IBookingConfirmResult, IBookingCredentials, IBookingDetail, ICalendarBookings } from "../model/types/booking.type";
+import type { IBooking, IBookingActionCredentials, IBookingCalendarCredentials, IBookingChangeStatusCredentials, IBookingCredentials, IBookingDetail, ICalendarBookings } from "../model/types/booking.type";
 import { buildQuery } from "@/shared/lib";
 
 export const bookingApi = API.injectEndpoints({
   endpoints: builder => ({
 
     /**
-      ===== СПИСОК ВСЕХ БРОНИРОВАНИЙ =====
+      ===== СПИСОК ВСЕХ ЗАПИСЕЙ =====
     **/
     getBookings: builder.query<ApiResponse<IBooking>, IBookingCredentials>({
       query: ({ location_id, ...query }) => ({
         url: buildQuery(`/v1/bookings/location/${location_id}`, { ...query }),
         method: "GET",
       }),
+      providesTags: ["BOOKINGS"]
     }),
 
     /**
-      ===== СПИСОК ВСЕХ БРОНИРОВАНИЙ: КАЛЕНДАРЬ =====
+      ===== СПИСОК ВСЕХ ЗАПИСЕЙ: КАЛЕНДАРЬ =====
     **/
     getCalendarBookings: builder.query<ICalendarBookings, IBookingCalendarCredentials>({
       query: ({ location_id, ...query }) => ({
@@ -26,7 +27,7 @@ export const bookingApi = API.injectEndpoints({
     }),
 
     /**
-      ===== ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О БРОНИРОВАНИИ =====
+      ===== ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ЗАПИСИ =====
     **/
     getBooking: builder.query<IBookingDetail, { booking_id: string }>({
       query: ({ booking_id }) => ({
@@ -37,7 +38,7 @@ export const bookingApi = API.injectEndpoints({
     }),
 
     /**
-      ===== СОЗДАНИЕ БРОНИРОВАНИЯ =====
+      ===== СОЗДАНИЕ ЗАПИСИ =====
     **/
     createBooking: builder.mutation<IBooking, IBookingActionCredentials>({
       query: (body) => ({
@@ -64,26 +65,30 @@ export const bookingApi = API.injectEndpoints({
     }),
 
     /**
-      ===== ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ =====
+      ===== ИЗМЕНЕНИЕ СТАТУСА ЗАПИСИ =====
     **/
-    confirmBooking: builder.mutation<IBookingConfirmResult, IBookingConfirmCredentials>({
-      query: ({ params, body }) => ({
-        url: `/v1/booking/${params.booking_id}/confirm`,
-        method: "PATCH",
+    changeBookingStatus: builder.mutation<IBookingDetail, IBookingChangeStatusCredentials>({
+      query: ({ params, ...body }) => ({
+        url: `/v1/booking/${params.booking_id}`,
+        method: "PUT",
         body,
       }),
-      invalidatesTags: ["BOOKINGS"],
-    }),
 
-    /**
-      ===== ЗАВЕРШЕНИЕ БРОНИРОВАНИЯ =====
-    **/
-    completeBooking: builder.mutation<IBookingCompleteResult, { booking_id: string }>({
-      query: ({ booking_id }) => ({
-        url: `/v1/booking/${booking_id}/complete`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["BOOKINGS"],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+
+          dispatch(
+            bookingApi.util.updateQueryData(
+              "getBooking",
+              { booking_id: arg.params.booking_id },
+              (draft) => {
+                Object.assign(draft, data)
+              }
+            )
+          );
+        } catch { /* */ }
+      },
     }),
   }),
 });
@@ -94,6 +99,5 @@ export const {
   useGetBookingQuery,
   useLazyGetBookingQuery,
   useCreateBookingMutation,
-  useConfirmBookingMutation,
-  useCompleteBookingMutation,
+  useChangeBookingStatusMutation,
 } = bookingApi;
