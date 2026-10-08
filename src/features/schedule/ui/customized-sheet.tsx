@@ -37,6 +37,7 @@ export const CustomizedSheet = ({ dates, userId, locationId, onSuccess }: ICusto
           size={"size_56"}
           iconLeft={<EditIcon width={18} height={18} />}
           className={"text-xs font-semibold hover:bg-card px-5 rounded-none border-r border-background"}
+          classNameChild={"sm:block hidden"}
         >
           Настроить
         </Button>

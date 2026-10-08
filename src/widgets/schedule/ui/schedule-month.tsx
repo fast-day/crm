@@ -4,6 +4,7 @@ import type { UseCalendarReturnProps } from "@/features/calendar/model/hooks/cal
 import { CustomizedClose, CustomizedOffDay, CustomizedSheet, PRESETS, ScheduleBulkSelect } from "@/features/schedule";
 import { Button, Card, CardContent } from "@/shared/ui";
 import { LazyBlur } from "@/widgets/loading";
+import { AnimatePresence, motion } from "motion/react";
 import { useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 
@@ -54,64 +55,84 @@ export const ScheduleMonth = ({  userId, locationId, calendar, dayInfoByKey, sch
   return (
     <div className="mt-8">
 
-      {(calendar.isFlexMode && calendar.customizedDate.length > 0) && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <Card className="bg-white overflow-hidden">
-            <CardContent className="p-0 flex">
-              <CustomizedSheet
-                dates={calendar.customizedDate.map((d) => d.date_key)}
-                userId={userId}
-                locationId={locationId}
-                onSuccess={calendar.toggleFlexMode}
-              />
-              <CustomizedOffDay
-                dates={calendar.customizedDate.map((d) => d.date_key)}
-                userId={userId}
-                locationId={locationId}
-                onSuccess={calendar.toggleFlexMode}
-              />
-              <CustomizedClose onClick={calendar.toggleFlexMode} />
-            </CardContent>
-          </Card>
-        </div>
-      )}
-      
-      <div className="flex items-start justify-between gap-6 flex-wrap">
-        {!isTablet && <CurrentDate calendarTitle={calendar.calendarTitle} goPrevMonth={calendar.goPrevMonth} goNextMonth={calendar.goNextMonth} />}
-
-        <ChangeYear
-          goPrevYear={calendar.goPrevYear}
-          goNextYear={calendar.goNextYear}
-          calendarTitle={calendar.calendarTitle}
-          viewYear={calendar.viewYear}
-          yearMin={calendar.yearMin}
-          yearMax={calendar.yearMax}
-          viewMonthIndex={calendar.viewMonthIndex}
-          handleSelectDate={calendar.handleSelectDate}
-          handleViewMonthIndex={calendar.handleViewMonthIndex}
-        />
-      </div>
+      <AnimatePresence>
+        {(calendar.isFlexMode && calendar.customizedDate.length > 0) && (
+          <div className="fixed bottom-19 1100:bottom-8 left-1/2 -translate-x-1/2 z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.25 }}
+            >
+              <Card className="bg-white overflow-hidden">
+                <CardContent className="p-0 flex">
+                  <CustomizedSheet
+                    dates={calendar.customizedDate.map((d) => d.date_key)}
+                    userId={userId}
+                    locationId={locationId}
+                    onSuccess={calendar.toggleFlexMode}
+                  />
+                  <CustomizedOffDay
+                    dates={calendar.customizedDate.map((d) => d.date_key)}
+                    userId={userId}
+                    locationId={locationId}
+                    onSuccess={calendar.toggleFlexMode}
+                  />
+                  <CustomizedClose onClick={calendar.toggleFlexMode} />
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <div className="mt-6 max-w-260 w-full mx-auto space-y-4">
-        <div className="flex items-center justify-end gap-2.5">
-          {calendar.isFlexMode && (
-            <ScheduleBulkSelect
-              isFlexMode={calendar.isFlexMode}
-              viewYear={calendar.viewYear}
-              viewMonthIndex={calendar.viewMonthIndex}
-              onPreset={handlePreset}
-            />
-          )}
-          <Button
-            type={"button"}
-            size={"size_40"}
-            variant={"white"}
-            animation={"toggle_sm"}
-            className={"text-sm font-semibold w-fit px-4"}
-            onClick={calendar.toggleFlexMode}
-          >
-            {calendar.isFlexMode ? "Отменить" : "Множественный выбор" }
-          </Button>
+        <div className="flex items-center justify-between gap-2.5">
+          <div className="flex items-center gap-5">
+            {!calendar.isFlexMode && (
+              <>
+                {!isTablet && (
+                  <CurrentDate
+                    goPrevMonth={calendar.goPrevMonth}
+                    goNextMonth={calendar.goNextMonth}
+                  />
+                )}
+    
+                <ChangeYear
+                  goPrevYear={calendar.goPrevYear}
+                  goNextYear={calendar.goNextYear}
+                  calendarTitle={calendar.calendarTitle}
+                  viewYear={calendar.viewYear}
+                  yearMin={calendar.yearMin}
+                  yearMax={calendar.yearMax}
+                  viewMonthIndex={calendar.viewMonthIndex}
+                  handleSelectDate={calendar.handleSelectDate}
+                  handleViewMonthIndex={calendar.handleViewMonthIndex}
+                />
+              </>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            {calendar.isFlexMode && (
+              <ScheduleBulkSelect
+                isFlexMode={calendar.isFlexMode}
+                viewYear={calendar.viewYear}
+                viewMonthIndex={calendar.viewMonthIndex}
+                onPreset={handlePreset}
+              />
+            )}
+            <Button
+              type={"button"}
+              size={"size_40"}
+              variant={"white"}
+              animation={"toggle_sm"}
+              className={"text-sm font-semibold w-fit px-4"}
+              onClick={calendar.toggleFlexMode}
+            >
+              {calendar.isFlexMode ? "Отменить" : "Множественный выбор" }
+            </Button>
+          </div>
         </div>
 
         <div>

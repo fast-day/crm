@@ -251,7 +251,7 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
       data-selected={isSelected}
       className={cn(
         "relative flex w-full items-center gap-2 rounded-14 py-3.5 px-4 text-md outline-hidden select-none cursor-pointer duration-200", 
-        isSelected ? "bg-gray" : "", 
+        isSelected && "bg-card", 
         className
       )}
       onPointerDown={handlePointerDown}

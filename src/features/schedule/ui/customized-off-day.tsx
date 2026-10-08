@@ -42,6 +42,7 @@ export const CustomizedOffDay = ({ userId, locationId, dates, onSuccess }: ICust
       disabled={isLoading}
       iconLeft={<BanIcon width={18} height={18} className="text-red" />}
       className={"text-xs font-semibold hover:bg-card px-5 rounded-none border-r border-background"}
+      classNameChild={"sm:block hidden"}
     >Выходной</Button>
   )
 }
