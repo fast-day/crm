@@ -1,7 +1,7 @@
 import type { TScheduleItem } from "@/entities/schedule";
 import { CalendarDayItem, ChangeYear, CurrentDate, WEEKDAYS_MONDAY_START, type DayInfo, type ScheduleEditInfo } from "@/features/calendar"
 import type { UseCalendarReturnProps } from "@/features/calendar/model/hooks/calendar.hook";
-import { CustomizedClose, CustomizedSheet } from "@/features/schedule";
+import { CustomizedClose, CustomizedOffDay, CustomizedSheet, PRESETS, ScheduleBulkSelect } from "@/features/schedule";
 import { Button, Card, CardContent } from "@/shared/ui";
 import { LazyBlur } from "@/widgets/loading";
 import { useMemo } from "react";
@@ -30,16 +30,41 @@ export const ScheduleMonth = ({  userId, locationId, calendar, dayInfoByKey, sch
     }
   };
 
+  const handlePreset = ({ value }: { value: string }) => {
+    const test = PRESETS.find((p) => p.value === value)?.test;
+    if (!test) return;
+
+    const items = calendar.calendarCells
+      .filter((c) => c.inMonth && test(c))
+      .map((c) => ({
+        date_key: c.dateKey,
+        year: c.year,
+        month_index: c.monthIndex,
+        day: c.day,
+        in_month: c.inMonth,
+        day_info: dayInfoByKey.get(c.dateKey),
+        ...scheduleEditByKey.get(c.dateKey),
+      }));
+
+    calendar.selectDates(items);
+  };
+
   const customizedKeys = useMemo(() => new Set(calendar.customizedDate.map(d => d.date_key)), [calendar.customizedDate]);
 
   return (
     <div className="mt-8">
 
       {(calendar.isFlexMode && calendar.customizedDate.length > 0) && (
-        <div className="fixed bottom-8 left-1/2 translate-x-1/2 z-10">
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10">
           <Card className="bg-white overflow-hidden">
             <CardContent className="p-0 flex">
               <CustomizedSheet
+                dates={calendar.customizedDate.map((d) => d.date_key)}
+                userId={userId}
+                locationId={locationId}
+                onSuccess={calendar.toggleFlexMode}
+              />
+              <CustomizedOffDay
                 dates={calendar.customizedDate.map((d) => d.date_key)}
                 userId={userId}
                 locationId={locationId}
@@ -68,7 +93,15 @@ export const ScheduleMonth = ({  userId, locationId, calendar, dayInfoByKey, sch
       </div>
 
       <div className="mt-6 max-w-260 w-full mx-auto space-y-4">
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end gap-2.5">
+          {calendar.isFlexMode && (
+            <ScheduleBulkSelect
+              isFlexMode={calendar.isFlexMode}
+              viewYear={calendar.viewYear}
+              viewMonthIndex={calendar.viewMonthIndex}
+              onPreset={handlePreset}
+            />
+          )}
           <Button
             type={"button"}
             size={"size_40"}

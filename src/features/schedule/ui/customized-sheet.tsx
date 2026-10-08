@@ -1,6 +1,6 @@
 import { IntervalsField } from "@/features/schedule/ui/intervals-field"
 import { EditIcon } from "@/shared/icons"
-import { Button, Form, Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/shared/ui"
+import { Button, Form, Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/shared/ui"
 import { bulkScheduleSchema, toSlots, type BulkScheduleForm } from "../model/schemas/schedule.schema";
 import { useState } from "react";
 import { formatDates, pluralizeDays, useBulkCreateMutation } from "@/entities/schedule";
@@ -72,7 +72,8 @@ export const CustomizedSheet = ({ dates, userId, locationId, onSuccess }: ICusto
           </div>
         </div>
 
-        <SheetFooter>
+        <SheetFooter className="space-y-1">
+          <SheetDescription className="text-xs leading-4 opacity-50">Обратите внимание: эти настройки перезапишут существующее расписание</SheetDescription>
           <Button
             type={"submit"}
             form={"schedule-sheet-save"}

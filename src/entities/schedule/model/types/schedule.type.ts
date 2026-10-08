@@ -1,5 +1,9 @@
 import type { DayInfo } from "@/features/calendar";
 
+/**
+  !!! ПРИВЕСТИ ВСЕ В ПОРЯДОК !!!
+**/
+
 export interface ISchedule {
   id: number;
   date: string;
@@ -34,6 +38,14 @@ export interface IScheduleBulkCreateCredentials {
   body: {
     user_id: string;
     slots: ScheduleSlot[];
+  };
+}
+
+export interface IScheduleBulkDayOffCreateCredentials {
+  params: { location_id: string },
+  body: {
+    user_id: string;
+    dates: string[];
   };
 }
 

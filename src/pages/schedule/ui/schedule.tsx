@@ -1,10 +1,9 @@
 import { useAccount } from "@/entities/account"
 import { dialogSelector } from "@/entities/dialog"
 import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule"
-import { Can } from "@/features/auth";
 import { isTimeValue, isWeekendValue, pad2, parseBackendDate, toDateKey, useCalendar, type DayInfo, type ScheduleEditInfo } from "@/features/calendar";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui";
-import { ScheduleDialog, ScheduleMonth, ScheduleSetting } from "@/widgets/schedule"
+import { ScheduleDialog, ScheduleMonth } from "@/widgets/schedule"
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
@@ -93,9 +92,6 @@ export const Schedule = () => {
         <PageHeaderTitle>Расписание</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
-          <Can permission={"test"}>
-            <ScheduleSetting />
-          </Can>
         </PageHeaderActions>
       </PageHeader>
 

@@ -15,6 +15,7 @@ export interface UseCalendarReturnProps {
   handleSelectDateItem: (data: TScheduleItem & Partial<ScheduleEditInfo>) => void;
   handleViewMonthIndex: (idx: number) => void;
   toggleFlexMode: () => void;
+  selectDates: (items: (TScheduleItem & Partial<ScheduleEditInfo>)[]) => void;
 
   viewYear: number;
   yearMin: number;
@@ -117,6 +118,11 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
     setCustomizedDate([]);
   };
 
+  const selectDates = (items: (TScheduleItem & Partial<ScheduleEditInfo>)[]) => {
+    setIsFlexMode(true);
+    setCustomizedDate(items);
+  };
+
   const handleViewMonthIndex = (idx: number) => setViewMonthIndex(idx);
 
   const goPrevMonth = () => {
@@ -163,6 +169,7 @@ export const useCalendar = (user_id?: string): UseCalendarReturnProps => {
     handleSelectDateItem,
     handleViewMonthIndex,
     toggleFlexMode,
+    selectDates,
 
     viewYear,
     yearMin,

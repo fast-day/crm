@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import { type IScheduleDetail, type IScheduleCreateCredentials, type IScheduleCredentials, type ISchedule, type IScheduleEmployeeParams, type IScheduleUpdateCredentials, type IScheduleUpdateResponse, type IScheduleBulkCreateCredentials, } from "../model/types/schedule.type";
+import { type IScheduleDetail, type IScheduleCreateCredentials, type IScheduleCredentials, type ISchedule, type IScheduleEmployeeParams, type IScheduleUpdateCredentials, type IScheduleUpdateResponse, type IScheduleBulkCreateCredentials, type IScheduleBulkDayOffCreateCredentials, } from "../model/types/schedule.type";
 import { buildQuery } from "@/shared/lib";
 
 export const scheduleAPI = API.injectEndpoints({
@@ -22,6 +22,18 @@ export const scheduleAPI = API.injectEndpoints({
     bulkCreate: builder.mutation<ISchedule, IScheduleBulkCreateCredentials>({
       query: ({ body, params }) => ({
         url: `/v1/schedule/${params.location_id}/bulk`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_res, error) => (error ? [] : [{ type: "SCHEDULE", id: "LIST" }]),
+    }),
+
+    /** 
+      ===== СОЗДАНИЕ ВЫХОДНОГО ДНЯ =====
+    **/
+    bulkDayOffCreate: builder.mutation<ISchedule, IScheduleBulkDayOffCreateCredentials>({
+      query: ({ body, params }) => ({
+        url: `/v1/schedule/${params.location_id}/bulk/day-off`,
         method: "POST",
         body,
       }),
@@ -80,6 +92,7 @@ export const scheduleAPI = API.injectEndpoints({
 export const {
   useCreateMutation,
   useBulkCreateMutation,
+  useBulkDayOffCreateMutation,
   useGetDetailEmployeeServiceQuery,
   useLazyGetDetailEmployeeServiceQuery,
   useGetEmployeeServicesQuery,

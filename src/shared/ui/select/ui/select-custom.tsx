@@ -177,8 +177,6 @@ function SelectContent({ className, children, ...props }: ComponentProps<"div">)
     }
 
     if (open) {
-      // pointerdown вместо click — срабатывает до React onClick на SelectItem
-      // { capture: true } — перехватываем до всплытия
       document.addEventListener('pointerdown', handlePointerDown, { capture: true });
       return () => document.removeEventListener('pointerdown', handlePointerDown, { capture: true });
     }
@@ -252,8 +250,8 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
       data-ui={"select-item"}
       data-selected={isSelected}
       className={cn(
-        "hover:backdrop-blur-3xl relative flex w-full items-center gap-2 rounded-14 py-3.5 px-4 text-md outline-hidden select-none cursor-pointer", 
-        isSelected ? "backdrop-blur-3xl" : "", 
+        "relative flex w-full items-center gap-2 rounded-14 py-3.5 px-4 text-md outline-hidden select-none cursor-pointer duration-200", 
+        isSelected ? "bg-gray" : "", 
         className
       )}
       onPointerDown={handlePointerDown}
