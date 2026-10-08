@@ -171,6 +171,19 @@
   --breakpoint-1100: 1101px;
   --breakpoint-440: 441px;
 
+  /* animate */
+  --animate-sheet-in-bottom: sheet-in-bottom 0.25s ease-out;
+  --animate-sheet-in-right: sheet-in-right 0.25s ease-out;
+
+  @keyframes sheet-in-bottom {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+  @keyframes sheet-in-right {
+    from { transform: translateX(2.5rem); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+
   /* ... */
 }
 

@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type PropsWithChildren } from "react";
 import type { IDropdownContext, TDropdownComponent, TDropdownContentProps, TDropdownProps } from "../model/types/types.type";
-import { cn } from "@/shared/utils";
+import { cn, lockBodyScroll } from "@/shared/utils";
 import { createPortal } from "react-dom";
 import { Button } from "../../button";
 import { useMediaQuery } from "react-responsive";
@@ -112,9 +112,7 @@ const DropdownContent = ({ align="center", side="bottom", children, className, c
 
   useEffect(() => {
     if (!ctx?.open || !isMobile) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
+    return lockBodyScroll();
   }, [ctx?.open, isMobile]);
 
   if (!ctx || !ctx.open) return null;
