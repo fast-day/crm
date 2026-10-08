@@ -12,10 +12,11 @@ export type IDropdownContext = {
 } | null;
 
 export type TDropdownContentProps = {
-  children: React.ReactNode;
+  children: React.ReactNode | ((api: { close: () => void }) => React.ReactNode);
   side?: Side,
   align?: Align,
   className?: string;
+  cancelLabel?: string;
 }
 
 export type TDropdownProps = {
