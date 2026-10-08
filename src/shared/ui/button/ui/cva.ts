@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-md font-extrabold transition-colors gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-200",
+  "inline-flex items-center justify-center sm:whitespace-nowrap rounded-xl text-md font-extrabold transition-colors gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-200",
   {
     variants: {
       variant: {
@@ -46,6 +46,7 @@ export const buttonVariants = cva(
         icon_42: "size-10.5",
         icon_44: "size-11",
         icon_48: "size-12",
+        icon_56: "size-14",
         icon_60: "size-15",
 
         size_24: "h-6",

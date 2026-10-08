@@ -1,8 +1,9 @@
 import React, { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type PropsWithChildren } from "react";
 import type { IDropdownContext, TDropdownComponent, TDropdownContentProps, TDropdownProps } from "../model/types/types.type";
-import { cn } from "@/shared/utils";
+import { cn, lockBodyScroll } from "@/shared/utils";
 import { createPortal } from "react-dom";
 import { Button } from "../../button";
+import { useMediaQuery } from "react-responsive";
 
 const DropdownContext = createContext<IDropdownContext>(null);
 
@@ -59,12 +60,15 @@ const DropdownTrigger = ({ children }: PropsWithChildren) => {
   )
 }
 
-const DropdownContent = ({ align="center", side="bottom", children, className }: TDropdownContentProps) => {
+const MOBILE_QUERY = "(max-width: 767px)";
+
+const DropdownContent = ({ align="center", side="bottom", children, className, cancelLabel="Отмена" }: TDropdownContentProps) => {
   const ctx = useContext(DropdownContext);
+  const isMobile = useMediaQuery({ query: MOBILE_QUERY });
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
 
   useLayoutEffect(() => {
-    if (!ctx?.open) {
+    if (!ctx?.open || isMobile) {
       setCoords(null);
       return;
     }
@@ -106,7 +110,42 @@ const DropdownContent = ({ align="center", side="bottom", children, className }:
     };
   }, [ctx?.open, side]);
 
+  useEffect(() => {
+    if (!ctx?.open || !isMobile) return;
+    return lockBodyScroll();
+  }, [ctx?.open, isMobile]);
+
   if (!ctx || !ctx.open) return null;
+
+  const body = typeof children === "function" ? children({ close: ctx.close }) : children;
+
+  if (isMobile) {
+    return createPortal(
+      <div
+        className="fixed inset-0 z-50 flex flex-col justify-end bg-card-accent/30 animate-in fade-in-0"
+        onClick={(e) => { if (e.target === e.currentTarget) ctx.close(); }}
+      >
+        <div
+          ref={ctx.contentRef}
+          data-ui="dropdown-content"
+          className="flex flex-col gap-2.5 p-5 animate-in slide-in-from-bottom"
+        >
+          <div className={cn("bg-white rounded-2xl p-2 max-h-[70dvh] overflow-y-auto", className)}>
+            {body}
+          </div>
+          <Button
+            type={"button"}
+            variant={"accent"}
+            animation={"toggle_sm"}
+            size={"size_56"}
+            className={"w-full font-semibold hover:bg-primary! active:bg-primary! active:opacity-100!"}
+            onClick={ctx.close}
+          >{cancelLabel}</Button>
+        </div>
+      </div>,
+      document.body,
+    );
+  }
 
   return createPortal(
     <div
@@ -123,7 +162,7 @@ const DropdownContent = ({ align="center", side="bottom", children, className }:
       `,
       )}
     >
-      <div className={cn("bg-white min-w-30 rounded-12 w-auto overflow-hidden p-2", className)}>{children}</div>
+      <div className={cn("bg-white min-w-30 rounded-12 w-auto overflow-hidden p-2", className)}>{body}</div>
     </div>,
     document.body,
   )
@@ -147,7 +186,7 @@ const DropdownItem = ({ children, className, icon, onClick, ...props }: TDropdow
       data-ui={"dropdown-item"}
       data-action={"dropdown-item"}
       onClick={handleClick}
-      className={cn("flex items-center gap-2.5 px-2.5 py-1.5 text-xs font-medium hover:bg-card text-foreground active:opacity-55 duration-200 cursor-pointer rounded-12", className)}
+      className={cn("flex items-center gap-2.5 md:px-2.5 md:py-1.5 md:text-xs text-md px-5! py-4! font-medium hover:bg-card text-foreground active:opacity-55 duration-200 cursor-pointer rounded-12", className)}
       {...props}
     >
       {icon && <span className="size-4">{icon}</span>}

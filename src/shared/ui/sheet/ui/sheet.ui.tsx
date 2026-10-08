@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { cn } from "@/shared/utils";
+import { cn, lockBodyScroll } from "@/shared/utils";
 import { Button, buttonVariants } from "../../button";
 import { useCallback, useContext, useEffect, useState } from "react";
 import type { VariantProps } from "class-variance-authority";
@@ -108,7 +108,7 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-card backdrop-blur-xs",
+        "fixed inset-0 z-50 bg-card-accent/30",
         "animate-in fade-in-0 duration-100",
         className
       )}
@@ -120,8 +120,18 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const sideStyles: Record<Side, string> = {
-  right: "inset-y-0 right-0 h-full w-3/4 sm:max-w-sm data-[state=open]:slide-in-from-right-10 data-[state=closed]:slide-out-to-right-10",
-  left: "inset-y-0 left-0 h-full w-3/4 sm:max-w-sm data-[state=open]:slide-in-from-left-10 data-[state=closed]:slide-out-to-left-10",
+  right: [
+    "inset-0 h-dvh w-full data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom",
+    "sm:inset-y-0 sm:inset-x-auto sm:right-0 sm:h-full sm:w-3/4 sm:max-w-sm",
+    "sm:data-[state=open]:slide-in-from-bottom-0 sm:data-[state=closed]:slide-out-to-bottom-0",
+    "sm:data-[state=open]:slide-in-from-right-10 sm:data-[state=closed]:slide-out-to-right-10",
+  ].join(" "),
+  left: [
+    "inset-0 h-dvh w-full data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom",
+    "sm:inset-y-0 sm:inset-x-auto sm:left-0 sm:h-full sm:w-3/4 sm:max-w-sm",
+    "sm:data-[state=open]:slide-in-from-bottom-0 sm:data-[state=closed]:slide-out-to-bottom-0",
+    "sm:data-[state=open]:slide-in-from-left-10 sm:data-[state=closed]:slide-out-to-left-10",
+  ].join(" "),
   top: "inset-x-0 top-0 h-auto data-[state=open]:slide-in-from-top-10 data-[state=closed]:slide-out-to-top-10",
   bottom: "inset-x-0 bottom-0 h-auto data-[state=open]:slide-in-from-bottom-10 data-[state=closed]:slide-out-to-bottom-10",
 }
@@ -142,6 +152,11 @@ function SheetContent({ className, children, side = "right", showCloseButton = t
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, onOpenChange]);
+
+  useEffect(() => {
+    if (!open) return;
+    return lockBodyScroll();
+  }, [open]);
 
   if (!open) return null;
 
@@ -184,7 +199,7 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="sheet-header"
-      className={cn("flex flex-col gap-0.5 p-6", className)}
+      className={cn("flex flex-col gap-0.5 px-6 pt-6", className)}
       {...props}
     />
   )
@@ -194,7 +209,7 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="sheet-footer"
-      className={cn("mt-auto flex flex-col gap-2 p-6", className)}
+      className={cn("mt-auto flex flex-col gap-2 px-6 pb-6", className)}
       {...props}
     />
   )

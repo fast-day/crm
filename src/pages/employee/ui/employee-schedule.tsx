@@ -3,9 +3,8 @@ import { dialogSelector } from "@/entities/dialog";
 import { useGetEmployeeServicesQuery, type ISchedule } from "@/entities/schedule";
 import { isTimeValue, isWeekendValue, parseBackendDate, toDateKey, useCalendar, type DayInfo, type ScheduleEditInfo } from "@/features/calendar";
 import { PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
-import { CalendarMonth } from "@/widgets/calendar";
 import { EmployeeNotFound } from "@/widgets/employee";
-import { ScheduleDialog } from "@/widgets/schedule";
+import { ScheduleDialog, ScheduleMonth } from "@/widgets/schedule";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
@@ -93,13 +92,15 @@ export const EmployeeSchedule = ({ employee_id }: IEmployeeScheduleProps) => {
 
       {isError && <EmployeeNotFound />}
       {!isError && 
-        <CalendarMonth 
-          dayInfoByKey={dayInfoByKey}
-          isLoading={isLoading || isFetching}
-          isFetching={isFetching}
-          calendar={calendar}
-          scheduleEditByKey={scheduleEditByKey}
-        />
+        <ScheduleMonth 
+        dayInfoByKey={dayInfoByKey}
+        isLoading={isLoading || isFetching}
+        isFetching={isFetching}
+        calendar={calendar}
+        scheduleEditByKey={scheduleEditByKey}
+        userId={employee_id}
+        locationId={location_id}
+      />
       }
       {dialog.name === "schedule" && <ScheduleDialog location_id={location_id} data={dialog.data} />}
     </>

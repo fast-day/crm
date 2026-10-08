@@ -12,3 +12,4 @@ export { isApiError } from './api-error/api-error';
 export { formatPrice } from './price/formatter';
 export { removeEmpty } from './object/object';
 export { getErrorMessage } from './error/error.util';
+export { lockBodyScroll } from './lock-scroll/lock-body-scroll.util';

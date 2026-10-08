@@ -1,4 +1,5 @@
 import { PaletteIcon, SettingIcon, WorldIcon } from "@/shared/icons"
+import SvgCalendar from "@/shared/icons/Calendar"
 import SvgPerson from "@/shared/icons/Person"
 import { Link } from "@tanstack/react-router"
 
@@ -9,14 +10,19 @@ const settings = [
     href: "/settings/system",
   },
   {
+    icon: <SvgPerson />,
+    name: "Профиль",
+    href: "/me",
+  },
+  {
     icon: <PaletteIcon />,
     name: "Услуги",
     href: "/business/services",
   },
   {
-    icon: <SvgPerson />,
-    name: "Профиль",
-    href: "/me",
+    icon: <SvgCalendar />,
+    name: "Расписание",
+    href: "/schedule",
   },
   {
     icon: <WorldIcon />,

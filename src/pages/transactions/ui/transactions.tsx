@@ -63,7 +63,7 @@ export const Transactions = ({ query }: ITransactionsProps) => {
 
       <PageTableWrapper>
         <TransactionDigit
-          total_amount={data?.data[0].total_amount ?? 4000}
+          total_amount={data?.data[0].total_amount ?? 0}
           type={query.type || "all"}
           start_date={query.start_date}
           end_date={query.end_date}

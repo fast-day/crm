@@ -1,11 +1,11 @@
 import { API } from "@/shared/api";
-import { type IScheduleDetail, type IScheduleCreateCredentials, type IScheduleCredentials, type ISchedule, type IScheduleEmployeeParams, type IScheduleUpdateCredentials, type IScheduleUpdateResponse, } from "../model/types/schedule.type";
+import { type IScheduleDetail, type IScheduleCreateCredentials, type IScheduleCredentials, type ISchedule, type IScheduleEmployeeParams, type IScheduleUpdateCredentials, type IScheduleUpdateResponse, type IScheduleBulkCreateCredentials, type IScheduleBulkDayOffCreateCredentials, } from "../model/types/schedule.type";
 import { buildQuery } from "@/shared/lib";
 
 export const scheduleAPI = API.injectEndpoints({
   endpoints: builder => ({
     /** 
-      ===== СОЗДАНИЕ РАСПИСАНИЯ ДЛЯ СОТРУДНИКА =====
+      ===== СОЗДАНИЕ РАСПИСАНИЯ =====
     **/
     create: builder.mutation<ISchedule, IScheduleCreateCredentials>({
       query: ({ body, params }) => ({
@@ -17,7 +17,31 @@ export const scheduleAPI = API.injectEndpoints({
     }),
 
     /** 
-      ===== ПОЛУЧЕНИЕ ДЕТАЛАЛЬНОГО РАСПИСАНИЯ СОТРУДНИКА =====
+      ===== СОЗДАНИЕ МНОЖЕСТВЕННОГО РАСПИСАНИЯ =====
+    **/
+    bulkCreate: builder.mutation<ISchedule, IScheduleBulkCreateCredentials>({
+      query: ({ body, params }) => ({
+        url: `/v1/schedule/${params.location_id}/bulk`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_res, error) => (error ? [] : [{ type: "SCHEDULE", id: "LIST" }]),
+    }),
+
+    /** 
+      ===== СОЗДАНИЕ ВЫХОДНОГО ДНЯ =====
+    **/
+    bulkDayOffCreate: builder.mutation<ISchedule, IScheduleBulkDayOffCreateCredentials>({
+      query: ({ body, params }) => ({
+        url: `/v1/schedule/${params.location_id}/bulk/day-off`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_res, error) => (error ? [] : [{ type: "SCHEDULE", id: "LIST" }]),
+    }),
+
+    /** 
+      ===== ПОЛУЧЕНИЕ ДЕТАЛАЛЬНОГО РАСПИСАНИЯ =====
     **/
     getDetailEmployeeService: builder.query<IScheduleDetail, IScheduleCredentials>({
       query: ({ body, params }) => ({
@@ -28,7 +52,7 @@ export const scheduleAPI = API.injectEndpoints({
     }),
 
     /** 
-      ===== ПОЛУЧЕНИЕ ВСЕГО РАСПИСАНИЯ СОТРУДНИКА =====
+      ===== ПОЛУЧЕНИЕ ВСЕГО РАСПИСАНИЯ =====
     **/
     getEmployeeServices: builder.query<ISchedule[], IScheduleEmployeeParams>({
       query: ({ user_id, location_id, query }) => ({
@@ -41,7 +65,7 @@ export const scheduleAPI = API.injectEndpoints({
     }),
 
     /** 
-      ===== РЕДАКТИРОВАНИЕ РАСПИСАНИЯ СОТРУДНИКА =====
+      ===== РЕДАКТИРОВАНИЕ РАСПИСАНИЯ =====
     **/
     update: builder.mutation<IScheduleUpdateResponse, IScheduleUpdateCredentials>({
       query: ({ body, params }) => ({
@@ -53,7 +77,7 @@ export const scheduleAPI = API.injectEndpoints({
     }),
 
     /** 
-      ===== УДАЛЕНИЕ РАСПИСАНИЯ СОТРУДНИКА =====
+      ===== УДАЛЕНИЕ РАСПИСАНИЯ =====
     **/
     delete: builder.mutation<void, IScheduleCredentials>({
       query: ({ body, params }) => ({
@@ -67,6 +91,8 @@ export const scheduleAPI = API.injectEndpoints({
 
 export const {
   useCreateMutation,
+  useBulkCreateMutation,
+  useBulkDayOffCreateMutation,
   useGetDetailEmployeeServiceQuery,
   useLazyGetDetailEmployeeServiceQuery,
   useGetEmployeeServicesQuery,

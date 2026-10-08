@@ -177,8 +177,6 @@ function SelectContent({ className, children, ...props }: ComponentProps<"div">)
     }
 
     if (open) {
-      // pointerdown вместо click — срабатывает до React onClick на SelectItem
-      // { capture: true } — перехватываем до всплытия
       document.addEventListener('pointerdown', handlePointerDown, { capture: true });
       return () => document.removeEventListener('pointerdown', handlePointerDown, { capture: true });
     }
@@ -219,7 +217,7 @@ function SelectContent({ className, children, ...props }: ComponentProps<"div">)
       data-ui={"select-content"}
       style={{ maxHeight }}
       className={cn(
-        "scrollbar-hidden bg-card backdrop-blur-xl p-3.5 text-foreground relative z-50 min-w-32 overflow-x-hidden overflow-y-auto rounded-2xl",
+        "scrollbar-hidden bg-gray p-3.5 text-foreground relative z-50 min-w-32 overflow-x-hidden overflow-y-auto rounded-2xl overscroll-contain touch-pan-y",
         "absolute left-0 right-0 z-50 my-2",
         side === 'bottom' && "top-full",
         side === 'top' && "bottom-full",
@@ -241,7 +239,7 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
   const { value: selected, setValue } = useSelect();
   const isSelected = selected?.value === value.value;
 
-  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+  const handleClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     setValue(value);
     onChange?.();
@@ -252,11 +250,11 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
       data-ui={"select-item"}
       data-selected={isSelected}
       className={cn(
-        "hover:backdrop-blur-3xl relative flex w-full items-center gap-2 rounded-14 py-3.5 px-4 text-md outline-hidden select-none cursor-pointer", 
-        isSelected ? "backdrop-blur-3xl" : "", 
+        "relative flex w-full items-center gap-2 rounded-14 py-3.5 px-4 text-md outline-hidden select-none cursor-pointer duration-200", 
+        isSelected && "bg-card", 
         className
       )}
-      onPointerDown={handlePointerDown}
+      onClick={handleClick}
       {...props}
     >
       {children}
