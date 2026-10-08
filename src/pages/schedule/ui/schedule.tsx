@@ -100,6 +100,8 @@ export const Schedule = () => {
       </PageHeader>
 
       <ScheduleMonth
+        userId={user_id}
+        locationId={location_id}
         calendar={calendar}
         scheduleEditByKey={scheduleEditByKey}
         dayInfoByKey={dayInfoByKey}

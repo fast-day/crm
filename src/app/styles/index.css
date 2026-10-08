@@ -26,6 +26,8 @@
     --card-ring: oklch(91.807% 0.00965 72.467);             /* #E8E3DD */
     --card-accent: oklch(89.675% 0.00971 72.47);            /* #E1DCD6 */
 
+    --gray: oklch(97.586% 0.00122 107.808);                 /* #F7F7F6 */
+
     --red: oklch(69.103% 0.17056 26.222);                   /* #f36a61 */
     --red-accent: oklch(66.604% 0.22173 30.905);            /* #ff4931 */
     
@@ -110,6 +112,8 @@
   --color-card: var(--card);
   --color-card-ring: var(--card-ring);
   --color-card-accent: var(--card-accent);
+
+  --color-gray: var(--gray);
   
   --color-red: var(--red);
   --color-red-accent: var(--red-accent);

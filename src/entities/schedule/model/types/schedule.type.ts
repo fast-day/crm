@@ -27,6 +27,16 @@ export interface IScheduleCreateCredentials {
   body: IScheduleCreateBodyCredentials;
 }
 
+export type ScheduleSlot = { date: string; start: string; end: string };
+
+export interface IScheduleBulkCreateCredentials {
+  params: { location_id: string },
+  body: {
+    user_id: string;
+    slots: ScheduleSlot[];
+  };
+}
+
 export interface IScheduleCreateBodyCredentials {
   date: string;
   intervals: IScheduleIntervals[];

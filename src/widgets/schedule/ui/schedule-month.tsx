@@ -1,13 +1,15 @@
 import type { TScheduleItem } from "@/entities/schedule";
 import { CalendarDayItem, ChangeYear, CurrentDate, WEEKDAYS_MONDAY_START, type DayInfo, type ScheduleEditInfo } from "@/features/calendar"
 import type { UseCalendarReturnProps } from "@/features/calendar/model/hooks/calendar.hook";
-import { CloseIcon, EditIcon } from "@/shared/icons";
-import { Button, Card, CardContent, Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/shared/ui";
+import { CustomizedClose, CustomizedSheet } from "@/features/schedule";
+import { Button, Card, CardContent } from "@/shared/ui";
 import { LazyBlur } from "@/widgets/loading";
 import { useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 
 interface ScheduleProps {
+  userId: string;
+  locationId: string;
   calendar: UseCalendarReturnProps;
   dayInfoByKey: Map<string, DayInfo>;
   scheduleEditByKey: Map<string, ScheduleEditInfo>;
@@ -15,7 +17,7 @@ interface ScheduleProps {
   isFetching: boolean;
 }
 
-export const ScheduleMonth = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoading=false, isFetching }: ScheduleProps) => {
+export const ScheduleMonth = ({  userId, locationId, calendar, dayInfoByKey, scheduleEditByKey, isLoading=false, isFetching }: ScheduleProps) => {
   const isTablet = useMediaQuery({ query: `(max-width: 1099px)` });
 
   const handleChangeSchedule = (data: TScheduleItem) => {
@@ -37,32 +39,13 @@ export const ScheduleMonth = ({ calendar, dayInfoByKey, scheduleEditByKey, isLoa
         <div className="fixed bottom-8 left-1/2 translate-x-1/2 z-10">
           <Card className="bg-white overflow-hidden">
             <CardContent className="p-0 flex">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button
-                    type={"button"}
-                    variant={"transparent"}
-                    size={"size_56"}
-                    iconLeft={<EditIcon width={18} height={18} />}
-                    className={"text-xs font-semibold hover:bg-card px-5 rounded-none border-r border-background"}
-                  >
-                    Настроить
-                  </Button>
-                </SheetTrigger>
-
-                <SheetContent>
-                  <SheetHeader>
-                    <SheetTitle>Настроить расписание</SheetTitle>
-                  </SheetHeader>
-                </SheetContent>
-              </Sheet>
-              <Button
-                type={"button"}
-                variant={"transparent"}
-                size={"icon_56"}
-                className={"hover:bg-red/25 hover:text-red rounded-none"}
-                onClick={calendar.toggleFlexMode}
-              ><CloseIcon width={20} height={20} /></Button>
+              <CustomizedSheet
+                dates={calendar.customizedDate.map((d) => d.date_key)}
+                userId={userId}
+                locationId={locationId}
+                onSuccess={calendar.toggleFlexMode}
+              />
+              <CustomizedClose onClick={calendar.toggleFlexMode} />
             </CardContent>
           </Card>
         </div>

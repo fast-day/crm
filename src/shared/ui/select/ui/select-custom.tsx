@@ -219,7 +219,7 @@ function SelectContent({ className, children, ...props }: ComponentProps<"div">)
       data-ui={"select-content"}
       style={{ maxHeight }}
       className={cn(
-        "scrollbar-hidden bg-card backdrop-blur-xl p-3.5 text-foreground relative z-50 min-w-32 overflow-x-hidden overflow-y-auto rounded-2xl",
+        "scrollbar-hidden bg-gray p-3.5 text-foreground relative z-50 min-w-32 overflow-x-hidden overflow-y-auto rounded-2xl",
         "absolute left-0 right-0 z-50 my-2",
         side === 'bottom' && "top-full",
         side === 'top' && "bottom-full",
