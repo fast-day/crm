@@ -93,12 +93,14 @@ export const EmployeeSchedule = ({ employee_id }: IEmployeeScheduleProps) => {
       {isError && <EmployeeNotFound />}
       {!isError && 
         <ScheduleMonth 
-          dayInfoByKey={dayInfoByKey}
-          isLoading={isLoading || isFetching}
-          isFetching={isFetching}
-          calendar={calendar}
-          scheduleEditByKey={scheduleEditByKey}
-        />
+        dayInfoByKey={dayInfoByKey}
+        isLoading={isLoading || isFetching}
+        isFetching={isFetching}
+        calendar={calendar}
+        scheduleEditByKey={scheduleEditByKey}
+        userId={employee_id}
+        locationId={location_id}
+      />
       }
       {dialog.name === "schedule" && <ScheduleDialog location_id={location_id} data={dialog.data} />}
     </>
