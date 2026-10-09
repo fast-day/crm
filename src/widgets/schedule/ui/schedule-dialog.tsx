@@ -1,8 +1,10 @@
+import { updateAccount } from "@/entities/account";
 import { useDialog } from "@/entities/dialog";
 import { useCreateMutation, useUpdateMutation, type IScheduleCreateBodyCredentials, type IScheduleIntervals } from "@/entities/schedule";
 import type { DayInfo } from "@/features/calendar";
 import { intervalsSchema, type IntervalsSchemaType } from "@/features/schedule/model/schemas/schedule.schema";
 import { IntervalsField } from "@/features/schedule/ui/intervals-field";
+import { useAppDispatch } from "@/shared/hooks";
 import { Button, Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, Form } from "@/shared/ui"
 import { getErrorMessage } from "@/shared/utils";
 import { toast } from "sonner";
@@ -25,6 +27,7 @@ interface ScheduleDialogProps {
 }
 
 export const ScheduleDialog = ({ location_id, data: props }: ScheduleDialogProps) => {
+  const dispatch = useAppDispatch();
   const { closeDialog } = useDialog();
 
   const [createSchedule, { isLoading: isCreating }] = useCreateMutation()
@@ -53,6 +56,8 @@ export const ScheduleDialog = ({ location_id, data: props }: ScheduleDialogProps
         }).unwrap()
         closeDialog();
       }
+
+      dispatch(updateAccount({ has_schedules: true }));
     }
     catch (error) {
       console.error("Не удалось сохранить расписание");

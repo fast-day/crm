@@ -7,7 +7,7 @@ const SvgNetworkOn = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-access-point"
+    className="network-on_svg__icon network-on_svg__icon-tabler network-on_svg__icons-tabler-outline network-on_svg__icon-tabler-access-point"
     viewBox="0 0 24 24"
     {...props}
   >

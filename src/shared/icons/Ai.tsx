@@ -7,7 +7,7 @@ const SvgAi = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-settings-ai"
+    className="ai_svg__icon ai_svg__icon-tabler ai_svg__icons-tabler-outline ai_svg__icon-tabler-settings-ai"
     viewBox="0 0 24 24"
     {...props}
   >

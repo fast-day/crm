@@ -65,9 +65,10 @@ export interface IMe {
   locations: MeLocation[];
   company: IMeCompany | null;
   settings: MeSettings;
-  has_customers: boolean,
-  has_employees: boolean,
-  has_bookings: boolean,
-  has_orders: boolean,
-  has_services: boolean,
+  has_customers: boolean;
+  has_employees: boolean;
+  has_bookings: boolean;
+  has_orders: boolean;
+  has_services: boolean;
+  has_schedules: boolean;
 }

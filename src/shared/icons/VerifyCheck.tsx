@@ -3,7 +3,7 @@ const SvgVerifyCheck = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
-    className="icon icon-tabler icons-tabler-filled icon-tabler-rosette-discount-check"
+    className="verify-check_svg__icon verify-check_svg__icon-tabler verify-check_svg__icons-tabler-filled verify-check_svg__icon-tabler-rosette-discount-check"
     viewBox="0 0 24 24"
     {...props}
   >

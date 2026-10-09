@@ -7,7 +7,7 @@ const SvgShop = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-building-store"
+    className="shop_svg__icon shop_svg__icon-tabler shop_svg__icons-tabler-outline shop_svg__icon-tabler-building-store"
     viewBox="0 0 24 24"
     {...props}
   >

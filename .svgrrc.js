@@ -10,6 +10,7 @@ export default {
           },
         },
       },
+      'prefixIds',
       'removeDimensions',
       {
         name: "convertColors",

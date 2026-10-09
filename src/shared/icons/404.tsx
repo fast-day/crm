@@ -7,7 +7,7 @@ const Svg404 = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-error-404"
+    className="404_svg__icon 404_svg__icon-tabler 404_svg__icons-tabler-outline 404_svg__icon-tabler-error-404"
     viewBox="0 0 24 24"
     {...props}
   >

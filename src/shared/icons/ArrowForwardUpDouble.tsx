@@ -7,7 +7,7 @@ const SvgArrowForwardUpDouble = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-forward-up-double"
+    className="arrow-forward-up-double_svg__icon arrow-forward-up-double_svg__icon-tabler arrow-forward-up-double_svg__icons-tabler-outline arrow-forward-up-double_svg__icon-tabler-arrow-forward-up-double"
     viewBox="0 0 24 24"
     {...props}
   >

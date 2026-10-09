@@ -17,7 +17,6 @@ export const CustomerBookingTableDesktop = ({ bookings, isFetching }: CustomerBo
         <TableRow>
           <TableHead>Дата</TableHead>
           <TableHead>Услуга</TableHead>
-          <TableHead>Сотрудник</TableHead>
           <TableHead>Цена</TableHead>
           <TableHead>Статус</TableHead>
           <TableHead />
@@ -54,12 +53,6 @@ export const CustomerBookingTableDesktop = ({ bookings, isFetching }: CustomerBo
                       )}
                     </>
                   ) : ( <div className="flex items-center w-full flex-1">-</div> )}
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2.5">
-                    <Avatar size={"tiny"} avatar_url={booking.booking_services[0].user.avatar} name={booking.booking_services[0].user.full_name} id={booking.booking_services[0].user.user_id} />
-                    <p className="leading-4">{booking.booking_services[0].user.full_name}</p>
-                  </div>
                 </TableCell>
                 <TableCell>
                   {formatPrice(booking.subtotal ?? booking.booking_services.reduce((sum, s) => sum + s.booking_service_price, 0))} ₽

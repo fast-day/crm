@@ -7,7 +7,7 @@ const SvgMoon = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-moon"
+    className="moon_svg__icon moon_svg__icon-tabler moon_svg__icons-tabler-outline moon_svg__icon-tabler-moon"
     viewBox="0 0 24 24"
     {...props}
   >

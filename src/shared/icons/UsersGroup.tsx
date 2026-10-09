@@ -7,7 +7,7 @@ const SvgUsersGroup = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-users-group"
+    className="users-group_svg__icon users-group_svg__icon-tabler users-group_svg__icons-tabler-outline users-group_svg__icon-tabler-users-group"
     viewBox="0 0 24 24"
     {...props}
   >

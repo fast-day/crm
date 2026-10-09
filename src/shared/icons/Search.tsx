@@ -7,7 +7,7 @@ const SvgSearch = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-search"
+    className="search_svg__icon search_svg__icon-tabler search_svg__icons-tabler-outline search_svg__icon-tabler-search"
     viewBox="0 0 24 24"
     {...props}
   >

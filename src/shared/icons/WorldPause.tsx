@@ -7,7 +7,7 @@ const SvgWorldPause = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-world-pause"
+    className="world-pause_svg__icon world-pause_svg__icon-tabler world-pause_svg__icons-tabler-outline world-pause_svg__icon-tabler-world-pause"
     viewBox="0 0 24 24"
     {...props}
   >

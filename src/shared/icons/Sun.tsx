@@ -7,7 +7,7 @@ const SvgSun = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-sun"
+    className="sun_svg__icon sun_svg__icon-tabler sun_svg__icons-tabler-outline sun_svg__icon-tabler-sun"
     viewBox="0 0 24 24"
     {...props}
   >

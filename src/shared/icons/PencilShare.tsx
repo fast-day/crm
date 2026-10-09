@@ -7,7 +7,7 @@ const SvgPencilShare = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-pencil-share"
+    className="pencil-share_svg__icon pencil-share_svg__icon-tabler pencil-share_svg__icons-tabler-outline pencil-share_svg__icon-tabler-pencil-share"
     viewBox="0 0 24 24"
     {...props}
   >

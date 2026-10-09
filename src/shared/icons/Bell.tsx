@@ -7,7 +7,7 @@ const SvgBell = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-bell"
+    className="bell_svg__icon bell_svg__icon-tabler bell_svg__icons-tabler-outline bell_svg__icon-tabler-bell"
     viewBox="0 0 24 24"
     {...props}
   >

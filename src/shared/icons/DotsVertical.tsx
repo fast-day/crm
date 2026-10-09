@@ -7,7 +7,7 @@ const SvgDotsVertical = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-dots-vertical"
+    className="dots-vertical_svg__icon dots-vertical_svg__icon-tabler dots-vertical_svg__icons-tabler-outline dots-vertical_svg__icon-tabler-dots-vertical"
     viewBox="0 0 24 24"
     {...props}
   >

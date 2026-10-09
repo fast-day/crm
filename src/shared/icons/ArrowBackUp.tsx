@@ -7,7 +7,7 @@ const SvgArrowBackUp = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up"
+    className="arrow-back-up_svg__icon arrow-back-up_svg__icon-tabler arrow-back-up_svg__icons-tabler-outline arrow-back-up_svg__icon-tabler-arrow-back-up"
     viewBox="0 0 24 24"
     {...props}
   >

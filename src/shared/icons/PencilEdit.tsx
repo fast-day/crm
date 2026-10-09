@@ -7,7 +7,7 @@ const SvgPencilEdit = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-edit"
+    className="pencil-edit_svg__icon pencil-edit_svg__icon-tabler pencil-edit_svg__icons-tabler-outline pencil-edit_svg__icon-tabler-edit"
     viewBox="0 0 24 24"
     {...props}
   >

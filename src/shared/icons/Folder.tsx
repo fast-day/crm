@@ -7,7 +7,7 @@ const SvgFolder = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-folder"
+    className="folder_svg__icon folder_svg__icon-tabler folder_svg__icons-tabler-outline folder_svg__icon-tabler-folder"
     viewBox="0 0 24 24"
     {...props}
   >

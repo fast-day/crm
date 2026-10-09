@@ -7,7 +7,7 @@ const SvgShoppingCart = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"
+    className="shopping-cart_svg__icon shopping-cart_svg__icon-tabler shopping-cart_svg__icons-tabler-outline shopping-cart_svg__icon-tabler-shopping-cart"
     viewBox="0 0 24 24"
     {...props}
   >

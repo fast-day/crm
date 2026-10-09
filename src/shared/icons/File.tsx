@@ -3,7 +3,7 @@ const SvgFile = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
-    className="icon icon-tabler icons-tabler-filled icon-tabler-file"
+    className="file_svg__icon file_svg__icon-tabler file_svg__icons-tabler-filled file_svg__icon-tabler-file"
     viewBox="0 0 24 24"
     {...props}
   >

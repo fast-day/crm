@@ -7,7 +7,7 @@ const SvgDatabricks = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-brand-databricks"
+    className="databricks_svg__icon databricks_svg__icon-tabler databricks_svg__icons-tabler-outline databricks_svg__icon-tabler-brand-databricks"
     viewBox="0 0 24 24"
     {...props}
   >
