@@ -7,7 +7,7 @@ const SvgEyeClosed = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-eye-closed"
+    className="eye-closed_svg__icon eye-closed_svg__icon-tabler eye-closed_svg__icons-tabler-outline eye-closed_svg__icon-tabler-eye-closed"
     viewBox="0 0 24 24"
     {...props}
   >

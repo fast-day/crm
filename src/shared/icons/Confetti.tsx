@@ -7,7 +7,7 @@ const SvgConfetti = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-confetti"
+    className="confetti_svg__icon confetti_svg__icon-tabler confetti_svg__icons-tabler-outline confetti_svg__icon-tabler-confetti"
     viewBox="0 0 24 24"
     {...props}
   >

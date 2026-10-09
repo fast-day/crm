@@ -3,7 +3,7 @@ const SvgGift = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
-    className="icon icon-tabler icons-tabler-filled icon-tabler-gift"
+    className="gift_svg__icon gift_svg__icon-tabler gift_svg__icons-tabler-filled gift_svg__icon-tabler-gift"
     viewBox="0 0 24 24"
     {...props}
   >

@@ -7,7 +7,7 @@ const SvgWorldOff = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-world-off"
+    className="world-off_svg__icon world-off_svg__icon-tabler world-off_svg__icons-tabler-outline world-off_svg__icon-tabler-world-off"
     viewBox="0 0 24 24"
     {...props}
   >

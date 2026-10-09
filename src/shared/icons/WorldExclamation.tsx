@@ -7,7 +7,7 @@ const SvgWorldExclamation = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-world-exclamation"
+    className="world-exclamation_svg__icon world-exclamation_svg__icon-tabler world-exclamation_svg__icons-tabler-outline world-exclamation_svg__icon-tabler-world-exclamation"
     viewBox="0 0 24 24"
     {...props}
   >

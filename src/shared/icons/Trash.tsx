@@ -7,7 +7,7 @@ const SvgTrash = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-trash"
+    className="trash_svg__icon trash_svg__icon-tabler trash_svg__icons-tabler-outline trash_svg__icon-tabler-trash"
     viewBox="0 0 24 24"
     {...props}
   >

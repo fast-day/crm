@@ -33,6 +33,7 @@ export const CustomerDocumentApi = API.injectEndpoints({
       url: `/v1/customer/${customer_id}/documents/${document_id}`,
       method: "GET",
     }),
+    keepUnusedDataFor: 0,
    }),
 
     /*

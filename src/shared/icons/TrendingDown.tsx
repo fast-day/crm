@@ -7,7 +7,7 @@ const SvgTrendingDown = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-trending-down"
+    className="trending-down_svg__icon trending-down_svg__icon-tabler trending-down_svg__icons-tabler-outline trending-down_svg__icon-tabler-trending-down"
     viewBox="0 0 24 24"
     {...props}
   >

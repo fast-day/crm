@@ -17,7 +17,7 @@ export const BookingScheduleIntervals = ({ user_id, location_id, date, duration,
   }, { refetchOnMountOrArgChange: true });
 
   return (
-    <div>
+    <div className="max-h-30 overflow-y-auto scrollbar-thin scrollbar-thumb-gray hover:scrollbar-thumb-card-accent duration-200">
       {/* {isError && <div className="text-xs text-center my-6">Сотрудник не работает в выбранный день.</div>} */}
       {/* {isError && <div className="text-xs text-center my-6">Сотрудник не работает в выбранный день.</div>} */}
       {isLoading && <div className="text-xs text-center my-6">Загружаем свободные слоты.</div>}

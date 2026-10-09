@@ -7,7 +7,7 @@ const SvgEye = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-eye"
+    className="eye_svg__icon eye_svg__icon-tabler eye_svg__icons-tabler-outline eye_svg__icon-tabler-eye"
     viewBox="0 0 24 24"
     {...props}
   >

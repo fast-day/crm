@@ -3,7 +3,7 @@ const SvgLockSquare = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
-    className="icon icon-tabler icons-tabler-filled icon-tabler-lock-square-rounded"
+    className="lock-square_svg__icon lock-square_svg__icon-tabler lock-square_svg__icons-tabler-filled lock-square_svg__icon-tabler-lock-square-rounded"
     viewBox="0 0 24 24"
     {...props}
   >

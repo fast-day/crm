@@ -7,7 +7,7 @@ const SvgChecks = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-checks"
+    className="checks_svg__icon checks_svg__icon-tabler checks_svg__icons-tabler-outline checks_svg__icon-tabler-checks"
     viewBox="0 0 24 24"
     {...props}
   >

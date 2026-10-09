@@ -4,6 +4,8 @@ import { Button, Form, Sheet, SheetContent, SheetDescription, SheetFooter, Sheet
 import { bulkScheduleSchema, toSlots, type BulkScheduleForm } from "../model/schemas/schedule.schema";
 import { useState } from "react";
 import { formatDates, pluralizeDays, useBulkCreateMutation } from "@/entities/schedule";
+import { useAppDispatch } from "@/shared/hooks";
+import { updateAccount } from "@/entities/account";
 
 interface ICustomizedSheetProps {
   dates: string[];
@@ -13,6 +15,7 @@ interface ICustomizedSheetProps {
 }
 
 export const CustomizedSheet = ({ dates, userId, locationId, onSuccess }: ICustomizedSheetProps) => {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
 
   const [saveSchedule, { isLoading }] = useBulkCreateMutation();
@@ -25,6 +28,7 @@ export const CustomizedSheet = ({ dates, userId, locationId, onSuccess }: ICusto
       body: { user_id: userId, slots: toSlots(dates, data) },
     }).unwrap();
     setOpen(false);
+    dispatch(updateAccount({ has_schedules: true }));
     onSuccess();
   };
 

@@ -70,24 +70,28 @@ function Select({ className, children, value, defaultValue, onValueChange, ...pr
   const { setActiveSelectId } = useGlobalSelect();
 
   const onValueChangeRef = useRef(onValueChange);
+  const closedAtRef = useRef(0);
   onValueChangeRef.current = onValueChange;
 
   const isControlled = value !== undefined;
   const currentValue = isControlled ? value : internalValue;
-
-  const setValue = useCallback((v: SelectItemValue) => {
-    if (!isControlled) setInternalValue(v);
-    onValueChangeRef.current?.(v);
-    setOpen(false);
-    setActiveSelectId(null);
-  }, [isControlled, setActiveSelectId]);
-
+  
   const handleOpenChange = useCallback((newOpen: boolean) => {
     if (newOpen) {
+      if (Date.now() - closedAtRef.current < 300) return;
       setActiveSelectId(selectId);
+    } else {
+      closedAtRef.current = Date.now();
     }
     setOpen(newOpen);
   }, [selectId, setActiveSelectId]);
+  
+  const setValue = useCallback((v: SelectItemValue) => {
+    if (!isControlled) setInternalValue(v);
+    onValueChangeRef.current?.(v);
+    handleOpenChange(false);
+    setActiveSelectId(null);
+  }, [isControlled, handleOpenChange, setActiveSelectId]);
 
   useEffect(() => {
     function handlePointerDown(e: PointerEvent) {
@@ -240,6 +244,7 @@ const SelectItem = ({ value, onChange, className, children, ...props }: SelectIt
   const isSelected = selected?.value === value.value;
 
   const handleClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     setValue(value);
     onChange?.();

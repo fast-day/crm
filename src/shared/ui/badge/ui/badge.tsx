@@ -25,6 +25,9 @@ const badgeVariants = cva(
         unpaid_icon: "bg-blue/30 text-white border-none px-4 py-1.5 flex items-center justify-center relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-14 before:h-14 before:bg-blue before:rounded-full before:pointer-events-none",
         cancelled_icon: "bg-red border-none px-4 py-1.5 flex items-center justify-center",
         refund_icon: "bg-red border-none px-4 py-1.5 flex items-center justify-center",
+
+        step_done: "px-2 py-0.5 text-xss! font-bold rounded-lg border-none bg-green/30 text-green",
+        step_time: "px-2 py-0.5 text-xss! font-semibold rounded-lg border-none bg-border text-foreground/50",
         
         /*
           ----- СТАРЫЕ СТАТУСЫ -----

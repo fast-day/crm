@@ -11,7 +11,7 @@ export const BaseLayout = ({ children, sidebar, mainClassName="" }: BaseLayoutPr
     <div className="flex flex-1 relative">
       {sidebar}
 
-      <main className={`flex flex-col flex-1 1100:pb-0 pb-20 ${mainClassName}`}>
+      <main className={`flex flex-col flex-1 1100:pb-0 pb-30 ${mainClassName}`}>
         <div className="px-5 md:px-8 py-8 flex flex-col flex-1">
           {children}
         </div>

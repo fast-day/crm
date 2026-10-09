@@ -7,7 +7,7 @@ const SvgCreditCards = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-credit-card"
+    className="credit-cards_svg__icon credit-cards_svg__icon-tabler credit-cards_svg__icons-tabler-outline credit-cards_svg__icon-tabler-credit-card"
     viewBox="0 0 24 24"
     {...props}
   >

@@ -7,7 +7,7 @@ const SvgLink = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-link"
+    className="link_svg__icon link_svg__icon-tabler link_svg__icons-tabler-outline link_svg__icon-tabler-link"
     viewBox="0 0 24 24"
     {...props}
   >

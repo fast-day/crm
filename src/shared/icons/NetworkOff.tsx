@@ -7,7 +7,7 @@ const SvgNetworkOff = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-access-point-off"
+    className="network-off_svg__icon network-off_svg__icon-tabler network-off_svg__icons-tabler-outline network-off_svg__icon-tabler-access-point-off"
     viewBox="0 0 24 24"
     {...props}
   >

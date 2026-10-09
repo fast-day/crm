@@ -7,7 +7,7 @@ const SvgPlus = (props: SVGProps<SVGSVGElement>) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
-    className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
+    className="plus_svg__icon plus_svg__icon-tabler plus_svg__icons-tabler-outline plus_svg__icon-tabler-plus"
     viewBox="0 0 24 24"
     {...props}
   >

@@ -18,7 +18,7 @@ export const Editor = ({ editor, name, customer_id, document_id }: IEditorProps)
   const [title, setTitle] = useState(name ?? "");
   const [content, setContent] = useState<Block[] | undefined>(undefined);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const isFirstRender = useRef(true);
+  const lastSaved = useRef({ title: name ?? "", content: undefined as Block[] | undefined });
 
   const [document] = useCustomerUpdateDocumentMutation();
 
@@ -43,10 +43,12 @@ export const Editor = ({ editor, name, customer_id, document_id }: IEditorProps)
   }, []);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    if (
+      titleDebounce === lastSaved.current.title &&
+      contentDebounce === lastSaved.current.content
+    ) return;
+
+    lastSaved.current = { title: titleDebounce, content: contentDebounce };
 
     document({ customer_id, document_id, body: { name: titleDebounce, content: contentDebounce } }).unwrap()
       .catch(error => toast.error(getErrorMessage(error)));
