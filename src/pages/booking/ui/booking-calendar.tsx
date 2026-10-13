@@ -5,8 +5,8 @@ import { Can } from "@/features/auth";
 import { AddIcon } from "@/shared/icons";
 import { Button, PageHeader, PageHeaderActions, PageHeaderTitle } from "@/shared/ui"
 import { BookingCalendar, BookingEmpty } from "@/widgets/booking";
-import { PageTableWrapper, RequestError } from "@/widgets/layout";
-import { AppLoading, Loading } from "@/widgets/loading";
+import { PageTableWrapper } from "@/widgets/layout";
+import { AppLoading } from "@/widgets/loading";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
   const [view, setView] = useState<TCalendarView>(storedView === "day" || storedView === "week" ? storedView : "week");
 
   /** ! ПРИКРУТИТЬ DEBOUNCE ! **/
-  const { data, isLoading, isError, isSuccess, isFetching } = useGetCalendarBookingsQuery(
+  const { data, isLoading, isError, isFetching } = useGetCalendarBookingsQuery(
     location && account?.has_bookings ? { ...query, location_id: location.uuid } : skipToken,
     {
       refetchOnMountOrArgChange: true,
@@ -32,27 +32,44 @@ export const BookingCalendarPage = ({ query }: BookingProps) => {
 
   if (!location) return <AppLoading />;
 
+  // const content = !account?.has_bookings ? (
+  //   <BookingEmpty />
+  // ) : isLoading ? (
+  //   <Loading msg={"Загружаем календарь"} />
+  // ) : isError ? (
+  //   <RequestError />
+  // ) : isSuccess ? (
+  //   <>
+  //     <BookingCalendar
+  //       view={view}
+  //       start_date={query.start_date}
+  //       end_date={query.end_date}
+  //       onViewChange={setView}
+  //       isFetching={isFetching}
+  //       bookings={data.bookings}
+  //       intervals={data.intervals}
+  //       isLoading={isLoading}
+  //       isError={isError}
+  //     />
+  //   </>
+  // ) : (
+  //   <BookingEmpty />
+  // );
+
   const content = !account?.has_bookings ? (
     <BookingEmpty />
-  ) : isLoading ? (
-    <Loading msg={"Загружаем календарь"} />
-  ) : isError ? (
-    <RequestError />
-  ) : isSuccess ? (
-    <>
-      <BookingCalendar
-        view={view}
-        start_date={query.start_date}
-        end_date={query.end_date}
-        onViewChange={setView}
-        isFetching={isFetching}
-        bookings={data.bookings}
-        intervals={data.intervals}
-      />
-    </>
   ) : (
-    <BookingEmpty />
-  );
+    <BookingCalendar
+      view={view}
+      isFetching={isLoading || isFetching}
+      isError={isError}
+      start_date={query.start_date}
+      end_date={query.end_date}
+      onViewChange={setView}
+      bookings={data?.bookings}
+      intervals={data?.intervals}
+    />
+  )
 
   return (
     <>

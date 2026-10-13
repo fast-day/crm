@@ -1,5 +1,4 @@
 import { SUPPORT_CONTACTS } from "@/entities/support"
-import SvgInstagram from "@/shared/brand-icons/Instagram"
 import SvgTelegram from "@/shared/brand-icons/Telegram"
 import { PhoneIcon } from "@/shared/icons"
 import { Button } from "@/shared/ui"
@@ -31,9 +30,9 @@ export const SupportWidget = ({ className="" }: { className?: string }) => {
             <a href={SUPPORT_CONTACTS.telegram.href} target={"_blank"} rel="noopener noreferrer" className="block">
               <SvgTelegram width={32} height={32} className="text-[#229ED9]" />
             </a>
-            <a href={SUPPORT_CONTACTS.instagram.href} target={"_blank"} rel="noopener noreferrer" className="block">
+            {/* <a href={SUPPORT_CONTACTS.instagram.href} target={"_blank"} rel="noopener noreferrer" className="block">
               <SvgInstagram width={32} height={32} />
-            </a>
+            </a> */}
           </div>
         </div>
 
