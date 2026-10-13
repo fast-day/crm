@@ -11,6 +11,7 @@ import { useAppDispatch } from '@/shared/hooks';
 import { isSameWeek } from 'date-fns';
 
 interface IBookingCalendarProps extends ICalendarProps {
+  isError: boolean;
   start_date?: string;
   end_date?: string;
   bookings?: IBooking[];
@@ -18,12 +19,13 @@ interface IBookingCalendarProps extends ICalendarProps {
 }
 
 export const BookingCalendar = ({
+  view,
+  isError,
   start_date,
   end_date,
   bookings,
   intervals,
   isFetching,
-  view,
   onViewChange,
   renderEvent,
   renderMonthEvent,
@@ -100,6 +102,10 @@ export const BookingCalendar = ({
   return (
     <CalendarCustomizationContext.Provider value={customization}>
       <div className='space-y-6'>
+        {isError && (
+          <div className='text-center text-red bg-red/15 p-5 rounded-xl'>Не удалось загрузить календарь. Попробуйте обновить страницу.</div>
+        )}
+
         <CalendarHeader
           view={view}
           onViewChange={handleChangeView}

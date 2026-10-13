@@ -2,7 +2,7 @@ import type { IEvent, TEventRenderView } from "../../model/types/event-calendar.
 import { isMarkColor, useCalendarCustomization } from "../../model/utils/customization.util";
 import { useMemo } from "react";
 import { differenceInMinutes } from "date-fns";
-import { cn, formatPrice } from "@/shared/utils";
+import { cn } from "@/shared/utils";
 import { dateParserIso } from "../../model/utils/formatter.util";
 import { calendarItemVariant } from "../../model/variants/calendar-item.variant";
 import { Avatar } from "@/entities/user";
@@ -60,7 +60,7 @@ export const CalendarEventBlock = ({ event, className, view="week" }: ICalendarE
               <div className="text-11 text-accent font-medium rounded-md leading-2.5 bg-white w-4.5 h-4.5 flex items-center justify-center">+{event.booking_services.length - 1}</div>
             )}
           </div>
-          <p className="font-medium text-xs leading-4">Цена: <span>{formatPrice(event.subtotal ?? 0)} ₽</span></p>
+          {/* <p className="font-medium text-xs leading-4">Цена: <span>{formatPrice(event.subtotal ?? 0)} ₽</span></p> */}
         </div>
       </div>
     </div>

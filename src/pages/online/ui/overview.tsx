@@ -1,6 +1,7 @@
 import { accountSelector } from "@/entities/account"
+import { DownloadQr } from "@/features/online"
 import { ShareIcon, WorldIcon } from "@/shared/icons"
-import { Card, CardContent, CardHeader, CardTitle, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, PageHeader, PageHeaderActions, PageHeaderBackAction, PageHeaderTitle } from "@/shared/ui"
 import { PageTableWrapper } from "@/widgets/layout"
 import { Link } from "@tanstack/react-router"
 import { useSelector } from "react-redux"
@@ -19,24 +20,44 @@ export const OnlineOverview = () => {
 
       <PageTableWrapper>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl">Ссылка на онлайн-бронирование</CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="flex items-center gap-2.5 bg-card p-2.5 rounded-2xl">
-              <div className="relative size-8">
-                <WorldIcon />
-                <div className="absolute top-0.5 right-0.5 w-3 h-3 rounded-full bg-green" />
-              </div>
-              <div className="text-md font-semibold flex-1 line-clamp-1 break-all">{(account && location) ? `${account.company?.widget_url}/${location.id}/${account.id}` : '-'}</div>
-              
-              <Link to={`${account?.company?.widget_url}/${(account && location) ? `${location.id}/${account.id}` : ''}`} target={"_blank"} className="bg-white size-12 rounded-2xl flex items-center justify-center">
-                <ShareIcon width={20} height={20} />
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+        {(account?.company && location) && (
+          <div className="max-w-180 mx-auto space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Ссылка на онлайн-бронирование</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex items-center gap-2.5 bg-card p-2.5 rounded-2xl">
+                  <div className="relative size-8">
+                    <WorldIcon />
+                    <div className="absolute top-0.5 right-0.5 w-3 h-3 rounded-full bg-green" />
+                  </div>
+                  <div className="text-md font-semibold flex-1 line-clamp-1 break-all">{(account && location) ? `${account.company?.widget_url}/${location.id}/${account.id}` : '-'}</div>
+                  
+                  <Link to={`${account?.company?.widget_url}/${(account && location) ? `${location.id}/${account.id}` : ''}`} target={"_blank"} className="bg-white size-12 rounded-2xl flex items-center justify-center">
+                    <ShareIcon width={20} height={20} />
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>QR-код</CardTitle>
+                <CardDescription className="opacity-50">QR-код для онлайн-записи</CardDescription>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex 480:items-center justify-between 480:flex-row flex-col gap-3">
+                  <div className="480:min-w-29 480:w-29 480:h-29 w-fit p-1.75 bg-white rounded-3xl">
+                    <img src={account.company.widget_qr_code} alt={"widget_qr_code"} />
+                  </div>
+                  <DownloadQr />
+                </div>
+
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
       </PageTableWrapper>
     </>

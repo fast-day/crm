@@ -11,9 +11,9 @@ export const OnlineHandler = () => {
   if (isOnline) return null;
 
   return (
-    <div className="fixed w-full h-full top-0 left-0 z-99 border-4 backdrop-blur-2 border-red flex justify-center">
-      <div className="p-2.5 bg-red/30 backdrop-blur-3xl w-full h-fit text-center">
-        <p className="text-red font-semibold">Нет подключения к сети</p>
+    <div className="fixed w-full h-full top-0 left-0 z-99 border-4 bg-card-accent/30 border-red flex justify-center p-5">
+      <div className="py-3 px-6 bg-white md:w-fit w-full max-w-105 mx-auto h-fit text-center rounded-12!">
+        <p className="text-red text-sm font-semibold">Нет подключения к сети</p>
       </div>
     </div>
   );

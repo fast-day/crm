@@ -8,6 +8,7 @@ export interface IMeCompany {
   currency: CurrencyType;
   site_url: string;
   widget_url: string;
+  widget_qr_code: string;
 }
 
 export interface IMeLocationTimezone {

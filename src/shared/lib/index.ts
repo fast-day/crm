@@ -3,3 +3,4 @@ export { TIME_OPTIONS, createTimeOptions } from './time/time.lib';
 export { omitNullValues } from './omit-null-values/omit-null-values.lib';
 export { buildQuery } from './build-query/build-query.lib';
 export { pluralize } from './pluralize/pluralize.lib';
+export { resolveBlobError } from './query/query.lib';
