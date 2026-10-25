@@ -46,7 +46,10 @@ export const TransactionSort = ({ type, start_date, end_date, category_id }: ITr
             <Button
               key={idx}
               variant={"action"}
-              className={cn((v === "all" ? !type : type === v) ? "bg-white" : "")}
+              className={cn(
+                "whitespace-nowrap",
+                (v === "all" ? !type : type === v) ? "bg-white" : "")
+              }
               size={"size_40"}
               onClick={() => handleChange("type", v)}
             >{TRANSACTION_TYPE[v]}</Button>

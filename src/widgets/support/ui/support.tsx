@@ -5,7 +5,7 @@ import { X } from "lucide-react"
 
 export const Support = () => {
   return (
-    <Dropdown className="fixed 1100:bottom-8 1100:right-8 bottom-20 right-5 z-10">
+    <Dropdown className="fixed 1100:bottom-8 1100:right-8 bottom-22 right-5 z-10">
       <DropdownTrigger>
         <Button
           type={"button"}

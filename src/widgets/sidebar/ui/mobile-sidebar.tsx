@@ -35,8 +35,8 @@ const menuItems: MenuItem[] = [
   {
     to: "/bookings/create",
     icon: (
-      <div className="size-10 rounded-xl text-primary bg-white flex items-center justify-center">
-        <Plus2Icon width={20} height={20} />
+      <div className="size-14 rounded-20 text-accent bg-card flex items-center justify-center">
+        <Plus2Icon width={22} height={22} />
       </div>
     ),
     permission: ["booking:create"],
@@ -58,16 +58,42 @@ const menuItems: MenuItem[] = [
 export const MobileSidebar = () => {
   const { pathname } = useLocation();
   return (
-    <div className="fixed bottom-0 left-0 w-full z-10">
-      <div className="bg-primary py-3 px-4 grid grid-cols-5 items-center gap-2.5">
-        
-        {menuItems.map((page, idx) => {
+    <div className="fixed bottom-0 left-0 w-full z-10 px-3 pb-3">
+      <div className="flex items-center gap-1 rounded-full bg-white p-1.5">
+        {menuItems.map((page) => {
+          const active = isRouteActive(pathname, page.to, [page.to]);
+
           return (
-            <Link to={page.to} key={idx} className={cn("flex flex-col text-white items-center gap-1")}>
-              <span>{page.icon}</span>
-              {page.label && <span className={cn("text-xs leading-3", isRouteActive(pathname, page.to, [page.to]) ? "opacity-100" : "opacity-50")}>{page.label}</span>}
+            <Link
+              key={page.to}
+              to={page.to}
+              aria-label={page.label}
+              className={cn(
+                "flex h-14 items-center justify-center rounded-full",
+                "transition-[flex-grow,background-color,color] duration-300",
+                active
+                  ? "flex-[2.6] bg-accent text-white"
+                  : "flex-1 text-accent/80"
+              )}
+            >
+              <span className="shrink-0">{page.icon}</span>
+
+              {page.label && (
+                <span
+                  className={cn(
+                    "grid transition-[grid-template-columns,opacity,margin] duration-300",
+                    active
+                      ? "grid-cols-[1fr] opacity-100 ml-2"
+                      : "grid-cols-[0fr] opacity-0 ml-0"
+                  )}
+                >
+                  <span className="overflow-hidden whitespace-nowrap text-md font-semibold">
+                    {page.label}
+                  </span>
+                </span>
+              )}
             </Link>
-          )
+          );
         })}
       </div>
     </div>

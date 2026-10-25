@@ -65,19 +65,14 @@ const MOBILE_QUERY = "(max-width: 767px)";
 const DropdownContent = ({ align="center", side="bottom", children, className, cancelLabel="Отмена" }: TDropdownContentProps) => {
   const ctx = useContext(DropdownContext);
   const isMobile = useMediaQuery({ query: MOBILE_QUERY });
-  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
 
   useLayoutEffect(() => {
-    if (!ctx?.open || isMobile) {
-      setCoords(null);
-      return;
-    }
+    if (!ctx?.open || isMobile) return;
+    const trigger = ctx.mainRef.current;
+    const content = ctx.contentRef.current;
+    if (!trigger || !content) return;
 
     const update = () => {
-      const trigger = ctx.mainRef.current;
-      const content = ctx.contentRef.current;
-      if (!trigger || !content) return;
-
       const r = trigger.getBoundingClientRect();
       const w = content.offsetWidth;
       const h = content.offsetHeight;
@@ -86,29 +81,32 @@ const DropdownContent = ({ align="center", side="bottom", children, className, c
       const alignY = align === "start" ? r.top : align === "end" ? r.bottom - h : r.top + r.height / 2 - h / 2;
       const alignX = align === "start" ? r.left : align === "end" ? r.right - w : r.left + r.width / 2 - w / 2;
 
-      const pos = { top: 0, left: 0 };
-
+      let top = 0, left = 0;
       switch (side) {
-        case "left":         pos.left = r.left - GAP - w; pos.top = alignY; break;
-        case "right":        pos.left = r.right + GAP;    pos.top = alignY; break;
-        case "top":          pos.top = r.top - GAP - h;   pos.left = alignX; break;
-        case "bottom":       pos.top = r.bottom + GAP;    pos.left = alignX; break;
-        case "top_right":    pos.left = r.right + GAP;    pos.top = r.top; break;
-        case "center_right": pos.left = r.right + GAP;    pos.top = r.top + r.height / 2 - h / 2; break;
-        case "bottom_right": pos.left = r.right + GAP;    pos.top = r.bottom - h; break;
+        case "left":         left = r.left - GAP - w; top = alignY; break;
+        case "right":        left = r.right + GAP;    top = alignY; break;
+        case "top":          top = r.top - GAP - h;   left = alignX; break;
+        case "bottom":       top = r.bottom + GAP;    left = alignX; break;
+        case "top_right":    left = r.right + GAP;    top = r.top; break;
+        case "center_right": left = r.right + GAP;    top = r.top + r.height / 2 - h / 2; break;
+        case "bottom_right": left = r.right + GAP;    top = r.bottom - h; break;
       }
 
-      setCoords(pos);
+      content.style.top = `${top}px`;
+      content.style.left = `${left}px`;
     };
 
     update();
+    const ro = new ResizeObserver(update);
+    ro.observe(content);
     window.addEventListener("scroll", update, true);
     window.addEventListener("resize", update);
     return () => {
+      ro.disconnect();
       window.removeEventListener("scroll", update, true);
       window.removeEventListener("resize", update);
     };
-  }, [ctx?.open, side]);
+  }, [ctx?.open, side, align]);
 
   useEffect(() => {
     if (!ctx?.open || !isMobile) return;
@@ -152,7 +150,6 @@ const DropdownContent = ({ align="center", side="bottom", children, className, c
       ref={ctx.contentRef}
       data-ui="dropdown-content"
       data-state={ctx?.open ? "open" : "closed"}
-      style={coords ? { top: coords.top, left: coords.left } : undefined}
       className={cn(`
         fixed z-10 animate-in fade-in-0 zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out
         data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
