@@ -24,7 +24,7 @@ export const OnlineOverview = () => {
           <div className="max-w-180 mx-auto space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Ссылка на онлайн-бронирование</CardTitle>
+                <CardTitle className="text-xl">Ссылка на онлайн-запись</CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="flex items-center gap-2.5 bg-card p-2.5 rounded-2xl">
