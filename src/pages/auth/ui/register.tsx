@@ -1,9 +1,7 @@
-import { Button, Form, InputForm } from "@/shared/ui"
+import { Button, Form, InputForm, PhoneInput } from "@/shared/ui"
 import { RegisterSchema } from "../model/schemas/register.schema"
 import { useRegister } from "../model/hooks/register.hook";
 import { Controller } from "react-hook-form";
-import { PatternFormat } from "react-number-format";
-import { Input } from "@/shared/ui/input";
 import { Link } from "@tanstack/react-router";
 
 export const Register = () => {
@@ -51,17 +49,14 @@ export const Register = () => {
                 name={"phone"}
                 control={control}
                 render={({ field, formState }) => (
-                  <PatternFormat
-                    id={"phone"}
-                    name={"phone"}
-                    format={"+7 (###) ### ##-##"}
-                    mask={"_"}
-                    onChange={(v) => field.onChange(v)}
+                  <PhoneInput
+                    id="phone"
+                    name="phone"
                     value={field.value}
-                    customInput={Input}
-                    inputSize={"size_60"}
+                    onChange={field.onChange}
+                    inputSize="size_60"
                     error={formState.errors["phone"]}
-                    placeholder={"Телефон"}
+                    placeholder="Телефон"
                   />
                 )}
               />

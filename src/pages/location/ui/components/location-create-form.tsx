@@ -1,9 +1,7 @@
 import { mockCountries, mockTimezone } from "@/pages/company/model/mock"
-import { Button, Card, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm, SelectForm, TextareaForm } from "@/shared/ui"
+import { Button, Card, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm, PhoneInput, SelectForm, TextareaForm } from "@/shared/ui"
 import { CardContent, CardHeader, CardTitle } from "@/shared/ui/card/ui/card"
-import { Input } from "@/shared/ui/input"
 import { Controller } from "react-hook-form"
-import { PatternFormat } from "react-number-format"
 import { locationSchema } from "../../model/schema/location.schema"
 import { useCreateLocation } from "../../model/hooks/create-location.hook"
 
@@ -41,19 +39,15 @@ export const LocationCreateForm = () => {
                     name={"phone"}
                     control={control}
                     render={({ field, formState }) => (
-                      <PatternFormat
+                      <PhoneInput
                         id={"phone"}
                         name={"phone"}
-                        format={"+7 (###) ### ##-##"}
-                        mask={"_"}
                         onChange={(v) => field.onChange(v)}
                         value={field.value}
-                        customInput={Input}
                         inputSize={"size_56"}
                         error={formState.errors["phone"]}
                         placeholder={"Номер телефона"}
                         label={"Телефон"}
-                        lcls={"text-xs"}
                         required
                       />
                     )}

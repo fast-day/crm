@@ -6,3 +6,4 @@ export * from './error';
 export * from './select';
 export * from './textarea';
 export * from './radio-group';
+export * from './phone-input';

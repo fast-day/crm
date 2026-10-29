@@ -4913,6 +4913,7 @@ __metadata:
     eslint-plugin-storybook: "npm:^10.1.11"
     globals: "npm:^16.4.0"
     jsdom: "npm:^30.0.1"
+    libphonenumber-js: "npm:^1.13.15"
     lucide-react: "npm:^0.562.0"
     motion: "npm:^12.42.2"
     playwright: "npm:^1.57.0"
@@ -4921,8 +4922,8 @@ __metadata:
     react-day-picker: "npm:^10.0.0"
     react-dom: "npm:^19.1.1"
     react-hook-form: "npm:^7.65.0"
+    react-international-phone: "npm:^4.8.0"
     react-is: "npm:^19.2.3"
-    react-number-format: "npm:^5.4.4"
     react-redux: "npm:^9.2.0"
     react-responsive: "npm:^10.0.1"
     recharts: "npm:^3.6.0"
@@ -6709,6 +6710,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.13.15":
+  version: 1.13.15
+  resolution: "libphonenumber-js@npm:1.13.15"
+  checksum: 10/01c715a9526db7d114477155f69a071e47667ae62fa58b9e59d06fce3f6c9950aac8eb47dc6b9873493c88f2f9efa915bea7820a5b9a101821dd7cf19388c881
+  languageName: node
+  linkType: hard
+
 "lightningcss-android-arm64@npm:1.32.0":
   version: 1.32.0
   resolution: "lightningcss-android-arm64@npm:1.32.0"
@@ -7896,6 +7904,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-international-phone@npm:^4.8.0":
+  version: 4.8.0
+  resolution: "react-international-phone@npm:4.8.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/c5b3cbdbae50cc444552697d65ff14530c54ab605e34254a3405d8e13eda76c4bc2a5437a738e2c538c9c204cec83f0296acfe724b5f747b5ff9a6b0cc7c0d22
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -7917,7 +7934,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-number-format@npm:^5.4.4, react-number-format@npm:^5.4.5":
+"react-number-format@npm:^5.4.5":
   version: 5.4.5
   resolution: "react-number-format@npm:5.4.5"
   peerDependencies:

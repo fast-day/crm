@@ -1,11 +1,10 @@
-import { Button, Card, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm, SelectForm } from "@/shared/ui"
+import { Button, Card, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm, PhoneInput, SelectForm } from "@/shared/ui"
 import { CardContent, CardContentLabel, CardContentLabelDescription, CardContentLabelTitle, CardHeader, CardTitle } from "@/shared/ui/card/ui/card"
 import { useSelector } from "react-redux"
 import { useAccount } from "@/entities/account"
 import { useInvite } from "../../model/hooks/invite.hook"
 import { Avatar } from "@/entities/user"
 import { Controller } from "react-hook-form"
-import { PatternFormat } from "react-number-format"
 import { ROLE } from "@/shared/constants"
 import { inviteCheckSchema, employeeSchema } from "../../model/schemas"
 
@@ -122,16 +121,12 @@ export const EmployeeInviteForm = () => {
                         name={"phone"}
                         control={control}
                         render={({ field, formState }) => (
-                          <PatternFormat
+                          <PhoneInput
                             id={"phone"}
                             name={"phone"}
-                            format={"+7 (###) ### ##-##"}
-                            mask={"_"}
                             onChange={(v) => field.onChange(v)}
                             value={field.value}
-                            customInput={InputForm}
                             required
-                            register={register("phone")}
                             label={"Номер телефона"}
                             inputSize={"size_56"}
                             error={formState.errors["phone"]}
