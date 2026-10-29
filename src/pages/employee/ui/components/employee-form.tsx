@@ -1,6 +1,5 @@
-import { Button, Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm } from "@/shared/ui"
+import { Button, Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, FormWrapperAction, ImagePicker, InputForm, PhoneInput } from "@/shared/ui"
 import { Controller } from "react-hook-form"
-import { PatternFormat } from "react-number-format"
 import { employeeSchema, type EmployeeSchemaType } from "../../model/schemas"
 import type { IEmployeeDetail } from "@/entities/employee";
 
@@ -71,16 +70,12 @@ export const EmployeeForm = ({ data, formId, onSubmit, isLoading, isEdit }: Empl
                   name={"phone"}
                   control={control}
                   render={({ field, formState }) => (
-                    <PatternFormat
+                    <PhoneInput
                       id={"phone"}
                       name={"phone"}
-                      format={"+7 (###) ### ##-##"}
-                      mask={"_"}
                       onChange={(v) => field.onChange(v)}
                       value={field.value}
-                      customInput={InputForm}
                       required
-                      register={register("phone")}
                       label={"Номер телефона"}
                       inputSize={"size_56"}
                       error={formState.errors["phone"]}

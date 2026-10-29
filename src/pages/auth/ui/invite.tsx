@@ -2,9 +2,8 @@ import { Link } from "@tanstack/react-router"
 import { useCheckInviteTokenMutation } from "../service/auth.service";
 import { useEffect } from "react";
 import { Loading } from "@/widgets/loading";
-import { Button, Form, Input, InputForm } from "@/shared/ui";
+import { Button, Form, InputForm, PhoneInput } from "@/shared/ui";
 import { Controller } from "react-hook-form";
-import { PatternFormat } from "react-number-format";
 import { RegisterSchema } from "../model/schemas/register.schema";
 import { cn } from "@/shared/utils";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
@@ -93,17 +92,14 @@ export const Invite = ({ token, email }: IInviteProps) => {
                 name={"phone"}
                 control={control}
                 render={({ field, formState }) => (
-                  <PatternFormat
-                    id={"phone"}
-                    name={"phone"}
-                    format={"+7 (###) ### ##-##"}
-                    mask={"_"}
-                    onChange={(v) => field.onChange(v)}
+                  <PhoneInput
+                    id="phone"
+                    name="phone"
                     value={field.value}
-                    customInput={Input}
-                    inputSize={"size_60"}
+                    onChange={field.onChange}
+                    inputSize="size_60"
                     error={formState.errors["phone"]}
-                    placeholder={"Телефон"}
+                    placeholder="Телефон"
                   />
                 )}
               />

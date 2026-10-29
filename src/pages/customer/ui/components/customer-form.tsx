@@ -1,8 +1,7 @@
 import type { ICustomer } from "@/entities/customers";
-import { Button, Card, CardContent, CardHeader, CardTitle, Form, FormWrapperAction, InputForm, TextareaForm } from "@/shared/ui"
+import { Button, Card, CardContent, CardHeader, CardTitle, Form, FormWrapperAction, InputForm, PhoneInput, TextareaForm } from "@/shared/ui"
 import { customerSchema, type CustomerSchemaType } from "../../model/schemas/customer.schema";
 import { Controller } from "react-hook-form";
-import { PatternFormat } from "react-number-format";
 
 interface CustomerFormProps {
   data?: ICustomer;
@@ -67,16 +66,11 @@ export const CustomerForm = ({ data, onSubmit, isLoading }: CustomerFormProps) =
                     name={"phone"}
                     control={control}
                     render={({ field, formState }) => (
-                      <PatternFormat
+                      <PhoneInput
                         id={"phone"}
                         name={"phone"}
-                        format={"+7 (###) ### ##-##"}
-                        mask={"_"}
                         onChange={(v) => field.onChange(v)}
                         value={field.value}
-                        customInput={InputForm}
-                        required
-                        register={register("phone")}
                         label={"Номер телефона"}
                         inputSize={"size_56"}
                         error={formState.errors["phone"]}

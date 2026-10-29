@@ -1,7 +1,6 @@
-import { Button, Card, CardContent, CardHeader, CardTitle, Form, FormWrapperAction, InputForm, TextareaForm } from "@/shared/ui"
+import { Button, Card, CardContent, CardHeader, CardTitle, Form, FormWrapperAction, InputForm, PhoneInput, TextareaForm } from "@/shared/ui"
 import { customerCheckSchema, customerSchema } from "../../model/schemas/customer.schema";
 import { Controller } from "react-hook-form";
-import { PatternFormat } from "react-number-format";
 import { useCustomerInvite } from "../../model/hooks/invite.hook";
 import { FoundCustomer } from "@/widgets/customer";
 
@@ -18,7 +17,7 @@ export const CustomerInviteForm = () => {
             onSubmit={(data) => handleCheck(data.phone)}
             schema={customerCheckSchema}
           >
-            {({ control, register }) => (
+            {({ control }) => (
               <>
                 <Card>
                   <CardHeader className="pb-0">
@@ -29,16 +28,12 @@ export const CustomerInviteForm = () => {
                       name={"phone"}
                       control={control}
                       render={({ field, formState }) => (
-                        <PatternFormat
+                        <PhoneInput
                           id={"phone"}
                           name={"phone"}
-                          format={"+7 (###) ### ##-##"}
-                          mask={"_"}
                           onChange={(v) => field.onChange(v)}
                           value={field.value}
-                          customInput={InputForm}
                           required
-                          register={register("phone")}
                           label={"Номер телефона"}
                           inputSize={"size_56"}
                           error={formState.errors["phone"]}
@@ -72,27 +67,29 @@ export const CustomerInviteForm = () => {
             onSubmit={(data) => handleCreate(data)}
             schema={customerSchema}
           >
-            {({ register, formState }) => (
+            {({ control, register, formState }) => (
               <>
                 <Card>
                   <CardHeader className="pb-0">
                     <CardTitle>Номер телефона</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <PatternFormat
-                      id={"phone"}
+                    <Controller
                       name={"phone"}
-                      format={"+7 (###) ### ##-##"}
-                      mask={"_"}
-                      value={foundCustomer?.search_value}
-                      customInput={InputForm}
-                      register={register("phone")}
-                      label={"Номер телефона"}
-                      inputSize={"size_56"}
-                      error={formState.errors["phone"]}
-                      placeholder={"Телефон"}
-                      required
-                      readOnly
+                      control={control}
+                      render={({ field, formState }) => (
+                        <PhoneInput
+                          id="phone"
+                          name="phone"
+                          value={field.value}
+                          onChange={field.onChange}
+                          inputSize="size_56"
+                          error={formState.errors["phone"]}
+                          placeholder="Телефон"
+                          required
+                          readOnly
+                        />
+                      )}
                     />
                   </CardContent>
                 </Card>

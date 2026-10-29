@@ -1,19 +1,18 @@
 import { addressSchema } from "@/shared/schemas/address.schema";
 import { avatarSchema } from "@/shared/schemas/avatar.schema";
 import { timezoneSchema } from "@/shared/schemas/timezone.schema";
-import { RUS_PHONE } from "@/shared/utils";
+import { isPossiblePhoneNumber } from "libphonenumber-js";
 import z from "zod";
 
 export const locationSchema = addressSchema.extend({
   name: z.string().min(1, "Укажите название"),
   description: z.string().optional().nullable(),
 
-  phone: 
-    z.string("Укажите номер телефона")
-    .min(1, "Укажите номер телефона")
-    .refine((v) => {
-      return RUS_PHONE.test(v);
-    }, "Неверный формат"),
+  phone: z
+    .object({ value: z.string(), masked: z.string() })
+    .refine((v) => v.value.length > 0, "Укажите номер телефона")
+    .refine((v) => !v.value || isPossiblePhoneNumber(v.value), "Неверный формат")
+    .transform((v) => v.masked),
 
   timezone: timezoneSchema,
   avatar: avatarSchema,

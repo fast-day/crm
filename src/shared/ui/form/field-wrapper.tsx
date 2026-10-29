@@ -22,7 +22,7 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
         <div className="mt-0.5">{children}</div>
       </Label>
       <FormMessage className="m-2 opacity-70">{message}</FormMessage>
-      <ErrorForm msg={error?.message}/>
+      {error?.message && <ErrorForm msg={error.message}/>}
     </div>
   )
 };
