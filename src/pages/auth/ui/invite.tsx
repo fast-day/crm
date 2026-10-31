@@ -47,7 +47,11 @@ export const Invite = ({ token, email }: IInviteProps) => {
       )}
       <div className={cn(isError ? "mt-4" : "mt-8")}>
         <Form
-          onSubmit={(data) => onSubmit(data, token)}
+          /*
+            AGREE В ДАННОМ СЛУЧАЕ ВРЕМЕННОЕ РЕШЕНИЕ
+            РЕШЕНИМЕ: НЕ ИСПОЛЬЗОВАТЬ СХЕМУ СВЯЗАННУЮ С РЕГИСТРАЦИЕЙ
+          */ 
+          onSubmit={(data) => onSubmit({ ...data, agree: true }, token)}
           schema={RegisterSchema}
           options={{ defaultValues: {
             email: email ?? "",
