@@ -43,8 +43,8 @@ export const Login = () => {
                   Войти
                 </Button>
               </div>
-              <div className="flex items-center justify-center">
-                <p>У вас нет аккаунта? <Link to={"/register"} className="text-orange hover:text-warn-color-icon underline duration-200 cursor-pointer">Зарегистрироваться</Link></p>
+              <div className="flex items-center text-sm justify-center">
+                <p>У вас нет аккаунта? <Link to={"/register"} className="hover:text-warn-color-icon underline duration-200 cursor-pointer">Зарегистрироваться</Link></p>
               </div>
             </>
           )}

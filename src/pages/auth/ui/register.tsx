@@ -1,4 +1,4 @@
-import { Button, Form, InputForm, PhoneInput } from "@/shared/ui"
+import { Button, CheckboxForm, ErrorForm, Form, InputForm, PhoneInput } from "@/shared/ui"
 import { RegisterSchema } from "../model/schemas/register.schema"
 import { useRegister } from "../model/hooks/register.hook";
 import { Controller } from "react-hook-form";
@@ -70,6 +70,20 @@ export const Register = () => {
                 placeholder={"Пароль"}
               />
               <div>
+                <CheckboxForm
+                  {...register("agree")}
+                  checkboxClass={"size-5.5 bg-card border border-primary/20"}
+                  label={
+                    <>
+                      {"Принимаю "}
+                      <a href="https://storage.fast-day.ru/site-documents/terms_of_service_WEB301026.pdf" target="_blank" className="underline">условия использования</a>,{" "}
+                      <a href="https://storage.fast-day.ru/site-documents/personal_data_processing_policy_WEB301026.pdf" target="_blank" className="underline">политику обработки персональных данных</a>
+                    </>
+                  }
+                />
+                {formState.errors["agree"] && <ErrorForm msg={formState.errors["agree"].message}/>}
+              </div>
+              <div>
                 <Button
                   type={"submit"}
                   size={"size_60"}
@@ -79,8 +93,8 @@ export const Register = () => {
                   Зарегистрироваться
                 </Button>
               </div>
-              <div className="flex items-center justify-center">
-                <p>Уже есть аккаунт? <Link to={"/login"} className="text-orange hover:text-warn-color-icon underline duration-200 cursor-pointer">Войти</Link></p>
+              <div className="flex items-center text-sm justify-center">
+                <p>Уже есть аккаунт? <Link to={"/login"} className="hover:text-warn-color-icon underline duration-200 cursor-pointer">Войти</Link></p>
               </div>
             </>
           )}
