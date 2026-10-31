@@ -11,6 +11,7 @@ export const RegisterSchema = z.object({
     .refine((v) => !v.value || isPossiblePhoneNumber(v.value), "Неверный формат")
     .transform((v) => v.masked),
   password: z.string().min(8, "Пароль должен содержать минимум 8 символов"),
+  agree: z.boolean().refine((v) => v, { error: "Необходимо согласие" }),
 });
 
 export type RegisterType = z.infer<typeof RegisterSchema>;
