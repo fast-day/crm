@@ -1,5 +1,5 @@
 import { ChevronIcon, PieIcon } from "@/shared/icons"
-import SvgBook from "@/shared/icons/Book"
+// import SvgBook from "@/shared/icons/Book"
 import Cast from "@/shared/icons/Cast"
 import { Card, CardContent, PageHeader, PageHeaderTitle } from "@/shared/ui"
 import { PageTableWrapper } from "@/widgets/layout"
@@ -14,13 +14,13 @@ const links = [
     icon: <Cast width={22} height={22} />,
     permission: ["orders:*"],
   },
-  {
-    to: "/finance/invoices",
-    type: "ORDERS",
-    label: "Чеки",
-    icon: <SvgBook width={22} height={22} />,
-    permission: ["invoices:*"],
-  },
+  // {
+  //   to: "/finance/invoices",
+  //   type: "ORDERS",
+  //   label: "Чеки",
+  //   icon: <SvgBook width={22} height={22} />,
+  //   permission: ["invoices:*"],
+  // },
   {
     to: "/finance/transactions",
     type: "ORDERS",
