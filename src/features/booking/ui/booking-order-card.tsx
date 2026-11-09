@@ -1,13 +1,13 @@
+// import React from "react";
 import type { IBookingOrder } from "@/entities/booking";
-import { InvoiceOrderCard } from "@/entities/invoice";
-import { InvoiceDownload } from "@/features/invoice";
+// import { InvoiceOrderCard } from "@/entities/invoice";
+// import { InvoiceDownload } from "@/features/invoice";
 import { ORDER_STATUS } from "@/shared/constants/order-status.constant";
 import { Card, CardContent, Button, Badge } from "@/shared/ui";
 import { formatPrice } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
-import React from "react";
 
-export const BookingOrderCard = ({ status, subtotal, id, tag, invoices }: IBookingOrder) => {
+export const BookingOrderCard = ({ status, subtotal, id, tag }: IBookingOrder) => {
   return (
     <Card className="bg-card/60">
       <CardContent className="p-5">
@@ -27,7 +27,7 @@ export const BookingOrderCard = ({ status, subtotal, id, tag, invoices }: IBooki
           <div className="font-bold">{formatPrice(status === "refund" ? -subtotal : subtotal)} ₽</div>
         </div>
 
-        <div>
+        {/* <div>
           {invoices.length > 0 ? (
             invoices.map((invoice, idx) => (
               <React.Fragment key={idx}>
@@ -44,7 +44,7 @@ export const BookingOrderCard = ({ status, subtotal, id, tag, invoices }: IBooki
               <p className="text-xss text-center opacity-50">Счета не созданы</p>
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className="mt-4">
           <Link to={`/finance/orders/${id}`} className="block">

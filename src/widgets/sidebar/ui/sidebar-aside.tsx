@@ -50,13 +50,13 @@ const menuItems: MenuItem[] = [
           icon: <Cast width={20} height={20} />,
           permission: ["orders:*"],
         },
-        {
-          to: "/finance/invoices",
-          type: "ORDERS",
-          label: "Чеки",
-          icon: <SvgBook width={20} height={20} />,
-          permission: ["invoices:*"],
-        },
+        // {
+        //   to: "/finance/invoices",
+        //   type: "ORDERS",
+        //   label: "Чеки",
+        //   icon: <SvgBook width={20} height={20} />,
+        //   permission: ["invoices:*"],
+        // },
         {
           to: "/finance/transactions",
           type: "ORDERS",
