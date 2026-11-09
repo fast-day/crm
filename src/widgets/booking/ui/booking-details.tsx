@@ -52,8 +52,8 @@ export const BookingDetails = ({ booking }: BookingDetailsProps) => {
               )}
               
               <CardContentLabel>
-                <CardContentLabelTitle>Примечание к бронированию</CardContentLabelTitle>
-                <CardContentLabelDescription>{booking.comment ?? "-"}</CardContentLabelDescription>
+                <CardContentLabelTitle>Примечание к записи</CardContentLabelTitle>
+                <CardContentLabelDescription>{booking.comment ?? "Нет"}</CardContentLabelDescription>
               </CardContentLabel>
             </div>
           }

@@ -15,6 +15,7 @@ interface IUseCustomerInviteReturnProps {
   isChecking: boolean;
   isCreating: boolean;
   foundCustomer?: ICheckCustomer;
+  phone: string | null;
   
   handleCheck: (phone: string) => Promise<void>;
   handleCreate: (data: CustomerSchemaType) => Promise<void>;
@@ -28,6 +29,7 @@ export const useCustomerInvite = (): IUseCustomerInviteReturnProps => {
 
   const [step, setStep] = useState<InviteStep>("checking");
   const [foundCustomer, setFoundCustomer] = useState<ICheckCustomer | undefined>(undefined);
+  const [phone, setPhone] = useState<string | null>(null);
 
   const [checking, { isLoading: isChecking }] = useLazyCheckCustomerQuery();
   const [creating, { isLoading: isCreating }] = useCreateCustomerMutation();
@@ -40,6 +42,7 @@ export const useCustomerInvite = (): IUseCustomerInviteReturnProps => {
         setStep("viewing");
       } else {
         setStep("creating");
+        setPhone(phone);
       }
     }
     catch (err) {
@@ -49,14 +52,17 @@ export const useCustomerInvite = (): IUseCustomerInviteReturnProps => {
   }
 
   const handleCreate = async (data: CustomerSchemaType): Promise<void> => {
+    if (!phone) return;
     try {
       const req = {
         ...data,
+        phone,
         is_banned: false,
       } satisfies ICustomerCreateCredentials;
       await creating(req).unwrap();
 
       dispatch(updateAccount({ has_customers: true }));
+      setPhone(null);
 
       navigate({ to: redirect ? redirect : "/customers" });
     }
@@ -71,6 +77,7 @@ export const useCustomerInvite = (): IUseCustomerInviteReturnProps => {
     isChecking,
     isCreating,
     foundCustomer,
+    phone,
 
     handleCheck,
     handleCreate,

@@ -20,6 +20,7 @@ export const useCustomerCreate = (): useCustomerCreateReturnProps => {
     try {
       const req = {
         ...data,
+        phone: "",
         is_banned: false,
       } satisfies ICustomerCreateCredentials;
       await customer(req).unwrap();
