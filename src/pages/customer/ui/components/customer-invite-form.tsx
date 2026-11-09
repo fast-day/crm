@@ -5,7 +5,7 @@ import { useCustomerInvite } from "../../model/hooks/invite.hook";
 import { FoundCustomer } from "@/widgets/customer";
 
 export const CustomerInviteForm = () => {
-  const { step, handleCheck, isChecking, foundCustomer, handleCreate, isCreating } = useCustomerInvite();
+  const { step, handleCheck, isChecking, foundCustomer, phone, handleCreate, isCreating } = useCustomerInvite();
 
   return (
     <div className="mt-8 relative">
@@ -67,29 +67,21 @@ export const CustomerInviteForm = () => {
             onSubmit={(data) => handleCreate(data)}
             schema={customerSchema}
           >
-            {({ control, register, formState }) => (
+            {({ register, formState }) => (
               <>
                 <Card>
                   <CardHeader className="pb-0">
                     <CardTitle>Номер телефона</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <Controller
-                      name={"phone"}
-                      control={control}
-                      render={({ field, formState }) => (
-                        <PhoneInput
-                          id="phone"
-                          name="phone"
-                          value={field.value}
-                          onChange={field.onChange}
-                          inputSize="size_56"
-                          error={formState.errors["phone"]}
-                          placeholder="Телефон"
-                          required
-                          readOnly
-                        />
-                      )}
+                    <PhoneInput
+                      id="phone"
+                      name="phone"
+                      value={phone ?? ""}
+                      onChange={() => {}}
+                      inputSize="size_56"
+                      placeholder="Телефон"
+                      readOnly
                     />
                   </CardContent>
                 </Card>

@@ -18,9 +18,11 @@ export const useRegister = (): RegisterReturnProps => {
   const { login } = useAuth();
 
   const onSubmit = async (data: RegisterType): Promise<void> => {
+    const { agree, ...body } = data;
+    if (!agree) return;
+
     try {
-      console.log(data)
-      const { access_token, refresh_token } = await register(data).unwrap() satisfies UserSession;
+      const { access_token, refresh_token } = await register(body).unwrap() satisfies UserSession;
 
       login(access_token, refresh_token);
 
