@@ -1,4 +1,5 @@
 import type { IDirectoryEmployee, IDirectoryLocation } from "@/entities/directories";
+import type { ImageUrls } from "@/entities/user";
 
 /**
   ServiceStatus - type
@@ -64,7 +65,7 @@ export interface IServices {
   public_name: string;
   duration: number;
   category: string;
-  avatar: string;
+  avatar: ImageUrls;
 
   /**
     PRICE И PRICE В PRICES - ОДНИ И ТЕ ЖЕ ДАННЫЕ

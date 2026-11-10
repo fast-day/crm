@@ -1,5 +1,4 @@
 import { API } from "@/shared/api";
-import { API_VERSION } from "@/shared/constants";
 import type { ISpecialization } from "../model/type/specialization.type";
 import type { IIndustry } from "../model/type/industry.type";
 import type { CompanyCreateResponse, CompanyCredentials } from "../model/type/company-create.type";
@@ -11,7 +10,7 @@ export const companyApi = API.injectEndpoints({
     **/
     getSpecialization: builder.query<ISpecialization[], void>({
       query: () => ({
-        url: `/${API_VERSION}/company/specializations`,
+        url: `/v1/company/specializations`,
         method: "GET",
       }),
     }),
@@ -21,7 +20,7 @@ export const companyApi = API.injectEndpoints({
     **/
     getSpecializationIndustry: builder.query<IIndustry[], number>({
       query: (specialization_id) => ({
-        url: `/${API_VERSION}/company/industry/${specialization_id}`,
+        url: `/v1/company/industry/${specialization_id}`,
         method: "GET",
       }),
     }),
@@ -31,7 +30,7 @@ export const companyApi = API.injectEndpoints({
     **/
     companyCreate: builder.mutation<CompanyCreateResponse, CompanyCredentials>({
       query: (body) => ({
-        url: `/${API_VERSION}/company`,
+        url: `/v1/company`,
         method: "POST",
         body, 
       }),

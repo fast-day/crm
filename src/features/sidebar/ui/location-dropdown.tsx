@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AppDispatch } from "@/app/providers/redux/config";
 import { setLocation, type MeLocation } from "@/entities/account";
-import { Avatar } from "@/entities/user";
+import { Avatar, type ImageUrls } from "@/entities/user";
 import { Can } from "@/features/auth";
 import { ShopIcon } from "@/shared/icons";
 import SvgAdd from "@/shared/icons/Add";
@@ -10,7 +10,7 @@ import { Badge, Button, HoverDropdown, HoverDropdownContent, HoverDropdownItemLi
 import { useDispatch } from "react-redux";
 
 interface LocationDropdownProps {
-  avatar_url?: string | null;
+  avatar_url?: ImageUrls;
   name: string;
   locations: MeLocation[];
   selectId?: string;

@@ -1,4 +1,5 @@
 import type { RoleType } from "@/entities/account";
+import type { ImageUrls } from "@/entities/user";
 
 export interface IDirectoryEmployee {
   id: string;
@@ -9,7 +10,7 @@ export interface IDirectoryEmployee {
   role: RoleType;
   profile_id: string;
   position: string;
-  avatar: string;
+  avatar: ImageUrls;
 }
 
 export interface IDirectoryLocationEmployee extends IDirectoryEmployee {

@@ -1,6 +1,7 @@
 import { API } from "@/shared/api";
 import type { IService, IServiceChangeResponse, IServiceCredentials, IServiceDeleteCredentials, IServiceDetailCredentials, IServiceEditCredentials, IServiceLocationsCredentials, IServiceQuery, IServices, IServiceUsersCredentials, UploadServiceAvatarCredentials } from "../model/types/service.type";
 import { buildQuery } from "@/shared/lib";
+import type { ImageUrls } from "@/entities/user";
 
 const servicesApi = API.injectEndpoints({
   endpoints: build => ({
@@ -9,7 +10,7 @@ const servicesApi = API.injectEndpoints({
     **/
     getServices: build.query<ApiResponse<IServices>, IServiceQuery>({
       query: (query) => ({
-        url: buildQuery(`v1/services`, { ...query }),
+        url: buildQuery(`/v1/services`, { ...query }),
         method: "GET",
       }),
       providesTags: ["SERVICES"],
@@ -20,7 +21,7 @@ const servicesApi = API.injectEndpoints({
     **/
     getDetailService: build.query<IService, IServiceDetailCredentials>({
       query: ({ service_id }) => ({
-        url: `v1/service/${service_id}`,
+        url: `/v1/service/${service_id}`,
         method: "GET",
       }),
       providesTags: ["SERVICE"],
@@ -31,7 +32,7 @@ const servicesApi = API.injectEndpoints({
     **/
     createService: build.mutation<IServiceChangeResponse, IServiceCredentials>({
       query: (body) => ({
-        url: `v1/service`,
+        url: `/v1/service`,
         method: "POST",
         body,
       }),
@@ -43,7 +44,7 @@ const servicesApi = API.injectEndpoints({
     **/
     editService: build.mutation<ApiSuccess, IServiceEditCredentials>({
       query: ({ service_id, body }) => ({
-        url: `v1/service/${service_id}`,
+        url: `/v1/service/${service_id}`,
         method: "PATCH",
         body,
       }),
@@ -115,7 +116,7 @@ const servicesApi = API.injectEndpoints({
     **/
     addLocationToService: build.mutation<ApiSuccess, IServiceLocationsCredentials>({
       query: ({ service_id, location_id }) => ({
-        url: `v1/service/locations/${service_id}/${location_id}`,
+        url: `/v1/service/locations/${service_id}/${location_id}`,
         method: "POST",
       }),
       async onQueryStarted({ service_id, location }, { dispatch, queryFulfilled }) {
@@ -138,7 +139,7 @@ const servicesApi = API.injectEndpoints({
     **/
     removeLocationForService: build.mutation<ApiSuccess, IServiceLocationsCredentials>({
       query: ({ service_id, location_id }) => ({
-        url: `v1/service/locations/${service_id}/${location_id}`,
+        url: `/v1/service/locations/${service_id}/${location_id}`,
         method: "DELETE",
       }),
       async onQueryStarted({ service_id, location }, { dispatch, queryFulfilled }) {
@@ -161,7 +162,7 @@ const servicesApi = API.injectEndpoints({
     **/
     deleteService: build.mutation<ApiSuccess, IServiceDeleteCredentials>({
       query: ({ service_id }) => ({
-        url: `v1/service/${service_id}`,
+        url: `/v1/service/${service_id}`,
         method: "DELETE",
       }),
       async onQueryStarted({ service_id }, { dispatch, queryFulfilled }) {
@@ -182,7 +183,7 @@ const servicesApi = API.injectEndpoints({
     /** 
       ===== ЗАГРУЗКА ФОТО УСЛУГИ =====
     **/
-    photoService: build.mutation<{ avatar: string }, UploadServiceAvatarCredentials>({
+    photoService: build.mutation<{ avatar: ImageUrls }, UploadServiceAvatarCredentials>({
       query: ({ service_id, body }) => ({
         url: `/v1/service/avatar/${service_id}`,
         method: "POST",

@@ -1,12 +1,12 @@
 import type { IRole } from '@/entities/account';
-import { Avatar, UserRole } from '@/entities/user'
+import { Avatar, UserRole, type ImageUrls } from '@/entities/user'
 import SvgExit from '@/shared/icons/Exit'
 import SvgPerson from '@/shared/icons/Person'
 import { Button, HoverDropdown, HoverDropdownContent, HoverDropdownItemLink, HoverDropdownSeparator, HoverDropdownTrigger } from '@/shared/ui'
 
 interface AccountDropdownProps {
   id: string;
-  avatar_url: string | null;
+  avatar_url: ImageUrls;
   first_name: string;
   last_name: string;
   full_name: string;

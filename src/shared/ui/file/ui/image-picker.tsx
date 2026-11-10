@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { FilePicker } from "./file-picker";
 import { cn } from "@/shared/utils";
+import type { ImageUrls } from "@/entities/user";
 
 interface ImagePickerProps {
   value?: File | null;
   onChange: (file: File | null) => void;
-  preview_url?: string | null;
+  preview_url?: ImageUrls;
   disabled?: boolean;
   className?: string;
   sizeCls?: string;
@@ -31,7 +32,7 @@ export const ImagePicker = ({ value, onChange, preview_url, disabled=false, clas
     if (f[0]) onChange(f[0])
   }, [onChange]);
 
-  const preview = localPreview ?? preview_url ?? null;
+  const preview = localPreview ?? preview_url?.md ?? null;
 
   return (
     <FilePicker
@@ -45,9 +46,12 @@ export const ImagePicker = ({ value, onChange, preview_url, disabled=false, clas
       {preview ? (
         <div className={"relative"}>
           <img
-            src={preview}
-            alt={"Выбранный файл"}
             className={"w-full h-full object-cover"}
+            src={preview}
+            srcSet={preview_url ? `${preview_url.sm} 480w, ${preview_url.md} 960w, ${preview_url.lg} 1920w` : undefined}
+            sizes={"(max-width: 600px) 480px, 960px"}
+            loading={"lazy"}
+            alt={"Выбранный файл"}
           />
         </div>
       ) : children}
