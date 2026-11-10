@@ -1,5 +1,4 @@
 import { API } from "@/shared/api";
-import { API_VERSION } from "@/shared/constants";
 import type { IServiceCategory, IServiceCategoryDeleteCredentials, IServiceCategoryCredentials, IServiceUpdateCategoryCredentials } from "../model/types/service-category.type";
 
 const ServiceCategoryApi = API.injectEndpoints({
@@ -9,7 +8,7 @@ const ServiceCategoryApi = API.injectEndpoints({
     **/
     getServiceCategory: build.query<IServiceCategory[], void>({
       query: () => ({
-        url: `${API_VERSION}/categories/service`,
+        url: `/v1/categories/service`,
         method: "GET",
       }),
     }),
@@ -19,7 +18,7 @@ const ServiceCategoryApi = API.injectEndpoints({
     **/
     createServiceCategory: build.mutation<IServiceCategory, IServiceCategoryCredentials>({
       query: (body) => ({
-        url: `${API_VERSION}/service/category`,
+        url: `/v1/service/category`,
         method: "POST",
         body,
       }),
@@ -43,7 +42,7 @@ const ServiceCategoryApi = API.injectEndpoints({
     **/
     editServiceCategory: build.mutation<IServiceCategory, IServiceUpdateCategoryCredentials>({
       query: ({ category_id, body }) => ({
-        url: `${API_VERSION}/service/category/${category_id}`,
+        url: `/v1/service/category/${category_id}`,
         method: "PUT",
         body,
       }),
@@ -68,7 +67,7 @@ const ServiceCategoryApi = API.injectEndpoints({
     **/
     deleteServiceCategory: build.mutation<IServiceCategory, IServiceCategoryDeleteCredentials>({
       query: ({ category_id }) => ({
-        url: `${API_VERSION}/service/${category_id}`,
+        url: `/v1/service/${category_id}`,
         method: "DELETE",
       }),
 

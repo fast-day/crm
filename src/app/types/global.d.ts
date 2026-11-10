@@ -1,3 +1,5 @@
+import type { ImageUrls } from "@/entities/user";
+
 export {};
 
 declare global {
@@ -65,7 +67,7 @@ declare global {
   interface IDataList {
     id: string;
     name: string;
-    avatar: string | null;
+    avatar: ImageUrls;
   }
   
   /**

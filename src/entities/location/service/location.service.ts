@@ -1,6 +1,7 @@
 import { API } from "@/shared/api";
 import type { LocationCredentials, ILocationResponse, ILocationDetail, ILocationUser, ILocationUserQuery, UpdateLocationCredentials, ChangeLocationStatusCredentials, UploadLocationAvatarCredentials, ILocationQuery } from "../model/types/location.type";
 import { buildQuery } from "@/shared/lib";
+import type { ImageUrls } from "@/entities/user";
 
 export const locationAPI = API.injectEndpoints(({
   endpoints: (build) => ({
@@ -146,7 +147,7 @@ export const locationAPI = API.injectEndpoints(({
     /** 
       ===== ЗАГРУЗКА ФОТО ЛОКАЦИ =====
     **/
-    photoLocation: build.mutation<{ avatar: string }, UploadLocationAvatarCredentials>({
+    photoLocation: build.mutation<{ avatar: ImageUrls }, UploadLocationAvatarCredentials>({
       query: ({ location_id, body }) => ({
         url: `/v1/location/avatar/${location_id}`,
         method: "POST",

@@ -1,12 +1,13 @@
 import type { RoleType, IUserProfile } from "@/entities/account";
 import type { IDirectoryService } from "@/entities/directories";
+import type { ImageUrls } from "@/entities/user";
 
 export interface IEmployee {
   id: string;
   email: string;
   full_name: string;
   phone: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   status: EmployeeStatus;
   position: string | null;
   role: RoleType;
@@ -56,7 +57,7 @@ export interface IEmployeeByEmail {
   role: RoleType;
   first_name: string;
   last_name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   position: string;
 }
 
@@ -114,7 +115,7 @@ export interface IEmployeeDeleteCredentials {
 export interface IEmployeesList {
   id: string;
   name: string;
-  avatar: string | null | undefined;
+  avatar: ImageUrls | undefined;
 }
 
 export interface IServiceToUserCredentials {

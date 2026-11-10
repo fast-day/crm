@@ -4,6 +4,7 @@ import type { IInvoice } from "@/entities/invoice";
 import type { ILocationAddress } from "@/entities/location";
 import type { ISchedule } from "@/entities/schedule";
 import type { ServicePrices } from "@/entities/services";
+import type { ImageUrls } from "@/entities/user";
 
 export interface IBookingCustomer {
   id: string;
@@ -13,7 +14,7 @@ export interface IBookingCustomer {
   last_name: string | null;
   phone: string;
   email: string | null;
-  avatar: string | null;
+  avatar: ImageUrls;
   birthday: string | null;
 }
 
@@ -24,7 +25,7 @@ export interface IBookingEmployee {
   last_name: string | null;
   phone: string;
   position: string;
-  avatar: string | null;
+  avatar: ImageUrls;
 }
 
 export type BookingServicePriceType = {
@@ -37,7 +38,7 @@ export type BookingServiceType = {
   name: string;
   public_name: string;
   mark: MarkType;
-  avatar: string | null;
+  avatar: ImageUrls;
   duration: number;
   prices: BookingServicePriceType;
   category: string | null;
@@ -58,7 +59,7 @@ export interface IBookingOrder {
 export interface IBookingLocation {
   id: string;
   name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   address: ILocationAddress;
 }
 
@@ -89,7 +90,7 @@ export interface IBookingServiceType {
   name: string;
   mark: MarkType;
   duration: number;
-  avatar: string | null;
+  avatar: ImageUrls;
   category: string;
   prices: ServicePrices;
 }
@@ -100,7 +101,7 @@ export interface IBookingUserType {
   last_name: string;
   full_name: string;
   phone: string;
-  avatar: string | null;
+  avatar: ImageUrls;
 }
 
 export interface IBookingService {

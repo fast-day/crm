@@ -1,6 +1,7 @@
 import { API } from "@/shared/api";
 import type { ICheckEmployeeInLocationCredentials, IEmployee, IEmployeeBlockedCredentials, IEmployeeByEmail, IEmployeeByEmailCredentials, IEmployeeDeleteCredentials, IEmployeeDetail, IEmployeeInviteCredentials, IEmployeeInviteResponse, IEmployeePasswordChangeCredentials, IEmployeesCredentials, IEmployeeUpdateCredentials, IServiceFromUserCredentials, IServiceToUserCredentials, UploadEmployeeAvatarCredentials } from "../model/types/employee.type";
 import { buildQuery } from "@/shared/lib";
+import type { ImageUrls } from "@/entities/user";
 
 export const employeeAPI = API.injectEndpoints(({
   endpoints: (build) => ({
@@ -199,7 +200,7 @@ export const employeeAPI = API.injectEndpoints(({
     /** 
       ===== ЗАГРУЗКА ФОТО СОТРУДНИКА =====
     **/
-    photoEmployee: build.mutation<{ avatar: string }, UploadEmployeeAvatarCredentials>({
+    photoEmployee: build.mutation<{ avatar: ImageUrls }, UploadEmployeeAvatarCredentials>({
       query: ({ user_id, body }) => ({
         url: `/v1/user/avatar/${user_id}`,
         method: "POST",

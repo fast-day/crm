@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils';
 import { createContext, useContext, useEffect, useRef, useState, useCallback, type ComponentProps, useMemo } from 'react';
 import { buttonVariants } from '../../button';
 import type { VariantProps } from 'class-variance-authority';
-import { Avatar } from '@/entities/user';
+import { Avatar, type ImageUrls } from '@/entities/user';
 import SvgChevron from '@/shared/icons/Chevron';
 
 type SelectItemValue = {
@@ -11,7 +11,7 @@ type SelectItemValue = {
   avatar?: {
     id: string;
     name: string;
-    avatar_url: string | null;
+    avatar_url?: ImageUrls;
   };
 }
 

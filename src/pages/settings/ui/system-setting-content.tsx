@@ -1,6 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, ImagePicker, InputForm, SelectForm, Switch } from "@/shared/ui"
+import { Card, CardContent, CardHeader, CardTitle, ErrorForm, Form, ImagePicker, InputForm, Switch } from "@/shared/ui"
 import { settingSchema, type SettingType } from "../model/schemas/setting.schema"
-import { mockCurrency } from "@/pages/company/model/mock"
 import { useSelector } from "react-redux"
 import { accountSelector } from "@/entities/account"
 import { Controller } from "react-hook-form"
@@ -125,7 +124,7 @@ export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) =>
                               <div className="flex items-center flex-col">
                                 <PaperClipIcon width={32} height={32} />
                                 <div className="font-bold text-base mt-1.5">Логотип</div>
-                                <p className="font-normal text-xs text-primary/50">Рекомендуемый размер 200x200</p>
+                                <p className="font-normal text-xss leading-3.5 text-primary/50 whitespace-break-spaces">Рекомендуемый размер 200x200</p>
                               </div>
                             </ImagePicker>
                             {fieldState.error && <ErrorForm msg={fieldState.error.message} />}
@@ -144,14 +143,14 @@ export const SystemSettingContent = ({ onSubmit }: SystemSettingContentProps) =>
                         label="Наименование компании"
                         required
                       />
-                      <SelectForm
+                      {/* <SelectForm
                         name="currency"
                         control={control}
                         options={mockCurrency}
                         error={formState.errors["currency"]}
                         label="Валюта"
                         required
-                      />
+                      /> */}
                     </div>
                   </CardContent>
                 </Card>

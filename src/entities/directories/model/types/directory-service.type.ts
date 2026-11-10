@@ -1,9 +1,11 @@
+import type { ImageUrls } from "@/entities/user";
+
 export interface IDirectoryService {
   id: string;
   name: string;
   mark: MarkType;
   public_name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
 }
 
 export interface IDirectoryLocationService extends IDirectoryService {

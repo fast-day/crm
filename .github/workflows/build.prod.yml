@@ -42,6 +42,7 @@ jobs:
           push: true
           build-args: |
             VITE_API_URL=${{ vars.VITE_API_URL }}
+            VITE_NODE_ENV=${{ vars.VITE_NODE_ENV }}
           tags: |
             ${{ env.REP_OWNER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
             ${{ env.REP_OWNER }}/${{ env.IMAGE_NAME }}:latest

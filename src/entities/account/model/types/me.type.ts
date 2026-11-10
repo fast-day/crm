@@ -1,10 +1,11 @@
 import type { PageType } from "@/entities/settings";
 import type { IRole } from "./role.type";
+import type { ImageUrls } from "@/entities/user";
 
 export interface IMeCompany {
   id: string;
   name: string;
-  logo: string | null;
+  logo: ImageUrls;
   currency: CurrencyType;
   site_url: string;
   widget_url: string;
@@ -36,7 +37,7 @@ export interface MeLocation {
   id: number;
   uuid: string;
   name: string;
-  avatar: string;
+  avatar: ImageUrls;
   full_address: string;
   timezone: IMeLocationTimezone;
   address: IMeLocationAddress;
@@ -62,7 +63,7 @@ export interface IMe {
   first_name: string;
   last_name: string;
   full_name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   locations: MeLocation[];
   company: IMeCompany | null;
   settings: MeSettings;

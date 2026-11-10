@@ -37,7 +37,7 @@ export const BookingSelectServiceCard = ({ service, employee, date, time, onClic
             {service && <div className="text-xs font-medium leading-3.5">{minuteFormat(service.duration)}</div>}
             {employee && (
               <div className="flex items-center gap-1.5">
-                <Avatar size={"xs"} avatar_url={""} name={employee.first_name} id={employee.id} />
+                <Avatar size={"xs"} avatar_url={employee.avatar} name={employee.first_name} id={employee.id} />
                 <p className="text-xs font-medium leading-3.5">{employee.full_name}</p>
               </div>
             )}

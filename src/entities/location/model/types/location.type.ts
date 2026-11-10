@@ -1,4 +1,5 @@
 import type { IRole, IUserProfile } from "@/entities/account";
+import type { ImageUrls } from "@/entities/user";
 import type { AddressCredentials } from "@/shared/types";
 
 export interface ILocationAddress {
@@ -27,7 +28,7 @@ export interface ILocationQuery extends PaginationQuery {
 export interface ILocation {
   id: string;
   name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   is_active: boolean;
   description: string | null;
   phone: string;
@@ -42,7 +43,7 @@ export interface ILocationResponse extends ILocation {
 export interface ILocationUsersList {
   id: string;
   name: string;
-  avatar: string | null | undefined;
+  avatar: ImageUrls | undefined;
 }
 
 export interface ILocationUserQuery {
@@ -61,7 +62,7 @@ export interface ILocationServices {
   id: string;
   name: string;
   mark: MarkType;
-  avatar: string | null;
+  avatar: ImageUrls;
 }
 
 export interface ILocationDetail extends ILocation {

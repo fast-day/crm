@@ -1,4 +1,5 @@
 import type { IBookingQuery } from "@/entities/booking";
+import type { ImageUrls } from "@/entities/user";
 
 export type CustomerProfile = {
   id: string;
@@ -6,7 +7,7 @@ export type CustomerProfile = {
   first_name: string;
   last_name: string | null;
   phone: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   birthday: string | null;
 }
 
@@ -54,7 +55,7 @@ export interface ICheckCustomer {
     first_name: string | null;
     last_name: string | null;
     full_name: string | null;
-    avatar: string | null;
+    avatar: ImageUrls;
     phone: string | null;
   };
 }

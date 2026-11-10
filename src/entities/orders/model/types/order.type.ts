@@ -1,6 +1,7 @@
 import type { IBooking, IBookingService } from "@/entities/booking";
 import type { IInvoice } from "@/entities/invoice";
 import type { ServiceStatusType } from "@/entities/services";
+import type { ImageUrls } from "@/entities/user";
 
 export type OrderSortType = "newest" | "oldest" | "price_asc" | "price_desc";
 
@@ -11,7 +12,7 @@ export interface IOrderQuery extends PaginationQuery {
 
 export interface IOrderCustomer {
   id: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   first_name: string;
   last_name: string | null;
   full_name: string;
@@ -42,7 +43,7 @@ export interface IOrderBookingCustomer {
   first_name: string;
   last_name: string | null;
   full_name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   phone: string;
   email: string | null;
 }
@@ -52,7 +53,7 @@ export interface IOrderBookingEmployee {
   first_name: string;
   last_name: string | null;
   full_name: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   phone: string;
   email: string;
 }
@@ -63,7 +64,7 @@ export interface IOrderBookingService {
   type: ServiceStatusType;
   name: string;
   category: string | null;
-  avatar: string | null;
+  avatar: ImageUrls;
   duration: number;
   price: { price: number; cost_price: number };
 }
