@@ -1,15 +1,16 @@
 FROM node:24-alpine AS build
 
 WORKDIR /app
+RUN corepack enable
 
 ARG VITE_API_URL
 ENV VITE_API_URL=${VITE_API_URL}
 ARG VITE_NODE_ENV
 ENV VITE_NODE_ENV=${VITE_NODE_ENV}
 
-COPY package.json yarn.lock ./
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
-    yarn install --frozen-lockfile
+COPY package.json yarn.lock .yarnrc.yml ./
+RUN --mount=type=cache,target=/root/.yarn/berry/cache \
+    yarn install --immutable
 
 COPY . .
 RUN yarn build
