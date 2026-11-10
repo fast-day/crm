@@ -10,7 +10,8 @@ ENV VITE_NODE_ENV=${VITE_NODE_ENV}
 
 COPY package.json yarn.lock .yarnrc.yml ./
 
-RUN yarn install --immutable
+RUN --mount=type=cache,target=/app/.yarn/cache \
+    yarn install --immutable
 
 COPY . .
 RUN yarn build
