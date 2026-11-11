@@ -7,7 +7,7 @@ import { BaseLayout } from "./base-layout";
 import { OnboardingProgress } from "@/widgets/onboarding";
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
-  const { isCompany, account } = useSelector(useAccount);
+  const { isCompany, account, location } = useSelector(useAccount);
   const isTablet = useMediaQuery({ query: `(max-width: 1100px)` })
 
   const sidebar = !isTablet && isCompany ? <Sidebar />
@@ -24,6 +24,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
             has_services: account.has_services,
             has_schedules: account.has_schedules,
           }}
+          bookingUrl={location ? `${account.company?.widget_url}/${location.id}/${account.id}}` : "Не удалось загрузить ссылку"}
         />
       )}
     </BaseLayout>

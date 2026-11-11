@@ -1,10 +1,16 @@
 import { getProgressMessage, ONBOARDING_STEPS, OnboardingProgressRing, OnboardingStepItem, type TOnboardingStatus } from "@/entities/onboarding"
+import { ShareLinkCard } from "@/features/onboarding";
 import { pluralize } from "@/shared/lib";
 import { Button, Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/shared/ui";
 import { Support, SupportWidget } from "@/widgets/support";
 import { useState } from "react";
 
-export const OnboardingProgress = ({ status }: { status: TOnboardingStatus }) => {
+interface IOnboardingProgressProps {
+  status: TOnboardingStatus;
+  bookingUrl: string;
+}
+
+export const OnboardingProgress = ({ status, bookingUrl }: IOnboardingProgressProps) => {
   const [open, setOpen] = useState(false);
 
   const steps = ONBOARDING_STEPS.map((s) => ({ ...s, done: status[s.key] }));
@@ -58,6 +64,7 @@ export const OnboardingProgress = ({ status }: { status: TOnboardingStatus }) =>
           </div>
 
           <div className="space-y-6">
+            {status.has_schedules && <ShareLinkCard bookingUrl={bookingUrl} />}
             {pendingSteps.length > 0 && (
               <div className="space-y-2">
                 <div className="text-sm font-semibold opacity-50">{pluralize(left, "Остался", "Осталось", "Осталось")} {left} {pluralize(left, "шаг", "шага", "шагов")}</div>
