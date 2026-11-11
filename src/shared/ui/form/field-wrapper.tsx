@@ -19,7 +19,7 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
     <div>
       <Label className="text-xs relative">
         {label} {required ? <span className="text-red">*</span> : undefined}
-        <div className="mt-0.5">{children}</div>
+        <div className="relative mt-0.5">{children}</div>
       </Label>
       <FormMessage className="m-2 opacity-70">{message}</FormMessage>
       {error?.message && <ErrorForm msg={error.message}/>}
