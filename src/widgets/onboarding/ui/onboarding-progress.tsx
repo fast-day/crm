@@ -28,7 +28,7 @@ export const OnboardingProgress = ({ status }: { status: TOnboardingStatus }) =>
           aria-label={"Прогресс настройки"}
           animation={"toggle_sm"}
           size={"size_48"}
-          className={"1100:w-fit w-12 rounded-full cursor-pointer fixed 1100:bottom-8 1100:right-8 bottom-20 right-5 z-10 hover:bg-primary hover:opacity-100 active:bg-primary active:opacity-100 pl-0.75 py-0.75 1100:pr-4 pr-0.75 text-sm font-semibold"}
+          className={"1100:w-fit w-12 rounded-full cursor-pointer fixed 1100:bottom-8 1100:right-8 bottom-23 right-5 z-10 hover:bg-primary hover:opacity-100 active:bg-primary active:opacity-100 pl-0.75 py-0.75 1100:pr-4 pr-0.75 text-sm font-semibold"}
           iconLeft={<OnboardingProgressRing done={done} total={total} />}
           classNameChild={"1100:block hidden"}
         >Завершите настройку</Button>

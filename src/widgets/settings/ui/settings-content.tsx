@@ -1,7 +1,9 @@
 import { PaletteIcon, SettingIcon, WorldIcon } from "@/shared/icons"
 import SvgCalendar from "@/shared/icons/Calendar"
+import SvgExit from "@/shared/icons/Exit"
 import SvgPerson from "@/shared/icons/Person"
 import { Link } from "@tanstack/react-router"
+import { useMediaQuery } from "react-responsive"
 
 const settings = [
   {
@@ -32,10 +34,11 @@ const settings = [
 ]
 
 export const SettingsContent = () => {
+  const isTablet = useMediaQuery({ query: `(max-width: 1099px)` });
+
   return (
     <div className="mt-8">
       <div className="grid 1100:grid-cols-3! xl:grid-cols-4! sm:grid-cols-2 grid-cols-1 gap-2.5 sm:gap-5">
-
 
         {settings.map((item, idx) => (
           <Link to={item.href} key={idx} className="bg-card rounded-2xl sm:px-10 sm:py-12 p-6">
@@ -45,7 +48,14 @@ export const SettingsContent = () => {
             </div>
           </Link>
         ))}
-
+        {isTablet && (
+          <Link to={"/logout"} replace={true} className="bg-red/20 text-red rounded-2xl sm:px-10 sm:py-12 p-6">
+            <div className="flex items-center flex-col gap-2.5">
+              <div className="md:size-8 size-6"><SvgExit /></div>
+              <p className="sm:text-base text-sm">Выйти</p>
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   )
