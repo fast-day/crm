@@ -121,7 +121,7 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
                     required
                     labelInput={account?.company?.currency}
                   />
-                  <InputForm
+                  {/* <InputForm
                     name={"cost_price"}
                     id={"cost_price"}
                     type={"text"}
@@ -132,7 +132,7 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
                     error={formState.errors["cost_price"]}
                     placeholder={"Себестоимость услуги"}
                     labelInput={account?.company?.currency}
-                  />
+                  /> */}
                 </CardContent>
               </Card>
 

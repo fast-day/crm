@@ -8,6 +8,7 @@ const avatarVariants = cva(
   {
     variants: {
       size: {
+        custom: "",
         default: "min-w-10 w-10 h-10 rounded-10",
         xs: "min-w-5 w-5 h-5 rounded-md text-10",
         tiny: "min-w-6 w-6 h-6 rounded-md text-10",
