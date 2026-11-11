@@ -15,14 +15,23 @@ FieldWrapperPassThroughProps & VariantProps<typeof inputVariants> & {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className="", type, variant, inputSize, error, label, isError=false, lcls, ...props }, ref) => {
     return (
-      <div className="relative">
+      <div className="relative w-full min-w-0">
         <input
           ref={ref}
           type={type}
           {...props}
-          className={cn(inputVariants({ variant, inputSize, className }), (error || isError) ? "border-error-color-icon focus:border-error-color-icon" : "")}
+          className={cn(
+            inputVariants({ variant, inputSize, className }),
+            "w-full min-w-0",
+            label && "pr-16",
+            (error || isError) && "border-error-color-icon focus:border-error-color-icon",
+          )}
         />
-         {label && <div className={cn("absolute bg-primary/90 h-full w-16 font-bold text-white right-0 bottom-0 flex items-center justify-center rounded-r-xl", lcls)}>{label}</div>}
+        {label && (
+          <div className={cn("pointer-events-none absolute inset-y-0 right-0 flex w-16 items-center justify-center rounded-r-xl bg-primary/90 font-bold text-white", lcls)}>
+            {label}
+          </div>
+        )}
       </div>
     );
   },
