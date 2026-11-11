@@ -24,7 +24,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
             has_services: account.has_services,
             has_schedules: account.has_schedules,
           }}
-          bookingUrl={location ? `${account.company?.widget_url}/${location.id}/${account.id}}` : "Не удалось загрузить ссылку"}
+          bookingUrl={location ? `${account.company?.widget_url}/${location.id}/${account.id}` : ""}
         />
       )}
     </BaseLayout>

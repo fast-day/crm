@@ -64,7 +64,7 @@ export const OnboardingProgress = ({ status, bookingUrl }: IOnboardingProgressPr
           </div>
 
           <div className="space-y-6">
-            {status.has_schedules && <ShareLinkCard bookingUrl={bookingUrl} />}
+            {status.has_schedules && bookingUrl && <ShareLinkCard bookingUrl={bookingUrl} />}
             {pendingSteps.length > 0 && (
               <div className="space-y-2">
                 <div className="text-sm font-semibold opacity-50">{pluralize(left, "Остался", "Осталось", "Осталось")} {left} {pluralize(left, "шаг", "шага", "шагов")}</div>
