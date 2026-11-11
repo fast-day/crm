@@ -34,7 +34,7 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
   return (
     <div className="mt-8 relative">
       <Form 
-        className="space-y-8 flex justify-center 1100:flex-row flex-col-reverse items-start gap-8"
+        className="space-y-8 flex justify-center 1100:flex-row items-center flex-col-reverse 1100:items-start gap-8"
         onSubmit={(data) => onSubmit(data)} 
         options={{ defaultValues }}
         schema={serviceSchema}
@@ -152,7 +152,7 @@ export const ServicesForm = ({ onSubmit, isLoading, data }: ServicesCreateFormPr
               control={control}
               name={"avatar"}
               render={({ field, fieldState }) => (
-                <div className="1100:sticky top-8 self-start h-fit">
+                <div className="1100:sticky top-8 1100:self-start h-fit">
                   <ImagePicker
                     sizeCls={"h-32 w-32"}
                     value={field.value}
