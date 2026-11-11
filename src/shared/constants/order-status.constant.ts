@@ -7,15 +7,31 @@ type OrderEnumStatusType = {
 }
 
 export const ORDER_STATUS: Record<OrderStatusType, OrderEnumStatusType> = {
-  paid: { title: "Заказ завершен", label: "Оплачен", icon: PaymentSuccessIcon },
-  unpaid: { title: "Заказ не оплачен", label: "Не оплачен", icon: UnpaidOrderIcon },
-  cancelled: { title: "Заказ отмене", label: "Отменен", icon: ArrowBackIcon },
-  refund: { title: "Заказ возвращён", label: "Возвращен", icon: ArrowBackIcon },
+  paid: {
+    title: "Оплачен",
+    label: "Оплачен",
+    icon: PaymentSuccessIcon,
+  },
+  unpaid: {
+    title: "Ожидает оплаты",
+    label: "Не оплачен",
+    icon: UnpaidOrderIcon,
+  },
+  cancelled: {
+    title: "Платёж отменён",
+    label: "Отменён",
+    icon: ArrowBackIcon,
+  },
+  refund: {
+    title: "Деньги возвращены",
+    label: "Возвращён",
+    icon: ArrowBackIcon,
+  },
 };
 
 export const ORDER_STATUS_TITLE: Record<OrderStatusType, string> = {
-  paid: "Заказ завершен",
-  unpaid: "Заказ не оплачен",
-  cancelled: "Заказ отменен",
-  refund: "Заказ возвращён"
+  paid: "Оплачен",
+  unpaid: "Ожидает оплаты",
+  cancelled: "Платёж отменён",
+  refund: "Деньги возвращены",
 };

@@ -85,7 +85,7 @@ export const OrderCheckoutSell = ({ booking_id, booking }: IOrderCheckoutSellPro
             </>
           }
           actions={
-            <div className="flex gap-3">
+            <div className="flex 420:flex-row flex-col gap-3">
               <Button
                 type={"button"}
                 size={"size_60"}

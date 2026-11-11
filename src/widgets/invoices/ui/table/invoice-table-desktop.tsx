@@ -18,7 +18,7 @@ export const InvoiceTableDesktop = ({ invoices, isFetching }: InvoiceTableProps)
         <TableHeader>
           <TableRow>
             <TableHead>№</TableHead>
-            <TableHead>Заказ №</TableHead>
+            <TableHead>Платеж №</TableHead>
             <TableHead>Выдан</TableHead>
             <TableHead>Статус</TableHead>
             <TableHead>Итого</TableHead>

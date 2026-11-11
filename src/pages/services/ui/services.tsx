@@ -24,7 +24,7 @@ export const Services = ({ query }: ServiceProps) => {
   const content = !account?.has_services ? (
     <ServicesEmpty />
   ) : isLoading ? (
-    <TableLoading rows={4} />
+    <TableLoading rows={4} skeletonCls="h-[143px]" />
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (

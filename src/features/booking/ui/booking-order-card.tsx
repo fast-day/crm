@@ -48,7 +48,7 @@ export const BookingOrderCard = ({ status, subtotal, id, tag }: IBookingOrder) =
 
         <div className="mt-4">
           <Link to={`/finance/orders/${id}`} className="block">
-            <Button variant={"accent"} size={"size_48"} className="w-full bg-primary">Заказ № {tag}</Button>
+            <Button variant={"accent"} size={"size_48"} className="w-full bg-primary">Платеж № {tag}</Button>
           </Link>
         </div>
       </CardContent>

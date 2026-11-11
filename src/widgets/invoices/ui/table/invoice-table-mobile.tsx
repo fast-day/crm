@@ -23,7 +23,7 @@ export const InvoiceTableMobile = ({ invoices, isFetching }: InvoiceTableProps) 
                     {invoice.tag}
                 </TableMobileCell>
 
-                <TableMobileCell thead={"Заказ №"}>
+                <TableMobileCell thead={"Платеж №"}>
                   {invoice.order_tag}
                 </TableMobileCell>
 

@@ -19,9 +19,9 @@ export const OrderResultLoading = () => {
 
           <div>
 
-            <div className="grid grid-cols-[48px_1fr_140px] space-y-2 items-center">
+            <div className="grid grid-cols-[48px_1fr_1fr] space-y-2">
               <Skeleton className="w-5 h-5 rounded-8" />
-              <Skeleton className="w-30 h-5 rounded-8" />
+              <Skeleton className="w-1/1 md:w-30 h-5 rounded-8" />
               <Skeleton className="w-20 h-5 ml-auto rounded-8" />
             </div>
 

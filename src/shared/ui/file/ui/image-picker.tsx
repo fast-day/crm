@@ -48,8 +48,6 @@ export const ImagePicker = ({ value, onChange, preview_url, disabled=false, clas
           <img
             className={"w-full h-full object-cover"}
             src={preview}
-            srcSet={preview_url ? `${preview_url.sm} 480w, ${preview_url.md} 960w, ${preview_url.lg} 1920w` : undefined}
-            sizes={"(max-width: 600px) 480px, 960px"}
             loading={"lazy"}
             alt={"Выбранный файл"}
           />

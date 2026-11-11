@@ -12,7 +12,7 @@ export const OrderResultServices = ({ bookings }: IOrderResultServicesProps) => 
   return (
     <div>
       
-      <div className="grid grid-cols-[48px_1fr_140px] space-y-2 items-center">
+      <div className="grid grid-cols-[48px_1fr_1fr] space-y-2 items-center">
         <div className="text-sm opacity-50 text-center">#</div>
         <div className="text-sm opacity-50">Название</div>
         <div className="text-sm opacity-50 text-end">Цена</div>
@@ -21,7 +21,7 @@ export const OrderResultServices = ({ bookings }: IOrderResultServicesProps) => 
       <div>
         {bookings[0].booking_services.map((service, idx) => (
           <Card key={idx} className="bg-transparent">
-            <CardContent className="py-2.5 px-0 grid grid-cols-[48px_1fr_140px]">
+            <CardContent className="py-2.5 px-0 grid grid-cols-[48px_1fr_1fr]">
               <div className="text-sm flex items-center justify-center">
                 <div className="bg-white/50 w-6.5 h-6.5 opacity-80 rounded-8 text-xs flex items-center justify-center">{idx+1}</div>
               </div>

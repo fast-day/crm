@@ -57,7 +57,7 @@ export const ScheduleMonth = ({  userId, locationId, calendar, dayInfoByKey, sch
 
       <AnimatePresence>
         {(calendar.isFlexMode && calendar.customizedDate.length > 0) && (
-          <div className="fixed bottom-19 1100:bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <div className="fixed bottom-24 1100:bottom-8 left-1/2 -translate-x-1/2 z-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}

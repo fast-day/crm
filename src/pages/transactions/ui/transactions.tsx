@@ -25,7 +25,7 @@ export const Transactions = ({ query }: ITransactionsProps) => {
   );
 
   const content = isLoading ? (
-    <TableLoading rows={3} isAction={false} />
+    <TableLoading rows={3} isAction={false} skeletonCls="h-[152px]" />
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (
@@ -49,7 +49,7 @@ export const Transactions = ({ query }: ITransactionsProps) => {
           <PageHeaderBackAction />
           <Can permission={"transactions:create-dev"}>
             <Link to={"create"}>
-              <Button 
+              <Button
                 size={"size_44"}
                 animation={"toggle"}
                 className={"text-sm font-bold 1100:w-fit w-11 1100:px-6 px-0"}

@@ -23,7 +23,7 @@ export const Customers = ({ query }: CustomerProps) => {
   const content = !account?.has_customers ? (
     <CustomerEmpty />
   ) : isLoading ? (
-    <TableLoading rows={3} />
+    <TableLoading rows={3} skeletonCls="h-[112px]" />
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (

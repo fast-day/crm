@@ -14,7 +14,7 @@ export const Support = () => {
           className={"rounded-full hover:bg-primary hover:opacity-100 active:bg-primary active:opacity-100"}
         ><PhoneIcon width={24} height={24} /></Button>
       </DropdownTrigger>
-      <DropdownContent align="end" side="top" className="p-5" cancelLabel="Хорошо">
+      <DropdownContent align="end" side="top" className="p-5" cancelLabel="Спасибо">
         {({ close }) => (
           <>
             <SupportWidget className="p-0 border-transparent" />

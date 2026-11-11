@@ -55,7 +55,7 @@ export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrd
         },
       }).unwrap();
 
-      dispatch(updateAccount({ has_bookings: true }));
+      dispatch(updateAccount({ has_bookings: true, has_orders: true }));
       navigate({ to: `/finance/orders/${res.id}` });
     }
     catch (error) {
@@ -92,7 +92,7 @@ export const useOrderSell = ({ isDirty, services }: IUseOrderSellProps): IUseOrd
         body: { payment_method: payment },
       }).unwrap();
 
-      dispatch(updateAccount({ has_bookings: true }));
+      dispatch(updateAccount({ has_bookings: true, has_orders: true }));
       navigate({ to: `/finance/orders/${res.id}`, replace: true });
     }
     catch (error) {

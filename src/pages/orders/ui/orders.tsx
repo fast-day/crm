@@ -21,7 +21,7 @@ export const Orders = ({ query }: OrderProps) => {
   const content = !account?.has_orders ? (
     <OrderEmpty />
   ) : isLoading ? (
-    <TableLoading rows={6} />
+    <TableLoading rows={6} skeletonCls="h-[238px]" />
   ) : isError ? (
     <RequestError />
   ) : isSuccess ? (

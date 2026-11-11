@@ -30,7 +30,8 @@ export const EmployeeEdit = ({ employee_id }: IEmployeeEditProps) => {
   return (
     <>
       <PageHeader>
-        <PageHeaderTitle>Сотрудник - редактировать</PageHeaderTitle>
+        {/* <PageHeaderTitle>Сотрудник - редактировать</PageHeaderTitle> */}
+        <PageHeaderTitle>Редактировать профиль</PageHeaderTitle>
         <PageHeaderActions>
           <PageHeaderBackAction />
         </PageHeaderActions>

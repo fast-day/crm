@@ -7,3 +7,4 @@ export { OrderCheckoutSell } from './ui/checkout/order-checkout-sell';
 export { CancelPaymentMethodDialog } from './ui/checkout/cancel-payment-method-dialog';
 export { SelectPaymentMethodDialog } from './ui/checkout/select-payment-method-dialog';
 export { OrderSort } from './ui/order-sort';
+export { OrderCheckoutLoading } from './ui/checkout/order-checkout-loading';

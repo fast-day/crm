@@ -5,6 +5,8 @@ import { logout } from "@/entities/account";
 import { redirect } from "@/entities/navigation";
 import { router } from "@/app/router";
 import { isDev } from "@/shared/constants";
+import { shouldResetLocation } from "../../util/should-reset-location.util";
+import { refreshLocation } from "@/shared/hooks/refresh-location/refresh-location.hook";
 
 type Verify = {
   success: boolean;
@@ -31,6 +33,10 @@ export const reauthQuery: typeof baseQuery = async (args, api, opt) => {
     const currentPath = router.state.location.pathname;
     api.dispatch(redirect({ to: "/network/server", from: currentPath }));
     return res;
+  }
+
+  if (shouldResetLocation(res.error)) {
+    await refreshLocation(api, opt);
   }
 
   if (res.error?.status === 401) {

@@ -1,11 +1,13 @@
 import { Skeleton, Table, TableBody, TableHeader, TableRow } from "@/shared/ui";
+import { cn } from "@/shared/utils";
 
 interface TableLoadingProps {
   rows?: number;
   isAction?: boolean;
+  skeletonCls?: string;
 }
 
-export const TableLoading = ({ rows=3, isAction=true }: TableLoadingProps) => {
+export const TableLoading = ({ rows=3, isAction=true, skeletonCls="" }: TableLoadingProps) => {
   return (
     <Table className="mt-8">
 
@@ -16,9 +18,9 @@ export const TableLoading = ({ rows=3, isAction=true }: TableLoadingProps) => {
       </TableHeader>
 
       <TableBody className="bg-transparent! mt-2 peer-hover:rounded-t-3xl!">
-        <Skeleton className="h-18 rounded-none" />
-        <Skeleton className="h-18 rounded-none" />
-        <Skeleton className="h-18 rounded-none" />
+        <Skeleton className={cn("1100:h-18 1100:rounded-none", skeletonCls)} />
+        <Skeleton className={cn("1100:h-18 1100:rounded-none", skeletonCls)} />
+        <Skeleton className={cn("1100:h-18 1100:rounded-none", skeletonCls)} />
       </TableBody>
 
     </Table>

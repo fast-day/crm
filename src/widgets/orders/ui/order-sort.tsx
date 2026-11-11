@@ -35,7 +35,7 @@ export const OrderSort = ({ status }: IOrderQuery) => {
             <Button
               key={idx}
               variant={"action"}
-              className={cn((v === "all" ? !status : status === v) ? "bg-white" : "")}
+              className={cn("whitespace-nowrap", (v === "all" ? !status : status === v) ? "bg-white" : "")}
               size={"size_40"}
               onClick={() => handleChange("status", v)}
             >{ORDER_STATUS[v]}</Button>
